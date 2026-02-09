@@ -1,0 +1,32 @@
+CREATE PROCEDURE [remuneraciones].[__SPRM_CargoMod_EliminarObservaciones](
+	@USUARIOCREADOR VARCHAR(MAX),
+	@CODIGOSOLICITUD VARCHAR(MAX),
+	@OBSERVACIONES VARCHAR(MAX),
+	@CODE VARCHAR(MAX) OUTPUT,
+	@MESSAGE VARCHAR(MAX) OUTPUT
+)
+AS
+	
+	BEGIN TRY
+		
+		BEGIN TRANSACTION
+			
+			UPDATE [remuneraciones].[RM_CargosMod]
+			       SET Observaciones = REPLACE(REPLACE(Observaciones, ' <br/> ' + @OBSERVACIONES, ''), @OBSERVACIONES, '')
+				   WHERE CodigoCargoMod = [TW_GENERAL_TEAMWORK].[dbo].[FN_BASE64_DECODE](@CODIGOSOLICITUD)
+
+			SET @CODE = '200'
+			SET @MESSAGE = ''
+
+		COMMIT TRANSACTION
+
+	END TRY
+	BEGIN CATCH
+		
+		ROLLBACK TRANSACTION
+
+		SELECT '500' 'Code',
+		       'Ha ocurrido un problema' 'Message',
+			   ERROR_MESSAGE() 'Error'
+
+	END CATCH

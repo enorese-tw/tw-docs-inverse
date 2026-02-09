@@ -1,0 +1,13 @@
+[remuneraciones].[__SPRMINT_CargoMod_CalcularSueldoBase]
+- [remuneraciones].[FNGratificacion]
+  - [dbo].[FNBase64Encode]
+- [remuneraciones].[FNUFTopeImponible]
+- [remuneraciones].[FNPorcentajeAFP]
+- [remuneraciones].[FNEANI]
+- [remuneraciones].[FNImpuestoUnicoFromLiquido]
+
+[remuneraciones].[__SPRMINT_CargoMod_SueldoFromLiquido]
+- [dbo].[FN_BASE64_DECODE]
+- [remuneraciones].[FNPorcObligaciones]
+- [remuneraciones].[FNEBonos]
+- [dbo].[FN_CONVERTMONEY]

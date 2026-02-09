@@ -1,0 +1,39 @@
+CREATE FUNCTION [remuneraciones].[FNPorcentajeAFP]
+(
+	@AFP VARCHAR(100),
+	@EMPRESA VARCHAR(10)
+)
+RETURNS FLOAT
+AS
+BEGIN
+	
+	DECLARE @PORCENTAJE FLOAT
+
+	IF(@EMPRESA = 'TWEST')
+	BEGIN
+
+		SELECT @PORCENTAJE = VAFP.CargoModAfpPorc
+			   FROM [remuneraciones].[View_AfpTWEST] VAFP WITH (NOLOCK)
+			   WHERE VAFP.Nombre = @AFP
+
+	END
+	ELSE IF(@EMPRESA = 'TWRRHH')
+	BEGIN
+		
+		SELECT @PORCENTAJE = VAFP.CargoModAfpPorc
+			   FROM [remuneraciones].[View_AfpTWRRHH] VAFP WITH (NOLOCK)
+			   WHERE VAFP.Nombre = @AFP
+
+	END
+	ELSE IF(@EMPRESA = 'TWC')
+	BEGIN
+		
+		SELECT @PORCENTAJE = VAFP.CargoModAfpPorc
+			   FROM [remuneraciones].[View_AfpTWC] VAFP WITH (NOLOCK)
+			   WHERE VAFP.Nombre = @AFP
+
+	END
+
+	RETURN @PORCENTAJE
+
+END

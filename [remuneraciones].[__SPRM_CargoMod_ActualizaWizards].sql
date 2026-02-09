@@ -1,0 +1,38 @@
+CREATE PROCEDURE [remuneraciones].[__SPRM_CargoMod_ActualizaWizards](
+	@CODIGOSOLICITUD VARCHAR(MAX),
+	@ESTADO VARCHAR(MAX),
+	@USUARIOCREADOR VARCHAR(MAX)
+)
+AS
+	
+	BEGIN TRY
+		
+		BEGIN TRANSACTION
+
+			DECLARE @__WIZARDS NUMERIC,
+			        @__MAXSTAGE NUMERIC
+
+			SET @__MAXSTAGE = 7
+			SET @__WIZARDS = CAST(@ESTADO AS NUMERIC)
+
+			IF(@__WIZARDS > @__MAXSTAGE)
+			BEGIN
+				
+				SET @__WIZARDS = @__MAXSTAGE
+
+			END
+			
+			UPDATE [remuneraciones].[RM_CargosMod]
+			       SET Wizards = @__WIZARDS,
+				       FechaUltimaActualizacion = GETDATE(),
+					   UsuarioUltimaActualizacion = @USUARIOCREADOR
+				   WHERE CodigoCargoMod = [TW_GENERAL_TEAMWORK].[dbo].[FN_BASE64_DECODE](@CODIGOSOLICITUD)
+
+		COMMIT TRANSACTION
+
+	END TRY
+	BEGIN CATCH
+		
+		ROLLBACK TRANSACTION
+
+	END CATCH

@@ -1,0 +1,210 @@
+CREATE PROCEDURE [remuneraciones].[__SPRMINT_CargoMod_SueldoFromLiquido](
+	@SUELDO FLOAT,
+	@CODIGOSOLICITUD VARCHAR(MAX),
+	@WITHAJUSTE BIT,
+	@NEWSUELDO FLOAT OUTPUT,
+	@MESSAGE VARCHAR(MAX) OUTPUT
+)
+AS
+	
+	BEGIN TRY
+		
+		BEGIN TRANSACTION
+
+			DECLARE @OUTGRATIFICACION FLOAT,
+					@OUTTOTALES FLOAT,
+					@OUTTOTALESIMP FLOAT,
+					@OUTOTROSHABERES FLOAT,
+					@OUTHABERES FLOAT,
+					@OUTSALUD FLOAT,
+					@OUTAFP FLOAT,
+					@OUTAFC FLOAT,
+					@OUTIMPUESTO FLOAT,
+					@OUTDESCUENTOS FLOAT,
+					@OUTLIQUIDO FLOAT,
+					@SUELDOINPUT FLOAT,
+					@CODIGOCARGOMOD VARCHAR(MAX),
+					@TOPEGRATIFICACION FLOAT,
+					@CC VARCHAR(1),
+					@CCP VARCHAR(1),
+					@VALORUF FLOAT,
+					@TIPOCONTRATO NUMERIC
+
+			DECLARE @PORCOBLIGACIONES FLOAT,
+			        @EBONOS FLOAT
+
+			DECLARE @SUELDOINGRESOMINIMO FLOAT,
+			        @DIF FLOAT,
+					@CAL FLOAT,
+					@CONTAR FLOAT
+			
+			DECLARE @AJUSTE FLOAT,
+			        @PORCAFC FLOAT,
+			        @TOPEIMPONIBLEAFC FLOAT,
+			        @AJUSTESUM FLOAT
+
+			/** VARIABLES DE CALCULO PARA LIQUIDO => ASISTENCIA */
+			DECLARE @OTROSHABERESINPUT FLOAT,
+					@NEWGRATIFICACION FLOAT
+
+			SET @DIF = 0
+			SET @CAL = 0
+			SET @CONTAR = 0
+			SET @NEWSUELDO = 0
+			SET @NEWGRATIFICACION = 0
+			SET @AJUSTE = 0
+			SET @AJUSTESUM = 0
+			
+			SET @SUELDOINPUT = @SUELDO
+
+			SET @CODIGOCARGOMOD = [TW_GENERAL_TEAMWORK].[dbo].[FN_BASE64_DECODE](@CODIGOSOLICITUD)
+					
+			/** SET VARIABLES */
+			SET @OTROSHABERESINPUT = 0
+
+			EXEC [remuneraciones].[__SPRMINT_CargoMod_CalcularSueldoBase]
+			@SUELDOINPUT,
+			@OTROSHABERESINPUT,
+			@CODIGOCARGOMOD,
+			@OUTGRATIFICACION OUTPUT,
+			@OUTTOTALES OUTPUT,
+			@OUTTOTALESIMP OUTPUT,
+			@OUTOTROSHABERES OUTPUT,
+			@OUTHABERES OUTPUT,
+			@OUTSALUD OUTPUT,
+			@OUTAFP OUTPUT,
+			@OUTAFC OUTPUT,
+			@OUTIMPUESTO OUTPUT,
+			@OUTDESCUENTOS OUTPUT,
+			@OUTLIQUIDO OUTPUT
+
+			SET @DIF = ABS(@OUTLIQUIDO - @SUELDOINPUT)
+
+			SELECT @TOPEGRATIFICACION = Valor
+					FROM [remuneraciones].[RM_Constantes] WITH (NOLOCK)
+					WHERE CodigoVariable = 'C002' AND
+							Estado = 'VIG'
+
+			SELECT @SUELDOINGRESOMINIMO = Valor
+					FROM [remuneraciones].[RM_Constantes] WITH (NOLOCK)
+					WHERE CodigoVariable = 'C001' AND
+							Estado = 'VIG'
+
+			SELECT @PORCOBLIGACIONES = [remuneraciones].[FNPorcObligaciones](
+											RMCM.TipoContrato,
+											RMCM.Empresa,
+											RMCM.AFP
+										),
+					@EBONOS = [remuneraciones].[FNEBonos](
+								RMCM.CodigoCargoMod
+								),
+					@CC = GratifCC,
+					@CCP = GratificacionPactada,
+					@TIPOCONTRATO = RMCM.TipoContrato
+					FROM [remuneraciones].[RM_CargosMod] RMCM WITH (NOLOCK)
+					WHERE RMCM.CodigoCargoMod = @CODIGOCARGOMOD
+
+			WHILE (@DIF > 1 AND @CONTAR < 30 )
+			BEGIN
+						
+				SET @CAL = CASE WHEN @OUTLIQUIDO < @SUELDOINPUT THEN
+								@OTROSHABERESINPUT + @DIF * @PORCOBLIGACIONES
+						    ELSE
+								@OTROSHABERESINPUT - @DIF * @PORCOBLIGACIONES
+							END
+
+				SET @OTROSHABERESINPUT = ROUND(@CAL, 0)
+
+				EXEC [remuneraciones].[__SPRMINT_CargoMod_CalcularSueldoBase]
+				@SUELDOINPUT,
+				@OTROSHABERESINPUT,
+				@CODIGOCARGOMOD,
+				@OUTGRATIFICACION OUTPUT,
+				@OUTTOTALES OUTPUT,
+				@OUTTOTALESIMP OUTPUT,
+				@OUTOTROSHABERES OUTPUT,
+				@OUTHABERES OUTPUT,
+				@OUTSALUD OUTPUT,
+				@OUTAFP OUTPUT,
+				@OUTAFC OUTPUT,
+				@OUTIMPUESTO OUTPUT,
+				@OUTDESCUENTOS OUTPUT,
+				@OUTLIQUIDO OUTPUT
+
+				SET @DIF = ABS(@OUTLIQUIDO - @SUELDOINPUT)
+
+				SET @CONTAR = @CONTAR + 1
+
+			END	
+
+			/** Ajuste para clientes outsourcing vinculado a AFC  */
+			SELECT @VALORUF = ValorUF
+	               FROM [remuneraciones].[View_UltimaUF]
+			
+			SELECT @PORCAFC = CASE WHEN @TIPOCONTRATO = 1 THEN
+								 VC.Valor
+			                  ELSE
+								 0
+							  END
+			       FROM [remuneraciones].[View_Constantes] VC
+			       WHERE VC.CodigoVariable = 'C006'
+			       
+			SELECT @TOPEIMPONIBLEAFC = VC.Valor
+				   FROM [remuneraciones].[View_Constantes] VC
+				   WHERE VC.CodigoVariable = 'C005'
+
+
+			IF(@TIPOCONTRATO = 1 AND @WITHAJUSTE = 1)
+			BEGIN
+				
+				SET @AJUSTE = ROUND(@OUTTOTALESIMP * @PORCAFC, 0)
+				SET @AJUSTESUM = CASE WHEN @OUTTOTALESIMP < (@TOPEIMPONIBLEAFC * @VALORUF) THEN
+									(@OUTTOTALESIMP * @PORCAFC) 
+							     ELSE
+									(@TOPEIMPONIBLEAFC * @VALORUF) * @PORCAFC
+								 END
+				
+			END
+
+			SET @NEWGRATIFICACION = CASE WHEN @CC = 'N' AND @CCP = 'N' THEN
+					                    @OUTTOTALESIMP - (@OUTTOTALESIMP / 1.25)
+									ELSE
+										CASE WHEN @CC = 'S' THEN
+											0
+											WHEN @CCP = 'S' THEN
+											(SELECT RMGC.Valor
+													FROM [remuneraciones].[RM_GratificacionConvenida] RMGC WITH (NOLOCK)
+													WHERE RMGC.CodigoCargoMod = @CODIGOCARGOMOD AND
+															RMGC.Estado = 'VIG')
+										END
+									END
+			
+			SET @NEWSUELDO = @OUTTOTALESIMP - CASE WHEN @CC = 'N' AND @CCP = 'N' THEN
+												CASE WHEN @NEWGRATIFICACION < @TOPEGRATIFICACION THEN 
+														@NEWGRATIFICACION 
+													ELSE 
+														@TOPEGRATIFICACION 
+													END 
+												ELSE
+													@NEWGRATIFICACION
+												END
+												- @EBONOS - @AJUSTE + @AJUSTESUM
+												
+			IF(@NEWSUELDO < @SUELDOINGRESOMINIMO)
+			BEGIN
+				SET @MESSAGE = 'El sueldo base no puede ser menor al sueldo minimo legal que es ' + 
+										[TW_GENERAL_TEAMWORK].[dbo].[FN_CONVERTMONEY](@SUELDOINGRESOMINIMO)
+			END
+			ELSE
+			BEGIN
+				SET @MESSAGE = ''
+			END
+
+		COMMIT TRANSACTION
+
+	END TRY
+	BEGIN CATCH
+		
+		ROLLBACK TRANSACTION
+
+	END CATCH

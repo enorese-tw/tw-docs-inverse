@@ -1,0 +1,27 @@
+CREATE PROCEDURE [remuneraciones].[__SPRM_CargoMod_CambiarCalculoTypeSueldo](
+	@SUELDO VARCHAR(MAX),
+	@CODIGOCARGOMOD VARCHAR(MAX),
+	@CODE VARCHAR(MAX) OUTPUT,
+	@MESSAGE VARCHAR(MAX) OUTPUT
+)
+AS
+	
+	BEGIN TRY
+		
+		BEGIN TRANSACTION
+			
+			UPDATE [remuneraciones].[RM_CargosMod]
+				   SET TypeSueldo = @SUELDO
+				   WHERE CodigoCargoMod = [TW_GENERAL_TEAMWORK].[dbo].[FN_BASE64_DECODE](@CODIGOCARGOMOD)
+				
+			SET @CODE = '200'
+			SET @MESSAGE = 'Se ha modificado la afp asociada'
+
+		COMMIT TRANSACTION
+
+	END TRY
+	BEGIN CATCH
+		
+		ROLLBACK TRANSACTION
+
+	END CATCH

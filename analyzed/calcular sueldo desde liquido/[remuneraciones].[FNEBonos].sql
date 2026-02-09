@@ -1,0 +1,17 @@
+CREATE FUNCTION [remuneraciones].[FNEBonos]
+(
+	@CODIGOCARGOMOD VARCHAR(MAX)
+)
+RETURNS FLOAT
+AS
+BEGIN
+	
+	DECLARE @EBONOS FLOAT
+
+	SELECT @EBONOS = ISNULL(SUM(Valor), 0)
+		   FROM [remuneraciones].[RM_BonosCargoMod] WITH (NOLOCK)
+		   WHERE CodigoCargoMod = @CODIGOCARGOMOD
+
+	RETURN @EBONOS
+
+END

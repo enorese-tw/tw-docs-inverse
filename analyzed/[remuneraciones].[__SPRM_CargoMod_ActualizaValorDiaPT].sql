@@ -1,0 +1,75 @@
+CREATE PROCEDURE [remuneraciones].[__SPRM_CargoMod_ActualizaValorDiaPT](
+	@USUARIOCREADOR VARCHAR(MAX),
+	@CODIGOSOLICITUD VARCHAR(MAX),
+	@VALORDIARIO VARCHAR(MAX),
+	@HORASEMANALES VARCHAR(MAX),
+	@CODE VARCHAR(MAX) OUTPUT,
+	@MESSAGE VARCHAR(MAX) OUTPUT
+)
+AS
+	
+	BEGIN TRY
+		
+		BEGIN TRANSACTION
+
+			DECLARE @SUELDOBASE FLOAT,
+			        @TYPEJORNADAPT VARCHAR(50),
+					@NHORASSEMANALES FLOAT,
+					@VALORJORNADAPT FLOAT
+
+			UPDATE [remuneraciones].[RM_CargosMod]
+			       SET NHorasSemanales = NULL,
+				       NumeroHorasSemanalesPT = CAST(@HORASEMANALES AS FLOAT),
+				       ValorSueldoPT = CAST(REPLACE(@VALORDIARIO, '.', '') AS FLOAT)
+				   WHERE CodigoCargoMod = [TW_GENERAL_TEAMWORK].[dbo].[FN_BASE64_DECODE](@CODIGOSOLICITUD)
+
+			SELECT @TYPEJORNADAPT = RMCM.TypeCalculoPT,
+			       @NHORASSEMANALES = RMCM.NumeroHorasSemanalesPT,
+				   @VALORJORNADAPT = RMCM.ValorSueldoPT
+			       FROM [remuneraciones].[RM_CargosMod] RMCM WITH (NOLOCK)
+			       WHERE RMCM.CodigoCargoMod = [TW_GENERAL_TEAMWORK].[dbo].[FN_BASE64_DECODE](@CODIGOSOLICITUD)
+			
+			IF(@TYPEJORNADAPT = 'PTM')
+			BEGIN
+
+				SET @SUELDOBASE = @VALORJORNADAPT * 30
+
+			END
+			IF(@TYPEJORNADAPT = 'PTD')
+			BEGIN
+
+				SET @SUELDOBASE = @VALORJORNADAPT --* 30
+
+			END
+			ELSE IF(@TYPEJORNADAPT = 'PTH')
+			BEGIN
+				
+				SET @SUELDOBASE = ((@VALORJORNADAPT * @NHORASSEMANALES) / 7) --* 30
+
+			END
+
+			UPDATE [remuneraciones].[RM_CargosMod]
+			       SET SueldoBase = @SUELDOBASE,
+					   TypeSueldoInput = 'SBPT',
+					   --TypeSueldo = 'D',
+					   Horarios = 'JORNADA PART TIME ' + 
+									CASE WHEN LEN(@HORASEMANALES) > 1 THEN
+										@HORASEMANALES 
+									ELSE
+										RIGHT('00' + LTRIM(RTRIM(CAST(@HORASEMANALES AS VARCHAR(MAX)))), 2)
+									END
+								  + 
+								  ' HORA(S) - ' + ISNULL(RTRIM(LTRIM(SUBSTRING(Horarios, CHARINDEX('-', Horarios) + 1, LEN(Horarios)))), '')
+				   WHERE CodigoCargoMod = [TW_GENERAL_TEAMWORK].[dbo].[FN_BASE64_DECODE](@CODIGOSOLICITUD)
+
+			SET @CODE = '200'
+			SET @MESSAGE = ''
+
+		COMMIT TRANSACTION
+
+	END TRY
+	BEGIN CATCH
+		
+		ROLLBACK TRANSACTION
+
+	END CATCH
