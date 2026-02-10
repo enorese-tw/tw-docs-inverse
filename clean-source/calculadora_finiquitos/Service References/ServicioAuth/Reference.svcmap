@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="673a799f-e03e-4c90-9f2e-f22a6ef1059d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="wsServicioAuth.xsd" MetadataType="Schema" ID="9030f753-9f40-47ea-9f09-51fa89115b29" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd1" />
+    <MetadataFile FileName="wsServicioAuth1.xsd" MetadataType="Schema" ID="a15bd92e-f7ab-4ae0-9827-045bd12fb55b" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd2" />
+    <MetadataFile FileName="wsServicioAuth2.xsd" MetadataType="Schema" ID="8584d177-e7be-4119-bc87-a2dfab605efb" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd3" />
+    <MetadataFile FileName="wsServicioAuth3.xsd" MetadataType="Schema" ID="6c3324ce-3937-40cd-ac60-6d362eed4c19" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd4" />
+    <MetadataFile FileName="wsServicioAuth.wsdl" MetadataType="Wsdl" ID="100d25b6-bc92-41d8-96d6-36181ddad342" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?wsdl" />
+    <MetadataFile FileName="wsServicioAuth4.xsd" MetadataType="Schema" ID="1002b2ae-414d-42cf-b50a-426959b33863" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

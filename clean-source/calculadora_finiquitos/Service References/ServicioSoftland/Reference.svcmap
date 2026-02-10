@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1361017f-6556-445e-8ec1-a388fcdc4c46" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="wsServicioSoftland.xsd" MetadataType="Schema" ID="ec17686f-72db-40da-9700-809e6f28a98c" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd1" />
+    <MetadataFile FileName="wsServicioSoftland1.xsd" MetadataType="Schema" ID="6d9d9973-0836-4448-95d4-9079205a5ec9" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd0" />
+    <MetadataFile FileName="wsServicioSoftland2.xsd" MetadataType="Schema" ID="edd7a445-5069-4a2f-850e-cfd83c2590b6" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd3" />
+    <MetadataFile FileName="wsServicioSoftland.wsdl" MetadataType="Wsdl" ID="e6060976-da56-4241-bfe2-b59ab8d4ec7a" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?wsdl" />
+    <MetadataFile FileName="wsServicioSoftland3.xsd" MetadataType="Schema" ID="5e4aac79-e979-4d7d-85a2-a92a7b8b8e39" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd2" />
+    <MetadataFile FileName="wsServicioSoftland4.xsd" MetadataType="Schema" ID="ee6cb49d-6532-41bc-979a-e35ffc15d32d" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

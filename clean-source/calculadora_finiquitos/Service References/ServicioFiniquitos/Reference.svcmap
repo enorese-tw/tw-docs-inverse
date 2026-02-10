@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="fd988698-e069-4319-af88-b0172739fd6d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="wsServicioFiniquitos.xsd" MetadataType="Schema" ID="a5a90b84-0224-4df8-886a-bb812fde805a" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd2" />
+    <MetadataFile FileName="wsServicioFiniquitos1.xsd" MetadataType="Schema" ID="5b232abf-ae7b-49e7-9d30-0c5369d5e428" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd3" />
+    <MetadataFile FileName="wsServicioFiniquitos.disco" MetadataType="Disco" ID="6b63d8b6-b08e-4233-b2ae-e3b2c0a1179b" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?disco" />
+    <MetadataFile FileName="wsServicioFiniquitos2.xsd" MetadataType="Schema" ID="c6210b46-16a3-48a9-bfeb-01c12d2e3586" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd4" />
+    <MetadataFile FileName="wsServicioFiniquitos3.xsd" MetadataType="Schema" ID="66a44f5c-02fd-40d4-aded-b6ab1f359fdb" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd1" />
+    <MetadataFile FileName="wsServicioFiniquitos.wsdl" MetadataType="Wsdl" ID="cb73cb00-891c-418c-81da-5905e53882f7" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?wsdl" />
+    <MetadataFile FileName="wsServicioFiniquitos4.xsd" MetadataType="Schema" ID="93a126cd-c388-4a99-bb29-9612e6fed930" SourceId="1" SourceUrl="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

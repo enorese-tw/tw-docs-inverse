@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="wsServicioSoftland" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ServicioSoftland" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc?xsd=xsd4" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioSoftland_GetValidarPermitidoSolBj4_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidarPermitidoSolBj4" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetValidarPermitidoSolBj4_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidarPermitidoSolBj4Response" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetRutTrabajador_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRutTrabajador" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetRutTrabajador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRutTrabajadorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetListarContratosFiniquitados_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarContratosFiniquitados" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetListarContratosFiniquitados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarContratosFiniquitadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetContratoActivoBaja_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContratoActivoBaja" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetContratoActivoBaja_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContratoActivoBajaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetObtenerAreaNegocio_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerAreaNegocio" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetObtenerAreaNegocio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerAreaNegocioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetObtenerCargo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerCargo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetObtenerCargo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerCargoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetCentroCosto_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCentroCosto" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetCentroCosto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCentroCostoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNObtenerUsuario_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNObtenerUsuario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNObtenerUsuario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNObtenerUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNAdicionalEnrolamiento_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNAdicionalEnrolamiento" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNAdicionalEnrolamiento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNAdicionalEnrolamientoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNEsJefatura_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNEsJefatura" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNEsJefatura_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNEsJefaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNFicha_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNFicha" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNFicha_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNFichaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasUsados_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasUsados" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasUsados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasUsadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNContratoActivo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNContratoActivo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNContratoActivo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNContratoActivoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasPostTemp_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasPostTemp" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasPostTemp_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasPostTempResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasPendientes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasPendientes" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasPendientes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasPendientesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasAdministrativos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasAdministrativos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasAdministrativos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasAdministrativosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasAdicionales_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasAdicionales" />
+  </wsdl:message>
+  <wsdl:message name="IServicioSoftland_GetVNDiasAdicionales_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVNDiasAdicionalesResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioSoftland">
+    <wsdl:operation name="GetValidarPermitidoSolBj4">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetValidarPermitidoSolBj4" message="tns:IServicioSoftland_GetValidarPermitidoSolBj4_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetValidarPermitidoSolBj4Response" message="tns:IServicioSoftland_GetValidarPermitidoSolBj4_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRutTrabajador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetRutTrabajador" message="tns:IServicioSoftland_GetRutTrabajador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetRutTrabajadorResponse" message="tns:IServicioSoftland_GetRutTrabajador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListarContratosFiniquitados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetListarContratosFiniquitados" message="tns:IServicioSoftland_GetListarContratosFiniquitados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetListarContratosFiniquitadosResponse" message="tns:IServicioSoftland_GetListarContratosFiniquitados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContratoActivoBaja">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetContratoActivoBaja" message="tns:IServicioSoftland_GetContratoActivoBaja_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetContratoActivoBajaResponse" message="tns:IServicioSoftland_GetContratoActivoBaja_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerAreaNegocio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetObtenerAreaNegocio" message="tns:IServicioSoftland_GetObtenerAreaNegocio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetObtenerAreaNegocioResponse" message="tns:IServicioSoftland_GetObtenerAreaNegocio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerCargo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetObtenerCargo" message="tns:IServicioSoftland_GetObtenerCargo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetObtenerCargoResponse" message="tns:IServicioSoftland_GetObtenerCargo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCentroCosto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetCentroCosto" message="tns:IServicioSoftland_GetCentroCosto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetCentroCostoResponse" message="tns:IServicioSoftland_GetCentroCosto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNObtenerUsuario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNObtenerUsuario" message="tns:IServicioSoftland_GetVNObtenerUsuario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNObtenerUsuarioResponse" message="tns:IServicioSoftland_GetVNObtenerUsuario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNAdicionalEnrolamiento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNAdicionalEnrolamiento" message="tns:IServicioSoftland_GetVNAdicionalEnrolamiento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNAdicionalEnrolamientoResponse" message="tns:IServicioSoftland_GetVNAdicionalEnrolamiento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNEsJefatura">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNEsJefatura" message="tns:IServicioSoftland_GetVNEsJefatura_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNEsJefaturaResponse" message="tns:IServicioSoftland_GetVNEsJefatura_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNFicha">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNFicha" message="tns:IServicioSoftland_GetVNFicha_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNFichaResponse" message="tns:IServicioSoftland_GetVNFicha_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasUsados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasUsados" message="tns:IServicioSoftland_GetVNDiasUsados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasUsadosResponse" message="tns:IServicioSoftland_GetVNDiasUsados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNContratoActivo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNContratoActivo" message="tns:IServicioSoftland_GetVNContratoActivo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNContratoActivoResponse" message="tns:IServicioSoftland_GetVNContratoActivo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasPostTemp">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasPostTemp" message="tns:IServicioSoftland_GetVNDiasPostTemp_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasPostTempResponse" message="tns:IServicioSoftland_GetVNDiasPostTemp_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasPendientes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasPendientes" message="tns:IServicioSoftland_GetVNDiasPendientes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasPendientesResponse" message="tns:IServicioSoftland_GetVNDiasPendientes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasAdministrativos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasAdministrativos" message="tns:IServicioSoftland_GetVNDiasAdministrativos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasAdministrativosResponse" message="tns:IServicioSoftland_GetVNDiasAdministrativos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasAdicionales">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasAdicionales" message="tns:IServicioSoftland_GetVNDiasAdicionales_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioSoftland/GetVNDiasAdicionalesResponse" message="tns:IServicioSoftland_GetVNDiasAdicionales_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicioSoftland" type="tns:IServicioSoftland">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetValidarPermitidoSolBj4">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetValidarPermitidoSolBj4" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRutTrabajador">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetRutTrabajador" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListarContratosFiniquitados">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetListarContratosFiniquitados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContratoActivoBaja">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetContratoActivoBaja" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerAreaNegocio">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetObtenerAreaNegocio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerCargo">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetObtenerCargo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCentroCosto">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetCentroCosto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNObtenerUsuario">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNObtenerUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNAdicionalEnrolamiento">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNAdicionalEnrolamiento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNEsJefatura">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNEsJefatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNFicha">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNFicha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasUsados">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNDiasUsados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNContratoActivo">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNContratoActivo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasPostTemp">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNDiasPostTemp" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasPendientes">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNDiasPendientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasAdministrativos">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNDiasAdministrativos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVNDiasAdicionales">
+      <soap:operation soapAction="http://tempuri.org/IServicioSoftland/GetVNDiasAdicionales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsServicioSoftland">
+    <wsdl:port name="BasicHttpBinding_IServicioSoftland" binding="tns:BasicHttpBinding_IServicioSoftland">
+      <soap:address location="http://192.168.0.10/wsServicioSoftland/wsServicioSoftland.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="wsServicioCorreo" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioCorreo/wsServicioCorreo.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioCorreo/wsServicioCorreo.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioCorreo_correoTeamworkEstandar_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoTeamworkEstandar" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoTeamworkEstandar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoTeamworkEstandarResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoTeamworkEstandarCCO_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoTeamworkEstandarCCO" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoTeamworkEstandarCCO_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoTeamworkEstandarCCOResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoValleNevado_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoValleNevado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoValleNevado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoValleNevadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoTeamworkEstandarCCOTest_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoTeamworkEstandarCCOTest" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoTeamworkEstandarCCOTest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoTeamworkEstandarCCOTestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoMarina_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoMarina" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoMarina_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoMarinaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoTeamworkCCOAttachament_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoTeamworkCCOAttachament" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoTeamworkCCOAttachament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoTeamworkCCOAttachamentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoValleNevadoCCOAttachament_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoValleNevadoCCOAttachament" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoValleNevadoCCOAttachament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoValleNevadoCCOAttachamentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoMarinaCCOAttachament_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoMarinaCCOAttachament" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoMarinaCCOAttachament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoMarinaCCOAttachamentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoMarinaTwCCOAttachament_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoMarinaTwCCOAttachament" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoMarinaTwCCOAttachament_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoMarinaTwCCOAttachamentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoCargoMod_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoCargoMod" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoCargoMod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoCargoModResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoStandar_InputMessage">
+    <wsdl:part name="parameters" element="tns:correoStandar" />
+  </wsdl:message>
+  <wsdl:message name="IServicioCorreo_correoStandar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:correoStandarResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioCorreo">
+    <wsdl:operation name="correoTeamworkEstandar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoTeamworkEstandar" message="tns:IServicioCorreo_correoTeamworkEstandar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoTeamworkEstandarResponse" message="tns:IServicioCorreo_correoTeamworkEstandar_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoTeamworkEstandarCCO">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoTeamworkEstandarCCO" message="tns:IServicioCorreo_correoTeamworkEstandarCCO_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoTeamworkEstandarCCOResponse" message="tns:IServicioCorreo_correoTeamworkEstandarCCO_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoValleNevado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoValleNevado" message="tns:IServicioCorreo_correoValleNevado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoValleNevadoResponse" message="tns:IServicioCorreo_correoValleNevado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoTeamworkEstandarCCOTest">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoTeamworkEstandarCCOTest" message="tns:IServicioCorreo_correoTeamworkEstandarCCOTest_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoTeamworkEstandarCCOTestResponse" message="tns:IServicioCorreo_correoTeamworkEstandarCCOTest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoMarina">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoMarina" message="tns:IServicioCorreo_correoMarina_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoMarinaResponse" message="tns:IServicioCorreo_correoMarina_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoTeamworkCCOAttachament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoTeamworkCCOAttachament" message="tns:IServicioCorreo_correoTeamworkCCOAttachament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoTeamworkCCOAttachamentResponse" message="tns:IServicioCorreo_correoTeamworkCCOAttachament_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoValleNevadoCCOAttachament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoValleNevadoCCOAttachament" message="tns:IServicioCorreo_correoValleNevadoCCOAttachament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoValleNevadoCCOAttachamentResponse" message="tns:IServicioCorreo_correoValleNevadoCCOAttachament_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoMarinaCCOAttachament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoMarinaCCOAttachament" message="tns:IServicioCorreo_correoMarinaCCOAttachament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoMarinaCCOAttachamentResponse" message="tns:IServicioCorreo_correoMarinaCCOAttachament_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoMarinaTwCCOAttachament">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoMarinaTwCCOAttachament" message="tns:IServicioCorreo_correoMarinaTwCCOAttachament_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoMarinaTwCCOAttachamentResponse" message="tns:IServicioCorreo_correoMarinaTwCCOAttachament_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoCargoMod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoCargoMod" message="tns:IServicioCorreo_correoCargoMod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoCargoModResponse" message="tns:IServicioCorreo_correoCargoMod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="correoStandar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioCorreo/correoStandar" message="tns:IServicioCorreo_correoStandar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioCorreo/correoStandarResponse" message="tns:IServicioCorreo_correoStandar_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicioCorreo" type="tns:IServicioCorreo">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="correoTeamworkEstandar">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoTeamworkEstandar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoTeamworkEstandarCCO">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoTeamworkEstandarCCO" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoValleNevado">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoValleNevado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoTeamworkEstandarCCOTest">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoTeamworkEstandarCCOTest" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoMarina">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoMarina" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoTeamworkCCOAttachament">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoTeamworkCCOAttachament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoValleNevadoCCOAttachament">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoValleNevadoCCOAttachament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoMarinaCCOAttachament">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoMarinaCCOAttachament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoMarinaTwCCOAttachament">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoMarinaTwCCOAttachament" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoCargoMod">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoCargoMod" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="correoStandar">
+      <soap:operation soapAction="http://tempuri.org/IServicioCorreo/correoStandar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsServicioCorreo">
+    <wsdl:port name="BasicHttpBinding_IServicioCorreo" binding="tns:BasicHttpBinding_IServicioCorreo">
+      <soap:address location="http://192.168.0.10/wsServicioCorreo/wsServicioCorreo.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

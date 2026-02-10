@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="wsServicioAuth" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ServicioAuth" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc?xsd=xsd4" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioAuth_GetSignIn_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSignIn" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetSignIn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSignInResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetBASE64_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBASE64" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetBASE64_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBASE64Response" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetPemisionSectionsAccess_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPemisionSectionsAccess" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetPemisionSectionsAccess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPemisionSectionsAccessResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetPemisionAccess_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPemisionAccess" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetPemisionAccess_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPemisionAccessResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetSectionRenderHtml_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSectionRenderHtml" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetSectionRenderHtml_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSectionRenderHtmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetPlantillaCargaMasivaRender_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlantillaCargaMasivaRender" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetPlantillaCargaMasivaRender_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlantillaCargaMasivaRenderResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetDownloadPlantillaCargaMasiva_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDownloadPlantillaCargaMasiva" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetDownloadPlantillaCargaMasiva_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDownloadPlantillaCargaMasivaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetObtenerEmpresas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerEmpresas" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetObtenerEmpresas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerEmpresasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetBarcodes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBarcodes" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_GetBarcodes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBarcodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_SetEnrolarColaborador_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetEnrolarColaborador" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_SetEnrolarColaborador_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetEnrolarColaboradorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_SetControlErroresSistemas_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetControlErroresSistemas" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_SetControlErroresSistemas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetControlErroresSistemasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_SetBatchChangeContrato_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetBatchChangeContrato" />
+  </wsdl:message>
+  <wsdl:message name="IServicioAuth_SetBatchChangeContrato_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetBatchChangeContratoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioAuth">
+    <wsdl:operation name="GetSignIn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetSignIn" message="tns:IServicioAuth_GetSignIn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetSignInResponse" message="tns:IServicioAuth_GetSignIn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBASE64">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetBASE64" message="tns:IServicioAuth_GetBASE64_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetBASE64Response" message="tns:IServicioAuth_GetBASE64_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPemisionSectionsAccess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetPemisionSectionsAccess" message="tns:IServicioAuth_GetPemisionSectionsAccess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetPemisionSectionsAccessResponse" message="tns:IServicioAuth_GetPemisionSectionsAccess_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPemisionAccess">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetPemisionAccess" message="tns:IServicioAuth_GetPemisionAccess_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetPemisionAccessResponse" message="tns:IServicioAuth_GetPemisionAccess_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSectionRenderHtml">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetSectionRenderHtml" message="tns:IServicioAuth_GetSectionRenderHtml_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetSectionRenderHtmlResponse" message="tns:IServicioAuth_GetSectionRenderHtml_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlantillaCargaMasivaRender">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetPlantillaCargaMasivaRender" message="tns:IServicioAuth_GetPlantillaCargaMasivaRender_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetPlantillaCargaMasivaRenderResponse" message="tns:IServicioAuth_GetPlantillaCargaMasivaRender_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadPlantillaCargaMasiva">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetDownloadPlantillaCargaMasiva" message="tns:IServicioAuth_GetDownloadPlantillaCargaMasiva_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetDownloadPlantillaCargaMasivaResponse" message="tns:IServicioAuth_GetDownloadPlantillaCargaMasiva_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerEmpresas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetObtenerEmpresas" message="tns:IServicioAuth_GetObtenerEmpresas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetObtenerEmpresasResponse" message="tns:IServicioAuth_GetObtenerEmpresas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/GetBarcodes" message="tns:IServicioAuth_GetBarcodes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/GetBarcodesResponse" message="tns:IServicioAuth_GetBarcodes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetEnrolarColaborador">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/SetEnrolarColaborador" message="tns:IServicioAuth_SetEnrolarColaborador_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/SetEnrolarColaboradorResponse" message="tns:IServicioAuth_SetEnrolarColaborador_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetControlErroresSistemas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/SetControlErroresSistemas" message="tns:IServicioAuth_SetControlErroresSistemas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/SetControlErroresSistemasResponse" message="tns:IServicioAuth_SetControlErroresSistemas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetBatchChangeContrato">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioAuth/SetBatchChangeContrato" message="tns:IServicioAuth_SetBatchChangeContrato_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioAuth/SetBatchChangeContratoResponse" message="tns:IServicioAuth_SetBatchChangeContrato_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicioAuth" type="tns:IServicioAuth">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetSignIn">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetSignIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBASE64">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetBASE64" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPemisionSectionsAccess">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetPemisionSectionsAccess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPemisionAccess">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetPemisionAccess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSectionRenderHtml">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetSectionRenderHtml" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlantillaCargaMasivaRender">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetPlantillaCargaMasivaRender" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownloadPlantillaCargaMasiva">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetDownloadPlantillaCargaMasiva" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerEmpresas">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetObtenerEmpresas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBarcodes">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/GetBarcodes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetEnrolarColaborador">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/SetEnrolarColaborador" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetControlErroresSistemas">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/SetControlErroresSistemas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBatchChangeContrato">
+      <soap:operation soapAction="http://tempuri.org/IServicioAuth/SetBatchChangeContrato" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsServicioAuth">
+    <wsdl:port name="BasicHttpBinding_IServicioAuth" binding="tns:BasicHttpBinding_IServicioAuth">
+      <soap:address location="http://192.168.0.10/wsServicioAuth/wsServicioAuth.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

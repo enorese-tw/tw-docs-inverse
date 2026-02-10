@@ -1,0 +1,2226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="wsServicioFiniquitos" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ServicioFiniquitos" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd3" />
+      <xsd:import schemaLocation="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerProveedoresProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerProveedoresProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerProveedoresProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerProveedoresProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerSolicitudesB4J_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerSolicitudesB4J" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerSolicitudesB4J_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerSolicitudesB4JResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCargaVariable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCargaVariable" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCargaVariable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCargaVariableResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCausales_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCausales" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCausales_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCausalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarDocumentos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarDocumentos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarDocumentos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarDocumentosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetUltimaUF_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUltimaUF" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetUltimaUF_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUltimaUFResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetOtrosHaberes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOtrosHaberes" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetOtrosHaberes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOtrosHaberesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarDescuentos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarDescuentos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarDescuentos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarDescuentosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerENCFiniquito_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerENCFiniquito" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerENCFiniquito_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerENCFiniquitoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetContratosCalculoPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContratosCalculoPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetContratosCalculoPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContratosCalculoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetEmpresasPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmpresasPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetEmpresasPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEmpresasPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetBancosPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBancosPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetBancosPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBancosPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTipoPagoPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTipoPagoPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTipoPagoPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTipoPagoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTotalesPagosEST_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalesPagosEST" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTotalesPagosEST_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalesPagosESTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidaDocumentoPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidaDocumentoPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidaDocumentoPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidaDocumentoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidaContratosEnCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidaContratosEnCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidaContratosEnCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidaContratosEnCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarContratosCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarContratosCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarContratosCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarContratosCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetUltimoEncDesvinculacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUltimoEncDesvinculacion" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetUltimoEncDesvinculacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUltimoEncDesvinculacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFiniquitosConfirmados_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiniquitosConfirmados" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFiniquitosConfirmados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiniquitosConfirmadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFiniquitosRecientes_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiniquitosRecientes" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFiniquitosRecientes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiniquitosRecientesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFiniquitosSolicitudesBaja_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiniquitosSolicitudesBaja" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFiniquitosSolicitudesBaja_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiniquitosSolicitudesBajaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFiniquitosSolicitudBaja_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiniquitosSolicitudBaja" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFiniquitosSolicitudBaja_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFiniquitosSolicitudBajaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFactorCalculo125_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFactorCalculo125" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetFactorCalculo125_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFactorCalculo125Response" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerUltimoCorrelativoDisponiblePagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerUltimoCorrelativoDisponiblePagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerUltimoCorrelativoDisponiblePagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerUltimoCorrelativoDisponiblePagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidarRegistroPago_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidarRegistroPago" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidarRegistroPago_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidarRegistroPagoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerPagoPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerPagoPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerPagoPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerPagoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetDataChequePagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataChequePagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetDataChequePagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDataChequePagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerProveedores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerProveedores" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerProveedores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerProveedoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerCorrelativoDisponibleProveedores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerCorrelativoDisponibleProveedores" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerCorrelativoDisponibleProveedores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerCorrelativoDisponibleProveedoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerClientesPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerClientesPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerClientesPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerClientesPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerTrabajadoresPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerTrabajadoresPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerTrabajadoresPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerTrabajadoresPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerMontoChequePagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerMontoChequePagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerMontoChequePagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerMontoChequePagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarDatosTrabajadorCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarDatosTrabajadorCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarDatosTrabajadorCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarDatosTrabajadorCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarPeriodosCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarPeriodosCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarPeriodosCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarPeriodosCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidarConfirmadoFiniquitoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidarConfirmadoFiniquitoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidarConfirmadoFiniquitoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidarConfirmadoFiniquitoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarContratosCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarContratosCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarContratosCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarContratosCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarDocumentosCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarDocumentosCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarDocumentosCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarDocumentosCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarTotalDiasCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarTotalDiasCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarTotalDiasCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarTotalDiasCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarDescuentosFiniquitoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarDescuentosFiniquitoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarDescuentosFiniquitoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarDescuentosFiniquitoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarOtrosHaberesFiniquitoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarOtrosHaberesFiniquitoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarOtrosHaberesFiniquitoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarOtrosHaberesFiniquitoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarDiasVacacionesCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarDiasVacacionesCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarDiasVacacionesCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarDiasVacacionesCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarTotalesFiniquitoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarTotalesFiniquitoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarTotalesFiniquitoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarTotalesFiniquitoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarHabaeresMensualFiniquitoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarHabaeresMensualFiniquitoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarHabaeresMensualFiniquitoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarHabaeresMensualFiniquitoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarConceptosAdicionalesFiniquitoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarConceptosAdicionalesFiniquitoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarConceptosAdicionalesFiniquitoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarConceptosAdicionalesFiniquitoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarBonosAdicionalesFiniquitoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarBonosAdicionalesFiniquitoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarBonosAdicionalesFiniquitoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarBonosAdicionalesFiniquitoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarValorUfFiniquitoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarValorUfFiniquitoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarValorUfFiniquitoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarValorUfFiniquitoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetBuscarKamEmpresa_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuscarKamEmpresa" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetBuscarKamEmpresa_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBuscarKamEmpresaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerSolB4J_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerSolB4J" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerSolB4J_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerSolB4JResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTMPValidateProcessInitProveedores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTMPValidateProcessInitProveedores" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTMPValidateProcessInitProveedores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTMPValidateProcessInitProveedoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTMPChequesInProcessProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTMPChequesInProcessProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTMPChequesInProcessProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTMPChequesInProcessProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTMPValidateProcessInitFiniquitos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTMPValidateProcessInitFiniquitos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTMPValidateProcessInitFiniquitos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTMPValidateProcessInitFiniquitosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTMPChequesInProcessFiniquitos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTMPChequesInProcessFiniquitos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTMPChequesInProcessFiniquitos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTMPChequesInProcessFiniquitosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetToken" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCalculoPartimeEspecial_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCalculoPartimeEspecial" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCalculoPartimeEspecial_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCalculoPartimeEspecialResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarTiposProveedores_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarTiposProveedores" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetVisualizarTiposProveedores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetVisualizarTiposProveedoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetReporteriaFiniquitos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetReporteriaFiniquitos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetReporteriaFiniquitos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetReporteriaFiniquitosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetPlantillasCorreo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlantillasCorreo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetPlantillasCorreo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlantillasCorreoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetAlertasInformativas_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlertasInformativas" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetAlertasInformativas_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAlertasInformativasResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerProgresivos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerProgresivos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerProgresivos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerProgresivosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerExcepcionPTAreaNeg_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerExcepcionPTAreaNeg" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerExcepcionPTAreaNeg_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerExcepcionPTAreaNegResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerExcepcionCalculoIAS_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerExcepcionCalculoIAS" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerExcepcionCalculoIAS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerExcepcionCalculoIASResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerFechaIngreso_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerFechaIngreso" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerFechaIngreso_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerFechaIngresoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidaRepeticionCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidaRepeticionCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetValidaRepeticionCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidaRepeticionCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetGratificacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGratificacion" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetGratificacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGratificacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerExcepcionAFC_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerExcepcionAFC" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetObtenerExcepcionAFC_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetObtenerExcepcionAFCResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetCrearSolicitudB4J_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCrearSolicitudB4J" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetCrearSolicitudB4J_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCrearSolicitudB4JResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetAdministrarProcesosSolB4J_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAdministrarProcesosSolB4J" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetAdministrarProcesosSolB4J_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAdministrarProcesosSolB4JResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertaContratoCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertaContratoCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertaContratoCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertaContratoCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertaDiasVacaciones_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertaDiasVacaciones" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertaDiasVacaciones_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertaDiasVacacionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertaTotalHaber_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertaTotalHaber" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertaTotalHaber_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertaTotalHaberResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertarRegistroPagoPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertarRegistroPagoPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertarRegistroPagoPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertarRegistroPagoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetChequePagado_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetChequePagado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetChequePagado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetChequePagadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetChequeDisponiblePagoPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetChequeDisponiblePagoPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetChequeDisponiblePagoPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetChequeDisponiblePagoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetAnularPagoPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAnularPagoPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetAnularPagoPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAnularPagoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetRegistrarPagoProveedores_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetRegistrarPagoProveedores" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetRegistrarPagoProveedores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetRegistrarPagoProveedoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPCargaChequeProveedorProveedores_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPCargaChequeProveedorProveedores" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPCargaChequeProveedorProveedores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPCargaChequeProveedorProveedoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPInitProcessChequeProveedorProveedores_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPInitProcessChequeProveedorProveedores" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPInitProcessChequeProveedorProveedores_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPInitProcessChequeProveedorProveedoresResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPCloseProcessChequeProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPCloseProcessChequeProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPCloseProcessChequeProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPCloseProcessChequeProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPCargaChequeFiniquitos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPCargaChequeFiniquitos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPCargaChequeFiniquitos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPCargaChequeFiniquitosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPInitProcessChequeFiniquitos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPInitProcessChequeFiniquitos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPInitProcessChequeFiniquitos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPInitProcessChequeFiniquitosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPCloseProcessChequeFiniquitos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPCloseProcessChequeFiniquitos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTMPCloseProcessChequeFiniquitos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTMPCloseProcessChequeFiniquitosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetConfirmarRetiroCalculo_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetConfirmarRetiroCalculo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetConfirmarRetiroCalculo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetConfirmarRetiroCalculoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetCrearModificarEncDesvinculacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetCrearModificarEncDesvinculacion" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetCrearModificarEncDesvinculacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetCrearModificarEncDesvinculacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetContratosOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetContratosOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetContratosOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetContratosOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetConceptosAdicionalesOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetConceptosAdicionalesOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetConceptosAdicionalesOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetConceptosAdicionalesOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetDatosVariablesOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDatosVariablesOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetDatosVariablesOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDatosVariablesOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetControlDocumentosOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetControlDocumentosOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetControlDocumentosOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetControlDocumentosOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetBonosAdicionalesOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetBonosAdicionalesOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetBonosAdicionalesOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetBonosAdicionalesOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetHaberesYDescuentosOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetHaberesYDescuentosOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetHaberesYDescuentosOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetHaberesYDescuentosOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetDiasVacacionesOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetDiasVacacionesOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetDiasVacacionesOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetDiasVacacionesOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetHaberesMensualesOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetHaberesMensualesOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetHaberesMensualesOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetHaberesMensualesOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTotalPagosOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetTotalPagosOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetTotalPagosOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetTotalPagosOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetAnularFolioFiniquito_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAnularFolioFiniquito" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetAnularFolioFiniquito_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAnularFolioFiniquitoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetFiniquitoPagado_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetFiniquitoPagado" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetFiniquitoPagado_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetFiniquitoPagadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetNotariadoPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetNotariadoPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetNotariadoPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetNotariadoPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetRevertirConfirmacionPagos_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetRevertirConfirmacionPagos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetRevertirConfirmacionPagos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetRevertirConfirmacionPagosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertarProveedor_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertarProveedor" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetInsertarProveedor_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetInsertarProveedorResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetAgregarFactorContrario_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetAgregarFactorContrario" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_SetAgregarFactorContrario_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetAgregarFactorContrarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCreditoCCAFEST_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCreditoCCAFEST" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCreditoCCAFEST_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCreditoCCAFESTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetJornadasParttimeEST_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJornadasParttimeEST" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetJornadasParttimeEST_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJornadasParttimeESTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTrabajadorPartTimeEST_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrabajadorPartTimeEST" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetTrabajadorPartTimeEST_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrabajadorPartTimeESTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCentroCostos_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCentroCostos" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCentroCostos_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCentroCostosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetContratoActivoBaja_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetContratoActivoBaja" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetContratoActivoBaja_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetContratoActivoBajaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarFiniquitados_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarFiniquitados" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarFiniquitados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarFiniquitadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarContratosTerminados_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarContratosTerminados" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetListarContratosTerminados_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetListarContratosTerminadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCausalFicha_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCausalFicha" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCausalFicha_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCausalFichaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCargo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCargo" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCargo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCargoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetAreaNegocio_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAreaNegocio" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetAreaNegocio_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAreaNegocioResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetUltimaLiquidacion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUltimaLiquidacion" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetUltimaLiquidacion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUltimaLiquidacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetRutTrabajadorSolicitudBaja_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRutTrabajadorSolicitudBaja" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetRutTrabajadorSolicitudBaja_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRutTrabajadorSolicitudBajaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetJornadasParttimeOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetJornadasParttimeOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetJornadasParttimeOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetJornadasParttimeOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetRutTrabajadorSolicitudBajaOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRutTrabajadorSolicitudBajaOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetRutTrabajadorSolicitudBajaOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRutTrabajadorSolicitudBajaOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCargoOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCargoOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCargoOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCargoOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCentroCostosOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCentroCostosOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetCentroCostosOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCentroCostosOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetRetencionJudicialOUT_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRetencionJudicialOUT" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetRetencionJudicialOUT_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRetencionJudicialOUTResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetRutTrabajadorSolicitudBajaCONSULTORA_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRutTrabajadorSolicitudBajaCONSULTORA" />
+  </wsdl:message>
+  <wsdl:message name="IServicioFiniquitos_GetRutTrabajadorSolicitudBajaCONSULTORA_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRutTrabajadorSolicitudBajaCONSULTORAResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IServicioFiniquitos">
+    <wsdl:operation name="GetObtenerProveedoresProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerProveedoresProveedor" message="tns:IServicioFiniquitos_GetObtenerProveedoresProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerProveedoresProveedorResponse" message="tns:IServicioFiniquitos_GetObtenerProveedoresProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerSolicitudesB4J">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerSolicitudesB4J" message="tns:IServicioFiniquitos_GetObtenerSolicitudesB4J_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerSolicitudesB4JResponse" message="tns:IServicioFiniquitos_GetObtenerSolicitudesB4J_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCargaVariable">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCargaVariable" message="tns:IServicioFiniquitos_GetCargaVariable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCargaVariableResponse" message="tns:IServicioFiniquitos_GetCargaVariable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCausales">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCausales" message="tns:IServicioFiniquitos_GetCausales_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCausalesResponse" message="tns:IServicioFiniquitos_GetCausales_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListarDocumentos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarDocumentos" message="tns:IServicioFiniquitos_GetListarDocumentos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarDocumentosResponse" message="tns:IServicioFiniquitos_GetListarDocumentos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUltimaUF">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetUltimaUF" message="tns:IServicioFiniquitos_GetUltimaUF_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetUltimaUFResponse" message="tns:IServicioFiniquitos_GetUltimaUF_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOtrosHaberes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetOtrosHaberes" message="tns:IServicioFiniquitos_GetOtrosHaberes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetOtrosHaberesResponse" message="tns:IServicioFiniquitos_GetOtrosHaberes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListarDescuentos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarDescuentos" message="tns:IServicioFiniquitos_GetListarDescuentos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarDescuentosResponse" message="tns:IServicioFiniquitos_GetListarDescuentos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerENCFiniquito">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerENCFiniquito" message="tns:IServicioFiniquitos_GetObtenerENCFiniquito_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerENCFiniquitoResponse" message="tns:IServicioFiniquitos_GetObtenerENCFiniquito_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContratosCalculoPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetContratosCalculoPagos" message="tns:IServicioFiniquitos_GetContratosCalculoPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetContratosCalculoPagosResponse" message="tns:IServicioFiniquitos_GetContratosCalculoPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpresasPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetEmpresasPagos" message="tns:IServicioFiniquitos_GetEmpresasPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetEmpresasPagosResponse" message="tns:IServicioFiniquitos_GetEmpresasPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBancosPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetBancosPagos" message="tns:IServicioFiniquitos_GetBancosPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetBancosPagosResponse" message="tns:IServicioFiniquitos_GetBancosPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTipoPagoPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTipoPagoPagos" message="tns:IServicioFiniquitos_GetTipoPagoPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTipoPagoPagosResponse" message="tns:IServicioFiniquitos_GetTipoPagoPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalesPagosEST">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTotalesPagosEST" message="tns:IServicioFiniquitos_GetTotalesPagosEST_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTotalesPagosESTResponse" message="tns:IServicioFiniquitos_GetTotalesPagosEST_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidaDocumentoPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidaDocumentoPagos" message="tns:IServicioFiniquitos_GetValidaDocumentoPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidaDocumentoPagosResponse" message="tns:IServicioFiniquitos_GetValidaDocumentoPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidaContratosEnCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidaContratosEnCalculo" message="tns:IServicioFiniquitos_GetValidaContratosEnCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidaContratosEnCalculoResponse" message="tns:IServicioFiniquitos_GetValidaContratosEnCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListarContratosCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarContratosCalculo" message="tns:IServicioFiniquitos_GetListarContratosCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarContratosCalculoResponse" message="tns:IServicioFiniquitos_GetListarContratosCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUltimoEncDesvinculacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetUltimoEncDesvinculacion" message="tns:IServicioFiniquitos_GetUltimoEncDesvinculacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetUltimoEncDesvinculacionResponse" message="tns:IServicioFiniquitos_GetUltimoEncDesvinculacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFiniquitosConfirmados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFiniquitosConfirmados" message="tns:IServicioFiniquitos_GetFiniquitosConfirmados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFiniquitosConfirmadosResponse" message="tns:IServicioFiniquitos_GetFiniquitosConfirmados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFiniquitosRecientes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFiniquitosRecientes" message="tns:IServicioFiniquitos_GetFiniquitosRecientes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFiniquitosRecientesResponse" message="tns:IServicioFiniquitos_GetFiniquitosRecientes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFiniquitosSolicitudesBaja">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFiniquitosSolicitudesBaja" message="tns:IServicioFiniquitos_GetFiniquitosSolicitudesBaja_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFiniquitosSolicitudesBajaResponse" message="tns:IServicioFiniquitos_GetFiniquitosSolicitudesBaja_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFiniquitosSolicitudBaja">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFiniquitosSolicitudBaja" message="tns:IServicioFiniquitos_GetFiniquitosSolicitudBaja_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFiniquitosSolicitudBajaResponse" message="tns:IServicioFiniquitos_GetFiniquitosSolicitudBaja_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFactorCalculo125">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFactorCalculo125" message="tns:IServicioFiniquitos_GetFactorCalculo125_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetFactorCalculo125Response" message="tns:IServicioFiniquitos_GetFactorCalculo125_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerUltimoCorrelativoDisponiblePagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerUltimoCorrelativoDisponiblePagos" message="tns:IServicioFiniquitos_GetObtenerUltimoCorrelativoDisponiblePagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerUltimoCorrelativoDisponiblePagosResponse" message="tns:IServicioFiniquitos_GetObtenerUltimoCorrelativoDisponiblePagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidarRegistroPago">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidarRegistroPago" message="tns:IServicioFiniquitos_GetValidarRegistroPago_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidarRegistroPagoResponse" message="tns:IServicioFiniquitos_GetValidarRegistroPago_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerPagoPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerPagoPagos" message="tns:IServicioFiniquitos_GetObtenerPagoPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerPagoPagosResponse" message="tns:IServicioFiniquitos_GetObtenerPagoPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDataChequePagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetDataChequePagos" message="tns:IServicioFiniquitos_GetDataChequePagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetDataChequePagosResponse" message="tns:IServicioFiniquitos_GetDataChequePagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerProveedores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerProveedores" message="tns:IServicioFiniquitos_GetObtenerProveedores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerProveedoresResponse" message="tns:IServicioFiniquitos_GetObtenerProveedores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerCorrelativoDisponibleProveedores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerCorrelativoDisponibleProveedores" message="tns:IServicioFiniquitos_GetObtenerCorrelativoDisponibleProveedores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerCorrelativoDisponibleProveedoresResponse" message="tns:IServicioFiniquitos_GetObtenerCorrelativoDisponibleProveedores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerClientesPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerClientesPagos" message="tns:IServicioFiniquitos_GetObtenerClientesPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerClientesPagosResponse" message="tns:IServicioFiniquitos_GetObtenerClientesPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerTrabajadoresPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerTrabajadoresPagos" message="tns:IServicioFiniquitos_GetObtenerTrabajadoresPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerTrabajadoresPagosResponse" message="tns:IServicioFiniquitos_GetObtenerTrabajadoresPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerMontoChequePagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerMontoChequePagos" message="tns:IServicioFiniquitos_GetObtenerMontoChequePagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerMontoChequePagosResponse" message="tns:IServicioFiniquitos_GetObtenerMontoChequePagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarDatosTrabajadorCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarDatosTrabajadorCalculo" message="tns:IServicioFiniquitos_GetVisualizarDatosTrabajadorCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarDatosTrabajadorCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarDatosTrabajadorCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarPeriodosCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarPeriodosCalculo" message="tns:IServicioFiniquitos_GetVisualizarPeriodosCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarPeriodosCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarPeriodosCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidarConfirmadoFiniquitoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidarConfirmadoFiniquitoCalculo" message="tns:IServicioFiniquitos_GetValidarConfirmadoFiniquitoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidarConfirmadoFiniquitoCalculoResponse" message="tns:IServicioFiniquitos_GetValidarConfirmadoFiniquitoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarContratosCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarContratosCalculo" message="tns:IServicioFiniquitos_GetVisualizarContratosCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarContratosCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarContratosCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarDocumentosCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarDocumentosCalculo" message="tns:IServicioFiniquitos_GetVisualizarDocumentosCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarDocumentosCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarDocumentosCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarTotalDiasCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarTotalDiasCalculo" message="tns:IServicioFiniquitos_GetVisualizarTotalDiasCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarTotalDiasCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarTotalDiasCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarDescuentosFiniquitoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarDescuentosFiniquitoCalculo" message="tns:IServicioFiniquitos_GetVisualizarDescuentosFiniquitoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarDescuentosFiniquitoCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarDescuentosFiniquitoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarOtrosHaberesFiniquitoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarOtrosHaberesFiniquitoCalculo" message="tns:IServicioFiniquitos_GetVisualizarOtrosHaberesFiniquitoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarOtrosHaberesFiniquitoCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarOtrosHaberesFiniquitoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarDiasVacacionesCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarDiasVacacionesCalculo" message="tns:IServicioFiniquitos_GetVisualizarDiasVacacionesCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarDiasVacacionesCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarDiasVacacionesCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarTotalesFiniquitoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarTotalesFiniquitoCalculo" message="tns:IServicioFiniquitos_GetVisualizarTotalesFiniquitoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarTotalesFiniquitoCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarTotalesFiniquitoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarHabaeresMensualFiniquitoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarHabaeresMensualFiniquitoCalculo" message="tns:IServicioFiniquitos_GetVisualizarHabaeresMensualFiniquitoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarHabaeresMensualFiniquitoCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarHabaeresMensualFiniquitoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarConceptosAdicionalesFiniquitoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarConceptosAdicionalesFiniquitoCalculo" message="tns:IServicioFiniquitos_GetVisualizarConceptosAdicionalesFiniquitoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarConceptosAdicionalesFiniquitoCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarConceptosAdicionalesFiniquitoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarBonosAdicionalesFiniquitoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarBonosAdicionalesFiniquitoCalculo" message="tns:IServicioFiniquitos_GetVisualizarBonosAdicionalesFiniquitoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarBonosAdicionalesFiniquitoCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarBonosAdicionalesFiniquitoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarValorUfFiniquitoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarValorUfFiniquitoCalculo" message="tns:IServicioFiniquitos_GetVisualizarValorUfFiniquitoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarValorUfFiniquitoCalculoResponse" message="tns:IServicioFiniquitos_GetVisualizarValorUfFiniquitoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBuscarKamEmpresa">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetBuscarKamEmpresa" message="tns:IServicioFiniquitos_GetBuscarKamEmpresa_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetBuscarKamEmpresaResponse" message="tns:IServicioFiniquitos_GetBuscarKamEmpresa_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerSolB4J">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerSolB4J" message="tns:IServicioFiniquitos_GetObtenerSolB4J_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerSolB4JResponse" message="tns:IServicioFiniquitos_GetObtenerSolB4J_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTMPValidateProcessInitProveedores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTMPValidateProcessInitProveedores" message="tns:IServicioFiniquitos_GetTMPValidateProcessInitProveedores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTMPValidateProcessInitProveedoresResponse" message="tns:IServicioFiniquitos_GetTMPValidateProcessInitProveedores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTMPChequesInProcessProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTMPChequesInProcessProveedor" message="tns:IServicioFiniquitos_GetTMPChequesInProcessProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTMPChequesInProcessProveedorResponse" message="tns:IServicioFiniquitos_GetTMPChequesInProcessProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTMPValidateProcessInitFiniquitos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTMPValidateProcessInitFiniquitos" message="tns:IServicioFiniquitos_GetTMPValidateProcessInitFiniquitos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTMPValidateProcessInitFiniquitosResponse" message="tns:IServicioFiniquitos_GetTMPValidateProcessInitFiniquitos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTMPChequesInProcessFiniquitos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTMPChequesInProcessFiniquitos" message="tns:IServicioFiniquitos_GetTMPChequesInProcessFiniquitos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTMPChequesInProcessFiniquitosResponse" message="tns:IServicioFiniquitos_GetTMPChequesInProcessFiniquitos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetToken">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetToken" message="tns:IServicioFiniquitos_GetToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTokenResponse" message="tns:IServicioFiniquitos_GetToken_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCalculoPartimeEspecial">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCalculoPartimeEspecial" message="tns:IServicioFiniquitos_GetCalculoPartimeEspecial_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCalculoPartimeEspecialResponse" message="tns:IServicioFiniquitos_GetCalculoPartimeEspecial_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarTiposProveedores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarTiposProveedores" message="tns:IServicioFiniquitos_GetVisualizarTiposProveedores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetVisualizarTiposProveedoresResponse" message="tns:IServicioFiniquitos_GetVisualizarTiposProveedores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReporteriaFiniquitos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetReporteriaFiniquitos" message="tns:IServicioFiniquitos_GetReporteriaFiniquitos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetReporteriaFiniquitosResponse" message="tns:IServicioFiniquitos_GetReporteriaFiniquitos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlantillasCorreo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetPlantillasCorreo" message="tns:IServicioFiniquitos_GetPlantillasCorreo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetPlantillasCorreoResponse" message="tns:IServicioFiniquitos_GetPlantillasCorreo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAlertasInformativas">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetAlertasInformativas" message="tns:IServicioFiniquitos_GetAlertasInformativas_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetAlertasInformativasResponse" message="tns:IServicioFiniquitos_GetAlertasInformativas_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerProgresivos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerProgresivos" message="tns:IServicioFiniquitos_GetObtenerProgresivos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerProgresivosResponse" message="tns:IServicioFiniquitos_GetObtenerProgresivos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerExcepcionPTAreaNeg">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionPTAreaNeg" message="tns:IServicioFiniquitos_GetObtenerExcepcionPTAreaNeg_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionPTAreaNegResponse" message="tns:IServicioFiniquitos_GetObtenerExcepcionPTAreaNeg_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerExcepcionCalculoIAS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionCalculoIAS" message="tns:IServicioFiniquitos_GetObtenerExcepcionCalculoIAS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionCalculoIASResponse" message="tns:IServicioFiniquitos_GetObtenerExcepcionCalculoIAS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerFechaIngreso">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerFechaIngreso" message="tns:IServicioFiniquitos_GetObtenerFechaIngreso_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerFechaIngresoResponse" message="tns:IServicioFiniquitos_GetObtenerFechaIngreso_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidaRepeticionCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidaRepeticionCalculo" message="tns:IServicioFiniquitos_GetValidaRepeticionCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetValidaRepeticionCalculoResponse" message="tns:IServicioFiniquitos_GetValidaRepeticionCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGratificacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetGratificacion" message="tns:IServicioFiniquitos_GetGratificacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetGratificacionResponse" message="tns:IServicioFiniquitos_GetGratificacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerExcepcionAFC">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionAFC" message="tns:IServicioFiniquitos_GetObtenerExcepcionAFC_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionAFCResponse" message="tns:IServicioFiniquitos_GetObtenerExcepcionAFC_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCrearSolicitudB4J">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetCrearSolicitudB4J" message="tns:IServicioFiniquitos_SetCrearSolicitudB4J_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetCrearSolicitudB4JResponse" message="tns:IServicioFiniquitos_SetCrearSolicitudB4J_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAdministrarProcesosSolB4J">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetAdministrarProcesosSolB4J" message="tns:IServicioFiniquitos_SetAdministrarProcesosSolB4J_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetAdministrarProcesosSolB4JResponse" message="tns:IServicioFiniquitos_SetAdministrarProcesosSolB4J_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertaContratoCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertaContratoCalculo" message="tns:IServicioFiniquitos_SetInsertaContratoCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertaContratoCalculoResponse" message="tns:IServicioFiniquitos_SetInsertaContratoCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertaDiasVacaciones">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertaDiasVacaciones" message="tns:IServicioFiniquitos_SetInsertaDiasVacaciones_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertaDiasVacacionesResponse" message="tns:IServicioFiniquitos_SetInsertaDiasVacaciones_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertaTotalHaber">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertaTotalHaber" message="tns:IServicioFiniquitos_SetInsertaTotalHaber_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertaTotalHaberResponse" message="tns:IServicioFiniquitos_SetInsertaTotalHaber_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertarRegistroPagoPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertarRegistroPagoPagos" message="tns:IServicioFiniquitos_SetInsertarRegistroPagoPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertarRegistroPagoPagosResponse" message="tns:IServicioFiniquitos_SetInsertarRegistroPagoPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetChequePagado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetChequePagado" message="tns:IServicioFiniquitos_SetChequePagado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetChequePagadoResponse" message="tns:IServicioFiniquitos_SetChequePagado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetChequeDisponiblePagoPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetChequeDisponiblePagoPagos" message="tns:IServicioFiniquitos_SetChequeDisponiblePagoPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetChequeDisponiblePagoPagosResponse" message="tns:IServicioFiniquitos_SetChequeDisponiblePagoPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAnularPagoPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetAnularPagoPagos" message="tns:IServicioFiniquitos_SetAnularPagoPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetAnularPagoPagosResponse" message="tns:IServicioFiniquitos_SetAnularPagoPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetRegistrarPagoProveedores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetRegistrarPagoProveedores" message="tns:IServicioFiniquitos_SetRegistrarPagoProveedores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetRegistrarPagoProveedoresResponse" message="tns:IServicioFiniquitos_SetRegistrarPagoProveedores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPCargaChequeProveedorProveedores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPCargaChequeProveedorProveedores" message="tns:IServicioFiniquitos_SetTMPCargaChequeProveedorProveedores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPCargaChequeProveedorProveedoresResponse" message="tns:IServicioFiniquitos_SetTMPCargaChequeProveedorProveedores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPInitProcessChequeProveedorProveedores">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPInitProcessChequeProveedorProveedores" message="tns:IServicioFiniquitos_SetTMPInitProcessChequeProveedorProveedores_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPInitProcessChequeProveedorProveedoresResponse" message="tns:IServicioFiniquitos_SetTMPInitProcessChequeProveedorProveedores_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPCloseProcessChequeProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPCloseProcessChequeProveedor" message="tns:IServicioFiniquitos_SetTMPCloseProcessChequeProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPCloseProcessChequeProveedorResponse" message="tns:IServicioFiniquitos_SetTMPCloseProcessChequeProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPCargaChequeFiniquitos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPCargaChequeFiniquitos" message="tns:IServicioFiniquitos_SetTMPCargaChequeFiniquitos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPCargaChequeFiniquitosResponse" message="tns:IServicioFiniquitos_SetTMPCargaChequeFiniquitos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPInitProcessChequeFiniquitos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPInitProcessChequeFiniquitos" message="tns:IServicioFiniquitos_SetTMPInitProcessChequeFiniquitos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPInitProcessChequeFiniquitosResponse" message="tns:IServicioFiniquitos_SetTMPInitProcessChequeFiniquitos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPCloseProcessChequeFiniquitos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPCloseProcessChequeFiniquitos" message="tns:IServicioFiniquitos_SetTMPCloseProcessChequeFiniquitos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTMPCloseProcessChequeFiniquitosResponse" message="tns:IServicioFiniquitos_SetTMPCloseProcessChequeFiniquitos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetConfirmarRetiroCalculo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetConfirmarRetiroCalculo" message="tns:IServicioFiniquitos_SetConfirmarRetiroCalculo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetConfirmarRetiroCalculoResponse" message="tns:IServicioFiniquitos_SetConfirmarRetiroCalculo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetCrearModificarEncDesvinculacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetCrearModificarEncDesvinculacion" message="tns:IServicioFiniquitos_SetCrearModificarEncDesvinculacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetCrearModificarEncDesvinculacionResponse" message="tns:IServicioFiniquitos_SetCrearModificarEncDesvinculacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetContratosOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetContratosOUT" message="tns:IServicioFiniquitos_SetContratosOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetContratosOUTResponse" message="tns:IServicioFiniquitos_SetContratosOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetConceptosAdicionalesOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetConceptosAdicionalesOUT" message="tns:IServicioFiniquitos_SetConceptosAdicionalesOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetConceptosAdicionalesOUTResponse" message="tns:IServicioFiniquitos_SetConceptosAdicionalesOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDatosVariablesOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetDatosVariablesOUT" message="tns:IServicioFiniquitos_SetDatosVariablesOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetDatosVariablesOUTResponse" message="tns:IServicioFiniquitos_SetDatosVariablesOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetControlDocumentosOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetControlDocumentosOUT" message="tns:IServicioFiniquitos_SetControlDocumentosOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetControlDocumentosOUTResponse" message="tns:IServicioFiniquitos_SetControlDocumentosOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetBonosAdicionalesOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetBonosAdicionalesOUT" message="tns:IServicioFiniquitos_SetBonosAdicionalesOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetBonosAdicionalesOUTResponse" message="tns:IServicioFiniquitos_SetBonosAdicionalesOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetHaberesYDescuentosOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetHaberesYDescuentosOUT" message="tns:IServicioFiniquitos_SetHaberesYDescuentosOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetHaberesYDescuentosOUTResponse" message="tns:IServicioFiniquitos_SetHaberesYDescuentosOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetDiasVacacionesOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetDiasVacacionesOUT" message="tns:IServicioFiniquitos_SetDiasVacacionesOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetDiasVacacionesOUTResponse" message="tns:IServicioFiniquitos_SetDiasVacacionesOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetHaberesMensualesOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetHaberesMensualesOUT" message="tns:IServicioFiniquitos_SetHaberesMensualesOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetHaberesMensualesOUTResponse" message="tns:IServicioFiniquitos_SetHaberesMensualesOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetTotalPagosOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTotalPagosOUT" message="tns:IServicioFiniquitos_SetTotalPagosOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetTotalPagosOUTResponse" message="tns:IServicioFiniquitos_SetTotalPagosOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAnularFolioFiniquito">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetAnularFolioFiniquito" message="tns:IServicioFiniquitos_SetAnularFolioFiniquito_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetAnularFolioFiniquitoResponse" message="tns:IServicioFiniquitos_SetAnularFolioFiniquito_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetFiniquitoPagado">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetFiniquitoPagado" message="tns:IServicioFiniquitos_SetFiniquitoPagado_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetFiniquitoPagadoResponse" message="tns:IServicioFiniquitos_SetFiniquitoPagado_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetNotariadoPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetNotariadoPagos" message="tns:IServicioFiniquitos_SetNotariadoPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetNotariadoPagosResponse" message="tns:IServicioFiniquitos_SetNotariadoPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetRevertirConfirmacionPagos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetRevertirConfirmacionPagos" message="tns:IServicioFiniquitos_SetRevertirConfirmacionPagos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetRevertirConfirmacionPagosResponse" message="tns:IServicioFiniquitos_SetRevertirConfirmacionPagos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertarProveedor">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertarProveedor" message="tns:IServicioFiniquitos_SetInsertarProveedor_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetInsertarProveedorResponse" message="tns:IServicioFiniquitos_SetInsertarProveedor_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetAgregarFactorContrario">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetAgregarFactorContrario" message="tns:IServicioFiniquitos_SetAgregarFactorContrario_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/SetAgregarFactorContrarioResponse" message="tns:IServicioFiniquitos_SetAgregarFactorContrario_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditoCCAFEST">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCreditoCCAFEST" message="tns:IServicioFiniquitos_GetCreditoCCAFEST_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCreditoCCAFESTResponse" message="tns:IServicioFiniquitos_GetCreditoCCAFEST_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJornadasParttimeEST">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetJornadasParttimeEST" message="tns:IServicioFiniquitos_GetJornadasParttimeEST_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetJornadasParttimeESTResponse" message="tns:IServicioFiniquitos_GetJornadasParttimeEST_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrabajadorPartTimeEST">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTrabajadorPartTimeEST" message="tns:IServicioFiniquitos_GetTrabajadorPartTimeEST_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetTrabajadorPartTimeESTResponse" message="tns:IServicioFiniquitos_GetTrabajadorPartTimeEST_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCentroCostos">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCentroCostos" message="tns:IServicioFiniquitos_GetCentroCostos_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCentroCostosResponse" message="tns:IServicioFiniquitos_GetCentroCostos_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetContratoActivoBaja">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetContratoActivoBaja" message="tns:IServicioFiniquitos_GetContratoActivoBaja_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetContratoActivoBajaResponse" message="tns:IServicioFiniquitos_GetContratoActivoBaja_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListarFiniquitados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarFiniquitados" message="tns:IServicioFiniquitos_GetListarFiniquitados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarFiniquitadosResponse" message="tns:IServicioFiniquitos_GetListarFiniquitados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetListarContratosTerminados">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarContratosTerminados" message="tns:IServicioFiniquitos_GetListarContratosTerminados_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetListarContratosTerminadosResponse" message="tns:IServicioFiniquitos_GetListarContratosTerminados_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCausalFicha">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCausalFicha" message="tns:IServicioFiniquitos_GetCausalFicha_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCausalFichaResponse" message="tns:IServicioFiniquitos_GetCausalFicha_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCargo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCargo" message="tns:IServicioFiniquitos_GetCargo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCargoResponse" message="tns:IServicioFiniquitos_GetCargo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAreaNegocio">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetAreaNegocio" message="tns:IServicioFiniquitos_GetAreaNegocio_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetAreaNegocioResponse" message="tns:IServicioFiniquitos_GetAreaNegocio_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUltimaLiquidacion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetUltimaLiquidacion" message="tns:IServicioFiniquitos_GetUltimaLiquidacion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetUltimaLiquidacionResponse" message="tns:IServicioFiniquitos_GetUltimaLiquidacion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRutTrabajadorSolicitudBaja">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBaja" message="tns:IServicioFiniquitos_GetRutTrabajadorSolicitudBaja_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBajaResponse" message="tns:IServicioFiniquitos_GetRutTrabajadorSolicitudBaja_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetJornadasParttimeOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetJornadasParttimeOUT" message="tns:IServicioFiniquitos_GetJornadasParttimeOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetJornadasParttimeOUTResponse" message="tns:IServicioFiniquitos_GetJornadasParttimeOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRutTrabajadorSolicitudBajaOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBajaOUT" message="tns:IServicioFiniquitos_GetRutTrabajadorSolicitudBajaOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBajaOUTResponse" message="tns:IServicioFiniquitos_GetRutTrabajadorSolicitudBajaOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCargoOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCargoOUT" message="tns:IServicioFiniquitos_GetCargoOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCargoOUTResponse" message="tns:IServicioFiniquitos_GetCargoOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCentroCostosOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCentroCostosOUT" message="tns:IServicioFiniquitos_GetCentroCostosOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetCentroCostosOUTResponse" message="tns:IServicioFiniquitos_GetCentroCostosOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRetencionJudicialOUT">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetRetencionJudicialOUT" message="tns:IServicioFiniquitos_GetRetencionJudicialOUT_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetRetencionJudicialOUTResponse" message="tns:IServicioFiniquitos_GetRetencionJudicialOUT_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRutTrabajadorSolicitudBajaCONSULTORA">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBajaCONSULTORA" message="tns:IServicioFiniquitos_GetRutTrabajadorSolicitudBajaCONSULTORA_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBajaCONSULTORAResponse" message="tns:IServicioFiniquitos_GetRutTrabajadorSolicitudBajaCONSULTORA_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IServicioFiniquitos" type="tns:IServicioFiniquitos">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetObtenerProveedoresProveedor">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerProveedoresProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerSolicitudesB4J">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerSolicitudesB4J" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCargaVariable">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCargaVariable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCausales">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCausales" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListarDocumentos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetListarDocumentos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUltimaUF">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetUltimaUF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOtrosHaberes">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetOtrosHaberes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListarDescuentos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetListarDescuentos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerENCFiniquito">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerENCFiniquito" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContratosCalculoPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetContratosCalculoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEmpresasPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetEmpresasPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBancosPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetBancosPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTipoPagoPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetTipoPagoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalesPagosEST">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetTotalesPagosEST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidaDocumentoPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetValidaDocumentoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidaContratosEnCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetValidaContratosEnCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListarContratosCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetListarContratosCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUltimoEncDesvinculacion">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetUltimoEncDesvinculacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiniquitosConfirmados">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetFiniquitosConfirmados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiniquitosRecientes">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetFiniquitosRecientes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiniquitosSolicitudesBaja">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetFiniquitosSolicitudesBaja" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFiniquitosSolicitudBaja">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetFiniquitosSolicitudBaja" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFactorCalculo125">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetFactorCalculo125" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerUltimoCorrelativoDisponiblePagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerUltimoCorrelativoDisponiblePagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidarRegistroPago">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetValidarRegistroPago" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerPagoPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerPagoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataChequePagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetDataChequePagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerProveedores">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerProveedores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerCorrelativoDisponibleProveedores">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerCorrelativoDisponibleProveedores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerClientesPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerClientesPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerTrabajadoresPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerTrabajadoresPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerMontoChequePagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerMontoChequePagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarDatosTrabajadorCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarDatosTrabajadorCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarPeriodosCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarPeriodosCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidarConfirmadoFiniquitoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetValidarConfirmadoFiniquitoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarContratosCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarContratosCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarDocumentosCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarDocumentosCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarTotalDiasCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarTotalDiasCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarDescuentosFiniquitoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarDescuentosFiniquitoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarOtrosHaberesFiniquitoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarOtrosHaberesFiniquitoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarDiasVacacionesCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarDiasVacacionesCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarTotalesFiniquitoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarTotalesFiniquitoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarHabaeresMensualFiniquitoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarHabaeresMensualFiniquitoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarConceptosAdicionalesFiniquitoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarConceptosAdicionalesFiniquitoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarBonosAdicionalesFiniquitoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarBonosAdicionalesFiniquitoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarValorUfFiniquitoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarValorUfFiniquitoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBuscarKamEmpresa">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetBuscarKamEmpresa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerSolB4J">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerSolB4J" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTMPValidateProcessInitProveedores">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetTMPValidateProcessInitProveedores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTMPChequesInProcessProveedor">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetTMPChequesInProcessProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTMPValidateProcessInitFiniquitos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetTMPValidateProcessInitFiniquitos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTMPChequesInProcessFiniquitos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetTMPChequesInProcessFiniquitos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetToken">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCalculoPartimeEspecial">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCalculoPartimeEspecial" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetVisualizarTiposProveedores">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetVisualizarTiposProveedores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReporteriaFiniquitos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetReporteriaFiniquitos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlantillasCorreo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetPlantillasCorreo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAlertasInformativas">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetAlertasInformativas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerProgresivos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerProgresivos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerExcepcionPTAreaNeg">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionPTAreaNeg" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerExcepcionCalculoIAS">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionCalculoIAS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerFechaIngreso">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerFechaIngreso" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidaRepeticionCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetValidaRepeticionCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGratificacion">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetGratificacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetObtenerExcepcionAFC">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetObtenerExcepcionAFC" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCrearSolicitudB4J">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetCrearSolicitudB4J" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAdministrarProcesosSolB4J">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetAdministrarProcesosSolB4J" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertaContratoCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetInsertaContratoCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertaDiasVacaciones">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetInsertaDiasVacaciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertaTotalHaber">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetInsertaTotalHaber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertarRegistroPagoPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetInsertarRegistroPagoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetChequePagado">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetChequePagado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetChequeDisponiblePagoPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetChequeDisponiblePagoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAnularPagoPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetAnularPagoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRegistrarPagoProveedores">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetRegistrarPagoProveedores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPCargaChequeProveedorProveedores">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetTMPCargaChequeProveedorProveedores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPInitProcessChequeProveedorProveedores">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetTMPInitProcessChequeProveedorProveedores" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPCloseProcessChequeProveedor">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetTMPCloseProcessChequeProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPCargaChequeFiniquitos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetTMPCargaChequeFiniquitos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPInitProcessChequeFiniquitos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetTMPInitProcessChequeFiniquitos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTMPCloseProcessChequeFiniquitos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetTMPCloseProcessChequeFiniquitos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetConfirmarRetiroCalculo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetConfirmarRetiroCalculo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCrearModificarEncDesvinculacion">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetCrearModificarEncDesvinculacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetContratosOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetContratosOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetConceptosAdicionalesOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetConceptosAdicionalesOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDatosVariablesOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetDatosVariablesOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetControlDocumentosOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetControlDocumentosOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetBonosAdicionalesOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetBonosAdicionalesOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetHaberesYDescuentosOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetHaberesYDescuentosOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDiasVacacionesOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetDiasVacacionesOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetHaberesMensualesOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetHaberesMensualesOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetTotalPagosOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetTotalPagosOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAnularFolioFiniquito">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetAnularFolioFiniquito" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFiniquitoPagado">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetFiniquitoPagado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetNotariadoPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetNotariadoPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRevertirConfirmacionPagos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetRevertirConfirmacionPagos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInsertarProveedor">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetInsertarProveedor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetAgregarFactorContrario">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/SetAgregarFactorContrario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCreditoCCAFEST">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCreditoCCAFEST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJornadasParttimeEST">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetJornadasParttimeEST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrabajadorPartTimeEST">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetTrabajadorPartTimeEST" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCentroCostos">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCentroCostos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetContratoActivoBaja">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetContratoActivoBaja" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListarFiniquitados">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetListarFiniquitados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetListarContratosTerminados">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetListarContratosTerminados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCausalFicha">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCausalFicha" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCargo">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCargo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAreaNegocio">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetAreaNegocio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUltimaLiquidacion">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetUltimaLiquidacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRutTrabajadorSolicitudBaja">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBaja" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetJornadasParttimeOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetJornadasParttimeOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRutTrabajadorSolicitudBajaOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBajaOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCargoOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCargoOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCentroCostosOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetCentroCostosOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRetencionJudicialOUT">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetRetencionJudicialOUT" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRutTrabajadorSolicitudBajaCONSULTORA">
+      <soap:operation soapAction="http://tempuri.org/IServicioFiniquitos/GetRutTrabajadorSolicitudBajaCONSULTORA" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsServicioFiniquitos">
+    <wsdl:port name="BasicHttpBinding_IServicioFiniquitos" binding="tns:BasicHttpBinding_IServicioFiniquitos">
+      <soap:address location="http://192.168.0.10/wsServicioFiniquitos/wsServicioFiniquitos.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
