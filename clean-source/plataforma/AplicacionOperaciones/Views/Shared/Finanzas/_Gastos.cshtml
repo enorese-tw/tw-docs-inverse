@@ -1,0 +1,289 @@
+﻿
+<table class="mt-auto" border="1" cellpadding="4" style="border: 1px solid rgb(100, 100, 100); width: 99%;">
+    <thead class="teamwork color-fx3">
+        <tr>
+            <th class="family-teamwork ta-center">Periodo</th>
+            <th class="family-teamwork ta-center">Código</th>
+            <th class="family-teamwork ta-center">Tipo Documento</th>
+            <th class="family-teamwork ta-center">Proveedor</th>
+            <th class="family-teamwork ta-center">Monto Neto</th>
+            <th class="family-teamwork ta-center">Número Documento</th>
+            <th class="family-teamwork ta-center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AplicacionOperaciones.Models.Gasto item in (List<AplicacionOperaciones.Models.Gasto>)ViewBag.RenderizadoGasto)
+        {
+            <tr>
+                <td class="family-teamwork fw-bold ta-center" style="font-size: 18px;">@item.Periodo</td>
+                <td class="family-teamwork fw-bold ta-center" style="font-size: 18px;">@item.Codigo</td>
+                <td class="family-teamwork fw-bold ta-center" style="font-size: 18px;">@item.TipoDocumento</td>
+                <td class="family-teamwork fw-bold">@item.Proveedor</td>
+                <td class="family-teamwork fw-bold ta-center" style="font-size: 18px;">@item.MontoNeto</td>
+                <td class="family-teamwork fw-bold ta-center" style="font-size: 18px;">
+                    @item.NumeroDocumento
+                    @if (item.OptModificar == "S")
+                    {
+
+
+
+                        using (Ajax.BeginForm("MantenedorGastosX", "Finanzas", FormMethod.Post, new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            OnComplete = "returnSection"
+
+                        }))
+                        {
+                            <input type="text" class="dspl-none" name="acciones" value="U" />
+                            <input type="number" name="IdNumDoc" value="@item.NumeroDocumento" />
+                            <input type="text" class="dspl-none" name="token" value="@item.Token" />
+                            <input type="text" class="dspl-none" name="idproveedor" value="@item.IdProveedor" />
+                            <input type="text" class="dspl-none" name="IdEmpresa" value="@item.IdEmpresa" />
+                            <input type="text" class="dspl-none" name="IdTipoDoc" value="@item.IdTipoDocumento" />
+                            <input type="text" class="dspl-none" name="descripcion" value="" />
+
+
+                            <button type="submit" class="btn btn-success" id="btnBuscarSolicitud"
+                                    style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Modificar</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block;">Dato</i>
+                                </span>
+                            </button>
+                        }
+
+
+                    }
+
+
+                </td>
+                <td class="ta-center">
+                    @*@if (item.OptModificar == "S")
+                    {
+                        <button type="submit" class="btn btn-teamwork" id="btnBuscarSolicitud"
+                                style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-actualizar" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Modificar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block;">Gasto</i>
+                            </span>
+                        </button>
+                    }*@
+
+                    @if (item.OptBorrar == "S")
+                    {
+                        //codigo generado por sebastian salas
+                        @*<button type="submit" class="btn btn-danger" id="btnBuscarSolicitud"
+                                    style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Borrar</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Gasto</i>
+                                </span>
+                            </button>*@
+
+                        <a href="#" class="eventEliminarGasto btn btn-danger mt-4" data-numerodoc="@item.NumeroDocumento" data-idProvee="@item.IdProveedor" data-nombreProvee="@item.Proveedor" data-IdTipoDocumento="@item.IdTipoDocumento" data-NombreDocumento="@item.TipoDocumento" data-IdEmp="@item.IdEmpresa" data-token="@item.Token"
+                           style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-trash" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Eliminar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Gasto</i>
+                            </span>
+                        </a>
+                        <a href="#" class="eventUpdateGasto btn btn-warning mt-4" data-numerodoc="@item.NumeroDocumento" data-idProvee="@item.IdProveedor" data-nombreProvee="@item.Proveedor" data-IdTipoDocumento="@item.IdTipoDocumento" data-NombreDocumento="@item.TipoDocumento" data-IdEmp="@item.IdEmpresa" data-token="@item.Token" data-nombrePro="@item.Proveedor" data-descripcion="@item.Descripcion" data-rutPro="@item.RutProveedor"
+                           style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-actualizar" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Actualizar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Gasto</i>
+                            </span>
+                        </a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="mt-20 ta-center">
+    @Html.Partial("Teamwork/_PaginationGastos")
+</div>
+
+@Html.Partial("Finanzas/_ModalEliminarGasto")
+@Html.Partial("Finanzas/_ModalActualizarGasto")
+
+<script>
+
+    $(document).ready(function () {
+
+        /** OBTENCION DINAMICA DE URL DE APLICACION PARA ACCESO A METODOS INTERNOS */
+
+        var prefixDomain = window.location.href.split('/')[0] + "//" + window.location.href.split('/')[2];
+        var prefix = "";
+
+        if (window.location.href.split('/')[2].indexOf(atob("bG9jYWxob3N0")) !== -1) {
+            if ((window.location.href.split('/').length - 1) === 3) {
+                prefix = prefix + "/" + window.location.href.split('/')[window.location.href.split('/').length - 1] + "/";
+            } else {
+                prefix = prefix + "/" + window.location.href.split('/')[3] + "/";
+            }
+        }
+
+        if (window.location.href.split('/')[2].indexOf(atob('bG9jYWxob3N0')) === -1) {
+            prefix = prefix + "/" + window.location.href.split('/')[3] + "/";
+
+            if ((window.location.href.split('/').length - 1) === 4) {
+                prefix = prefix + "/" + window.location.href.split('/')[window.location.href.split('/').length - 1] + "/";
+            } else {
+                prefix = prefix + "/" + window.location.href.split('/')[4] + "/";
+            }
+        }
+
+        
+
+
+
+        $(document).on("click", ".eventUpdateGasto", function (e) {
+            e.preventDefault
+            $("#tokenM").val($(this).attr("data-token"));
+            $("#idnumerodocM").val($(this).attr("data-numerodoc"));
+            $("#idnumerodocM").text($(this).attr("data-numerodoc"));
+            $("#IdEmpresaM").val($(this).attr("data-IdEmp"));
+            $("#idproveedorM").val($(this).attr("data-idProvee"));
+            $("#IdTipoDocM").val($(this).attr("data-IdTipoDocumento"));
+
+            $("#rutProveeId").text($(this).attr("data-rutPro"));
+            $("#rutProveeId").val($(this).attr("data-rutPro"));
+            $("#tokenM").val($(this).attr("data-token"));
+
+            $("#nombreProvedor").text($(this).attr("data-idProvee"));
+            $("#numFactura").text($(this).attr("data-numerodoc"));
+            $("#descripcionId").text($(this).attr("data-descripcion"));
+            ajaxViewDDLProveedores(prefixDomain + prefix);
+        
+             $("#ddlProveedor").val($(this).attr("data-idProvee"));
+            
+            if ($("#ddlProveedor").val() == '0') {
+
+               
+            }
+
+
+
+
+            
+            $("#mgastosid").val("");
+            $("#mgastosid").text("");
+
+            $("#IdTipoDocU").val($(this).attr("data-IdTipoDocumento"));
+            $("#iddescipcion").val($(this).attr("data-descripcion"));
+            $("#iddescipcion").text($(this).attr("data-descripcion"));
+            $("#idnumerodocU").val($(this).attr("data-numerodoc"));
+            $("#IdEmpresaU").val($(this).attr("data-IdEmp"));
+            $("#idproveedorU").val($(this).attr("data-idProvee"));
+            $("#tokenU").val($(this).attr("data-token"));
+            $("#optid").val($(this).attr("data-idProvee"));
+            $("#modalActualizarGasto").modal("show");
+
+
+
+        });
+
+
+
+    });
+
+
+
+    function ajaxViewDDLProveedores(controller) {
+        $.ajax({
+            type: 'POST',
+            url: controller + 'ViewDDLProveedores',
+            data: '{}',
+            contentType: 'application/json',
+            async: true,
+            success: function (response) {
+                if (response.Code !== "600") {
+                    if (response.Code === "200") {
+
+                        $("#ddlProveedor").append('<option value="0">Seleccione</option>');
+                        for (var i = 0; i < response.Proveedores.length; i++) {
+
+
+                            if (response.Proveedores[i].Id == $("#idproveedorM").val()) {
+
+                               
+                                $("#ddlProveedor").append('<option selected value  ="' + response.Proveedores[i].Id + '" >' + response.Proveedores[i].Rut + ' - ' + response.Proveedores[i].Nombre + '</option>');
+
+                            } else {
+
+                                $("#ddlProveedor").append('<option value ="' + response.Proveedores[i].Id + '" >' + response.Proveedores[i].Rut + ' - ' + response.Proveedores[i].Nombre + '</option>');
+
+                            }
+
+                        }
+                    }
+                }
+                else {
+
+                    sessionStorage.clear();
+                }
+            },
+            error: function (xhr) {
+                alert("error de ajax");
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    $(document).on("click", ".eventEliminarGasto", function (e) {
+        e.preventDefault();
+
+        $("#idnumerodoc").text($(this).attr("data-numerodoc"));
+        $("#proveedorModalToEliminar").text($(this).attr("data-nombreProvee"));
+        $("#documentoToEliminar").text($(this).attr("data-NombreDocumento"));
+        $("#nombreModalToEliminar").text($(this).attr("data-numerodoc"));
+        $("#token").val($(this).attr("data-token"));
+        $("#idnumerodoc").val($(this).attr("data-numerodoc"));
+        $("#IdEmpresa").val($(this).attr("data-IdEmp"));
+        $("#idproveedor").val($(this).attr("data-idProvee"));
+        $("#IdTipoDoc").val($(this).attr("data-IdTipoDocumento"));
+
+      
+       
+       
+        $("#tokenD").val($(this).attr("data-token"));
+        $("#idnumerodocD").val($(this).attr("data-numerodoc"));
+        $("#IdEmpresaD").val($(this).attr("data-IdEmp"));
+        $("#idproveedorD").val($(this).attr("data-idProvee"));
+        $("#IdTipoDocD").val($(this).attr("data-IdTipoDocumento"));
+
+
+        $("#mgastosidDelete").val("");
+        $("#mgastosidDelete").text("");
+        $("#modalEliminarGasto").modal("show");
+
+       
+
+
+    });
+
+
+
+
+
+</script>

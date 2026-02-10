@@ -1,0 +1,248 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Finanzas";
+
+    string prefixApp = "";
+    string urlServer = "";
+
+    if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+    {
+        urlServer = "http://181.190.6.196/AplicacionOperaciones";
+    }
+    else
+    {
+        urlServer = "http://localhost:46903";
+    }
+
+    ViewBag.EnlaceAgregarGasto = urlServer + "/Finanzas/AgregarGasto";
+    ViewBag.EnlaceAdministrarGasto = urlServer + "/Finanzas/AdministrarGastos";
+    ViewBag.EnlaceAdministrarPeriodos = urlServer + "/Finanzas/AdministrarPeriodos";
+    ViewBag.EnlaceAdministrarProveedor = urlServer + "/Finanzas/AdministrarProveedor";
+    ViewBag.EnlaceIngresarGastos = urlServer + "/Finanzas/IngresarGastos";
+    ViewBag.EnlacePagos = urlServer + "/Finanzas/Pagos";
+    ViewBag.EnlaceChequera = urlServer + "/Finanzas/AdministrarChequera";
+    ViewBag.EnlaceDespacho = urlServer + "/Finanzas/Despacho";
+    ViewBag.EnlaceProcesos = urlServer + "/Finanzas/Procesos";
+    ViewBag.EnlaceCargoMod = urlServer + "/Finanzas/CargoMod";
+    ViewBag.EnlaceData =  urlServer + "/Finanzas/Data";
+    ViewBag.EnlaceSeguroCovid = urlServer + "/Finanzas/SeguroCovid";
+    ViewBag.EnlaceSeguroReporte = urlServer + "/Bajas/Reporte";
+    ViewBag.EnlaceVBF = urlServer + "/Finiquitos";
+}
+
+<div class="row ml-auto mr-auto mb-60" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-100">
+        <h1 style="font-family: 'Open Sans Condensed', sans-serif; font-size: 40px;">
+            <i class="glyphicon-tw-5 glyphicon-tw-anexos2"></i> Finanzas
+        </h1>
+        <h2 class="family-teamwork fs-20">
+            Portal de aplicaciones para la administracion de finanzas de Team-Work, Ingreso de Gastos, Verificacion de gastos y rendicion. Para mayor informacion sobre el aplicativo consulte el siguiente manual de usuario <a>AQUI</a>.
+        </h2>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row mt-20">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-danger m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceAgregarGasto" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Portal</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Ingreso de Gastos</h2>
+                        <div class="glyphicon-tw-gastos ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-teamwork m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceAdministrarGasto" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Portal</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Administración de Gastos</h2>
+                        <div class="glyphicon-tw-gastos ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-success m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceAdministrarPeriodos" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Portal</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Administración de Periodos</h2>
+                        <div class="glyphicon-tw-calendario ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-warning m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceAdministrarProveedor" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center" style="font-size: 20px;">Portal</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg" style="font-size: 17px;">Administración de Proveedores</h2>
+                        <div class="glyphicon-tw-proveedor ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-teamwork m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlacePagos" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Portal</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Pago Finiquitos</h2>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-anulado m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceDespacho" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Lectura Inteligente</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Despacho</h2>
+                        <div class="glyphicon-tw-barcode ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-anulado m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceChequera" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Administrar</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Chequera</h2>
+                        <div class="glyphicon-tw-barcode ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-create m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceProcesos" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Procesos</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Pago</h2>
+                        <div class="glyphicon-tw-barcode ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-create m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceCargoMod" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Cargo Mod</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Creaciones</h2>
+                        <div class="glyphicon-tw-cargo ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-danger m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceData" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Datos</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Constantes de Calculo, bonos, valor diario, entre otros</h2>
+                        <div class="glyphicon-tw-cargo ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-teamwork m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceSeguroCovid" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 glyphicon-tw-labelnuevo2 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Clientes Seguro Covid</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Administraodr clientes Seguro Covid</h2>
+                        <div class="ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-teamwork m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceSeguroReporte" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 glyphicon-tw-labelnuevo2 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Reporte</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">Finiquitos</h2>
+                        <div class="ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                <div class="btn-teamwork m-auto cursor-pointer mb-20" style="width: 90%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                    <a href="@ViewBag.EnlaceVBF" style="width: 100%; height: 200px;" class="dspl-block">
+                        <div class="ta-right">
+                            <i class="glyphicon-tw-6 glyphicon-tw-labelnuevo2 dspl-inlblc mb-15neg"></i>
+                        </div>
+                        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 20px;">Finiquitos</h1>
+                        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 17px;">V°B Finanzas</h2>
+                        <div class="ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="btn-group mt-20" role="group" style="margin:0 auto" aria-label="Basic example">
+            <a href="@ViewBag.EnlaceAgregarGasto" class="btn btn-danger color-fx3 br-25 height-60">
+                <i class="glyphicon-tw-6 glyphicon-tw-dinero dspl-inlblc mb-15neg"></i>
+                <span class="dspl-inlblc mr-28 ta-left">
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Portal Ingreso</i>
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal">Gastos para Finanzas</i>
+                </span>
+            </a>
+            <a href="@ViewBag.EnlaceAdministrarGasto" class="btn btn-info color-fx3 br-25 height-60">
+                <i class="glyphicon-tw-6 glyphicon-tw-dinero dspl-inlblc mb-15neg"></i>
+                <span class="dspl-inlblc mr-28 ta-left">
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Portal Ingreso</i>
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal">Administracion de Gastos</i>
+                </span>
+            </a>
+            <a href="@ViewBag.EnlaceAdministrarPeriodos" class="btn btn-success color-fx3 br-25 height-60">
+                <i class="glyphicon-tw-6 glyphicon-tw-dinero dspl-inlblc mb-15neg"></i>
+                <span class="dspl-inlblc mr-28 ta-left">
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Portal Ingreso</i>
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal">Administracion de Periodos</i>
+                </span>
+            </a>
+
+            <a href="@ViewBag.EnlaceAdministrarProveedor" class="btn btn-warning color-fx3 br-25 height-60">
+                <i class="glyphicon-tw-6 glyphicon-tw-dinero dspl-inlblc mb-15neg"></i>
+                <span class="dspl-inlblc mr-28 ta-left">
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Portal Ingreso</i>
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal">Proveedores</i>
+                </span>
+            </a>
+
+            <a href="@ViewBag.EnlaceIngresarGastos" class="btn btn-warning color-fx3 br-25 height-60">
+                <i class="glyphicon-tw-6 glyphicon-tw-dinero dspl-inlblc mb-15neg"></i>
+                <span class="dspl-inlblc mr-28 ta-left">
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Nuevo</i>
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal">Adm GAstos</i>
+                </span>
+            </a>
+
+        </div>*@
+</div>
+
+
+@Scripts.Render("~/bundles/administrarproveedor")
+@Scripts.Render("~/bundles/index")
+@Scripts.Render("~/bundles/utils")

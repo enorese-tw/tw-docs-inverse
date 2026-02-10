@@ -1,0 +1,821 @@
+﻿
+<div style="" class="mb-10">
+    @Html.ButtonAdministracion(
+                "button",
+                new string[] {
+                    "class='dspl-inline-block new-family-teamwork'",
+                    "onclick='handleReturnMenuSeleccion()'"
+                },
+                new string[]
+                {
+                    "min-width: 50px",
+                    "border: none",
+                    "text-align: center",
+                    "font-weight: 100",
+                    "border: 0",
+                    "margin: none",
+                    "background-color: transparent!important"
+                },
+                new string[]
+                {
+                    "<span class='dspl-inline-block'><span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;' class='btn btn-teamwork pdt-5 pdr-5 pdb-5 pdl-5'><img src='../Resources/flecha-izquierda.svg' width='30' height='30' style='position: relative; left: 10%;' /></span></span>" +
+                    "<span class='new-family-teamwork' style='position: relative; float: right; margin-left: 10px; margin-top: 10px; font-size: 20px; font-wight: 100;'>Volver a Menu</span>"
+                },
+                true
+            )
+</div>
+
+<div>
+    <h1 class="new-family-teamwork mb-20" style="font-weight: 100;">Administrador de Ofertas Laborales</h1>
+
+    <div id="div__filtroOfertaLaboral" style="margin-bottom: 20px; display:none">
+        @Html.Partial("Containers/Seleccion/_FiltroOfertaLaboral")
+    </div>
+</div>
+
+
+
+
+@Html.Partial("Containers/Seleccion/_OfertasLaborales")
+
+@Html.Partial("Components/Seleccion/_ModalConfirmaEventoOfertasLaborales")
+
+@Html.Partial("Components/Seleccion/_ModalTinyURL")
+
+
+<script async>
+    //const __APP = "/AplicacionOperaciones";
+    const __APP = "";
+    const __SERVERHOST = `${window.location.origin}${__APP}`;
+    console.log(sessionStorage.getItem("inputPagination"))
+
+    __POSTData = async (url, body = {}) => {
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(body)
+        });
+
+        return response.json();
+    };
+
+    handleSearchTag = () => {
+        let filterType = document.getElementById("filterTypeTag").value;
+        let dataFilter = document.getElementById("filterTag").value;
+        let idOfertaLaboral = document.getElementById("inputIdOfertaLaboral").value;
+
+        methodSearchTagOfertaLaboral(idOfertaLaboral, filterType, dataFilter, "1-7");
+    }
+
+    handleSaveTag = () => {
+        let descripcion = document.getElementById("descripcionTag").value;
+        let filterType = document.getElementById("filterTypeTag").value;
+        let dataFilter = document.getElementById("filterTag").value;
+        let idOfertaLaboral = document.getElementById("inputIdOfertaLaboral").value;
+
+        if (descripcion !== null && descripcion !== '' && descripcion !== undefined) {
+            methodSaveTagOfertaLaboral(idOfertaLaboral, descripcion, "1", filterType, dataFilter);
+        }
+    }
+
+    handleSearchOfertaLaboral = () => {
+        let filterType = document.getElementById("filterType").value;
+        let dataFilter = document.getElementById("filterOfertaLaboral").value;
+        let target = document.getElementById("selTargets").value;
+
+        document.getElementById("divTagsOfertaLaboral").style.display = "none";
+        methodSearchOfertasLaborales(filterType, filterType === 'CodigoSolicitud' ? btoa(dataFilter) : dataFilter, '', '1-5');
+
+        //methodSearchOfertasLaborales(filterType, filterType === 'CodigoSolicitud' ? btoa(dataFilter) : dataFilter, target);
+    }
+
+    handleEditOfertaLaboral = (e) => {
+        let filterType = e.dataset.type;
+        let dataFilter = e.dataset.filter;
+        let target = e.dataset.targetedit;
+        let pagination = e.dataset.pagination;
+
+        window.location.href = window.location.pathname + '?codigo=' + dataFilter;
+        //methodEditOfertasLaborales(filterType, dataFilter, target);
+        document.getElementById('divTagsOfertaLaboral').style.display = "inline-block";
+    }
+
+    handleUpdOfertaLaboral = (e) => {
+        const inputdescCorta = document.getElementById(`descCorta`);
+        const inputFechaInicio = document.getElementById(`fechaInicio`);
+        const inputFechaTnicio = document.getElementById(`fechaTermino`);
+
+        let filterType = e.dataset.type;
+        let dataFilter = e.dataset.filter;
+        let target = e.dataset.targetupd;
+
+
+        const requeridoDesc = inputdescCorta.attributes.required !== undefined
+            ? inputdescCorta.value !== ""
+                ? true
+                : false
+            : true;
+        const requeridoFinicio = inputFechaInicio.attributes.required !== undefined
+            ? inputFechaInicio.value !== ""
+                ? true
+                : false
+            : true;
+        const requeridoFtermino = inputFechaTnicio.attributes.required !== undefined
+            ? inputFechaTnicio.value !== ""
+                ? true
+                : false
+            : true;
+
+        document.getElementById("modalBodyOfertaLaboral").innerHTML = `
+            <span class="mb-20;" style="text-align: center;">¿Esta completamente seguro de actualizar este proceso?</span>
+            <br><br>
+
+            <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                    style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                    data-idofertalaboral="${e.dataset.idofertalaboral}" data-requeridodesc="${requeridoDesc}" data-requeridofinicio="${requeridoFinicio}" data-requeridoftermino="${requeridoFtermino}"
+                    data-checktermino="${e.dataset.checktermino}" data-type="${filterType}" data-filter="${dataFilter}" data-target="${target}" data-action="Actualizar" data-dismiss="modal"
+                    onclick="handleConfirmaEvento(this)"  id="AceptarEvento">
+                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                        class='btn btn-success pdt-5 pdr-5 pdb-5 pdl-5'>
+                        <img src='..//Resources/check.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                </span>
+            </button>
+
+            <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                    style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                    data-dismiss="modal">
+                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                        class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                        <img src='../Resources/cancel.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                </span>
+            </button>`;
+    }
+
+    handleKeydownSearch = (e) => {
+        const keypress = event.which || event.keyCode;
+
+        if (keypress === 13) {
+            document.getElementById(e.dataset.target).click();
+        }
+    }
+
+    handleKeypressSaveTag = (e) => {
+        const patt = /[\w\s]/;
+
+        if (patt.test(event.key)) {
+            return e.value;
+        }
+        else {
+            return e.value.split(event.key).join('')
+        }
+    }
+
+    handleDeleteTag = (e) => {
+        let tag = e.dataset.tag;
+        let idOfertaLaboral = e.dataset.idofertalaboral;
+
+        document.getElementById("modalBodyOfertaLaboral").innerHTML = `
+            <span style="text-align: center;">¿Esta completamente seguro de eliminar este Interes Laboral?</span>
+            <br><br>
+
+            <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                    style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                    data-tag="${tag}" data-idofertalaboral="${idOfertaLaboral}" data-action="EliminarTag" data-type="" data-filter="" data-dismiss="modal"
+                    onclick="handleConfirmaEvento(this)"  id="AceptarEvento">
+                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                        class='btn btn-success pdt-5 pdr-5 pdb-5 pdl-5'>
+                        <img src='../Resources/check.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                </span>
+            </button>
+
+            <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                    style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                    data-dismiss="modal">
+                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                        class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                        <img src='../Resources/cancel.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                </span>
+            </button>`;
+    }
+
+    handleConfirmaEvento = (e) => {
+        let action = e.dataset.action;
+
+        if (action === 'Actualizar') {
+            //let requerido = e.dataset.requerido;
+            let requeridoDesc = e.dataset.requeridodesc;
+            let requeridoFinicio = e.dataset.requeridofinicio;
+            let requeridoFtermino = e.dataset.requeridoftermino;
+
+            let idOfertaLaboral = e.dataset.idofertalaboral;
+            let descLarga = document.getElementById("descLarga").value;
+            let descCorta = document.getElementById("descCorta").value;
+            let fechaInicio = document.getElementById("fechaInicio").value;
+            let fechaTermino = document.getElementById("fechaTermino").value;
+            let target = document.getElementById("selTargetOfertaLaboral").value;
+
+            let filterType = e.dataset.type;
+            let dataFilter = e.dataset.filter;
+            let targetupd = e.dataset.target;
+
+            if (requeridoDesc === "false") {
+                let input = document.getElementById("descCorta");
+
+                document.getElementById("div__alert").style.display = "block"
+                document.getElementById('alertError').classList.add("show");
+                document.getElementById('alertError').innerHTML = "Debe ingresar encabezado de la publicación para actualizar";
+                input.focus();
+
+                handleHideMessage();
+            }
+            else if (requeridoFinicio === "false") {
+                let input = document.getElementById("fechaInicio");
+
+                document.getElementById("div__alert").style.display = "block"
+                document.getElementById('alertError').classList.add("show");
+                document.getElementById('alertError').innerHTML = "Debe ingresar fecha de inicio de publicación para actualizar";
+                input.focus();
+
+                handleHideMessage();
+            }
+            else if (requeridoFtermino === "false") {
+                let input = document.getElementById("fechaTermino");
+
+                document.getElementById("div__alert").style.display = "block"
+                document.getElementById('alertError').classList.add("show");
+                document.getElementById('alertError').innerHTML = "Debe ingresar fecha de término de publicación para actualizar";
+                input.focus();
+
+                handleHideMessage();
+            }
+            else {
+                let check = document.getElementById(e.dataset.checktermino);
+
+                methodUpdOfertaLaboral(idOfertaLaboral, descLarga, descCorta, fechaInicio, check.checked ? '' : fechaTermino, target, filterType, dataFilter, targetupd)
+            }
+        }
+
+        if (action === 'EliminarTag') {
+            let tag = e.dataset.tag;
+            let idOfertaLaboral = e.dataset.idofertalaboral;
+            let filterType = "";
+            let dataFilter = "";
+
+            methodDeleteTag(idOfertaLaboral, tag, "1", filterType, dataFilter)
+        }
+    }
+
+    handleShowMessageTag = (result, idOfertaLaboral, filterType, dataFilter) => {
+        result.forEach(tags => {
+            if (tags.Code === '200') {
+                document.getElementById("div__alert__tag").style.display = "block";
+                document.getElementById("alertSuccessTag").classList.add("show");
+                document.getElementById("alertSuccessTag").innerHTML = tags.Message;
+
+                methodSearchTagOfertaLaboral(idOfertaLaboral, filterType, dataFilter, "1-7");
+                setTimeout(() => {
+                    document.getElementById("div__alert__tag").style.display = "none";
+                    document.getElementById("alertSuccessTag").classList.remove("show");
+                    document.getElementById("alertSuccessTag").innerHTML = "";
+
+                }, 5000)
+
+            }
+            else {
+                document.getElementById("div__alert__tag").style.display = "block";
+                document.getElementById("alertErrorTag").classList.add("show");
+                document.getElementById("alertErrorTag").innerHTML = tags.Message;
+
+                setTimeout(() => {
+                    document.getElementById("div__alert__tag").style.display = "none";
+                    document.getElementById("alertErrorTag").classList.remove("show");
+                    document.getElementById("alertErrorTag").innerHTML = "";
+                }, 5000)
+            }
+        })
+    }
+
+    handleFechaTermino = (e) => {
+        let check = e;
+
+        document.getElementById("fechaTermino").disabled = check.checked ? true : false;
+        document.getElementById("fechaTermino").required = check.checked ? false : true;
+    }
+
+    handleHideMessage = () => {
+        setTimeout(() => {
+            document.getElementById("div__alert").style.display = "none"
+            document.getElementById('alertError').classList.remove("show");
+            document.getElementById('alertError').innerHTML = "";
+        }, 5000);
+    }
+
+    handleReturnMenuSeleccion = () => {
+        window.location.href = `${__SERVERHOST}/Seleccion`;
+    }
+
+    handlePagination = (e) => {
+        let filterType = e.dataset.type;
+        let dataFilter = e.dataset.filter;
+        let pagination = e.dataset.pagination;
+        let target = e.dataset.target;
+        let typePagination = e.dataset.typepagination;
+        let idOfertaLaboral = e.dataset.idofertalaboral;
+
+        switch (typePagination){
+            case "OfertasLaborales":
+                methodSearchOfertasLaborales(filterType, dataFilter, target, pagination);
+                break;
+
+            case "TagOfertaLaboral":
+                methodSearchTagOfertaLaboral(idOfertaLaboral, filterType, dataFilter, pagination)
+                break;
+        }
+
+        //typePagination === "OfertasLaborales" ?
+        //    methodSearchOfertasLaborales(filterType, dataFilter, target, pagination) :
+        //    methodSearchTagOfertaLaboral(idOfertaLaboral, filterType, dataFilter, pagination)
+    }
+
+    handleGetViewOfertasLaborales = () => {
+        const params = new URLSearchParams(window.location.search);
+        let target = document.getElementById("selTargets").value;
+        let pagination = '';
+
+        if (params !== null && params !== '' && params !== undefined) {
+            if (params.get('codigo') !== null && params.get('codigo') !== '' && params !== params.get('codigo')) {
+                methodEditOfertasLaborales('CodigoSolicitud', params.get('codigo'), target, '1-5');
+            }
+            else {
+                methodGetTargets("selTargets", "");
+                console.log(sessionStorage.getItem("inputPagination"));
+                document.getElementById("divTagsOfertaLaboral").style.display = "none";
+                methodSearchOfertasLaborales("", "", "", (sessionStorage.getItem("inputPagination") === "null" || sessionStorage.getItem("inputPagination") === null) ? '1-5' : sessionStorage.getItem("inputPagination"));
+            }
+        }
+        else {
+            methodGetTargets("selTargets", "");
+
+            pagination = input__pagination
+            if (pagination === "" || pagination === null || pagination === undefined) {
+                pagination === "1-5";
+            }
+
+            document.getElementById("divTagsOfertaLaboral").style.display = "none";
+            methodSearchOfertasLaborales("", "", "", (sessionStorage.getItem("inputPagination") === "null" || sessionStorage.getItem("inputPagination")) ? '1-5' : sessionStorage.getItem("inputPagination"));
+        }
+    }
+
+
+    methodGetTargets = (targetInput, selectedTarget) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/ListarTarget`)
+            .then(resolve => {
+                let htmlTarget = '';
+
+                resolve.forEach(Target => {
+                    htmlTarget += `
+                        <option value="${Target.Target}" ${Target.Target === selectedTarget ? 'selected' : ''}>${Target.Target}</option>
+                    `;
+                })
+                document.getElementById(targetInput).innerHTML = htmlTarget;
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodSearchOfertasLaborales = (filterType, dataFilter, target, pagination) => {
+        document.getElementById("divOfertasLaborales").innerHTML =
+            `Cargando datos...`
+        __POSTData(`${__SERVERHOST}/Seleccion/ListarOfertasLaborales`, {
+            FilterType: filterType,
+            DataFilter: dataFilter,
+            Target: target,
+            pagination
+        })
+            .then(resolve => {
+                let htmlOfertaLaboral = `<table style="width:100%">`;
+                resolve.forEach(ofertaLaboral => {
+                    document.getElementById("div__filtroOfertaLaboral").style.display = "";
+                    document.getElementById("divOfertasLaborales").style.width = "";
+                    document.getElementById("divOfertasLaborales").style.display = "";
+
+                    document.getElementById("divTagsOfertaLaboral").style.width = "0";
+                    document.getElementById("divTagsOfertaLaboral").style.display = "none";
+
+                    htmlOfertaLaboral +=
+                        `<tr class="mb-30 bt-1-solid-200x3 bb-1-solid-200x3 br-1-solid-200x3 ${ofertaLaboral.Border}">
+                            <td style="width: 10%; text-align: center;">
+                                <span class="btn ${ofertaLaboral.Color} dspl-inline-block new-family-teamwork mr-20 fs-18" style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff; margin: 10px;">
+                                        ${ofertaLaboral.Id}
+                                </span>
+                            </td>
+
+                            <td style="width: 75%;">
+                                <div style="color: rgb(100, 100, 100)">
+                                    <label class="new-family-teamwork dspl-block lh-10 fs-14 mt-10"></label>
+                                    <label class="new-family-teamwork dspl-block lh-20">
+                                        <h2><b>Cargo :${ofertaLaboral.Nombre}</b></h2>
+                                   </label>
+                                </div>
+
+                                <div style="color: rgb(100, 100, 100)">
+                                    <label class="new-family-teamwork dspl-block lh-10 fs-14 mt-10">
+                                        <h4><b>Encabezado Publicación: ${ofertaLaboral.DescripcionCorta}</b></h4>
+                                    </label>
+                                </div>
+
+                                ${ofertaLaboral.Publicada === 'N' ? 
+                                    `<div>
+                                        <span class="btn ${ofertaLaboral.Color} new-family-teamwork" style="border-radius: 25px; text-align: left; color: #fff; margin: 5px;">
+                                            No publicada
+                                        </span>
+                                     </div>` : ''}
+
+                            </td>
+
+                            <td style="text-align: center;">
+                                <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                        style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                        id="button__editOfertaLaboral" onclick="handleEditOfertaLaboral(this)"
+                                        data-type="CodigoSolicitud" data-filter="${ofertaLaboral.CodigoSolicitud}" data-targetedit="${target}" data-pagination="${pagination}">
+                                    <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                            class='btn btn-warning pdt-5 pdr-5 pdb-5 pdl-5'>
+                                            <img src='../Resources/editar.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                    </span>
+                                </button>
+                                ${ ofertaLaboral.Publicada === 'S' ? 
+                                    `
+                                    <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                            style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                            id="button__editOfertaLaboral" onclick="handleGetTinyUrl(this)"
+                                            data-enlace="${ofertaLaboral.Enlace}" data-target="#modalTinyUrl" data-toggle="modal">
+                                        <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                                class='btn btn-anulado pdt-5 pdr-5 pdb-5 pdl-5'>
+                                                <img src='../Resources/svg/link.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                        </span>
+                                    </button>
+                                    ` : ``
+                                }
+                                
+                            </td>
+                         </tr>`
+                });
+                htmlOfertaLaboral += `</table>
+                                      <div id="div__Pagination" class="mt-10 new-family-teamwork ta-center"></div>`;
+
+                document.getElementById("divOfertasLaborales").innerHTML = htmlOfertaLaboral;
+
+                methodPagination("OfertasLaborales", pagination, filterType, dataFilter, target, "div__Pagination", "")
+
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    handleGetTinyUrl = (e) => {
+        let enlace = e.dataset.enlace;
+        methodGetTinyUrl(enlace, "#modalBodyTinyUrl .content__enlace");
+        methodGetTinyUrlQR(enlace, "#modalBodyTinyUrl .content__qr__enlace");
+    }
+
+    methodEditOfertasLaborales = (filterType, dataFilter, target, pagination) => {
+        document.getElementById("divOfertasLaborales").innerHTML =
+            `Cargando datos...`
+
+        __POSTData(`${__SERVERHOST}/Seleccion/ListarOfertasLaborales`, {
+            FilterType: filterType,
+            DataFilter: dataFilter,
+            Target: target,
+            pagination: pagination
+        })
+            .then(resolve => {
+                let htmlOfertaLaboral = '';
+
+                resolve.forEach(ofertaLaboral => {
+                    document.getElementById("div__filtroOfertaLaboral").style.display = "none";
+
+                    htmlOfertaLaboral += `
+                        <a class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                href="${__SERVERHOST}/Seleccion/OfertasLaborales">
+                            <span class='dspl-inline-block'><span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;' class='btn btn-teamwork pdt-5 pdr-5 pdb-5 pdl-5'><img src='../Resources/flecha-izquierda.svg' width='30' height='30' style='position: relative; left: 10%;' /></span></span>
+                            <span class='new-family-teamwork' style='position: relative; float: right; margin-left: 10px; margin-top: 10px; font-size: 20px; font-wight: 100;'>Volver a Ofertas Laborales</span>
+                        </a>
+
+                        <div class="mb-20">
+                            <div style="display: inline-block">
+                                <h2 style="display: inline-block">Id Proceso de Selección: ${ofertaLaboral.Id}</h2>
+                                ${ ofertaLaboral.Publicada === 'S' ? 
+                                    `
+                                <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                        style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100; vertical-align: top;"
+                                        id="button__editOfertaLaboral" onclick="handleGetTinyUrl(this)"
+                                        data-enlace="${ofertaLaboral.Enlace}" data-target="#modalTinyUrl" data-toggle="modal">
+                                    <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                            class='btn btn-anulado pdt-5 pdr-5 pdb-5 pdl-5'>
+                                            <img src='../Resources/svg/link.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                    </span>
+                                </button>
+                                    ` : ``
+                                }
+                            </div>
+
+                            <h3>Cargo: ${ofertaLaboral.Nombre}</h3>
+                            <h4>Fecha Comprometida Vacante: ${ofertaLaboral.FechaInicio}</h4>
+                        </div>
+
+                        <div id="div__alert" style="display: none;">
+                            <span id="alertSuccess" class="alert alert-success fade" role="alert"></span>
+                            <span id="alertError" class="alert alert-danger fade" role="alert"></span>
+                        </div>
+
+                        <table class="new-family-teamwork mt-20">
+                            <tr>
+                                <td><label>Encabezado Publicación:  </label></td>
+                                <td>
+                                    <input type="text" id="descCorta" value="${ofertaLaboral.DescripcionCorta === 'Sin descripción' ? '' : ofertaLaboral.DescripcionCorta}" maxlength="200" class="form-control mb-10" style="width: 500px;" required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Descripción Oferta:</label></td>
+                                <td>
+                                    <textarea id="descLarga" class="form-control mb-10" style="width: 500px;" maxlength="500" rows="6">${ofertaLaboral.DescripcionLarga === 'Sin descripción' ? '' : ofertaLaboral.DescripcionLarga}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label>Fecha Inicio Publicación:</label></td>
+                                <td>
+                                    <input type="date" id="fechaInicio" value="${ofertaLaboral.FechaInicioPublic}" class="form-control dspl-inline-block mb-10" style="width: 500px;" required />
+                                </div>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <input id="chk__${ofertaLaboral.CodigoSolicitud}" type="checkbox" onclick="handleFechaTermino(this)" ${ofertaLaboral.FechaTerminoPublic === '' ? 'checked' : ''} /><span style="margin-left: 5px;">Sin fecha termino</span>
+                                </div>
+                            </tr>
+                            <tr>
+                                <td><label>Fecha Termino Publicación:</label></td>
+                                <td>
+                                    <input type="date" id="fechaTermino" value="${ofertaLaboral.FechaTerminoPublic}" ${ofertaLaboral.FechaTerminoPublic === '' ? 'disabled' : 'required'} class="form-control mb-10" style="width: 500px;" />
+                                </div>
+                            </tr>
+                            <tr>
+                                <td><label>Tipo Selección:</label></td>
+                                <td>
+                                    <select id="selTargetOfertaLaboral" value="" class="form-control mb-10" style="width: 400px;"></select>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div>
+                            <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                    style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                data-idofertalaboral="${ofertaLaboral.CodigoSolicitud}" data-checktermino="chk__${ofertaLaboral.CodigoSolicitud}" data-action="Actualizar"
+                                data-type="${filterType}" data-filter="${dataFilter}" data-targetupd="${target}" data-target="#modalConfirmaEventoOfertaLaboral"
+                                onclick="handleUpdOfertaLaboral(this)" data-toggle="modal">
+                                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                        class='btn btn-success pdt-5 pdr-5 pdb-5 pdl-5'>
+                                        <img src='../Resources/check.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                </span>
+                            </button>
+
+                            <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                    style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                    onclick="methodSearchOfertasLaborales('', '', '', '1-5')">
+                                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                        class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                                        <img src='../Resources/cancel.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                </span>
+                            </button>
+                        </div>`;
+
+                    methodSearchTagOfertaLaboral(ofertaLaboral.CodigoSolicitud, "", "", "1-7")
+
+                });
+                htmlOfertaLaboral += ``;
+
+                document.getElementById("divOfertasLaborales").innerHTML = htmlOfertaLaboral;
+                document.getElementById("divOfertasLaborales").style.width = "60%";
+                document.getElementById("divOfertasLaborales").style.display = "inline-block";
+
+                document.getElementById("divTagsOfertaLaboral").style.width = "39%";
+                document.getElementById("divTagsOfertaLaboral").style.display = "inline-block";
+
+
+                methodGetTargets('selTargetOfertaLaboral', target);
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodUpdOfertaLaboral = (idOfertaLaboral, descripcionLarga, descripcionCorta, fechaInicio, fechaTermino, target, filterType, dataFilter, targetupd) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/ActualizarOfertaLaboral`, {
+            idOfertaLaboral: idOfertaLaboral,
+            descripcionLarga: descripcionLarga,
+            descripcionCorta: descripcionCorta,
+            fechaInicio: fechaInicio,
+            fechaTermino: fechaTermino,
+            target: target
+        })
+            .then(resolve => {
+                resolve.forEach(tags => {
+                    if (tags.Code === '200') {
+                        document.getElementById("div__alert").style.display = "block";
+                        document.getElementById("alertSuccess").classList.add("show");
+                        document.getElementById("alertSuccess").innerHTML = tags.Message;
+
+                        setTimeout(() => {
+                            document.getElementById("div__alert").style.display = "none"
+                            document.getElementById("alertSuccess").classList.remove("show");
+                            document.getElementById("alertSuccess").innerHTML = "";
+
+                            window.location.href = window.location.pathname
+                            //methodSearchOfertasLaborales(filterType, dataFilter, "", pagination)
+                        }, 2000)
+
+                    }
+                    else {
+                        document.getElementById("div__alert").style.display = "block";
+                        document.getElementById("alertError").classList.add("show");
+                        document.getElementById("alertError").innerHTML = tags.Message;
+
+                        setTimeout(() => {
+                            document.getElementById("div__alert").style.display = "none"
+                            document.getElementById("alertError").classList.remove("show");
+                            document.getElementById("alertError").innerHTML = "";
+                        }, 4000)
+                    }
+                })
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodSearchTagOfertaLaboral = (idOfertaLaboral, filterType, dataFilter, pagination) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/ListarTagOfertaLaboral`, {
+            idOfertaLaboral: idOfertaLaboral,
+            filterType: filterType,
+            dataFilter: dataFilter,
+            pagination: pagination
+        })
+            .then(resolve => {
+                document.getElementById("inputIdOfertaLaboral").value = idOfertaLaboral;
+
+                let htmlTag = `<table style="width:100%">`;
+                resolve.forEach(tags => {
+                    htmlTag +=
+                        `<tr class="mt-10">
+                            <td style="width:70%;">
+                                <div id="divEditInput${tags.CodigoTag}">
+                                    <span class="new-font-family fs-18" id="spn${tags.CodigoTag}">${tags.Descripcion}</span>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div id="divUpdButton${tags.CodigoTag}">
+                                    <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                            style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                            data-tag="${tags.CodigoTag}" data-idofertalaboral="${idOfertaLaboral}" data-action="EliminarTag" data-toggle="modal" data-target="#modalConfirmaEventoOfertaLaboral"
+                                            onclick="handleDeleteTag(this)" id="button__del__${tags.CodigoTag}">
+                                        <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                                class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                                                <img src='../Resources/eliminar.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                        </span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>`
+                });
+                htmlTag += `</table>
+                            <div id="div__TagPagination" class="mt-10 new-family-teamwork ta-center"></div >`;
+
+                document.getElementById("divTags").innerHTML = htmlTag;
+
+                methodPagination("TagOfertaLaboral", pagination, filterType, dataFilter, "", "div__TagPagination", idOfertaLaboral)
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodDeleteTag = (idOfertaLaboral, tag, categoria, filterType, dataFilter) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/EliminarTagOfertaLaboral`, {
+            IdOfertaLaboral: idOfertaLaboral,
+            Tag: tag,
+            Categoria: categoria
+        })
+            .then(resolve => {
+                handleShowMessageTag(resolve, idOfertaLaboral, filterType, dataFilter);
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodSaveTagOfertaLaboral = (idOfertaLaboral, descripcion, categoria, filterType, dataFilter) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/CrearTagOfertaLaboral`, {
+            IdOfertaLaboral: idOfertaLaboral,
+            DescripcionTag: descripcion,
+            Categoria: categoria
+        })
+            .then(resolve => {
+                handleShowMessageTag(resolve, idOfertaLaboral, filterType, dataFilter);
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodPagination = (typePagination, pagination, filterType, dataFilter, target, input, idOfertaLaboral) => {
+         __POSTData(`${__SERVERHOST}/Seleccion/Pagination`, {
+            filterType: filterType,
+            dataFilter: dataFilter,
+            pagination: pagination,
+            typePagination: typePagination,
+            target: target,
+            idOfertaLaboral: idOfertaLaboral
+        })
+            .then(resolve => {
+                let htmlPagination = '';
+
+                if (typePagination === 'OfertasLaborales') {
+                    sessionStorage.setItem("inputPagination", pagination);
+                }
+
+                resolve.forEach(pagination => {
+                    htmlPagination +=
+                        `<button class="btn new-family-teamwork enlacePagina ${pagination.Class}" ${pagination.Properties}
+                                 data-type="${pagination.Filter}" data-filter="${pagination.DataFilter}" data-pagination="${pagination.Rango}"
+                                 data-typepagination="${typePagination}" data-idofertalaboral="${idOfertaLaboral}"
+                                 onclick="handlePagination(this)">
+                            ${pagination.NumeroPagina}
+                         </button>
+                        `
+                });
+
+                document.getElementById(input).innerHTML = htmlPagination;
+
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodGetTinyUrl = (url, target) => {
+        $.ajax(`https://tinyurl.com/api-create.php?url=${url}Link`,
+        {
+            success: function (data, status, xhr) {
+                let htmlModal =
+                    `<span style="text-align: center;">Enlace directo a Oferta Laboral</span>
+                        <p>
+                        <h3 style="text-align: center;">${data}</h3>
+                        </p>
+                    <a class="btn new-family-teamwork fs-18 dspl-inline-block"
+                        style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                        href="${data}" target="_blank">
+                        <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                class='btn btn-anulado pdt-5 pdr-5 pdb-5 pdl-5'>
+                            <img src='../Resources/svg/link.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                        </span>
+                    </a>
+                        `;
+
+                document.querySelector(target).innerHTML = htmlModal;
+                    
+            }
+        });
+    }
+
+    methodGetTinyUrlQR = (url, target) => {
+        $.ajax(`https://tinyurl.com/api-create.php?url=${url}QR`,
+        {
+            success: function (data, status, xhr) {
+                let htmlModal =
+                    `
+                    <div>
+                        <img src="https://qrickit.com/api/qr.php?d=${data}&qrsize=200">
+                    </div>
+                        `;
+
+                document.querySelector(target).innerHTML = htmlModal;
+                    
+            }
+        });
+    }
+
+    setTimeout(() => {
+        handleGetViewOfertasLaborales();
+    }, 1000)
+</script>

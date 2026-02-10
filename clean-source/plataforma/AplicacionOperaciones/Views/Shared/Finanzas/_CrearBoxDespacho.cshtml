@@ -1,0 +1,52 @@
+﻿<div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+    <h1 class="family-teamwork ta-center" style="font-size: 50px;">Proceso de Despacho</h1>
+    <img src="~/Resources/cajainit.png" class="ml-auto mr-auto dspl-block mb-30" style="width: 200px;" />
+    @using (Ajax.BeginForm("CrearBoxDespacho", "Finanzas", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "contentDespacho",
+        LoadingElementId = "loader"
+    }))
+    {
+        <button type="submit" class="btn btn-success"
+                style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -7px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Crear Contenedor</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">De Despacho</i>
+            </span>
+        </button>
+    }
+    
+</div>
+<div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center mt-30">
+    <p class="family-teamwork mt-20" style="font-size: 20px;">Tengo un codigo de despacho que no ha sido despachado, para continuar con el proceso</p>
+    @if (ViewBag.ReferenciaInformacionDespacho != "")
+    {
+        <p class="family-teamwork">@ViewBag.ReferenciaInformacionDespacho</p>
+    }
+
+    @using (Ajax.BeginForm("ContinuarConBoxDespacho", "Finanzas", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "contentDespacho",
+        LoadingElementId = "loader"
+    }, new { @style = "display: block;" }))
+    {
+        <input type="text" name="codigoProceso" class="family-teamwork form-control form-control-lg ta-center dspl-inline-block" style="width: 40%;" required />
+        <button type="submit" class="btn btn-teamwork"
+                style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-buscar" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -7px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Buscar Contenedor</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">De Despacho</i>
+            </span>
+        </button>
+    }
+ </div>

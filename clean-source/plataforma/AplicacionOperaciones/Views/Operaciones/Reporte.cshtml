@@ -1,0 +1,10 @@
+﻿@{
+    if (Session["ApplicationActive"] != null)
+    {
+        ViewBag.Title = "Reportes Teamwork";
+    }
+    else
+    {
+        Response.Redirect("http://" + Request.Url.AbsoluteUri.Split('/')[2] + "/Auth/");
+    }
+}

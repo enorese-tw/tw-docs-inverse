@@ -1,0 +1,23 @@
+﻿@foreach (AplicacionOperaciones.Models.Teamwork.Pagination item in ViewBag.RenderizadoPaginations)
+{
+    <span class="dspl-inline-block">
+        @using (Ajax.BeginForm("Finiquitos", "Bajas", FormMethod.Post, new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "finiquitos",
+            OnBegin = "onBegin",
+            OnSuccess = "onSuccess",
+            LoadingElementId = "loader",
+        }))
+        {
+            <input type="text" name="typeFilter" value="@item.TypeFilter" class="dspl-none" />
+            <input type="text" name="filterDatos" value="@item.Filter" class="dspl-none" />
+            <input type="text" name="hasBaja" value="@item.HasBaja" class="dspl-none" />
+            <input type="text" name="pagination" value="@item.Rango" class="dspl-none" />
+            <button type="submit" class="btn family-teamwork enlacePagina @item.Class" @item.Properties>
+                @Html.Raw(item.NumeroPagina)
+            </button>
+        }
+    </span>
+}

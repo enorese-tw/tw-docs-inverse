@@ -1,0 +1,194 @@
+﻿
+@if (((List<AplicacionOperaciones.Models.Finiquitos.ValeVista>)ViewBag.RenderizadoValeVista).Count > 0)
+{
+    <table border="1" cellspacing="0" cellpadding="5" style="width: 100%;" class="family-teamwork mb-100">
+        <thead>
+            <tr>
+                <td class="ta-center">Tipo Documento</td>
+                <td class="ta-center">
+                    Rut Trabajador
+                    @using (Ajax.BeginForm("ActualizarVVConfirmadas", "Finanzas", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "transferenciasConfirmadas",
+                        LoadingElementId = "loader",
+                        OnComplete = "handleClickOrderBy('#button__orderby__rut', '" + ViewBag.OrderByTefConfirmadasRut + "')"
+                    }))
+                    {
+                        <input type="text" name="typeFilter" value="Rut" class="dspl-none" />
+                        <input type="text" name="dataFilter" value="@ViewBag.DataFilterTefConfirmadas" class="dspl-none" />
+                        <input type="text" name="orderByRut" value="@ViewBag.OrderByTefConfirmadasRut" class="dspl-none" />
+                        <input type="text" name="orderByNombres" value="@ViewBag.OrderByTefConfirmadasNombres" class="dspl-none" />
+                        <input type="text" name="tipoPago" value="@ViewBag.ReferenciaMetodoPago" class="dspl-none" />
+                        <input type="text" name="codigoProceso" value="@ViewBag.ReferenciaCodigoProceso" class="dspl-none" />
+                        @Html.ButtonAdministracion(
+                            "submit",
+                            new string[] {
+                                "class='dspl-inline-block btn btn-teamwork'",
+                                "id='button__orderby__rut'"
+                            },
+                            new string[] 
+                            {
+                                "width: 30px",
+                                "height: 30px",
+                                "border: none",
+                                "border-radius: 50%",
+                                "text-align: center",
+                                "margin-left: 5px;"
+                            },
+                            new string[]
+                            {
+                                "<span style='color: #fff; margin-left: -3px; margin-top: -2px; display: block;'>▾</span>"
+                            },
+                            true
+                        )
+                    }
+                </td>
+                <td class="ta-center">
+                    Nombre Trabajador
+                    @using (Ajax.BeginForm("ActualizarVVConfirmadas", "Finanzas", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "transferenciasConfirmadas",
+                        LoadingElementId = "loader",
+                        OnComplete = "handleClickOrderBy('#button__orderby__nombres', '" + ViewBag.OrderByTefConfirmadasNombres + "')"
+                    }))
+                    {
+                        <input type="text" name="typeFilter" value="Nombres" class="dspl-none" />
+                        <input type="text" name="dataFilter" value="@ViewBag.DataFilterTefConfirmadas" class="dspl-none" />
+                        <input type="text" name="orderByRut" value="@ViewBag.OrderByTefConfirmadasRut" class="dspl-none" />
+                        <input type="text" name="orderByNombres" value="@ViewBag.OrderByTefConfirmadasNombres" class="dspl-none" />
+                        <input type="text" name="tipoPago" value="@ViewBag.ReferenciaMetodoPago" class="dspl-none" />
+                        <input type="text" name="codigoProceso" value="@ViewBag.ReferenciaCodigoProceso" class="dspl-none" />
+                        @Html.ButtonAdministracion(
+                            "submit",
+                            new string[] {
+                                "class='dspl-inline-block btn btn-teamwork'",
+                                "id='button__orderby__nombres'"
+                            },
+                            new string[]
+                            {
+                                "width: 30px",
+                                "height: 30px",
+                                "border: none",
+                                "border-radius: 50%",
+                                "text-align: center",
+                                "margin-left: 5px;"
+                            },
+                            new string[]
+                            {
+                                "<span style='color: #fff; margin-left: -3px; margin-top: -2px; display: block;'>▾</span>"
+                            },
+                            true
+                        )
+                    }
+
+                </td>   
+                <td class="ta-center" >Total Pago</td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (AplicacionOperaciones.Models.Finiquitos.ValeVista item in ViewBag.RenderizadoValeVista)
+            {
+                <tr>
+                    <td class="ta-center">@item.Documento</td>
+                    <td class="ta-center">@item.Rut</td>
+                    <td class="ta-center">@item.Nombres</td>
+                    <td class="ta-center" style="font-size: 20px;">@item.TotalPago</td>
+                    <td>
+                        @switch (item.Origen)
+                        {
+                            case "FNQ":
+                                using (Ajax.BeginForm("ConfirmarEvento", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "confirmacionEvent",
+                                    OnSuccess = "ModalConfirmacionEvent",
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="option" value="TotalesFiniquito" class="dspl-none" />
+                                    <input type="text" name="codigoPago" value="@item.CodigoPago" class="dspl-none" />
+                                    <button type="submit" class="btn btn-teamwork"
+                                            style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                        <i class="glyphicon-tw-7 glyphicon-tw-calculado" style="display: inline-block;"></i>
+                                        <span style="display: inline-block; margin-top: -7px;">
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Montos Totales</i>
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block;">Del Finiquitos</i>
+                                        </span>
+                                    </button>
+                                }
+                                break;
+                        }
+
+                        @using (Ajax.BeginForm("IncorporarValeVistaPago", "Finanzas", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "transferenciasConfirmadas",
+                            LoadingElementId = "loader"
+                        }))
+                        {
+                            <input type="text" name="codigoProceso" value="@ViewBag.ReferenciaCodigoProceso" class="dspl-none" />
+                            <input type="text" name="codigoPago" value="@item.CodigoPago" class="dspl-none" />
+                            <input type="text" name="tipoPago" value="@ViewBag.ReferenciaMetodoPago" class="dspl-none" />
+                            <input type="text" name="origen" value="@item.Origen" class="dspl-none" />
+                            <button type="submit" class="btn btn-success"
+                                    style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-add2" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Agregar Vale Vista</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Proceso de Pago</i>
+                                </span>
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <img src="~/Resources/sinresultados.png" style="width: 100px;" class="dspl-block m-auto" />
+    <h1 class="family-teamwork ta-center color-70x3 mt-10ne">No se han encontrado Vale Vista Confirmados para</h1>
+    <h1 class="family-teamwork ta-center color-70x3 mt-10neg" style="font-size: 50px;">VALE VISTA</h1>
+    <p class="family-teamwork ta-center">Puedes actualizar los finiquitos confirmados</p>
+    <div class="ta-center">
+        @using (Ajax.BeginForm("ActualizarVVConfirmadas", "Finanzas", new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "transferenciasConfirmadas",
+            LoadingElementId = "loader"
+        }))
+        {
+            <button type="submit" class="btn btn-warning"
+                    style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                <i class="glyphicon-tw-7 glyphicon-tw-actualizar" style="display: inline-block;"></i>
+                <span style="display: inline-block; margin-top: -7px;">
+                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Actualizar Vale Vista</i>
+                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Confirmados</i>
+                </span>
+            </button>
+        }
+    </div>
+}
+
+<script async>
+
+    handleClickOrderBy = (target, orderBy) => {
+        document.querySelector(`${target} span`).innerHTML = orderBy === "ASC" ? "▴" : "▾";
+    }
+
+</script>

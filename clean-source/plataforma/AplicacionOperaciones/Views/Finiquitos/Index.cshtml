@@ -1,0 +1,44 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Finiquitos";
+}
+
+<div class="row m-auto mt-100" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="new-family-teamwork color-100x3" style="font-weight: 100;">
+            <img src="~/Resources/finiquitoscalculadosx2.png" width="60" /> Administración de finiquitos
+        </h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 headerFiniquitos">
+        
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10">
+        @*<h3 class="new-family-teamwork" style="font-weight: 100;">
+            <img src="~/Resources/svgnuevos/opciones.svg" width="25" style="margin-top: -.5%;" /> Opciones de administración de finiquitos
+        </h3>*@
+        @*<div class="pdb-10" style="position: relative;">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                    
+                </div>
+            </div>
+            
+        </div>*@
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 finiquitos">
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 mb-50 mt-50 paginationFiniquitos" style="text-align: center;">
+
+        </div>
+    </div>
+</div>
+
+<div class="modal-tw hidden-modal-tw">
+    <div class="modal-tw-body" id="moda">
+
+    </div>
+</div>
+
+<span class="alert__notification"></span>
+
+<script type="module" src="~/Src/containers/finiquitos/__Finiquitos.js"></script>

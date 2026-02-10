@@ -1,0 +1,28 @@
+﻿<div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-30">
+    <div class="border rounded" style="width: 90%;">
+        <div>
+            <span class="@ViewData["ButtonClass"] ml-20 mt-20neg dspl-inline-block @ViewData["Glyphicon"]"
+                  style="border-radius: 50%; width: 60px; height: 60px;"></span>
+        </div>
+        <div style="width: 95%;" class="mr-auto ml-auto">
+            <h1 class="family-teamwork pdl-10 pdr-10">
+                Carga Masiva <br>
+                @ViewData["RenderizadoTituloTwo"]
+            </h1>
+        </div>
+        <div style="width: 95%;" class="mr-auto ml-auto">
+            <p class="family-teamwork text-justify pdl-10 pdr-10">
+                @ViewData["RenderizadoDescripcion"]
+            </p>
+        </div>
+        <div class="ml-auto mb-20 mt-40 pdl-20 pdr-20">
+            <a href="@ViewData["Path"]" class="btn @ViewData["ButtonClass"] color-fx3 br-25 height-50">
+                <i class="glyphicon-tw-6 @ViewData["Glyphicon"] dspl-inlblc mb-15neg"></i>
+                <span class="dspl-inlblc mr-28 ta-left">
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">@ViewData["RenderizadoButtonOne"]</i>
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal">@ViewData["RenderizadoButtonTwo"]</i>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

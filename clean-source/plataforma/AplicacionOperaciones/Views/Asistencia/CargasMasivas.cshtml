@@ -1,0 +1,95 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Libro Asistencia";
+    
+}
+
+
+
+<div class="row ml-auto mr-auto mt-100" style="width: 92%; text-align:center">
+    <div class="row ml-auto mr-auto" style="width:92%">
+        @Html.ButtonAdministracion(
+                       "button",
+                       new string[] {
+                           "class='dspl-inline-block new-family-teamwork'",
+                           "onclick='handleReturnMenuAsistencia()'"
+                       },
+                       new string[]
+                       {
+                           "min-width: 50px",
+                           "border: none",
+                           "text-align: center",
+                           "font-weight: 100",
+                           "border: 0",
+                           "margin: none",
+                           "background-color: transparent!important"
+                       },
+                       new string[]
+                       {
+                           "<span class='dspl-inline-block'><span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;' class='btn btn-teamwork pdt-5 pdr-5 pdb-5 pdl-5'><img src='../Resources/flecha-izquierda.svg' width='30' height='30' style='position: relative; left: 10%;' /></span></span>" +
+                           "<span class='new-family-teamwork' style='position: relative; float: right; margin-left: 10px; margin-top: 10px; font-size: 20px; font-wight: 100;'>Volver a Menu</span>"
+                       },
+                       true
+                   )
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-50">
+        <h1 class="new-family-teamwork dspl-block" style="font-weight: 100;">Menu Cargas Masivas</h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-20 mt-50">
+        <Button type="button" class="dspl-inline-block btn-info mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="SolicitudAsistencia" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center" style="font-size: 22px;">Inasistencia</h1>
+            <h2 class="family-teamwork ta-center mt-10neg" style="font-size: 19px;">Carga Masiva</h2>
+            <img src="~/Resources/svg/attend.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-warning mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="SolicitudAsistenciaRetail" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Inasistencia (Retail)</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Carga Masiva</h2>
+            <img src="~/Resources/svg/attend.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-anulado mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="SolicitudHorasExtras" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Horas Extras</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Carga Masiva</h2>
+            <img src="~/Resources/svg/attend.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-teamwork mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="SolicitudAsistenciaRelojControl" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Asistencia Reloj Control</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Carga Masiva</h2>
+            <img src="~/Resources/svg/attend.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-dark mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="SolicitudBonos" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Bonos</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Carga Masiva</h2>
+            <img src="~/Resources/svg/attend.svg" width="50" height="50" />
+        </Button>
+    </div>
+</div>
+
+<script async>
+    //const __APP = "/AplicacionOperaciones";
+    const __APP = "";
+    const __SERVERHOST = `${window.location.origin}${__APP}`;
+
+    handleClickRedirectAction = (e) => {
+        window.location.href = `${__SERVERHOST}/Asistencia/${e.dataset.reference}`
+    }
+
+    handleReturnMenuAsistencia = () => {
+    window.location.href = `${__SERVERHOST}/Asistencia`;
+    }
+
+</script>

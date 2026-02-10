@@ -1,0 +1,164 @@
+﻿@using (Ajax.BeginForm("ConfirmacionEvento", "Bajas", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "contentPayment",
+    LoadingElementId = "loader"
+}, new { @style = "display: block;" }))
+{
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <embed src="@ViewBag.ReferenciaViewCaratula" style="width: 100%; height: 600px;" />
+            <div style="margin-top: -500px; width: 100%; height: 500px; text-align: center;">
+                <img src="~/Resources/pdfcolorreal-x2.png" style="width: 50px; display: block; margin: auto;" />
+                <h1 class="family-teamwork">Cargando PDF<br />Espere un momento...</h1>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1 class="family-teamwork ta-center" style="font-size: 25px;">SOLICITUD DE TRANSFERENCIA / DEPOSITO</h1>
+                </div>
+            </div>
+            <div class="row">
+                <table border="1" cellspacing="0" cellpadding="5" style="width: 90%; margin: auto; border: 1px solid rgb(100, 100, 100);">
+                    <tbody>
+                        @foreach (AplicacionOperaciones.Models.Finiquitos.SolicitudTransferencia item in ViewBag.RenderizadoDatosSolicitudTransferencia)
+                        {
+                            <tr>
+                                <td style="width: 20%;" class="family-teamwork">NOMBRE TRABAJADOR</td>
+                                <td class="family-teamwork" colspan="3">@item.Nombres</td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">BANCO</td>
+                                <td class="family-teamwork">
+                                @item.Banco
+                                @if (item.Banco == "")
+                                {
+                                    @: <select name="banco" class="form-control family-teamwork" style="width: 200px;">
+                                        @:<option value="">SELECCIONE BANCO</option>
+                                        @:<option value="CHILE">CHILE</option>
+                                        @:<option value="CREDICHILE">CREDICHILE</option>
+                                        @:<option value="EDWARDS">EDWARDS</option>
+                                        @:<option value="INTERNACIONAL">INTERNACIONAL</option>
+                                        @:<option value="ESTADO">ESTADO</option>
+                                        @:<option value="SCOTIABANK">SCOTIABANK</option>
+                                        @:<option value="DESARROLLO">DESARROLLO</option>
+                                        @:<option value="BCI">BCI</option>
+                                        @:<option value="NOVA">NOVA</option>
+                                        @:<option value="TBANC">TBANC</option>
+                                        @:<option value="BICE">BICE</option>
+                                        @:<option value="HSBC BANK">HSBC BANK</option>
+                                        @:<option value="SANTANDER">SANTANDER</option>
+                                        @:<option value="SANTANDER BANEFE">SANTANDER BANEFE</option>
+                                        @:<option value="CORPBANCA">CORPBANCA</option>
+                                        @:<option value="ITAU">ITAU</option>
+                                        @:<option value="SECURITY">SECURITY</option>
+                                        @:<option value="FALABELLA">FALABELLA</option>
+                                        @:<option value="RIPLEY">RIPLEY</option>
+                                        @:<option value="RABOBANK">RABOBANK</option>
+                                        @:<option value="CONSORCIO">CONSORCIO</option>
+                                        @:<option value="PENTA">PENTA</option>
+                                        @:<option value="BBVA">BBVA</option>
+                                        @: <option value="BTG PACTUAL CHILE">BTG PACTUAL CHILE</option>
+                                    @: </select>
+                                }
+                                </td>
+                                <td class="family-teamwork ta-center" style="width: 10%;">FECHA</td>
+                                <td class="family-teamwork ta-center">@item.Fecha</td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">N° CUENTA</td>
+                                <td class="family-teamwork" colspan="3">
+                                    @if (item.Cuenta != "" && item.Cuenta != "0" && item.Cuenta != " ") {
+                                        @item.Cuenta
+                                    } 
+                                    @if (item.Cuenta == "" || item.Cuenta == "0" || item.Cuenta == " ")
+                                    {
+                                        @: <input type="text" name="numeroCta" value="" required class="family-teamwork form-control"/>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">RUT</td>
+                                <td class="family-teamwork" colspan="3">@item.Rut</td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">MONTO</td>
+                                <td class="family-teamwork" colspan="3">
+                                    @item.TotalFiniquito
+                                    <input type="text" class="dspl-none" name="montofiniquito" value="@item.TotalFiniquito" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork" rowspan="2">LOCATION</td>
+                                <td style="width: 30px;" class="ta-center">
+                                    <label class="switch-md" style="display: inline-block;">
+                                        <input type="radio" name="location" id="lRegion" value="REGIONES" checked="checked" />
+                                        <span class="slider teamwork"></span>
+                                    </label>
+                                </td>
+                                <td class="family-teamwork" colspan="2">
+                                    <label for="lRegion">REGIONES<br />(Se declarara como TEF de regiones diferente a la metropolitana)</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 30px;" class="ta-center">
+                                    <label class="switch-md" style="display: inline-block;">
+                                        <input type="radio" name="location" id="lMetropolitana" value="METROPOLITANA" />
+                                        <span class="slider teamwork"></span>
+                                    </label>
+                                </td>
+                                <td class="family-teamwork" colspan="2">
+                                    <label for="lMetropolitana">METROPOLITANA<br />(se declarara como TEF de la región metropolitana)</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">GASTO ADMINISTRATIVO</td>
+                                <td class="family-teamwork" colspan="3">
+                                    <input type="number" value="0" name="gastosAdm" placeholder="Indique Monto de gastos administrativos (Ej. 30000)" class="family-teamwork form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">OBSERVACIÓN</td>
+                                <td class="family-teamwork" colspan="3">
+                                    <textarea name="observacion" style="width: 100%; background-color: none; border: 0; max-height: 80px; min-height: 80px; max-width: 100%; min-width: 100%;" placeholder="Indique observaciones"></textarea>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+                    <input type="text" name="codigoFiniquito" value="@ViewBag.ReferenciaCodigoFiniquito" class="dspl-none" />
+                    <input type="text" name="codigoComplemento" value="@ViewBag.CodigoComplemento" class="dspl-none" />
+                    <input type="text" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" class="dspl-none" />
+                    <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                    <input type="text" class="dspl-none" name="origen" value="@ViewBag.OrigenTEF" />
+                    <input type="text" name="option" value="SolicitudTransferencia" class="dspl-none" />
+                    <button type="submit" class="btn btn-success"
+                            style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Solicitar la</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Transferencia/Deposito</i>
+                        </span>
+                    </button>
+                    <a href="#" data-dismiss="modal" type="submit" class="btn btn-danger"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Cancelar y</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block;">Cerrar</i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

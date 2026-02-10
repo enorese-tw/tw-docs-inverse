@@ -1,0 +1,34 @@
+﻿@{
+    string prefixApp = "";
+    string urlServer = "";
+
+    if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+    {
+        prefixApp = "/" + Request.Url.AbsoluteUri.Split('/')[3];
+    }
+
+    if (Request.Url.AbsoluteUri.Split('/')[2].Contains("181.190.6.196"))
+    {
+        urlServer = "181.190.6.196";
+    }
+    else
+    {
+        urlServer = Request.Url.AbsoluteUri.Split('/')[2];
+    }
+
+    ViewBag.PathCodified = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/Operaciones/DownloadFileCargaMasiva";
+}
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+    <a href="@ViewBag.PathCodified?template=@ViewData["Id"]" class="btn @ViewData["RenderizadoColor"]"
+       style="border-radius: 50px; height: 80px; min-width: 400px; margin-top: 12px; text-align: left; color: #fff;">
+        <i class="glyphicon-tw-15 @ViewData["RenderizadoGlyphicon"]" style="display: inline-block;"></i>
+        <span style="display: inline-block; margin-top: -68px;">
+            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 25px; font-style: normal; display: block; margin-bottom: -10px;">@ViewData["RenderizadoOneTexto"]</i>
+            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 25px; font-style: normal; display: block;">de @ViewData["RenderizadoSecTexto"]</i>
+        </span>
+    </a>
+    <p class="family-teamwork mt-5" style="font-size: 15px;">@ViewData["RenderizadoMensajeImpt"]</p>
+</div>

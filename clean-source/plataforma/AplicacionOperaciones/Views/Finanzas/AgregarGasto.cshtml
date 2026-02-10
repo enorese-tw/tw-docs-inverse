@@ -1,0 +1,219 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Agregar Gasto";
+    
+}
+
+<div style="width: 100%;">
+    <div class="row mt-100 ml-auto mr-auto mb-20" style="width: 90%;">
+        <div class="col-7 col-sm-7 col-md-7 col-lg-7">
+            <h1 style="font-family: 'Open Sans Condensed', sans-serif; font-size: 40px;">
+                <i class="glyphicon-tw-5 glyphicon-tw-anexos"></i> Agregar Gastos
+            </h1>
+            <div class="col-12">
+                <h2 class="family-teamwork fs-20">
+                    Portal de Ingreso de gastos unicos y obtencion de codigos.
+                </h2>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="family-teamwork fw-bold color-100x3 mb-3neg" id="periodoVigente" style="width: 250px; height: 100px;top: 0%;">
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="ml-150 mr-150">
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                <label for="empresa" class="mt-2">Empresa</label>
+            </div>
+            <div class="col-6">
+                <select class="form-control" id="empresa">
+
+                    <option id="0">Seleccione</option>
+                    @foreach (AplicacionOperaciones.Models.Empresa item in (List<AplicacionOperaciones.Models.Empresa>)ViewBag.RenderizadoEmpresa)
+                    {
+                        <option value="@item.Codigo">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                Proveedor
+            </div>
+            <div class="col-2">
+                <input class="form-control" type="text" placeholder="Rut Proveedor" id="txbRutProveedor" disabled />
+            </div>
+            <div class="col-4" id="proveedorDiv">
+                <select class="form-control" id="ddlProveedor" required="required" disabled>
+                    <option>Seleccione</option>
+                    @foreach (AplicacionOperaciones.Models.Proveedor item in (List<AplicacionOperaciones.Models.Proveedor>)ViewBag.RenderizadoProveedor)
+                    {
+                        <option value="@item.Rut">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="col-1" style="align-items: center; display: flex; vertical-align: middle; position: relative; right: 25px;">
+                <a href="#" id="limpiarProveedor" class="btn btn-circle-micro btn-danger glyphicon-tw-delete" disable><span class="glyphicon "></span> </a>
+            </div>
+        </div>
+
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                Tipo Documento
+            </div>
+
+
+            <div class="col-3">
+                <select class="form-control" id="ddlTipoDocumento" required="required" disabled>
+                    <option value="-1">Seleccione</option>
+                    @foreach (AplicacionOperaciones.Models.TipoDocumento item in (List<AplicacionOperaciones.Models.TipoDocumento>)ViewBag.RenderizadoTipoDocumento)
+                    {
+                        <option value="@item.Id.ToString()">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+            <div class="col-4" id="radiotrubutaria">
+                <div class="form-check form-check-inline ml-20 mr-20">
+                    <input class="form-check-input rdindividual" type="radio" name="tributaria" id="afecta" value="1" disabled="disabled" checked />
+                    <label class="form-check-label" for="afecta">Afecta</label>
+                </div>
+                <div class="form-check form-check-inline ml-20 mr-20">
+                    <input class="form-check-input rdindividual" type="radio" name="tributaria" id="exenta" value="2" disabled="disabled" />
+                    <label class="form-check-label" for="exenta">Exenta</label>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                Numero Documento
+            </div>
+            <div class="col-4">
+                <input class="form-control"  type="text" placeholder="N° Documento" id="nFactura" disabled />
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20 div-monto">
+
+            <div class="col-3" id="txtMontoNeto">
+                <p>Monto Neto</p>
+            </div>
+
+            <div class="col-2" id="TxBMontoNeto">
+                <input type="number" class="form-control" placeholder="Monto Neto" id="monto" required="required" disabled>
+            </div>
+
+            <div class="col-2" id="TxBMontoIVA">
+                <input type="text" class="form-control" placeholder="Monto Iva" id="montoIVA" required="required" disabled>
+            </div>
+
+            <div class="col-2" id="TxBMontoTotal">
+                <input type="text" class="form-control" placeholder="Monto Total" id="montoTotal" required="required" disabled>
+            </div>
+
+
+        </div>
+
+        <div class="ta-center mt-20">
+            <div class="col-12">
+                <div class="form-check form-check-inline ml-20 mr-20">
+                    <input class="form-check-input rdpr" type="radio" name="cliente" id="unica" value="1" disabled="disabled" checked />
+                    <label class="form-check-label" for="unica">Factura Unica</label>
+                </div>
+                <div class="form-check form-check-inline ml-20 mr-20">
+                    <input class="form-check-input rdpr" type="radio" name="cliente" id="apertura" value="2" disabled="disabled" />
+                    <label class="form-check-label" for="apertura">Apertura de Factura</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="divCliente">
+            <div class="row ml-37 mr-37 mt-20 ">
+                <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                    <p>Cliente</p>
+                </div>
+                <div class="col-2">
+                    <input type="text" data-cliente="cliente" class="form-control" placeholder="Cliente" id="txtCliente" required="required" disabled>
+                </div>
+                <div class="col-4">
+                    <select class="form-control" id="dllCliente" required="required" disabled></select>
+                </div>
+                <div class="col-1 " style="align-items: center; display: flex; vertical-align: middle; position: relative; right: 25px;">
+                    <a href="#" id="limpiarCliente" class="btn btn-circle-micro btn-danger glyphicon-tw-delete" disable> </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20 div-tipoReembolso">
+            <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                <P>Tipo de Reembolso</P>
+            </div>
+            <div class="col-6 ">
+                <select class="form-control" id="ddlReembolso" required="required" disabled>
+                    <option value="0">Seleccione</option>
+                    @foreach (AplicacionOperaciones.Models.TipoReembolso item in (List<AplicacionOperaciones.Models.TipoReembolso>)ViewBag.RenderizadoReembolso)
+                    {
+                        <option value="@item.Id.ToString()">@item.Codigo @item.Nombre</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                <label for="comentario" class="mt-2">Comentario</label>
+            </div>
+            <div class="col-6">
+                <textarea class="form-control" id="txtComentario" rows="3" disabled></textarea>
+            </div>
+        </div>
+
+        <div class="row ml-70 mr-37 mt-30 mb-50">
+            <div class="col-3">   </div>
+            <div class="col-3 center btn-add-gasto">
+                <a href="#" class="btn btn-danger btnCrearGastoFinanzas" style="border-radius: 25px; height: 40px; text-align: left; color: #fff;" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="contentDashboardXContrato">
+                    <i class="glyphicon-tw-7 glyphicon-tw-dinero" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">&nbsp;&nbsp;Agregar&nbsp;&nbsp;</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">&nbsp;&nbsp;Gasto&nbsp;&nbsp;</i>
+                    </span>
+                </a>
+            </div>
+
+            <div class="col-3 center">
+                <a href="@ViewBag.EnlaceIndex" class="btn btn-warning" style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                    <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">&nbsp;&nbsp;Cancelar y&nbsp;&nbsp;</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">&nbsp;&nbsp;Volver&nbsp;&nbsp;</i>
+                    </span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+</script>
+
+@Scripts.Render("~/bundles/ajaxFuncionesfz")
+@Scripts.Render("~/bundles/agregargasto")
+@Scripts.Render("~/bundles/utils")
+@Scripts.Render("~/bundles/cargamasiva")

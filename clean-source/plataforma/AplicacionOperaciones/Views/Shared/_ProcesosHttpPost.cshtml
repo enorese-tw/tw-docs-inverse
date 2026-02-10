@@ -1,0 +1,201 @@
+﻿@{
+    string prefixApp = "";
+    string urlServer = "";
+
+    if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+    {
+        prefixApp = "/" + Request.Url.AbsoluteUri.Split('/')[3];
+    }
+
+    if (Request.Url.AbsoluteUri.Split('/')[2].Contains("181.190.6.196"))
+    {
+        urlServer = "181.190.6.196";
+    }
+    else
+    {
+        urlServer = Request.Url.AbsoluteUri.Split('/')[2];
+    }
+
+    ViewBag.PathCodified = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/Operaciones/Procesos/" + ViewBag.CodificarCod;
+    ViewBag.PathCodifiedDownloadData = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/Operaciones/GenerateExcel?codigotransaccion=" + ViewBag.CodigoTransaccion;
+    ViewBag.PathCodifiedHistorial = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/Operaciones/Historial";
+    ViewBag.CodProceso = "process_" + ViewBag.TipoProceso + "_" + ViewBag.CodigoTransaccion.Replace('=', '_');
+    ViewBag.CodTransaccion = "processtx_" + ViewBag.TipoProceso + "_" + ViewBag.CodigoTransaccion.Replace('=', '_');
+}
+
+<div class="row width-90per m-auto mb-2neg mt-2" id="@ViewBag.CodTransaccion">
+</div>
+<div id="@ViewBag.CodProceso" class="row width-90per m-auto @ViewBag.BorderColor bt-1-solid-200x3 br-1-solid-200x3 bb-1-solid-200x3 mheight-180 mt-2">
+    <span class="mt-10 ml-10" style="position: absolute; float: left;">
+    </span>
+    <div class="col-12 col-sm-12 col-md-2 col-lg-2 ta-center">
+        <div class="btn @ViewBag.GlyphiconColor dspl-inline-block mt-80 estadoProceso"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 @ViewBag.Glyphicon" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-15neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">Proceso @ViewBag.Prioridad</i>
+            </span>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-5">
+        <div class="row">
+            <a href="@ViewBag.PathCodified" class="dspl-block txd-none cursor-pointer width-100per">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 dspl-block">
+                    <label class="cursor-pointer family-teamwork dspl-block lh-13 fs-14 mt-10 color-100x3">Nombre Proceso</label>
+                    <label class="cursor-pointer family-teamwork dspl-block lh-20 fs-20 color-100x3">@ViewBag.Nombre</label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-20">
+                    <label class="cursor-pointer family-teamwork lh-10 fs-14 dspl-block color-100x3">Creado <b>@ViewBag.FechaCreacion</b></label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10">
+                    <label class="cursor-pointer family-teamwork lh-10 fs-14 dspl-block color-100x3">@Html.Raw(ViewBag.EjecutivoSeguimiento)</label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10">
+                    <label class="cursor-pointer family-teamwork fs-14 color-100x3">Este proceso tiene: <b>@Html.Raw(ViewBag.TotalSolicitudes)</b></label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <label class="cursor-pointer family-teamwork lh-16 fs-14 @ViewBag.ColorComentarios">Comentarios del proceso: <b>@ViewBag.Comentarios</b></label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <label class="cursor-pointer family-teamwork lh-10 fs-14 color-100x3 estadoProcesoGlosaDet">Este proceso se encuentra con prioridad <b>@ViewBag.Prioridad</b></label>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-5" style="text-align: right;">
+        <div class="row" style="min-height: 180px; align-items: center; vertical-align: middle;">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                @if (ViewBag.OptDescargarDatosCargados.ToString() == "S")
+                {
+                    <a href="@ViewBag.PathCodifiedDownloadData&excel=RGF0b3NDb21wbGV0b3NTb2xpY2l0dWRDb250cmF0bw==" class="btn btn-success"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-excel" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Descargar Datos</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block;">Cargados</i>
+                        </span>
+                    </a>
+                }
+
+                @if (ViewBag.OptAsignarProceso.ToString() == "S")
+                {
+                    <a href="#" class="btn btn-teamwork eventAsinarProceso"
+                       data-tipoevento="@ViewBag.TipoEvento" data-solicitud="@ViewBag.Nombre" data-cifrado="@ViewBag.CodigoTransaccion"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-asignado" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Asignar</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block;">Proceso</i>
+                        </span>
+                    </a>
+                }
+
+                @if (ViewBag.OptDescargarSolicitudContrato.ToString() == "S")
+                {
+                    <a href="@ViewBag.PathCodifiedDownloadData&excel=@ViewBag.TipoEvento" class="btn btn-success"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-excel" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                      font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Descargar Datos</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                      font-size: 14px; font-style: normal; display: block;">Solicitud Contrato</i>
+                        </span>
+                    </a>
+                }
+                @if (ViewBag.OptHistorialProceso.ToString() == "S")
+                {
+                    <a href="@ViewBag.PathCodifiedHistorial/P!!@ViewBag.TipoEvento/@ViewBag.CodigoTransaccion" target="_blank" class="btn btn-teamwork"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-atrasado" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Historial</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block;">Proceso</i>
+                        </span>
+                    </a>
+                }
+
+                @if (ViewBag.OptRevertirAnulacion.ToString() == "S")
+                {
+                    <a href="#" class="btn btn-warning eventRevertirAnulacion"
+                       data-tipoevento="@ViewBag.TipoEvento" data-solicitud="@ViewBag.Nombre" data-cifrado="@ViewBag.CodigoTransaccion"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #000;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Revertir</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block;">Anulación</i>
+                        </span>
+                    </a>
+                }
+
+                @if (ViewBag.OptDescargarErrorDatosCargados.ToString() == "S")
+                {
+                    <a href="@ViewBag.PathCodifiedDownloadData&excel=RGF0b3NFcnJvcmVzU29saWNpdHVkQ29udHJhdG8=" class="btn btn-create"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-excel" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                      font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Descargar Errores</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                      font-size: 14px; font-style: normal; display: block;">Datos Cargados</i>
+                        </span>
+                    </a>
+                }
+
+                @if (ViewBag.OptAnularProceso.ToString() == "S")
+                {
+                    <a href="#" class="btn btn-danger eventAnularSolicitud" data-tipoanulacion="Proceso"
+                       data-tipoevento="@ViewBag.TipoEvento" data-solicitud="@ViewBag.Nombre" data-cifrado="@ViewBag.CodigoTransaccion"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Anular</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block;">Proceso</i>
+                        </span>
+                    </a>
+                }
+
+                @if (ViewBag.OptTerminarProceso.ToString() == "S")
+                {
+                    <a href="#" class="btn btn-success eventTerminarSolicitud" data-tipoanulacion="Proceso"
+                       data-tipoevento="@ViewBag.TipoEvento" data-solicitud="@ViewBag.Nombre" data-cifrado="@ViewBag.CodigoTransaccion"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-terminar" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Terminar</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block;">Proceso</i>
+                        </span>
+                    </a>
+                }
+
+                @if (ViewBag.OptRevertirTermino.ToString() == "S")
+                {
+                    <a href="#" class="btn btn-warning eventRevertirTerminoSolicitud" data-tipoanulacion="Proceso"
+                       data-tipoevento="@ViewBag.TipoEvento" data-solicitud="@ViewBag.Nombre" data-cifrado="@ViewBag.CodigoTransaccion"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Revertir Termino</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 14px; font-style: normal; display: block;">Proceso</i>
+                        </span>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

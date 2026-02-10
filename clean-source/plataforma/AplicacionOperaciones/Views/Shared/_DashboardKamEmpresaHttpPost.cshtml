@@ -1,0 +1,336 @@
+﻿<div class="row tab-pane fade" id="contentDashboardXEmpresa_@ViewBag.Concepto"  role="tabpanel" aria-labelledby="contentDashboardXEmpresa_@ViewBag.Concepto">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 mb-5 pdl-5 pdr-5">
+                <div class="mb-5 mr-auto ml-auto" style="width: 100%; background-color: rgb(240, 240, 240); border: 1px solid rgb(200, 200, 200); min-height: 100px;">
+                    <h2 class="family-teamwork ta-center fw-bold color-100x3 mt-10 mb-10neg" style="font-size: 20px;">SOLICITUDES @ViewBag.Concepto</h2>
+                    <h1 class="family-teamwork fw-bold color-428BCA ta-center" style="font-size: 50px;">@ViewBag.TotalSolicitudes</h1>
+                    <p class="family-teamwork fw-bold color-150x3 mr-auto ml-auto mt-10neg ta-center" style="font-size: 15px; width: 90%;">VINCULADAS A <i class="color-428BCA fst-normal">@ViewBag.TotalProcesos</i> PROCESOS</p>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <div class="row ml-auto mr-auto" style="width: 98%;">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                    <h2 class="family-teamwork ta-center fw-bold color-100x3" style="font-size: 16px;">CONTRATOS</h2>
+                                    <h1 class="family-teamwork fw-bold color-428BCA ta-center mt-9neg" style="font-size: 17px;">@ViewBag.TotalSolContratos</h1>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-4">
+                                    <div class="w3-dark-grey ml-auto mr-auto mt-20 mb-7neg">
+                                        <div class="w3-blue" style="height: 3px; width: @ViewBag.PercentageSolContratos"></div>
+                                    </div>
+                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center" style="font-size: 17px;">@ViewBag.PercentageSolContratos</h1>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 ta-center">
+                                    <a href="#" class="btn btn-teamwork mt-14" style="border-radius: 25px; height: 30px; text-align: left; color: #fff;">
+                                        <i class="glyphicon-tw-19 glyphicon-tw-buscar" style="display: inline-block;"></i>
+                                    </a>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <p class="family-teamwork fw-bold color-100x3 ml-auto mr-auto" style="font-size: 13px; width: 98%;">Vinculado a @ViewBag.TotalProcContratos Procesos</p>
+                                </div>
+                            </div>
+                            <div class="row ml-auto mr-auto mt-3neg" style="width: 98%;">
+                                <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                    <h2 class="family-teamwork ta-center fw-bold color-100x3" style="font-size: 16px;">RENOVACION</h2>
+                                    <h1 class="family-teamwork fw-bold color-428BCA ta-center mt-9neg" style="font-size: 17px;">@ViewBag.TotalSolRenovaciones</h1>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-4">
+                                    <div class="w3-dark-grey ml-auto mr-auto mt-20 mb-7neg">
+                                        <div class="w3-blue" style="height: 3px; width: @ViewBag.PercentageSolRenovaciones"></div>
+                                    </div>
+                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center" style="font-size: 17px;">@ViewBag.PercentageSolRenovaciones</h1>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-3 col-lg-3 ta-center">
+                                    <a href="#" class="btn btn-teamwork mt-14" style="border-radius: 25px; height: 30px; text-align: left; color: #fff;">
+                                        <i class="glyphicon-tw-19 glyphicon-tw-buscar" style="display: inline-block;"></i>
+                                    </a>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                    <p class="family-teamwork fw-bold color-100x3 ml-auto mr-auto" style="font-size: 13px; width: 98%;">Vinculado a @ViewBag.TotalProcRenovaciones Procesos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-8 pdl-5 pdr-5">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-12 mb-5">
+                        <div class="mb-5 mr-auto ml-auto" style="width: 100%; background-color: rgb(240, 240, 240); border: 1px solid rgb(200, 200, 200); min-height: 100px;">
+                            <h2 class="family-teamwork ta-center fw-bold color-100x3 mt-10 mb-10neg" style="font-size: 18px;">SOLICITUDES @ViewBag.Concepto ** CONTRATOS **</h2>
+                            <div class="row ml-auto mr-auto mt-25" style="width: 99%;">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3 ta-center">
+                                    @if (Convert.ToInt32(ViewBag.EmpresaPCSSolContratos.Replace(".", "")) > 0)
+                                    {
+                                        <i class="success glyphicon-tw-terminar dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                        <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                            <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaPCSSolConcepto
+                                        </i>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10neg">
+                                                <h1 class="family-teamwork fw-bold color-9218492 ta-center" style="font-size: 20px;">@ViewBag.EmpresaPCSSolContratos</h1>
+                                                <div class="w3-dark-grey ml-auto mr-auto" style="width: 80%;">
+                                                    <div class="@ViewBag.EmpresaPCSSolBarColor" style="height: 3px; width: @ViewBag.EmpresaPCSSolContratosPercentage"></div>
+                                                </div>
+                                                <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-20" style="font-size: 18px;">@ViewBag.EmpresaPCSSolContratosPercentage</h1>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <i class="glyphicon-tw-feliz dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                        <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                            <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaPCSSolConcepto
+                                        </i>
+                                    }
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-9">
+                                    <div class="row">
+                                        @if (Convert.ToInt32(ViewBag.EmpresaCRITICOSolContratos) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaCRITICOSolGlyphiconColor @ViewBag.EmpresaCRITICOSolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaCRITICOSolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaCRITICOSolContratos</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaCRITICOSolBarColor" style="height: 3px; width: @ViewBag.EmpresaCRITICOSolContratosPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaCRITICOSolContratosPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (Convert.ToInt32(ViewBag.EmpresaURGENTESolContratos) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaURGENTESolGlyphiconColor @ViewBag.EmpresaURGENTESolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaURGENTESolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaURGENTESolContratos</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaURGENTESolBarColor" style="height: 3px; width: @ViewBag.EmpresaURGENTESolContratosPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaURGENTESolContratosPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (Convert.ToInt32(ViewBag.EmpresaNORMALSolContratos) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaNORMALSolGlyphiconColor @ViewBag.EmpresaNORMALSolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaNORMALSolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaNORMALSolContratos</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaNORMALSolBarColor" style="height: 3px; width: @ViewBag.EmpresaNORMALSolContratosPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaNORMALSolContratosPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (Convert.ToInt32(ViewBag.EmpresaSPSolContratos) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaSPSolGlyphiconColor @ViewBag.EmpresaSPSolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaSPSolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaSPSolContratos</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaSPSolBarColor" style="height: 3px; width: @ViewBag.EmpresaSPSolContratosPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaSPSolContratosPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+                                                            
+                                        @if (Convert.ToInt32(ViewBag.EmpresaANULADASolContratos) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaANULADASolGlyphiconColor @ViewBag.EmpresaANULADASolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaANULADASolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaANULADASolContratos</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaANULADASolBarColor" style="height: 3px; width: @ViewBag.EmpresaANULADASolContratosPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaANULADASolContratosPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+                                                            
+                                        @if (Convert.ToInt32(ViewBag.EmpresaERRORSolContratos) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaERRORSolGlyphiconColor @ViewBag.EmpresaERRORSolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaERRORSolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaERRORSolContratos</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaERRORSolBarColor" style="height: 3px; width: @ViewBag.EmpresaERRORSolContratosPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaERRORSolContratosPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+                                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-12 mb-5">
+                        <div class="mb-5 mr-auto ml-auto" style="width: 100%; background-color: rgb(240, 240, 240); border: 1px solid rgb(200, 200, 200); min-height: 100px;">
+                            <h2 class="family-teamwork ta-center fw-bold color-100x3 mt-10 mb-10neg" style="font-size: 18px;">SOLICITUDES @ViewBag.Concepto ** RENOVACION **</h2>
+                            <div class="row ml-auto mr-auto mt-25" style="width: 99%;">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3 ta-center">
+                                    @if (Convert.ToInt32(ViewBag.EmpresaPCSSolRenovaciones.Replace(".", "")) > 0)
+                                    {
+                                        <i class="success glyphicon-tw-terminar dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                        <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                            <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaPCSSolConcepto
+                                        </i>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10neg">
+                                                <h1 class="family-teamwork fw-bold color-9218492 ta-center" style="font-size: 20px;">@ViewBag.EmpresaPCSSolRenovaciones</h1>
+                                                <div class="w3-dark-grey ml-auto mr-auto" style="width: 80%;">
+                                                    <div class="w3-green" style="height: 3px; width: @ViewBag.EmpresaPCSSolRenovacionesPercentage"></div>
+                                                </div>
+                                                <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-20" style="font-size: 18px;">@ViewBag.EmpresaPCSSolRenovacionesPercentage</h1>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <i class="glyphicon-tw-feliz dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                        <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                            <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaPCSSolConcepto
+                                        </i>
+                                    }
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-9">
+                                    <div class="row">
+                                        @if (Convert.ToInt32(ViewBag.EmpresaCRITICOSolRenovaciones) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaCRITICOSolGlyphiconColor @ViewBag.EmpresaCRITICOSolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaCRITICOSolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaCRITICOSolRenovaciones</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaCRITICOSolBarColor" style="height: 3px; width: @ViewBag.EmpresaCRITICOSolRenovacionesPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaCRITICOSolRenovacionesPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (Convert.ToInt32(ViewBag.EmpresaURGENTESolRenovaciones) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaURGENTESolGlyphiconColor @ViewBag.EmpresaURGENTESolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaURGENTESolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaURGENTESolRenovaciones</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaURGENTESolBarColor" style="height: 3px; width: @ViewBag.EmpresaURGENTESolRenovacionesPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaURGENTESolRenovacionesPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (Convert.ToInt32(ViewBag.EmpresaNORMALSolRenovaciones) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaNORMALSolGlyphiconColor @ViewBag.EmpresaNORMALSolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaNORMALSolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaNORMALSolRenovaciones</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaNORMALSolBarColor" style="height: 3px; width: @ViewBag.EmpresaNORMALSolRenovacionesPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaNORMALSolRenovacionesPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (Convert.ToInt32(ViewBag.EmpresaSPSolRenovaciones) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaSPSolGlyphiconColor @ViewBag.EmpresaSPSolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaSPSolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaSPSolRenovaciones</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaSPSolBarColor" style="height: 3px; width: @ViewBag.EmpresaSPSolRenovacionesPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaSPSolRenovacionesPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (Convert.ToInt32(ViewBag.EmpresaANULADASolRenovaciones) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaANULADASolGlyphiconColor @ViewBag.EmpresaANULADASolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaANULADASolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaANULADASolRenovaciones</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaANULADASolBarColor" style="height: 3px; width: @ViewBag.EmpresaANULADASolRenovacionesPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaANULADASolRenovacionesPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+
+                                        @if (Convert.ToInt32(ViewBag.EmpresaERRORSolRenovaciones) > 0)
+                                        {
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-3 pdl-5 pdr-5 mb-5 ta-center">
+                                                <div class="ml-auto mr-auto pdt-5 cursor-pointer" style="width: 98%; border: 1px solid rgb(217, 83, 79);">
+                                                    <i class="@ViewBag.EmpresaERRORSolGlyphiconColor @ViewBag.EmpresaERRORSolGlyphicon dspl-inline-block mb-2neg" style="width: 30px; height: 30px; border-radius: 50%;"></i>
+                                                    <i class="family-teamwork fst-normal fw-bold color-100x3 dspl-inline-block mb-10 ta-left" style="font-size: 17px; line-height: 14px;">
+                                                        <span style="font-size: 13px;">Solicitudes</span><br />@ViewBag.EmpresaERRORSolConcepto
+                                                    </i>
+                                                    <h1 class="family-teamwork fw-bold color-2178379 ta-center mt-5neg" style="font-size: 20px;">@ViewBag.EmpresaERRORSolRenovaciones</h1>
+                                                    <div class="w3-dark-grey ml-auto mr-auto mt-3neg" style="width: 80%;">
+                                                        <div class="@ViewBag.EmpresaERRORSolBarColor" style="height: 3px; width: @ViewBag.EmpresaERRORSolRenovacionesPercentage"></div>
+                                                    </div>
+                                                    <h1 class="family-teamwork fw-bold color-100x3 ta-center mb-7" style="font-size: 18px;">@ViewBag.EmpresaERRORSolRenovacionesPercentage</h1>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

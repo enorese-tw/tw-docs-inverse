@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Shared/_MenuLogin.cshtml";
+}
+
+<div class="container-fluid glyphicon-tw-blind-landing" style="height: 100vh; display: flex; vertical-align: middle; align-items: center;">
+
+    <div class="row">
+        <div class="col-md-6 col-lg-3"></div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div style="width: 80%; margin: auto; background-color: #fff; box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3); height: 600px;">
+                <div class="row m-auto">
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 warning height-5"></div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 success height-5"></div>
+                    <div class="col-4 col-sm-4 col-md-4 col-lg-4 danger height-5"></div>
+                </div>
+                <div class="row ml-auto mr-auto mt-50" style="width: 80%;">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: -15px;">
+                        <h2 class="h2-responsive font-weight-bold">Plataforma <i class="glyphicon-tw-teamwork glyphicon-tw-logoteamwork"></i></h2>
+                        <h5 class="h5-responsive">Bienvenido Colaborador de Teamwork</h5>
+                        <hr class="hr-dark">
+                        <h6 style="font-size: 13px;">
+                            Plataforma integrada para la gestión de las operaciones del día a día de las diferentes áreas de la empresa.
+                        </h6>
+                        <br>
+                    </div>
+                    <div id="contentLogin">
+                        @Html.Partial("_FormLogin")
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3"></div>
+    </div>
+</div>
+
+
+@Html.Partial("_ModalNavegadorNoCompatible")
+
+@Scripts.Render("~/bundles/signin")

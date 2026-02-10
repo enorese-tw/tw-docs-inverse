@@ -1,0 +1,80 @@
+﻿<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+    <h1 class="family-teamwork ta-center dspl-block">Proceso de pago de finiquitos</h1>
+</div>
+<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+    <h3 class="family-teamwork ta-center dspl-block">Seleccione el método de pago</h3>
+</div>
+<div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-20">
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            @using (Ajax.BeginForm("IniciarProceso", "Finanzas", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "procesoPago",
+                InsertionMode = InsertionMode.Replace
+            }, new { @style = "display: block;" }))
+            {
+                <input type="text" name="codigoPago" class="dspl-none" value="CHQ" />
+                <input type="text" name="glosaPago" class="dspl-none" value="Cheque" />
+                <Button type="submit" class="dspl-block btn-success" style="width: 100%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;">
+                    <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Pago</h1>
+                    <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Cheque</h2>
+                    <div class="glyphicon-tw-cheque ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                </Button>
+            }
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            @using (Ajax.BeginForm("IniciarProceso", "Finanzas", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "procesoPago",
+                InsertionMode = InsertionMode.Replace
+            }, new { @style = "display: block;" }))
+            {
+                <input type="text" name="codigoPago" class="dspl-none" value="TEF" />
+                <input type="text" name="glosaPago" class="dspl-none" value="Transferencia" />
+                <Button type="submit" class="dspl-block btn-success" style="width: 100%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;">
+                    <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Pagos</h1>
+                    <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Transferencia</h2>
+                    <div class="glyphicon-tw-transferbank ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                </Button>
+            }
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            @using (Ajax.BeginForm("IniciarProceso", "Finanzas", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "procesoPago",
+                InsertionMode = InsertionMode.Replace
+            }, new { @style = "display: block;" }))
+            {
+                <input type="text" name="codigoPago" class="dspl-none" value="TEF_DT" />
+                <input type="text" name="glosaPago" class="dspl-none" value="Transferencia" />
+                <Button type="submit" class="dspl-block btn-info" style="width: 100%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;">
+                    <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Pagos DT</h1>
+                    <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Transferencia</h2>
+                    <div class="glyphicon-tw-transferbank ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                </Button>
+            }
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+            @using (Ajax.BeginForm("IniciarProceso", "Finanzas", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "procesoPago",
+                InsertionMode = InsertionMode.Replace
+            }, new { @style = "display: block;" }))
+            {
+                <input type="text" name="codigoPago" class="dspl-none" value="VV" />
+                <input type="text" name="glosaPago" class="dspl-none" value="Vale Vista" />
+                <Button type="submit" class="dspl-block btn-success" style="width: 100%; height: 200px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;">
+                    <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Pagos</h1>
+                    <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Vale Vista</h2>
+                    <div class="glyphicon-tw-transferbank ml-auto mr-auto mt-20" style="width: 50px; height: 50px;"></div>
+                </Button>
+            }
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+</div>

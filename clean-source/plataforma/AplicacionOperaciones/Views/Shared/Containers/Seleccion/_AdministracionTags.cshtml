@@ -1,0 +1,478 @@
+﻿
+
+<div id="div__crearTag" style="margin-bottom: 20px; display: inline-block;">
+    @Html.Partial("Containers/Seleccion/_CrearTag")
+</div>
+
+<div id="div__filtroTag" style="margin-bottom: 20px; display: inline-block;">
+    @Html.Partial("Containers/Seleccion/_FiltroTag")
+</div>
+
+
+<div>
+    @Html.Partial("Containers/Seleccion/_Tags")
+</div>
+
+<div>
+    @Html.Partial("Components/Seleccion/_ModalConfirmaEventoTag")
+</div>
+
+
+
+<script async>
+    //const __APP = "/AplicacionOperaciones";
+    const __APP = "";
+    const __SERVERHOST = `${window.location.origin}${__APP}`;
+
+    __POSTData = async (url, body = {}) => {
+        const response = await fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow',
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(body)
+        });
+
+        return response.json();
+    };
+
+    handleSearchTag = () => {
+        let filterType = document.getElementById("filterTypeTag").value;
+        let dataFilter = document.getElementById("filterTag").value;
+
+        methodSearchTags(filterType, dataFilter, "1-7");
+    }
+
+    handleSaveTag = () => {
+        let descripcion = document.getElementById("descripcionTag").value;
+        let filterType = document.getElementById("filterTypeTag").value;
+        let dataFilter = document.getElementById("filterTag").value;
+
+
+        if (descripcion !== null && descripcion !== '' && descripcion !== undefined) {
+            methodSaveTag(descripcion, filterType, dataFilter);
+        }
+    }
+
+    handleDisableTag = (e) => {
+        let tag = e.dataset.tag;
+        let newStatus = e.dataset.newstatus;
+        let action = e.dataset.action;
+        let filterType = e.dataset.type;
+        let dataFilter = e.dataset.filter;
+
+        document.getElementById("modalBodyTag").innerHTML = `
+                        <span class="new-family-teamwork" style="text-align: center; font-weight: 100;">¿Esta completamente seguro de deshabilitar este Tag?</span>
+                        <br>
+
+                        <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                data-tag="${tag}" data-newStatus="${newStatus}" data-action="${action}" data-type="${filterType}" data-filter="${dataFilter}" data-dismiss="modal"
+                                onclick="handleConfirmaEvento(this)" id="AceptarEvento">
+                            <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                    class='btn btn-success pdt-5 pdr-5 pdb-5 pdl-5'>
+                                    <img src='../Resources/check.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                            </span>
+                        </button>
+
+                        <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                data-dismiss="modal">
+                            <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                    class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                                    <img src='../Resources/cancel.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                            </span>
+                        </button>`;
+    }
+
+    handleDeleteTag = (e) => {
+        let tag = e.dataset.tag;
+        let filterType = e.dataset.type;
+        let dataFilter = e.dataset.filter;
+
+        document.getElementById("modalBodyTag").innerHTML = `
+                        <span style="text-align: center;">¿Esta completamente seguro de eliminar este Interes Laboral?</span>
+                        <br><br>
+
+                        <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                data-tag="${tag}" data-action="Eliminar" data-type="${filterType}" data-filter="${dataFilter}" data-dismiss="modal"
+                                onclick="handleConfirmaEvento(this)" id="AceptarEvento">
+                            <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                    class='btn btn-success pdt-5 pdr-5 pdb-5 pdl-5'>
+                                    <img src='../Resources/check.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                            </span>
+                        </button>
+
+                        <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                data-dismiss="modal">
+                            <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                    class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                                    <img src='../Resources/cancel.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                            </span>
+                        </button>`;
+    }
+
+    handleUpdateTag = (e) => {
+        let tag = e.dataset.tag;
+        const input = document.getElementById(`input${tag}`);
+        const requerido = input.attributes.required !== undefined
+            ? input.value !== ""
+                ? true
+                : false
+            : true;
+
+        let action = e.dataset.action;
+        let filterType = e.dataset.type;
+        let dataFilter = e.dataset.filter;
+        let descripcion = input.value;
+
+        document.getElementById("modalBodyTag").innerHTML = `
+                        <span class="mb-20;" style="text-align: center;">¿Esta completamente seguro de actualizar este Interes Laboral?</span>
+                        <br><br>
+
+                        <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                data-target="input${tag}" data-tag="${tag}" data-action="${action}" data-descripcion="${descripcion}" data-type="${filterType}" data-filter="${dataFilter}" data-requerido="${requerido}" data-dismiss="modal"
+                                onclick="handleConfirmaEvento(this)"  id="AceptarEvento">
+                            <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                    class='btn btn-success pdt-5 pdr-5 pdb-5 pdl-5'>
+                                    <img src='../Resources/check.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                            </span>
+                        </button>
+
+                        <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                data-dismiss="modal">
+                            <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                    class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                                    <img src='../Resources/cancel.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                            </span>
+                        </button>`;
+    }
+
+    handleKeydownInputTag = (e) => {
+        const keypress = event.which || event.keyCode;
+
+        if (keypress === 13) {
+            document.getElementById(e.dataset.targetupd).click();
+        }
+
+        if (keypress === 27) {
+            document.getElementById(e.dataset.targethide).click();
+        }
+    }
+
+    handleKeydownSearch = (e) => {
+        const keypress = event.which || event.keyCode;
+
+        if (keypress === 13) {
+            document.getElementById(e.dataset.target).click();
+        }
+    }
+
+    handleKeypressSaveTag = (e) => {
+        const patt = /[\w\s]/;
+
+        if (patt.test(event.key)) {
+            return e.value;
+        }
+        else {
+            return e.value.split(event.key).join('')
+        }
+    }
+
+    handleShowEdit = (e) => {
+        let tag = e.dataset.tag;
+
+        document.getElementById(`divUpdInput${tag}`).style.display = "inline-block";
+        document.getElementById(`divUpdButton${tag}`).style.display = "inline-block";
+        document.getElementById(`divEditInput${tag}`).style.display = "none";
+        document.getElementById(`divEditButton${tag}`).style.display = "none";
+    }
+
+    handleHideEdit = (e) => {
+        let tag = e.dataset.tag;
+        let descripcion = document.getElementById(`spn${tag}`).innerHTML;
+
+        document.getElementById(`input${tag}`).value = descripcion;
+
+        document.getElementById(`divUpdInput${tag}`).style.display = "none";
+        document.getElementById(`divUpdButton${tag}`).style.display = "none";
+        document.getElementById(`divEditInput${tag}`).style.display = "inline-block";
+        document.getElementById(`divEditButton${tag}`).style.display = "inline-block";
+    }
+
+    handleShowMessage = (result, filterType, dataFilter) => {
+        result.forEach(tags => {
+            if (tags.Code === '200') {
+                document.getElementById("div__alert__tag").style.display = "block";
+                document.getElementById("alertSuccessTag").classList.add("show");
+                document.getElementById("alertSuccessTag").innerHTML = tags.Message;
+
+                methodSearchTags(filterType, dataFilter, "1-7");
+                setTimeout(() => {
+                    document.getElementById("div__alert__tag").style.display = "none";
+                    document.getElementById("alertSuccessTag").classList.remove("show");
+                    document.getElementById("alertSuccessTag").innerHTML = "";
+
+                }, 5000)
+
+            }
+            else {
+                document.getElementById("div__alert__tag").style.display = "block";
+                document.getElementById("alertErrorTag").classList.add("show");
+                document.getElementById("alertErrorTag").innerHTML = tags.Message;
+
+                setTimeout(() => {
+                    document.getElementById("div__alert__tag").style.display = "none";
+                    document.getElementById("alertErrorTag").classList.remove("show");
+                    document.getElementById("alertErrorTag").innerHTML = "";
+                }, 5000)
+            }
+        })
+    }
+
+    handleConfirmaEvento = (e) => {
+        let action = e.dataset.action;
+        let tag = e.dataset.tag;
+        let filterType = e.dataset.type;
+        let dataFilter = e.dataset.filter;
+
+        if (action === 'Deshabilitar' || action === 'Habilitar') {
+            let newStatus = e.dataset.newstatus;
+
+            methodDisableTag(tag, newStatus, action, filterType, dataFilter);
+        }
+
+        if (action === 'Eliminar') {
+            methodDeleteTag(tag, filterType, dataFilter);
+        }
+
+        if (action === 'Actualizar') {
+            let descripcion = e.dataset.descripcion;
+            let requerido = e.dataset.requerido;
+            let input = document.getElementById(e.dataset.target);
+
+            if (requerido === "true") {
+                methodUpdateTag(tag, descripcion, action, filterType, dataFilter)
+            }
+            else {
+                document.getElementById("div__alert__tag").style.display = "block";
+                document.getElementById(`alertErrorTag`).classList.add("show");
+                document.getElementById(`alertErrorTag`).innerHTML = "Debe ingresar descripción para actualizar Interes Laboral";
+                input.focus();
+
+                setTimeout(() => {
+                    document.getElementById("div__alert__tag").style.display = "none";
+                    document.getElementById(`alertErrorTag`).classList.remove("show");
+                    document.getElementById(`alertErrorTag`).innerHTML = "";
+                }, 5000)
+            }
+        }
+    }
+
+    handleReturnMenuSeleccion = () => {
+        window.location.href = `${__SERVERHOST}/Seleccion`;
+    }
+
+    handlePagination = (e) => {
+        let filterType = e.dataset.type;
+        let dataFilter = e.dataset.filter;
+        let pagination = e.dataset.pagination;
+
+        methodSearchTags(filterType, dataFilter, pagination);
+    }
+
+
+    methodSearchTags = (filterType, dataFilter, pagination) => {
+        document.getElementById("divTags").innerHTML =
+            `Cargando datos...`
+        __POSTData(`${__SERVERHOST}/Seleccion/ListarTag`, {
+            FilterType: filterType,
+            DataFilter: dataFilter,
+            pagination: pagination
+        })
+            .then(resolve => {
+                let htmlTag = '';
+
+                htmlTag = '<table style="width:100%">';
+                resolve.forEach(tags => {
+                    htmlTag +=
+                        `<tr class="mt-10">
+                                <td style="width:80%;">
+                                    <div id="divEditInput${tags.CodigoTag}">
+                                        <span class="new-family-teamwork fs-18" id="spn${tags.CodigoTag}">${tags.Descripcion}</span>
+                                    </div>
+
+                                    <div id="divUpdInput${tags.CodigoTag}" style="width:90%; display:none;">
+                                        <input type="text" id="input${tags.CodigoTag}" maxlength="500" class="form-control new-family-teamwork fs-18" style="font-weight: 100;"
+                                            data-targetupd="button__act__${tags.CodigoTag}" data-targethide="button__hide__${tags.CodigoTag}"  onkeydown="handleKeydownInputTag(this)"
+                                            value="${tags.Descripcion}" required>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div id="divEditButton${tags.CodigoTag}">
+                                        ${tags.OptEditar === 'S' ?
+                            `<button  class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                                        style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                                        onclick="handleShowEdit(this)"
+                                                        data-tag="${tags.CodigoTag}">
+                                                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                                        class='btn btn-warning pdt-5 pdr-5 pdb-5 pdl-5'>
+                                                        <img src='../Resources/editar.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                                </span>
+                                                </button>` : ''}
+
+                                        ${(tags.OptDesactivar === 'S' || tags.OptActivar === 'S') && tags.OptEliminar === 'N' ?
+                            `<button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                                        style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                                        onclick="handleDisableTag(this)" data-tag="${tags.CodigoTag}" data-type="${filterType}" data-filter="${dataFilter}" data-newstatus="${tags.OptDesactivar === 'S' ? 'DES' : 'VIG'}"
+                                                        data-action="${tags.OptDesactivar === 'S' ? 'Deshabilitar' : 'Habilitar'}" data-toggle="modal" data-target="#modalConfirmaEventoTag">
+                                                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                                        class='btn btn-${tags.OptDesactivar === 'S' ? 'anulado' : 'success'} pdt-5 pdr-5 pdb-5 pdl-5'>
+                                                        <img src='../Resources/${tags.OptDesactivar === 'S' ? 'off' : 'on'}.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                                </span>
+                                                </button>` : ''}
+
+                                        ${tags.OptEliminar === 'S' ?
+                            `<button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                                        style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                                        onclick="handleDeleteTag(this)"
+                                                        data-tag="${tags.CodigoTag}" data-type="${filterType}" data-filter="${dataFilter}" data-toggle="modal" data-target="#modalConfirmaEventoTag">
+                                                <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                                        class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                                                        <img src='../Resources/eliminar.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                                </span>
+                                                </button>` : ''}
+                                    </div>
+
+                                    <div id="divUpdButton${tags.CodigoTag}" style="display:none;">
+                                        <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                                onclick="handleUpdateTag(this)" id="button__act__${tags.CodigoTag}"
+                                                data-tag="${tags.CodigoTag}" data-type="${filterType}" data-filter="${dataFilter}" data-action="Actualizar" data-toggle="modal" data-target="#modalConfirmaEventoTag">
+                                            <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                                    class='btn btn-success pdt-5 pdr-5 pdb-5 pdl-5'>
+                                                    <img src='../Resources/check.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                            </span>
+                                        </button>
+
+                                        <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                                style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+                                                onclick="handleHideEdit(this)" id="button__hide__${tags.CodigoTag}"
+                                                data-tag="${tags.CodigoTag}" data-type="${filterType}" data-filter="${dataFilter}" data-action="Actualizar">
+                                            <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+                                                    class='btn btn-danger pdt-5 pdr-5 pdb-5 pdl-5'>
+                                                    <img src='../Resources/cancel.svg' width='30' height='30' style='position: relative; left: 10%;' />
+                                            </span>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>`
+                });
+                htmlTag += `</table>
+                                <div id="div__Pagination" class="mt-10 new-family-teamwork ta-center"></div >`;
+
+                document.getElementById("divTags").innerHTML = htmlTag;
+
+                methodPagination("Tags", pagination, filterType, dataFilter)
+
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodSaveTag = (descripcion, filterType, dataFilter) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/CrearTag`, {
+            Descripcion: descripcion
+        })
+            .then(resolve => {
+                handleShowMessage(resolve, filterType, dataFilter);
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodDisableTag = (tag, newStatus, action, filterType, dataFilter) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/ActualizarTag`, {
+            tag: tag,
+            status: newStatus,
+            action: action
+        })
+            .then(resolve => {
+                handleShowMessage(resolve, filterType, dataFilter);
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodDeleteTag = (tag, filterType, dataFilter) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/EliminarTag`, {
+            tag: tag
+        })
+            .then(resolve => {
+                handleShowMessage(resolve, filterType, dataFilter);
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodUpdateTag = (tag, descripcion, action, filterType, dataFilter) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/ActualizarTag`, {
+            tag: tag,
+            descripcion: descripcion,
+            action: action
+        })
+            .then(resolve => {
+                handleShowMessage(resolve, filterType, dataFilter);
+            })
+            .catch(reject => {
+
+            })
+    }
+
+    methodPagination = (typePagination, pagination, filterType, dataFilter) => {
+        __POSTData(`${__SERVERHOST}/Seleccion/Pagination`, {
+            FilterType: filterType,
+            DataFilter: dataFilter,
+            pagination: pagination,
+            typePagination: typePagination
+        })
+            .then(resolve => {
+                let htmlPagination = '';
+
+                resolve.forEach(pagination => {
+                    htmlPagination +=
+                        `<button class="btn new-family-teamwork enlacePagina ${pagination.Class}" ${pagination.Properties}
+                                     data-type="${pagination.Filter}" data-filter="${pagination.DataFilter}" data-pagination="${pagination.Rango}"
+                                     onclick="handlePagination(this)">
+                                ${pagination.NumeroPagina}
+                             </button>
+                            `
+                });
+
+                document.getElementById("div__Pagination").innerHTML = htmlPagination;
+
+            })
+            .catch(reject => {
+
+            })
+    }
+
+
+    setTimeout(() => {
+        methodSearchTags("", "", "1-7");
+    }, 1000)
+</script>

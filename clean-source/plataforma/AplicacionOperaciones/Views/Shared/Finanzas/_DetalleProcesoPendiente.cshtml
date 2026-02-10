@@ -1,0 +1,15 @@
+﻿@foreach (AplicacionOperaciones.Models.Finanzas.DatosProceso item in ViewBag.RenderizadoDatosProceso)
+{
+    <div class="row mt-20neg">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <h1 class="family-teamwork" style="font-size: 18px;">Detalles del proceso de @item.Concepto</h1>
+            <h2 class="family-teamwork mt-5neg" style="font-size: 14px;">Codigo Referencial Proceso: @item.CodigoProceso</h2>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 ta-right">
+            <h2 class="family-teamwork" style="font-size: 20px;">Monto Total del Proceso</h2>
+            <h2 class="family-teamwork mt-10neg" style="font-size: 25px;"><b>@item.MontoTotal</b></h2>
+            <h2 class="family-teamwork mt-10neg" style="font-size: 14px; text-transform: capitalize;"><b>@item.Cifra</b></h2>
+            <h2 class="family-teamwork mt-10neg" style="font-size: 16px;">Cantidad de @item.Concepto en Proceso: <b>@item.Cantidad</b></h2>
+        </div>
+    </div>
+}

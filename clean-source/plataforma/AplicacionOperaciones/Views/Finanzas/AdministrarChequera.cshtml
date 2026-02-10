@@ -1,0 +1,181 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Administrar Chequera";
+}
+<div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+    <span id="loader" class="dspl-none">
+        @Html.Partial("_LoaderTransaccion")
+    </span>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="family-teamwork"><i class="glyphicon-tw-5 glyphicon-tw-cheque"></i> Administración de chequera digital</h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6" id="indicesCheques">
+        @Html.Partial("Finanzas/_IndicesCheques")
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="family-teamwork color-428BCA" style="font-size: 25px;">Agregar nuevos cheques a chequera digital</p>
+            </div>
+            @using (Ajax.BeginForm("AgregarChequeraDigital", "Finanzas", new AjaxOptions()
+            {
+                HttpMethod = "",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "indicesCheques",
+                LoadingElementId = "loader"
+            }, new { @style = "display: block; width: 100%;" }))
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <select class="family-teamwork form-control" name="empresaOrigen" required>
+                        <option value="">Seleccione Empresa de Origen</option>
+                        <option value="TWEST">Servicios Transitorios</option>
+                        <option value="TWRRHH">Recursos Humanos</option>
+                    </select>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-30">
+                    <select class="family-teamwork form-control" name="banco" required>
+                        <option value="Banco de Chile">Banco de Chile</option>
+                        <option value="Santander">Banco Santander</option>
+                    </select>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-30">
+                    <input type="text" name="serie" class="form-control family-teamwork dspl-inline-block" placeholder="Serie Cheque (Ej. AA2019)" style="width: 30%;" required />
+                    <input type="number" name="correlativo" class="form-control family-teamwork dspl-inline-block" placeholder="Cantidad de Cheques a registrar" style="width: 69%;" required />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-30 ta-center">
+                    <button type="submit" class="btn btn-success mt-10neg"
+                            style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Incorporar Cheques a</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block;">Chequera Digital de Pagos</i>
+                        </span>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="family-teamwork"><i class="glyphicon-tw-5 glyphicon-tw-transferbank"></i> Administración de Cuentas Bancarias para transferencias</h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-100">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                @using (Ajax.BeginForm("RenderizadoCuentasOrigen", "Finanzas", FormMethod.Post, new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "cuentasOrigen",
+                    LoadingElementId = "loader"
+                }))
+                {
+                    <input type="text" name="pagination" value="MS01" class="dspl-none" />
+                    <label style="font-family: 'Open Sans Condensed', sans-serif; line-height: 5px; display: block;">Aplicar Filtrado de Cuentas Origen</label>
+                    <select class="form-control family-teamwork" style="width: 200px; display: inline-block;" id="typeFilter" name="typeFilter" required>
+                        <option value="">Seleccione Filtro</option>
+                        <option value="NumeroCuenta">Numero de Cuenta</option>
+                        <option value="RutCuenta">Rut Cuenta</option>
+                        <option value="Banco">Banco</option>
+                    </select>
+                    <input type="text" class="form-control family-teamwork dspl-none" style="width: 300px;" id="dataFilter" />
+                    <select class="form-control family-teamwork dspl-none" style="width: 200px;" id="bancoFilter">
+                        <option value="">Seleccione Banco</option>
+                        <option value="SANTANDER">Banco Santander</option>
+                        <option value="BANCO DE CHILE">Banco de Chile</option>
+                    </select>
+                    <button type="submit" class="btn btn-teamwork dspl-none" id="btnBuscarCuentas"
+                            style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-buscar" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Buscar</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Cuentas</i>
+                        </span>
+                    </button>
+                    <a href="#" class="btn btn-warning eventRestore dspl-inline-block" style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Restablecer</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                font-size: 14px; font-style: normal; display: block;">Cuentas</i>
+                        </span>
+                    </a>
+                }
+                @using (Ajax.BeginForm("ModalCuentasBancarias", "Finanzas", FormMethod.Post, new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "cuentasBancariasModal",
+                    LoadingElementId = "loader",
+                    OnSuccess = "showModalCuentaBancaria"
+                }))
+                {
+                    <button type="submit" class="btn btn-success"
+                            style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-agregar" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Agregar Cuenta</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Bancaria</i>
+                        </span>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="row mt-20">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="cuentasOrigen">
+                @Html.Partial("Finanzas/_CuentasOrigen")
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("Finanzas/_ModalCuentasBancarias")
+
+<script>
+
+    function showModalCuentaBancaria() {
+        $("#modalCuentasBancarias").modal("show");
+    }
+
+    function hideModalCuentaBancaria() {
+        $("#modalCuentasBancarias").modal("hide");
+    }
+
+    $(document).on("change", ".estado", function () {
+        $("#" + $(this).attr("data-banco") + "_" + $(this).attr("data-numerocta")).trigger("click");
+    });
+
+
+    $("#typeFilter").on("change", function () {
+        switch ($(this).val()) {
+            case "Banco":
+                $("#bancoFilter").show().attr("required", "required").attr("name", "dataFilter");
+                $("#dataFilter").hide().removeAttr("required").removeAttr("name");
+                $("#btnBuscarCuentas").show();
+                break;
+            case "":
+                $("#bancoFilter").hide().removeAttr("required").removeAttr("name");
+                $("#dataFilter").hide().removeAttr("required").removeAttr("name");
+                $("#btnBuscarCuentas").hide();
+                break;
+            default:
+                $("#bancoFilter").hide().removeAttr("required").removeAttr("name");
+                $("#dataFilter").show().attr("required", "required").attr("name", "dataFilter");
+                $("#btnBuscarCuentas").show();
+                break;
+        }
+    });
+
+    $(".eventRestore").on("click", function (e) {
+        e.preventDefault();
+        window.location.reload();
+    });
+
+</script>

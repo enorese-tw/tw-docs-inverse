@@ -1,0 +1,1593 @@
+﻿
+
+
+<div class="row ml-auto mr-auto" style="width: 99%;">
+    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+        <h3 class="new-family-teamwork" style="font-weight: 100;">Asignacion de Provisiones para @ViewBag.Cliente</h3>
+
+        @foreach (Teamwork.Model.Finanzas.ProvisionMargen itemProv in ViewBag.RenderizadoProvisionesAsignadas)
+        {
+            <div class="bl-1-solid-200x3 br-1-solid-200x3 bt-1-solid-200x3 bb-1-solid-200x3 mb-20 pdl-5 pdt-10 pdb-10 pdr-5" style="border-radius: 10px; box-shadow: 0px 0px 5px rgba(0, 0, 0, .2);">
+                <div class="row mt-10">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                        <p class="mt-5neg color-100x3">
+                            . <br />
+                            . <br />
+                            . <br />
+                            . . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                        </p>
+                    </div>
+                    <div class="col-11 col-sm-11 col-md-11 col-lg-10">
+                        <div class="new-family-teamwork">
+                            <span style="display: inline-block; width: 25%; font-weight: 100;">@itemProv.Descripcion</span>
+                            @if (itemProv.OptCrear == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenCrearAsig", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="type" value="P" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    @*<input type="text" name="monto" value="@itemProv.Monto" class="form-control dspl-inline-block mt-10 mb-10 family-teamwork" style="width: 100px" placeholder="Porcentaje de Provisión" />*@
+                                    <div class="dspl-inline-block mt-10neg" style="width: 250px;">
+                                        @Html.InputAdministrador(
+                                            "text",
+                                            new string[] {
+                                                "class='family-teamwork bb-1-solid-200x3 dspl-block mt-20'",
+                                                "id='input__add__" + itemProv.CodigoVariable + "'",
+                                                "data-ownerlegends='legends__add__" + itemProv.CodigoVariable + "'",
+                                                "data-fontsizebefore='14px'",
+                                                "data-fontsizeafter='12px'",
+                                                "data-paddingbefore='30px, none, 11px, 0px'",
+                                                "data-paddingafter='10px, none, none, 0px'",
+                                                "onBlur='handleBlurInputFZ(this)'",
+                                                "name='monto'",
+                                                "required",
+                                                "autocomplete='off'"
+                                            },
+                                            new string[] {
+                                                "padding: 10px 0px",
+                                                "outline: none",
+                                                "width: 100%",
+                                                "border-left: none",
+                                                "border-right: none",
+                                                "border-top: none"
+                                            },
+                                            "on",
+                                            new string[]
+                                            {
+                                                "<label class='new-family-teamwork dspl-block pdt-30 pdl-0 pdb-11 cursor-pointer' onclick='handleFocusInputFZ(this)' style='position: absolute; width: 100%; font-size: 14px; font-weight: 100;' " +
+                                                "data-fontsizeafter='12px' data-fontsizebefore='14px' data-paddingafter='10px, none, none, 0px' data-paddingbefore='30px, none, 11px, 0px' data-paddingbefore='30px, none, 11px, 0px' data-paddingafter='10px, none, none, 0px'" +
+                                                "data-ownerfocus='input__add__" + itemProv.CodigoVariable + "' id='legends__add__" + itemProv.CodigoVariable + "'>" +
+                                                ((itemProv.TypeInput == "P" || itemProv.TypeInput == null) ? "Agregar Porcentaje Provisión (Ej. 1.2)" : "Agregar Monto Provisión (Ej. 181019)") +
+                                                "</label>"
+                                            }
+                                         )
+                                    </div>
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-teamwork'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/mas.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                        },
+                                        true
+                                    )
+                                }
+                            }
+
+                            @if (itemProv.OptEditar == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenActualizarAsig", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="typeInput" value="@itemProv.TypeInput" class="dspl-none" />
+                                    <input type="text" name="type" value="P" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    <div class="dspl-inline-block mt-10neg" style="width: 250px;">
+                                        @Html.InputAdministrador(
+                                            "text",
+                                            new string[] {
+                                                "class='new-family-teamwork bb-1-solid-200x3 dspl-block mt-20'",
+                                                "id='input__add__" + itemProv.CodigoVariable + "'",
+                                                "data-ownerlegends='legends__add__" + itemProv.CodigoVariable + "'",
+                                                "data-fontsizebefore='14px'",
+                                                "data-fontsizeafter='12px'",
+                                                "data-paddingbefore='30px, none, 11px, 0px'",
+                                                "data-paddingafter='10px, none, none, 0px'",
+                                                "onBlur='handleBlurInputFZ(this)'",
+                                                "name='monto'",
+                                                "required",
+                                                "autocomplete='off'",
+                                                "value='" + itemProv.Monto + "'"
+                                            },
+                                            new string[] {
+                                                "padding: 10px 0px",
+                                                "outline: none",
+                                                "width: 100%",
+                                                "border-left: none",
+                                                "border-right: none",
+                                                "border-top: none",
+                                                "font-weight: 100"
+                                            },
+                                            "on",
+                                            new string[]
+                                            {
+                                                "<label class='new-family-teamwork dspl-block " +
+                                                        ((itemProv.Monto == "") ? " pdt-30 pdl-0 " : "pdl-0 pdt-10") +
+                                                " pdb-11 cursor-pointer' onclick='handleFocusInputFZ(this)' style='position: absolute; width: 100%;" +
+                                                        ((itemProv.Monto == "") ? " font-size: 14px; font-weight: 100;" : " font-size: 12px; ") + "' data-fontsizeafter='12px' data-paddingbefore='30px, none, 11px, 0px' data-paddingafter='10px, none, none, 0px' " +
+                                                        "data-fontsizebefore='14px' data-ownerfocus='input__add__" + itemProv.CodigoVariable + "' id='legends__add__" + itemProv.CodigoVariable + "'>" +
+                                                        ((itemProv.TypeInput == "P" || itemProv.TypeInput == null) ? "Actualizar Porcentaje Provisión (Ej. 1.2)" : "Actualizar Monto Provisión (Ej. 181019)") +
+                                                        "</label>"
+                                            }
+                                         )
+                                    </div>
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-warning'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/editar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                        },
+                                        true
+                                    )
+
+                                }
+                            }
+
+                            @if (itemProv.OptEliminar == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenEliminarAsig", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="type" value="P" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-danger'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                        },
+                                        true
+                                    )
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-10
+                     @if(itemProv.OptEditar == "N")
+                     {
+                         @: dspl-none
+                     }
+                     " style="width: 97%; margin-left: 3%;">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                        <p class="mt-20neg color-100x3">
+                            . <br />
+                            . <br />
+                            . <br />
+                            . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                        </p>
+                    </div>
+                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 mb-20">
+                        @using (Ajax.BeginForm("ProvMargenActualizarTypeCalculo", "Finanzas", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loader"
+                        }))
+                        {
+                            <label class="switch-md" style="display: inline-block;">
+                                <input type="radio" name="typeInput" value="P" data-origin="actions__typecalculo__P__@itemProv.CodigoVariable"
+                                       @if (itemProv.TypeInput == "P") { @: checked="checked"
+                                       } onchange="handleChangeTypeCalculo(this)" />
+                                <span class="slider teamwork"></span>
+                            </label>
+                            <i class="fst-normal new-family-teamwork dspl-inline-block mr-10 mt-5neg" style="font-weight: 100;">Porcentaje (%)</i>
+                            <label class="switch-md" style="display: inline-block;">
+                                <input type="radio" name="typeInput" value="M" data-origin="actions__typecalculo__P__@itemProv.CodigoVariable"
+                                       @if (itemProv.TypeInput == "M") { @: checked="checked"
+                                       }
+                                       onchange="handleChangeTypeCalculo(this)" />
+                                <span class="slider teamwork"></span>
+                            </label>
+                            <i class="fst-normal new-family-teamwork dspl-inline-block mr-10 mt-5neg" style="font-weight: 100;">Monto ($ CLP)</i>
+                            <input type="text" name="type" value="P" class="dspl-none" />
+                            <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                            <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                            <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                            <input type="submit" id="actions__typecalculo__P__@itemProv.CodigoVariable" class="dspl-none" />
+                        }
+                    </div>
+                </div>
+                <div class="row mt-30 mb-20
+                     @if(itemProv.OptEditar == "N")
+                     {
+                         @: dspl-none
+                     }
+                     else
+                     {
+                        if (itemProv.TypeInput == "M")
+                        {
+                            @: dspl-none
+                        }
+                     }
+                     " style="width: 97%; margin-left: 3%;">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                        <p class="mt-20neg color-100x3">
+                            . <br />
+                            . <br />
+                            . <br />
+                            . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                        </p>
+                    </div>
+                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 mb-20
+                         @if(itemProv.OptEditar == "N")
+                         {
+                             @: dspl-none
+                         }
+                         else
+                         {
+                             if (itemProv.TypeInput == "M")
+                             {
+                                @: dspl-none
+                             }
+                         }
+                         ">
+                        @{
+                            ViewBag.ItemSelectConstCalculo = "";
+                            ViewBag.CheckedSelectConstCalculo = "Seleccione Constante de Cálculo";
+                        }
+                        @foreach (Teamwork.Model.Finanzas.ConstCalculoProvMargen itemConst in ViewBag.RenderizadoConstCalculoProvMargen)
+                        {
+                            if (itemConst.Codigo == itemProv.Constante.Codigo)
+                            {
+                                ViewBag.CheckedSelectConstCalculo = itemConst.Descripcion;
+                            }
+
+                            ViewBag.ItemSelectConstCalculo +=
+                                "<span class='owner__select pdt-5 pdb-5' style='display: block;' data-destino-constante='constante__referencial__" + itemProv.CodigoVariable + "' data-content-parent='parent__content__" + itemProv.CodigoVariable + "' " +
+                                "onclick='handleClicOptionSelectFZ(this)' data-option-constante='" + itemConst.Codigo + "'>" + itemConst.Descripcion + "</span>";
+                        }
+
+                        @Html.SelectAdministracion(
+                            new string[] {
+                                "class='pdt-5 pdl-30 pdr-30 pdb-5 new-family-teamwork cursor-pointer ta-center bb-1-solid-200x3 parent__content__select__show'",
+                                "onclick='handleClickSelectFZ(this)'",
+                                "data-option-selected='" + ViewBag.CheckedSelectConstCalculo + "'",
+                                "data-content-select='content__select__" + itemProv.CodigoVariable + "'",
+                                "id='parent__content__" + itemProv.CodigoVariable + "'"
+                            },
+                            new string[]
+                            {
+                                "width: 76%",
+                                "display: inline-block",
+                                "margin-right: 8px",
+                                "font-weight: 100"
+                            },
+                            new string[]
+                            {
+                                "<label style='position: relative;' class='mt-25neg dspl-block'>Constante de Cálculo</label>",
+                                ViewBag.CheckedSelectConstCalculo + " &#x25BE;",
+                                "<div class='select__content__hidden' id='content__select__" + itemProv.CodigoVariable + "' data-parent-content='parent__content__" + itemProv.CodigoVariable + "' style='display: none; position: absolute; width: 71%; height: 200px; background-color: #fff; border: 1px solid rgb(200, 200, 200); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); z-index: 99; left: 15px; margin-top: 15px;'>" + ViewBag.ItemSelectConstCalculo + "</div>"
+                            }
+                        )
+
+                        @if (itemProv.OptCrearAsignConstante == "S")
+                        {
+                            using (Ajax.BeginForm("ProvMargenCrearAsignConstCalculo", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" name="typeInput" value="@itemProv.TypeInput" class="dspl-none" />
+                                <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                <input type="text" required class="dspl-none" value="" name="constante" id="constante__referencial__@itemProv.CodigoVariable" />
+                                @Html.ButtonAdministracion(
+                                    "submit",
+                                    new string[] {
+                                        "class='dspl-inline-block btn btn-teamwork'"
+                                    },
+                                    new string[]
+                                    {
+                                        "width: 40px",
+                                        "height: 40px",
+                                        "border: none",
+                                        "border-radius: 50%",
+                                        "text-align: center"
+                                    },
+                                    new string[]
+                                    {
+                                        "<img src='../../Resources/mas.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                    },
+                                    true
+                                )
+                            }
+                        }
+
+                        @if (itemProv.OptActualizarAsignConstante == "S")
+                        {
+                            using (Ajax.BeginForm("ProvMargenActualizarAsignConstCalculo", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" name="typeInput" value="@itemProv.TypeInput" class="dspl-none" />
+                                <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                <input type="text" required class="dspl-none" value="" name="constante" id="constante__referencial__@itemProv.CodigoVariable" />
+                                @Html.ButtonAdministracion(
+                                    "submit",
+                                    new string[] {
+                                        "class='dspl-inline-block btn btn-warning'"
+                                    },
+                                    new string[]
+                                    {
+                                        "width: 40px",
+                                        "height: 40px",
+                                        "border: none",
+                                        "border-radius: 50%",
+                                        "text-align: center"
+                                    },
+                                    new string[]
+                                    {
+                                        "<img src='../../Resources/editar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                    },
+                                    true
+                                )
+                            }
+                        }
+
+                        @if (itemProv.OptEliminarAsignConstante == "S")
+                        {
+                            using (Ajax.BeginForm("ProvMargenEliminarAsignConstCalculo", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                @Html.ButtonAdministracion(
+                                    "submit",
+                                    new string[] {
+                                        "class='dspl-inline-block btn btn-danger'"
+                                    },
+                                    new string[]
+                                    {
+                                        "width: 40px",
+                                        "height: 40px",
+                                        "border: none",
+                                        "border-radius: 50%",
+                                        "text-align: center"
+                                    },
+                                    new string[]
+                                    {
+                                        "<img src='../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                    },
+                                    true
+                                )
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row mt-10 mb-20
+                    @if (itemProv.Message == "")
+                    {
+                        @: dspl-none
+                    }
+                    " style="width: 97%; margin-left: 3%;">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                        <p class="mt-5neg color-100x3">
+                            . <br />
+                            . <br />
+                            . <br />
+                            . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                        </p>
+                    </div>
+                    <div class="col-10 col-sm-10 col-md-10 col-lg-10">
+                        @if (itemProv.Message != "")
+                        {
+                            @: <i class="alert alert-warning dspl-block new-family-teamwork" style="font-weight: 100;">@itemProv.Message</i>
+                        }
+                    </div>
+                </div>
+                <div class="row mt-30 mb-20
+                     @if(itemProv.OptEditar == "N")
+                     {
+                         @: dspl-none
+                     }
+                     else
+                     {
+                        if (itemProv.TypeInput == "M")
+                        {
+                            @: dspl-none
+                        }
+                     }
+                     " style="width: 97%; margin-left: 3%;">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                        <p class="mt-20neg color-100x3">
+                            . <br />
+                            . <br />
+                            . <br />
+                            . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                        </p>
+                    </div>
+                    <div class="col-10 col-sm-10 col-md-10 col-lg-10 mb-20
+                         @if(itemProv.OptEditar == "N")
+                         {
+                             @: dspl-none
+                         }
+                         else
+                         {
+                             if (itemProv.TypeInput == "M")
+                             {
+                                @: dspl-none
+                             }
+                         }
+                         ">
+                        @{
+                            ViewBag.ItemSelectConstCalculo = "";
+                            ViewBag.CheckedSelectConstCalculo = "Seleccione Constante de Tope";
+                        }
+                        @foreach (Teamwork.Model.Finanzas.ConstCalculoProvMargen itemConst in ViewBag.RenderizadoConstTopeProvMargen)
+                        {
+                            if (itemConst.Codigo == itemProv.ConstanteTope.Codigo)
+                            {
+                                ViewBag.CheckedSelectConstCalculo = itemConst.Descripcion;
+                            }
+
+                            ViewBag.ItemSelectConstCalculo +=
+                                "<span class='owner__select pdt-5 pdb-5' style='display: block;' data-destino-constante='constante__referencialtope__" + itemProv.CodigoVariable + "' data-content-parent='parent__contenttope__" + itemProv.CodigoVariable + "' " +
+                                "onclick='handleClicOptionSelectFZ(this)' data-option-constante='" + itemConst.Codigo + "'>" + itemConst.Descripcion + "</span>";
+                        }
+
+                        @Html.SelectAdministracion(
+                            new string[] {
+                                "class='pdt-5 pdl-30 pdr-30 pdb-5 new-family-teamwork cursor-pointer ta-center bb-1-solid-200x3 parent__content__select__show'",
+                                "onclick='handleClickSelectFZ(this)'",
+                                "data-option-selected='" + ViewBag.CheckedSelectConstCalculo + "'",
+                                "data-content-select='content__selecttope__" + itemProv.CodigoVariable + "'",
+                                "id='parent__contenttope__" + itemProv.CodigoVariable + "'"
+                            },
+                            new string[]
+                            {
+                                "width: 76%",
+                                "display: inline-block",
+                                "margin-right: 8px",
+                                "font-weight: 100"
+                            },
+                            new string[]
+                            {
+                                "<label style='position: relative;' class='mt-25neg dspl-block'>Constante de Tope</label>",
+                                ViewBag.CheckedSelectConstCalculo + " &#x25BE;",
+                                "<div class='select__content__hidden' id='content__selecttope__" + itemProv.CodigoVariable + "' data-parent-content='parent__contenttope__" + itemProv.CodigoVariable + "' style='display: none; position: absolute; width: 71%; height: 200px; background-color: #fff; border: 1px solid rgb(200, 200, 200); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); z-index: 99; left: 15px; margin-top: 15px;'>" + ViewBag.ItemSelectConstCalculo + "</div>"
+                            }
+                        )
+
+                        @if (itemProv.OptCrearAsignConstanteTope == "S")
+                        {
+                            using (Ajax.BeginForm("ProvMargenCrearAsignConstTope", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" name="typeInput" value="@itemProv.TypeInput" class="dspl-none" />
+                                <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                <input type="text" required class="dspl-none" value="" name="constante" id="constante__referencialtope__@itemProv.CodigoVariable" />
+                                @Html.ButtonAdministracion(
+                                    "submit",
+                                    new string[] {
+                                        "class='dspl-inline-block btn btn-teamwork'"
+                                    },
+                                    new string[]
+                                    {
+                                        "width: 40px",
+                                        "height: 40px",
+                                        "border: none",
+                                        "border-radius: 50%",
+                                        "text-align: center"
+                                    },
+                                    new string[]
+                                    {
+                                        "<img src='../../Resources/mas.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                    },
+                                    true
+                                )
+                            }
+                        }
+
+                        @if (itemProv.OptActualizarAsignConstanteTope == "S")
+                        {
+                            using (Ajax.BeginForm("ProvMargenActualizarAsignConstTope", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" name="typeInput" value="@itemProv.TypeInput" class="dspl-none" />
+                                <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                <input type="text" required class="dspl-none" value="" name="constante" id="constante__referencialtope__@itemProv.CodigoVariable" />
+                                @Html.ButtonAdministracion(
+                                    "submit",
+                                    new string[] {
+                                        "class='dspl-inline-block btn btn-warning'"
+                                    },
+                                    new string[]
+                                    {
+                                        "width: 40px",
+                                        "height: 40px",
+                                        "border: none",
+                                        "border-radius: 50%",
+                                        "text-align: center"
+                                    },
+                                    new string[]
+                                    {
+                                        "<img src='../../Resources/editar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                    },
+                                    true
+                                )
+                            }
+                        }
+
+                        @if (itemProv.OptEliminarAsignConstanteTope == "S")
+                        {
+                            using (Ajax.BeginForm("ProvMargenEliminarAsignConstTope", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                @Html.ButtonAdministracion(
+                                    "submit",
+                                    new string[] {
+                                        "class='dspl-inline-block btn btn-danger'"
+                                    },
+                                    new string[]
+                                    {
+                                        "width: 40px",
+                                        "height: 40px",
+                                        "border: none",
+                                        "border-radius: 50%",
+                                        "text-align: center"
+                                    },
+                                    new string[]
+                                    {
+                                        "<img src='../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                    },
+                                    true
+                                )
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row mt-10 mb-20
+                    @if (itemProv.Message == "")
+                    {
+                        @: dspl-none
+                    }
+                    " style="width: 97%; margin-left: 3%;">
+                    <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                        <p class="mt-5neg color-100x3">
+                            . <br />
+                            . <br />
+                            . <br />
+                            . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                        </p>
+                    </div>
+                    <div class="col-10 col-sm-10 col-md-10 col-lg-10">
+                        @if (itemProv.Message != "")
+                        {
+                            @: <i class="alert alert-warning dspl-block new-family-teamwork" style="font-weight: 100;">@itemProv.Message</i>
+                        }
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+        }
+    </div>
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h3 class="new-family-teamwork" style="font-weight: 100;">Margen para @ViewBag.Cliente</h3>
+                @foreach (Teamwork.Model.Finanzas.ProvisionMargen itemMargen in ViewBag.RenderizadoMargenAsignadas)
+                {
+                    <div class="row mb-10">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                            <p class="mt-5neg color-100x3">
+                                . <br />
+                                . <br />
+                                . <br />
+                                . . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                            </p>
+                        </div>
+                        <div class="col-11 col-sm-11 col-md-11 col-lg-10">
+                            <div class="family-teamwork">
+                                <span style="display: inline-block; width: 20%">@itemMargen.Descripcion</span>
+                                @if (itemMargen.OptCrear == "S")
+                                {
+                                    using (Ajax.BeginForm("ProvMargenCrearAsig", "Finanzas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" name="type" value="M" class="dspl-none" />
+                                        <input type="text" name="codigoConcepto" value="@itemMargen.CodigoVariable" class="dspl-none" />
+                                        <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                        <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                        <div class="dspl-inline-block mt-10neg" style="width: 250px;">
+                                            @Html.InputAdministrador(
+                                                 "text",
+                                                 new string[] {
+                                                    "class='new-family-teamwork bb-1-solid-200x3 dspl-block mt-20'",
+                                                    "id='input__add__" + itemMargen.CodigoVariable + "'",
+                                                    "data-ownerlegends='legends__add__" + itemMargen.CodigoVariable + "'",
+                                                    "data-fontsizebefore='14px'",
+                                                    "data-fontsizeafter='12px'",
+                                                    "data-paddingbefore='30px, none, 11px, 0px'",
+                                                    "data-paddingafter='10px, none, none, 0px'",
+                                                    "onBlur='handleBlurInputFZ(this)'",
+                                                    "name='monto'",
+                                                    "required",
+                                                    "autocomplete='off'"
+                                                 },
+                                                new string[] {
+                                                    "padding: 10px 0px",
+                                                    "outline: none",
+                                                    "width: 100%",
+                                                    "border-left: none",
+                                                    "border-right: none",
+                                                    "border-top: none",
+                                                    "font-weight: 100"
+                                                },
+                                                "on",
+                                                new string[]
+                                                {
+                                                    "<label class='new-family-teamwork dspl-block pdt-30 pdl-0 pdb-11 cursor-pointer' onclick='handleFocusInputFZ(this)' " +
+                                                    "style='position: absolute; width: 100%; font-size: 14px; font-weight: 100;' data-fontsizeafter='12px' data-fontsizebefore='14px' data-paddingbefore='30px, none, 11px, 0px' data-paddingafter='10px, none, none, 0px'" +
+                                                    "data-ownerfocus='input__add__" + itemMargen.CodigoVariable + "' id='legends__add__" + itemMargen.CodigoVariable + "'>" +
+                                                    ((itemMargen.TypeInput == "P" || itemMargen.TypeInput == null) ? "Agregar Porcentaje Margen (Ej. 1.2)" : "Agregar Monto Margen (Ej. 181019)") +
+                                                    "</label>"
+                                                }
+                                            )
+                                        </div>
+                                        @Html.ButtonAdministracion(
+                                            "submit",
+                                            new string[] {
+                                                "class='dspl-inline-block btn btn-teamwork'"
+                                            },
+                                            new string[]
+                                            {
+                                                "width: 40px",
+                                                "height: 40px",
+                                                "border: none",
+                                                "border-radius: 50%",
+                                                "text-align: center"
+                                            },
+                                            new string[]
+                                            {
+                                                "<img src='../../Resources/mas.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                            },
+                                            true
+                                        )
+                                    }
+                                }
+
+                                @if (itemMargen.OptEditar == "S")
+                                {
+                                    using (Ajax.BeginForm("ProvMargenActualizarAsig", "Finanzas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" name="type" value="M" class="dspl-none" />
+                                        <input type="text" name="codigoConcepto" value="@itemMargen.CodigoVariable" class="dspl-none" />
+                                        <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                        <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                        <div class="dspl-inline-block mt-10neg" style="width: 250px;">
+                                            @Html.InputAdministrador(
+                                                "text",
+                                                new string[] {
+                                                    "class='family-teamwork bb-1-solid-200x3 dspl-block mt-20'",
+                                                    "id='input__add__" + itemMargen.CodigoVariable + "'",
+                                                    "data-ownerlegends='legends__add__" + itemMargen.CodigoVariable + "'",
+                                                    "data-fontsizebefore='14px'",
+                                                    "data-fontsizeafter='12px'",
+                                                    "data-paddingbefore='30px, none, 11px, 0px'",
+                                                    "data-paddingafter='10px, none, none, 0px'",
+                                                    "onBlur='handleBlurInputFZ(this)'",
+                                                    "name='monto'",
+                                                    "required",
+                                                    "autocomplete='off'",
+                                                    "value='" + itemMargen.Monto + "'"
+                                                },
+                                                new string[] {
+                                                    "padding: 10px 0px",
+                                                    "outline: none",
+                                                    "width: 100%",
+                                                    "border-left: none",
+                                                    "border-right: none",
+                                                    "border-top: none"
+                                                },
+                                                "on",
+                                                new string[]
+                                                {
+                                                    "<label class='new-family-teamwork dspl-block " +
+                                                            ((itemMargen.Monto == "") ? " pdt-30 pdl-0 " : "pdl-0 pdt-10") +
+                                                    " pdb-11 cursor-pointer' onclick='handleFocusInputFZ(this)' style='position: absolute; width: 100%; font-wight: 100;" +
+                                                            ((itemMargen.Monto == "") ? " font-size: 14px; " : " font-size: 12px; ") + "' data-fontsizeafter='12px' data-fontsizebefore='14px' data-paddingbefore='30px, none, 11px, 0px' data-paddingafter='10px, none, none, 0px'" +
+                                                            "data-ownerfocus='input__add__" + itemMargen.CodigoVariable + "' id='legends__add__" + itemMargen.CodigoVariable + "'>" +
+                                                            ((itemMargen.TypeInput == "P" || itemMargen.TypeInput == null) ? "Actualizar Porcentaje Margen (Ej. 1.2)" : "Actualizar Monto Margen (Ej. 181019)") +
+                                                            "</label>"
+                                                }
+                                             )
+                                        </div>
+                                        @Html.ButtonAdministracion(
+                                            "submit",
+                                            new string[] {
+                                                "class='dspl-inline-block btn btn-warning'"
+                                            },
+                                            new string[]
+                                            {
+                                                "width: 40px",
+                                                "height: 40px",
+                                                "border: none",
+                                                "border-radius: 50%",
+                                                "text-align: center"
+                                            },
+                                            new string[]
+                                            {
+                                                "<img src='../../Resources/editar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                            },
+                                            true
+                                        )
+                                    }
+                                }
+
+                                @if (itemMargen.OptEliminar == "S")
+                                {
+                                    using (Ajax.BeginForm("ProvMargenEliminarAsig", "Finanzas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" name="type" value="M" class="dspl-none" />
+                                        <input type="text" name="codigoConcepto" value="@itemMargen.CodigoVariable" class="dspl-none" />
+                                        <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                        <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                        @Html.ButtonAdministracion(
+                                            "submit",
+                                            new string[] {
+                                                "class='dspl-inline-block btn btn-danger'"
+                                            },
+                                            new string[]
+                                            {
+                                                "width: 40px",
+                                                "height: 40px",
+                                                "border: none",
+                                                "border-radius: 50%",
+                                                "text-align: center"
+                                            },
+                                            new string[]
+                                            {
+                                                "<img src='../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                            },
+                                            true
+                                        )
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-10
+                     @if(itemMargen.OptEditar == "N")
+                     {
+                         @: dspl-none
+                     }
+                     " style="width: 97%; margin-left: 3%;">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                            <p class="mt-20neg color-100x3">
+                                . <br />
+                                . <br />
+                                . <br />
+                                . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                            </p>
+                        </div>
+                        <div class="col-10 col-sm-10 col-md-10 col-lg-10 mb-20">
+                            @using (Ajax.BeginForm("ProvMargenActualizarTypeCalculo", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <label class="switch-md" style="display: inline-block;">
+                                    <input type="radio" name="typeInput" value="P" data-origin="actions__typecalculo__MM__@itemMargen.CodigoVariable"
+                                           @if (itemMargen.TypeInput == "P") { @: checked="checked"
+                                           } onchange="handleChangeTypeCalculo(this)" />
+                                    <span class="slider teamwork"></span>
+                                </label>
+                                <i class="fst-normal new-family-teamwork dspl-inline-block mr-10 mt-5neg" style="font-weight: 100;">Porcentaje (%)</i>
+                                <label class="switch-md" style="display: inline-block;">
+                                    <input type="radio" name="typeInput" value="M" data-origin="actions__typecalculo__MM__@itemMargen.CodigoVariable"
+                                           @if (itemMargen.TypeInput == "M") { @: checked="checked"
+                                           }
+                                           onchange="handleChangeTypeCalculo(this)" />
+                                    <span class="slider teamwork"></span>
+                                </label>
+                                <i class="fst-normal new-family-teamwork dspl-inline-block mr-10 mt-5neg" style="font-weight: 100;">Monto ($ CLP)</i>
+                                <input type="text" name="type" value="M" class="dspl-none" />
+                                <input type="text" name="codigoConcepto" value="@itemMargen.CodigoVariable" class="dspl-none" />
+                                <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                <input type="submit" id="actions__typecalculo__MM__@itemMargen.CodigoVariable" class="dspl-none" />
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-30 mb-20
+                     @if(itemMargen.OptEditar == "N")
+                     {
+                         @: dspl-none
+                     }
+                     else
+                     {
+                        if (itemMargen.TypeInput == "M")
+                        {
+                            @: dspl-none
+                        }
+                     }
+                     " style="width: 97%; margin-left: 3%;">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                            <p class="mt-20neg color-100x3">
+                                . <br />
+                                . <br />
+                                . <br />
+                                . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                            </p>
+                        </div>
+                        <div class="col-10 col-sm-10 col-md-10 col-lg-10 mb-20
+                         @if(itemMargen.OptEditar == "N")
+                         {
+                             @: dspl-none
+                         }
+                         else
+                         {
+                             if (itemMargen.TypeInput == "M")
+                             {
+                                @: dspl-none
+                             }
+                         }
+                         ">
+                            @{
+                                ViewBag.ItemSelectConstCalculo = "";
+                                ViewBag.CheckedSelectConstCalculo = "Seleccione Constante de Cálculo";
+                            }
+                            @foreach (Teamwork.Model.Finanzas.ConstCalculoProvMargen itemConst in ViewBag.RenderizadoConstCalculoProvMargen)
+                            {
+                                if (itemConst.Codigo == itemMargen.Constante.Codigo)
+                                {
+                                    ViewBag.CheckedSelectConstCalculo = itemConst.Descripcion;
+                                }
+
+                                ViewBag.ItemSelectConstCalculo +=
+                                    "<span class='owner__select pdt-5 pdb-5' style='display: block;' data-destino-constante='constante__referencial__" + itemMargen.CodigoVariable + "' data-content-parent='parent__content__" + itemMargen.CodigoVariable + "' " +
+                                    "onclick='handleClicOptionSelectFZ(this)' data-option-constante='" + itemConst.Codigo + "'>" + itemConst.Descripcion + "</span>";
+                            }
+
+                            @Html.SelectAdministracion(
+                                new string[] {
+                                    "class='pdt-5 pdl-30 pdr-30 pdb-5 new-family-teamwork cursor-pointer ta-center bb-1-solid-200x3 parent__content__select__show'",
+                                    "onclick='handleClickSelectFZ(this)'",
+                                    "data-option-selected='" + ViewBag.CheckedSelectConstCalculo + "'",
+                                    "data-content-select='content__select__" + itemMargen.CodigoVariable + "'",
+                                    "id='parent__content__" + itemMargen.CodigoVariable + "'"
+                                },
+                                new string[]
+                                {
+                                    "width: 76%",
+                                    "display: inline-block",
+                                    "margin-right: 8px",
+                                    "font-weight: 100"
+                                },
+                                new string[]
+                                {
+                                    "<label style='position: relative;' class='mt-25neg dspl-block'>Constante de Cálculo</label>",
+                                    ViewBag.CheckedSelectConstCalculo + " &#x25BE;",
+                                    "<div class='select__content__hidden' id='content__select__" + itemMargen.CodigoVariable + "' data-parent-content='parent__content__" + itemMargen.CodigoVariable + "' style='display: none; position: absolute; width: 71%; height: 200px; background-color: #fff; border: 1px solid rgb(200, 200, 200); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); z-index: 99; left: 15px; margin-top: 15px;'>" + ViewBag.ItemSelectConstCalculo + "</div>"
+                                }
+                            )
+
+                            @if (itemMargen.OptCrearAsignConstante == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenCrearAsignConstCalculo", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="typeInput" value="@itemMargen.TypeInput" class="dspl-none" />
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemMargen.CodigoVariable" class="dspl-none" />
+                                    <input type="text" required class="dspl-none" value="" name="constante" id="constante__referencial__@itemMargen.CodigoVariable" />
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-teamwork'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/mas.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                        },
+                                        true
+                                    )
+                                }
+                            }
+
+                            @if (itemMargen.OptActualizarAsignConstante == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenActualizarAsignConstCalculo", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="typeInput" value="@itemMargen.TypeInput" class="dspl-none" />
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemMargen.CodigoVariable" class="dspl-none" />
+                                    <input type="text" required class="dspl-none" value="" name="constante" id="constante__referencial__@itemMargen.CodigoVariable" />
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-warning'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/editar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                        },
+                                        true
+                                    )
+                                }
+                            }
+
+                            @if (itemMargen.OptEliminarAsignConstante == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenEliminarAsignConstCalculo", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemMargen.CodigoVariable" class="dspl-none" />
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-danger'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                        },
+                                        true
+                                    )
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="row
+                    @if (itemMargen.Message == "")
+                    {
+                        @: dspl-none
+                    }
+                    " style="width: 97%; margin-left: 3%;">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                            <p class="mt-5neg color-100x3">
+                                . <br />
+                                . <br />
+                                . <br />
+                                . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                            </p>
+                        </div>
+                        <div class="col-10 col-sm-10 col-md-10 col-lg-10">
+                            @if (itemMargen.Message != "")
+                            {
+                                @: <i class="alert alert-warning dspl-block family-teamwork">@itemMargen.Message</i>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h3 class="new-family-teamwork" style="font-weight: 100;">Asignacion de Margenes para @ViewBag.Cliente</h3>
+                @foreach (Teamwork.Model.Finanzas.ProvisionMargen itemProv in ViewBag.RenderizadoMargenesAsignadas)
+                {
+                    <div class="row mb-10">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                            <p class="mt-5neg color-100x3">
+                                . <br />
+                                . <br />
+                                . <br />
+                                . . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                            </p>
+                        </div>
+                        <div class="col-11 col-sm-11 col-md-11 col-lg-10">
+                            <div class="new-family-teamwork">
+                                <span style="display: inline-block; width: 20%; font-weight: 100;">@itemProv.Descripcion</span>
+                                @if (itemProv.OptCrear == "S")
+                                {
+                                    using (Ajax.BeginForm("ProvMargenCrearAsig", "Finanzas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" name="type" value="G" class="dspl-none" />
+                                        <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                        <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                        <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                        <div class="dspl-inline-block mt-10neg" style="width: 250px;">
+                                            @Html.InputAdministrador(
+                                                 "text",
+                                                 new string[] {
+                                                    "class='family-teamwork bb-1-solid-200x3 dspl-block mt-20'",
+                                                    "id='input__add__" + itemProv.CodigoVariable + "'",
+                                                    "data-ownerlegends='legends__add__" + itemProv.CodigoVariable + "'",
+                                                    "data-fontsizebefore='14px'",
+                                                    "data-fontsizeafter='12px'",
+                                                    "data-paddingbefore='30px, none, 11px, 0px'",
+                                                    "data-paddingafter='10px, none, none, 0px'",
+                                                    "onBlur='handleBlurInputFZ(this)'",
+                                                    "name='monto'",
+                                                    "required",
+                                                    "autocomplete='off'"
+                                                 },
+                                                new string[] {
+                                                    "padding: 10px 0px",
+                                                    "outline: none",
+                                                    "width: 100%",
+                                                    "border-left: none",
+                                                    "border-right: none",
+                                                    "border-top: none"
+                                                },
+                                                "on",
+                                                new string[]
+                                                {
+                                                    "<label class='new-family-teamwork dspl-block pdt-30 pdl-0 pdb-11 cursor-pointer' onclick='handleFocusInputFZ(this)' " +
+                                                    "style='font-weight: 100; position: absolute; width: 100%; font-size: 14px;' data-fontsizeafter='12px' data-fontsizebefore='14px' data-paddingbefore='30px, none, 11px, 0px' data-paddingafter='10px, none, none, 0px'" +
+                                                    "data-ownerfocus='input__add__" + itemProv.CodigoVariable + "' id='legends__add__" + itemProv.CodigoVariable + "'>" +
+                                                    ((itemProv.TypeInput == "P") ?  "Agregar Porcentaje Margen (Ej. 1.5)" : "Agregar Monto Margen (Ej. 181019)") +
+                                                    "</label>"
+                                                }
+                                            )
+                                        </div>
+                                        @Html.ButtonAdministracion(
+                                            "submit",
+                                            new string[] {
+                                                "class='dspl-inline-block btn btn-teamwork'"
+                                            },
+                                            new string[]
+                                            {
+                                                "width: 40px",
+                                                "height: 40px",
+                                                "border: none",
+                                                "border-radius: 50%",
+                                                "text-align: center"
+                                            },
+                                            new string[]
+                                            {
+                                                "<img src='../../Resources/mas.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                            },
+                                            true
+                                        )
+                                    }
+                                }
+
+                                @if (itemProv.OptEditar == "S")
+                                {
+                                    using (Ajax.BeginForm("ProvMargenActualizarAsig", "Finanzas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" name="type" value="G" class="dspl-none" />
+                                        <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                        <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                        <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                        <div class="dspl-inline-block mt-10neg" style="width: 250px;">
+                                            @Html.InputAdministrador(
+                                                "text",
+                                                new string[] {
+                                                    "class='family-teamwork bb-1-solid-200x3 dspl-block mt-20'",
+                                                    "id='input__add__" + itemProv.CodigoVariable + "'",
+                                                    "data-ownerlegends='legends__add__" + itemProv.CodigoVariable + "'",
+                                                    "data-fontsizebefore='14px'",
+                                                    "data-fontsizeafter='12px'",
+                                                    "data-paddingbefore='30px, none, 11px, 0px'",
+                                                    "data-paddingafter='10px, none, none, 0px'",
+                                                    "onBlur='handleBlurInputFZ(this)'",
+                                                    "name='monto'",
+                                                    "required",
+                                                    "autocomplete='off'",
+                                                    "value='" + itemProv.Monto + "'"
+                                                },
+                                                new string[] {
+                                                    "padding: 10px 0px",
+                                                    "outline: none",
+                                                    "width: 100%",
+                                                    "border-left: none",
+                                                    "border-right: none",
+                                                    "border-top: none"
+                                                },
+                                                "on",
+                                                new string[]
+                                                {
+                                                    "<label class='new-family-teamwork dspl-block " +
+                                                            ((itemProv.Monto == "") ? " pdt-30 pdl-0 " : "pdl-0 pdt-10") +
+                                                    " pdb-11 cursor-pointer' onclick='handleFocusInputFZ(this)' style='position: absolute; width: 100%; font-weight: 100;" +
+                                                            ((itemProv.Monto == "") ? " font-size: 14px; " : " font-size: 12px; ") + "' data-fontsizeafter='12px' data-fontsizebefore='14px' data-paddingbefore='30px, none, 11px, 0px' data-paddingafter='10px, none, none, 0pxx'" +
+                                                            "data-ownerfocus='input__add__" + itemProv.CodigoVariable + "' id='legends__add__" + itemProv.CodigoVariable + "'>" +
+                                                            ((itemProv.TypeInput == "P") ?  "Actualizar Porcentaje Margen (Ej. 1.5)" : "Cambiar Monto Margen (Ej. 181019)") +
+                                                            "</label>"
+                                                }
+                                             )
+                                        </div>
+                                        @Html.ButtonAdministracion(
+                                            "submit",
+                                            new string[] {
+                                                "class='dspl-inline-block btn btn-warning'"
+                                            },
+                                            new string[]
+                                            {
+                                                "width: 40px",
+                                                "height: 40px",
+                                                "border: none",
+                                                "border-radius: 50%",
+                                                "text-align: center"
+                                            },
+                                            new string[]
+                                            {
+                                                "<img src='../../Resources/editar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                            },
+                                            true
+                                        )
+                                    }
+                                }
+
+                                @if (itemProv.OptEliminar == "S")
+                                {
+                                    using (Ajax.BeginForm("ProvMargenEliminarAsig", "Finanzas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                        InsertionMode = InsertionMode.Replace,
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" name="type" value="G" class="dspl-none" />
+                                        <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                        <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                        <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                        @Html.ButtonAdministracion(
+                                            "submit",
+                                            new string[] {
+                                                "class='dspl-inline-block btn btn-danger'"
+                                            },
+                                            new string[]
+                                            {
+                                                "width: 40px",
+                                                "height: 40px",
+                                                "border: none",
+                                                "border-radius: 50%",
+                                                "text-align: center"
+                                            },
+                                            new string[]
+                                            {
+                                                "<img src='../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                            },
+                                            true
+                                        )
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-10
+                     @if(itemProv.OptEditar == "N")
+                     {
+                         @: dspl-none
+                     }
+                     " style="width: 97%; margin-left: 3%;">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                            <p class="mt-20neg color-100x3">
+                                . <br />
+                                . <br />
+                                . <br />
+                                . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                            </p>
+                        </div>
+                        <div class="col-10 col-sm-10 col-md-10 col-lg-10 mb-20">
+                            @using (Ajax.BeginForm("ProvMargenActualizarTypeCalculo", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <label class="switch-md" style="display: inline-block;">
+                                    <input type="radio" name="typeInput" value="P" data-origin="actions__typecalculo__M__@itemProv.CodigoVariable"
+                                           @if (itemProv.TypeInput == "P") { @: checked="checked"
+                                           } onchange="handleChangeTypeCalculo(this)" />
+                                    <span class="slider teamwork"></span>
+                                </label>
+                                <i class="fst-normal new-family-teamwork dspl-inline-block mr-10 mt-5neg" style="font-weight: 100;">Porcentaje (%)</i>
+                                <label class="switch-md" style="display: inline-block;">
+                                    <input type="radio" name="typeInput" value="M" data-origin="actions__typecalculo__M__@itemProv.CodigoVariable"
+                                           @if (itemProv.TypeInput == "M") { @: checked="checked"
+                                           }
+                                           onchange="handleChangeTypeCalculo(this)" />
+                                    <span class="slider teamwork"></span>
+                                </label>
+                                <i class="fst-normal new-family-teamwork dspl-inline-block mr-10 mt-5neg" style="font-weight: 100;">Monto ($ CLP)</i>
+                                <input type="text" name="type" value="G" class="dspl-none" />
+                                <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                <input type="submit" id="actions__typecalculo__M__@itemProv.CodigoVariable" class="dspl-none" />
+                            }
+                        </div>
+                    </div>
+                    <div class="row mt-30 mb-20
+                     @if(itemProv.OptEditar == "N")
+                     {
+                         @: dspl-none
+                     }
+                     else
+                     {
+                        if (itemProv.TypeInput == "M")
+                        {
+                            @: dspl-none
+                        }
+                     }
+                     " style="width: 97%; margin-left: 3%;">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                            <p class="mt-20neg color-100x3">
+                                . <br />
+                                . <br />
+                                . <br />
+                                . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                            </p>
+                        </div>
+                        <div class="col-10 col-sm-10 col-md-10 col-lg-10 mb-20
+                     @if(itemProv.OptEditar == "N")
+                     {
+                         @: dspl-none
+                     }
+                     else
+                     {
+                         if (itemProv.TypeInput == "M")
+                         {
+                            @: dspl-none
+                         }
+                     }
+                     ">
+                            @{
+                                ViewBag.ItemSelectConstCalculo = "";
+                                ViewBag.CheckedSelectConstCalculo = "Seleccione Constante de Cálculo";
+                            }
+                            @foreach (Teamwork.Model.Finanzas.ConstCalculoProvMargen itemConst in ViewBag.RenderizadoConstCalculoProvMargen)
+                            {
+                                if (itemConst.Codigo == itemProv.Constante.Codigo)
+                                {
+                                    ViewBag.CheckedSelectConstCalculo = itemConst.Descripcion;
+                                }
+
+                                ViewBag.ItemSelectConstCalculo +=
+                                    "<span class='owner__select pdt-5 pdb-5' style='display: block;' data-destino-constante='constante__referencial__" + itemProv.CodigoVariable + "' data-content-parent='parent__content__" + itemProv.CodigoVariable + "' " +
+                                    "onclick='handleClicOptionSelectFZ(this)' data-option-constante='" + itemConst.Codigo + "'>" + itemConst.Descripcion + "</span>";
+                            }
+
+                            @Html.SelectAdministracion(
+                                new string[] {
+                                    "class='pdt-5 pdl-30 pdr-30 pdb-5 new-family-teamwork cursor-pointer ta-center bb-1-solid-200x3 parent__content__select__show'",
+                                    "onclick='handleClickSelectFZ(this)'",
+                                    "data-option-selected='" + ViewBag.CheckedSelectConstCalculo + "'",
+                                    "data-content-select='content__select__" + itemProv.CodigoVariable + "'",
+                                    "id='parent__content__" + itemProv.CodigoVariable + "'"
+                                },
+                                new string[]
+                                {
+                                    "width: 76%",
+                                    "display: inline-block",
+                                    "margin-right: 8px",
+                                    "font-weight: 100"
+                                },
+                                new string[]
+                                {
+                                    "<label style='position: relative;' class='mt-25neg dspl-block'>Constante de Cálculo</label>",
+                                    ViewBag.CheckedSelectConstCalculo + " &#x25BE;",
+                                    "<div class='select__content__hidden' id='content__select__" + itemProv.CodigoVariable + "' data-parent-content='parent__content__" + itemProv.CodigoVariable + "' style='display: none; position: absolute; width: 71%; height: 200px; background-color: #fff; border: 1px solid rgb(200, 200, 200); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); z-index: 99; left: 15px; margin-top: 15px;'>" + ViewBag.ItemSelectConstCalculo + "</div>"
+                                }
+                            )
+
+                            @if (itemProv.OptCrearAsignConstante == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenCrearAsignConstCalculo", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="typeInput" value="@itemProv.TypeInput" class="dspl-none" />
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                    <input type="text" required class="dspl-none" value="" name="constante" id="constante__referencial__@itemProv.CodigoVariable" />
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-teamwork'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/mas.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                        },
+                                        true
+                                    )
+                                }
+                            }
+
+                            @if (itemProv.OptActualizarAsignConstante == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenActualizarAsignConstCalculo", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="typeInput" value="@itemProv.TypeInput" class="dspl-none" />
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                    <input type="text" required class="dspl-none" value="" name="constante" id="constante__referencial__@itemProv.CodigoVariable" />
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-warning'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/editar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                        },
+                                        true
+                                    )
+                                }
+                            }
+
+                            @if (itemProv.OptEliminarAsignConstante == "S")
+                            {
+                                using (Ajax.BeginForm("ProvMargenEliminarAsignConstCalculo", "Finanzas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "content__asignaciones__" + ViewBag.Cliente,
+                                    InsertionMode = InsertionMode.Replace,
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" name="cliente" value="@ViewBag.Cliente" class="dspl-none" />
+                                    <input type="text" name="empresa" value="@ViewBag.Empresa" class="dspl-none" />
+                                    <input type="text" name="codigoConcepto" value="@itemProv.CodigoVariable" class="dspl-none" />
+                                    @Html.ButtonAdministracion(
+                                        "submit",
+                                        new string[] {
+                                            "class='dspl-inline-block btn btn-danger'"
+                                        },
+                                        new string[]
+                                        {
+                                            "width: 40px",
+                                            "height: 40px",
+                                            "border: none",
+                                            "border-radius: 50%",
+                                            "text-align: center"
+                                        },
+                                        new string[]
+                                        {
+                                            "<img src='../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: -17%; ' />"
+                                        },
+                                        true
+                                    )
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="row
+                @if (itemProv.Message == "")
+                {
+                    @: dspl-none
+                }
+                " style="width: 97%; margin-left: 3%;">
+                        <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                            <p class="mt-5neg color-100x3">
+                                . <br />
+                                . <br />
+                                . <br />
+                                . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                            </p>
+                        </div>
+                        <div class="col-10 col-sm-10 col-md-10 col-lg-10">
+                            @if (itemProv.Message != "")
+                            {
+                                @: <i class="alert alert-warning dspl-block family-teamwork">@itemProv.Message</i>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    handleChangeTypeCalculo = (e) => {
+        document.getElementById(e.dataset.origin).click();
+    }
+
+</script>

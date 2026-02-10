@@ -1,0 +1,46 @@
+﻿<div class="row ml-auto mr-auto" style="width: 90%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="new-family-teamwork ta-center" style="font-weight: 100;">Confirmación de rechazo de cargo mod</h1>
+        @using (Ajax.BeginForm("CambioEstadoSolicitud", "Finanzas", new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "contentSolicitudes",
+            InsertionMode = InsertionMode.Replace,
+            OnSuccess = "HideModalPayment"
+        }, new { @style = "display: inline-block; width: 100%" }))
+        {
+            <div class="ml-auto mr-auto" style="width: 90%;">
+                <textarea class="form-control" name="observaciones" required style="min-height: 200px; max-width: 100%; min-width: 100%;" placeholder="Motivo del rechazo del cargo mod"></textarea>
+                <input type="text" name="origen" value="@ViewBag.Origen" class="dspl-none" />
+                <input type="text" name="codigoCargoMod" value="@ViewBag.CodigoCargoMod" class="dspl-none" />
+                <input type="text" name="estado" value="@ViewBag.Estado" class="dspl-none" />
+                <div class="ta-center">
+                    @Html.ButtonAdministracion(
+                        "submit",
+                        new string[] {
+                            "class='dspl-inline-block btn btn-danger new-family-teamwork mt-20'"
+                        },
+                        new string[]
+                        {
+                            "min-width: 50px",
+                            "height: 50px",
+                            "border: none",
+                            "border-radius: 25px",
+                            "text-align: center",
+                            "font-weight: 100"
+                        },
+                        new string[]
+                        {
+                            "<img src='../../../Resources/rechazo.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                            "<span style='position: relative; float: right;'>Rechazar Solicitud</span>"
+                        },
+                        true
+                    )
+                </div>
+                
+            </div>
+           
+        }
+    </div>
+
+</div>

@@ -1,0 +1,78 @@
+﻿@if (ViewBag.ResultInformationTransaction != "" && ViewBag.ResultCodeTransaction != "")
+{
+    switch ((string)ViewBag.ResultCodeTransaction)
+    {
+        case "200":
+            <span class="alert alert-success dspl-block family-teamwork" style="width: 100%;">
+                @ViewBag.ResultInformationTransaction
+            </span>
+            break;
+        default:
+            <span class="alert alert-danger dspl-block family-teamwork" style="width: 100%;">
+                @ViewBag.ResultInformationTransaction
+            </span>
+            break;
+    }
+}
+
+@if (((List<Teamwork.Model.Finanzas.ValoresDiarios>)ViewBag.RenderizadoValoresDiarios).Count > 0)
+{
+    <table border="1" style="width: 100%; font-size: 20px;" class="family-teamwork" cellpadding="5">
+        <thead>
+            <tr class="ta-center">
+                <td>Empresa</td>
+                <td>Cliente</td>
+                <td>Cargo Mod</td>
+                <td>Valor Diario</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody id="contentValorDiario">
+            @foreach (Teamwork.Model.Finanzas.ValoresDiarios item in ViewBag.RenderizadoValoresDiarios)
+            {
+                <tr class="br-1-solid-200x3 bb-1-solid-200x3 bt-1-solid-200x3 bb-1-solid-200x3">
+                    <td>@item.Empresa</td>
+                    <td>@item.Cliente</td>
+                    <td>@item.CargoMod</td>
+                    <td>@item.ValorDiario</td>
+                    <td>
+                        @using (Ajax.BeginForm("ConfirmEventVD", "Finanzas", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "confirmacionEvent",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loader",
+                            OnSuccess = "ShowModalConfirm"
+                        }, new { @style = "display: block;" }))
+                        {
+                            <input type="text" class="dspl-none" name="option" value="EliminarValorDiario" />
+                            <input type="text" name="empresa" value="@item.Empresa" class="dspl-none" />
+                            <input type="text" name="cargoMod" value="@item.CargoMod" class="dspl-none" />
+                            <button type="submit" class="btn btn-danger"
+                                    style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-trash" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Eliminar</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Valor Diario</i>
+                                </span>
+                            </button>
+                        }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <img src="~/Resources/sinresultados.png" style="width: 100px;" class="dspl-block m-auto" />
+    <h1 class="family-teamwork ta-center color-70x3 mt-10ne">Ups, Lo sentimos! No se ha encontrado el valor diario buscado!</h1>
+}
+
+
+<div class="ta-center mt-20">
+    @Html.Partial("Teamwork/_PaginationsValorDiario")
+</div>
+
+

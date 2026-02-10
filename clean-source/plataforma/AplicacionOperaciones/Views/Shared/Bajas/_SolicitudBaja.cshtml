@@ -1,0 +1,194 @@
+﻿@{
+//ViewBag.PathCodified = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/" + controller + "/Solicitudes/" + ViewData["CodificarCod"];
+//ViewBag.PathCodifiedHistorial = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/" + controller + "/Historial";
+}
+
+<div class="row m-auto" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+        @if ((string)ViewBag.TypeView != "")
+        {
+            Html.RenderPartial((string)ViewBag.TypeView);
+        }
+    </div>
+</div>
+@foreach (AplicacionOperaciones.Models.Solicitud item in (List<AplicacionOperaciones.Models.Solicitud>)ViewBag.RenderizadoSolicitudBajas)
+{
+    <div class="row width-90per m-auto @item.BorderColor bt-1-solid-200x3 br-1-solid-200x3 bb-1-solid-200x3 mheight-180 mt-2">
+        <div class="col-12 col-sm-12 col-md-2 col-lg-2 ta-center">
+            <div class="btn @item.GlyphiconColor dspl-inline-block mt-80"
+                 style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                <i class="glyphicon-tw-7 @item.Glyphicon" style="display: inline-block;"></i>
+                <span class="dspl-inline-block mt-15neg">
+                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                     font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">@item.Prioridad</i>
+                </span>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-5">
+            <div class="row">
+                <a href="@ViewBag.PathCodified" class="dspl-block txd-none cursor-pointer width-100per">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 dspl-block">
+                        <label class="cursor-pointer family-teamwork dspl-block lh-10 fs-14 mt-10 color-100x3">Nombre Solicitud</label>
+                        <label class="cursor-pointer family-teamwork dspl-block lh-20 fs-20 color-100x3"><b>@item.NombreSolicitud</b></label>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10">
+                        <label class="cursor-pointer family-teamwork lh-10 fs-14 dspl-block color-100x3">Creado <b>@item.Creado</b></label>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-5">
+                        <label class="cursor-pointer family-teamwork lh-10 fs-14 dspl-block color-100x3">Nombre Proceso: <b>@item.NombreProceso</b></label>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="cursor-pointer family-teamwork fs-14 color-100x3">Fechas de compromiso: <b>@item.FechasCompromiso</b>, Con Prioridad <b>@item.Prioridad</b></label>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="cursor-pointer family-teamwork lh-16 fs-14 @item.ColorFont">Comentarios de la solicitud: <b>@Html.Raw(item.Comentarios)</b></label>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-5" style="text-align: right;">  
+            <div class="row" style="min-height: 180px; align-items: center; vertical-align: middle;">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    @if (item.RenderizadoOpciones == "S")
+                    {
+                        if (item.OptHistorialSolicitud == "S")
+                        {
+                            <a href="/S!!@item.TipoEvento/@item.CodigoSolicitud" class="btn btn-teamwork ta-left" target="_blank"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-atrasado" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Historial</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (item.OptSimulacion == "S")
+                        {
+                            <a href="@item.IntegrateSimulate" class="btn btn-primary ta-left" style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: right; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-calculado" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Simular</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Cálculo</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (item.OptViewCartaBaja == "S")
+                        {
+                            using (Ajax.BeginForm("ConsultarCartaBajaMontosManuales", "Bajas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentCartaBaja",
+                                OnSuccess = "showModalMontosManualesCartaBaja",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" name="enlaceCartaBaja" value="@item.EnlaceViewCartaBaja" class="dspl-none" />
+                                <input type="text" name="codigoSolicitud" value="@item.CodigoSolicitud" class="dspl-none" />
+                                <button type="submit" class="btn btn-danger ta-left" style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: right; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-pdf" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Visualizar Doc. PDF</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Carta Baja</i>
+                                    </span>
+                                </button>
+                            }
+
+                        }
+
+                        if (item.OptCalcular == "S")
+                        {
+                            <a href="@item.IntegrateSettlement" class="btn btn-primary ta-left" style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: right; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-calculado" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Emitir</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Cálculo</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (item.OptAnularKam == "S")
+                        {
+                            <a href="#" data-codigosolicitud="@item.CodigoSolicitud" class="eventAnularSolicitud btn btn-danger ta-leftr"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: right; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Anular</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                    font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (item.OptRevertirCalculo == "S")
+                        {
+                            using (Ajax.BeginForm("AnularFiniquitoMalIngresado", "Bajas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "finiquitos",
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" name="codigoSolicitud" value="@item.CodigoSolicitud" class="dspl-none" />
+                                <button type="submit" class="btn btn-danger" style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-trash2" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Liberar Baja</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Calculada</i>
+                                    </span>
+                                </button>
+                            }
+                        }
+
+                        if (item.OptLiquidacionSueldo == "S")
+                        {
+                            using (Ajax.BeginForm("ConfirmacionEvento", "Bajas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "contentPayment",
+                                OnSuccess = "ModalPaymentShow",
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" name="secuencia" value="BJC" />
+                                <input type="text" class="dspl-none" name="option" value="LiquidacionSueldos" />
+                                <input type="text" class="dspl-none" name="codigoFiniquito" value="@item.CodigoSolicitud" />
+                                <button type="submit" class="btn btn-danger"
+                                        style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-pdf" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Liquidaciones</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block;">De Sueldo</i>
+                                    </span>
+                                </button>
+                            }
+                        }
+                        
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="mt-40 mb-100 ta-center">
+    @Html.Partial("Teamwork/_Pagination")
+</div>

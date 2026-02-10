@@ -1,0 +1,116 @@
+﻿@foreach (AplicacionOperaciones.Models.Finiquitos.SolicitudTransferencia item in ViewBag.RenderizadoDatosSolicitudTransferencia)
+{
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <embed src="@ViewBag.ReferenciaViewCaratula" style="width: 100%; height: 600px;" />
+            <div style="margin-top: -500px; width: 100%; height: 500px; text-align: center;">
+                <img src="~/Resources/pdfcolorreal-x2.png" style="width: 50px; display: block; margin: auto;" />
+                <h1 class="family-teamwork">Cargando PDF<br />Espere un momento...</h1>
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="family-teamwork">Este finiquito se encuentra con solicitud de transferencia, cuyos datos son los siguientes:</p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <table border="1" cellspacing="0" cellpadding="5" style="width: 90%; margin: auto; border: 1px solid rgb(100, 100, 100);">
+                        <tbody>
+                            <tr>
+                                <td style="width: 20%;" class="family-teamwork">NOMBRE TRABAJADOR</td>
+                                <td class="family-teamwork" colspan="3">@item.Nombres</td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">BANCO</td>
+                                <td class="family-teamwork">@item.Banco</td>
+                                <td class="family-teamwork ta-center" style="width: 10%;">FECHA</td>
+                                <td class="family-teamwork ta-center">@item.Fecha</td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">N° CUENTA</td>
+                                <td class="family-teamwork" colspan="3">@item.Cuenta</td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">RUT</td>
+                                <td class="family-teamwork" colspan="3">@item.Rut</td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">MONTO</td>
+                                <td class="family-teamwork" colspan="3">@item.TotalFiniquito</td>
+                            </tr>
+                            <tr>
+                                <td class="family-teamwork">OBSERVACIÓN</td>
+                                <td class="family-teamwork" colspan="3">
+                                    <textarea name="observacion" style="width: 100%; background-color: none; border: 0; max-height: 80px; min-height: 80px; max-width: 100%; min-width: 100%;" placeholder="Indique observaciones" readonly>@item.Observacion</textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+                    @using (Ajax.BeginForm("VerificacionPagoFiniquito", "Bajas", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "contentPayment",
+                        LoadingElementId = "loader"
+                    }))
+                    {
+                        <input type="text" name="codigoFiniquito" value="@ViewBag.ReferenciaCodigoFiniquito" class="dspl-none" />
+                        <input type="text" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" class="dspl-none" />
+                        <input type="text" name="tipoPago" value="TEF" class="dspl-none" />
+                        <input type="text" name="codigoPago" value="@item.CodigoPago" class="dspl-none" />
+                        <button type="submit" class="btn btn-success"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-asignado" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Aceptar Transferencia</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">y enviar a confirmación</i>
+                            </span>
+                        </button>
+                    }
+
+                    @using (Ajax.BeginForm("VerificacionPagoFiniquito", "Bajas", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "contentPayment",
+                        LoadingElementId = "loader"
+                    }))
+                    {
+                        <input type="text" name="codigoFiniquito" value="@ViewBag.ReferenciaCodigoFiniquito" class="dspl-none" />
+                        <input type="text" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" class="dspl-none" />
+                        <input type="text" name="tipoPago" value="CHQ" class="dspl-none" />
+                        <input type="text" name="codigoPago" value="" class="dspl-none" />
+                        <button type="submit" class="btn btn-teamwork"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Cambiar a Cheque</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">y enviar a confirmación</i>
+                            </span>
+                        </button>
+                    }
+
+
+                    <a href="#" data-dismiss="modal" type="submit" class="btn btn-danger"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Cancelar y</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Cerrar</i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

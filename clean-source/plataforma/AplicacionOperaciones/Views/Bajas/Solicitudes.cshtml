@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Solicitud de Baja";
+}
+
+@if (ViewBag.CodeCorrect)
+{
+
+    foreach (AplicacionOperaciones.Models.DatosBaja item in (List<AplicacionOperaciones.Models.DatosBaja>)ViewBag.RenderizadoDatosSolicitud)
+    {
+        Html.RenderPartial("_DatosSolicitudBaja", new ViewDataDictionary() {
+            { "Codificado", item.Codificado },
+            { "Ficha", item.Ficha },
+            { "NombreTrabajador", item.NombreTrabajador },
+            { "Rut", item.Rut },
+            { "CodigoCliente", item.CodigoCliente },
+            { "Cliente", item.Cliente },
+            { "CargoMod", item.CargoMod },
+            { "CargoReal", item.CargoReal },
+            { "Articulo", item.Articulo },
+            { "Causal", item.Causal },
+            { "ObservacionesCausal", item.ObservacionesCausal },
+            { "FechaInicio", item.FechaInicio },
+            { "FechaTermino", item.FechaTermino },
+            { "ComentariosSolicitud", item.ComentariosSolicitud },
+            { "Estado", item.Estado },
+            { "Glyphicon", item.Glyphicon },
+            { "GlyphiconColor", item.GlyphiconColor },
+            { "CreadoPor", item.CreadoPor },
+            { "Fecha", item.Fecha },
+            { "FechaUltimaActualizacion", item.FechaUltimaActualizacion },
+            { "Barcode", item.Barcode },
+            { "BarcodeImage", item.BarcodeImage },
+            { "BarcodeImageHasExists", item.BarcodeImageHasExists },
+            { "OptSgteEtapa", item.OptSgteEtapa },
+            { "OptHistorial", item.OptHistorial },
+            { "OptCalcular", item.OptCalcular },
+            { "OptViewDocFiniquito", item.OptViewDocFiniquito },
+            { "OptDescargarDocFiniquito", item.OptDescargarDocFiniquito },
+            { "OptViewCaratula", item.OptViewCaratula },
+            { "OptDescargarCaratula", item.OptDescargarCaratula },
+            { "OptRechazar", item.OptRechazar },
+            { "OptMoverAFiniquito", item.OptMoverAFiniquito }
+
+        });
+    }
+
+    @Html.Partial("_VisualizadorPDF")
+
+}
+else
+{
+    foreach (AplicacionOperaciones.Models.Error item in (List<AplicacionOperaciones.Models.Error>)ViewBag.Error)
+    {
+        @Html.Partial("_ErrorSistema", new ViewDataDictionary {
+            { "Message", item.Message }
+        });
+    }
+}
+
+@Scripts.Render("~/bundles/solicitudbajas")

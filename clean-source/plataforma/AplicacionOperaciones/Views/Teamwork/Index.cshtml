@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Lectura Código Barra";
+}
+
+<div class="row glyphicon-tw-barcodereaderLanding mt-50" style="height: 300px;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 pdl-0 pdr-0 ta-center" style="background-color: rgba(0, 0, 0, 0.6); height: 300px;">
+        <h1 class="family-teamwork color-fx3 fw-bold mt-100">Bienvenido Colaborador Teamwork</h1>
+        <h2 class="family-teamwork color-fx3 fw-bold">Lectura Inteligente de Código de Barra</h2>
+    </div>
+</div>
+<div class="row mt-8">
+    @Html.Partial("Teamwork/_MenuBarcodes")
+</div>

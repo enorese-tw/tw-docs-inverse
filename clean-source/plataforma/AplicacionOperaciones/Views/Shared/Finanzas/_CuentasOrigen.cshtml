@@ -1,0 +1,44 @@
+﻿<table border="1" cellspacing="0" cellpadding="5" style="width: 100%;">
+    <tbody>
+        <tr>
+            <th class="family-teamwork ta-center">Banco</th>
+            <th class="family-teamwork ta-center">Numero Cuenta</th>
+            <th class="family-teamwork ta-center">Glosa Cuenta</th>
+            <th class="family-teamwork ta-center">Rut Cuenta</th>
+            <th class="family-teamwork ta-center">Fecha Creación</th>
+            <th class="family-teamwork ta-center">Vigente</th>
+        </tr>
+        @foreach (AplicacionOperaciones.Models.Finanzas.CuentasOrigen item in ViewBag.RenderizadoCuentasOrigen)
+        {
+            <tr>
+                <th class="family-teamwork ta-center">@item.Banco</th>
+                <th class="family-teamwork ta-center">@item.NumeroCuenta</th>
+                <th class="family-teamwork ta-center">@item.GlosaCuenta</th>
+                <th class="family-teamwork ta-center">@item.RutCuenta</th>
+                <th class="family-teamwork ta-center">@item.FechaCreacion</th>
+                <th class="family-teamwork ta-center">
+                    @using (Ajax.BeginForm("ChangeEstadoCtaOrigen", "Finanzas", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        InsertionMode = InsertionMode.Replace,
+                        UpdateTargetId = "cuentasOrigen", 
+                        LoadingElementId = "loader"
+                    }))
+                    {
+                        <input type="text" name="cuenta" value="@item.NumeroCuenta" class="dspl-none" />
+                        <input type="text" name="banco" value="@item.Banco" class="dspl-none" />
+                        <label class="switch" style="display: inline-block;">
+                            <input type="checkbox" name="estado" class="estado" value="S" @item.Vigente data-banco="@item.Banco.Replace(" ", "")" data-numerocta="@item.NumeroCuenta" />
+                            <span class="slider danger"></span>
+                        </label>
+                        <input type="submit" class="dspl-none" id="@item.Banco.Replace(" ", "")_@item.NumeroCuenta" />
+                    }
+
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="mt-40 mb-100 ta-center">
+    @Html.Partial("Teamwork/_PaginationCuentasOrigen")
+</div>

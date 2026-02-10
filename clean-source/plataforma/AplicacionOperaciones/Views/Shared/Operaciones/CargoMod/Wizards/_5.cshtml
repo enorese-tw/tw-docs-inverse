@@ -1,0 +1,549 @@
+﻿@if (ViewBag.OptionMoveWizards != null)
+{
+    <div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h2 class="new-family-teamwork ta-center color-100x3" style="font-weight: 100;">Estamos cargando la etapa...</h2>
+            <h5 class="new-family-teamwork ta-center" style="font-weight: 100;">Espere un momento, no tardamos.</h5>
+        </div>
+    </div>
+    <script async>
+
+        window.location.href = "@ViewBag.HttpRedirectWizards"
+
+    </script>
+}
+else
+{
+    <div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h2 class="new-family-teamwork ta-center color-100x3" style="font-weight: 100;">Etapa @ViewBag.WizardsActual: Incluir Bonos</h2>
+        </div>
+    </div>
+    if (ViewBag.HtmlMessageResult != null)
+    {
+        @: <span class="alert alert-success dspl-block m-auto new-family-teamwork" style="width: 92%; font-weight: 100;"><img src="../../../../Resources/check.svg" width="30" height="30" /> @Html.Raw(ViewBag.HtmlMessageResult)</span>
+    }
+
+    <div class="row ml-auto mr-auto" style="width: 92%;">
+        @foreach (Teamwork.Model.Finanzas.EstructuraCargo itemHeader in ViewBag.RenderizaHeaderEstructura)
+        {
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                @using (Ajax.BeginForm("SiguienteWizards", "Operaciones", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "contentWizards",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loader"
+                }, new { @style = "display: block; width: 100%" }))
+                {
+                    <input type="text" name="codigoCargoMod" value="@itemHeader.CodigoCargoMod" class="dspl-none" />
+                    <input type="text" name="wizards" value="@ViewBag.WizardsPrev" class="dspl-none" />
+                    <input type="text" name="wizardsActual" value="@ViewBag.WizardsActual" class="dspl-none" />
+                    @Html.ButtonAdministracion(
+                        "submit",
+                        new string[] {
+                            "class='dspl-inline-block new-family-teamwork'"
+                        },
+                        new string[]
+                        {
+                            "min-width: 50px",
+                            "border: none",
+                            "text-align: center",
+                            "font-weight: 100",
+                            "border: 0",
+                            "margin: none",
+                            "background-color: transparent!important"
+                        },
+                        new string[]
+                        {
+                            "<span class='dspl-inline-block'><span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;' class='btn btn-teamwork pdt-5 pdr-5 pdb-5 pdl-5'><img src='../../../../Resources/flecha-izquierda.svg' width='30' height='30' style='position: relative; left: 10%;' /></span></span>" +
+                            "<span class='new-family-teamwork' style='position: relative; float: right; margin-left: 10px; margin-top: 10px; font-size: 20px; font-wight: 100;'>Anterior</span>"
+                        },
+                        true
+                    )
+                }
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-30">
+                <div class="row">
+                    @Html.Partial("Finanzas/_DDLSeleccionaBono")
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 mt-10">
+                @using (Ajax.BeginForm("AgregarBono", "Operaciones", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "contentWizards",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loader",
+                    OnSuccess = "formatInput"
+                }, new { @style = "display: block;" }))
+                {
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                            @Html.InputAdministrador(
+                                "text",
+                                new string[] {
+                                    "class='new-family-teamwork bb-1-solid-200x3 dspl-block mt-20'",
+                                    "id='input-add-gratif'",
+                                    "data-ownerlegends='legends-add-gratif'",
+                                    "data-ownerlegends='legends-add-gratif'",
+                                    "data-fontsizebefore='15px'",
+                                    "data-fontsizeafter='12px'",
+                                    "data-paddingbefore='27px, none, 11px, none'",
+                                    "data-paddingafter='0px, none, none, none'",
+                                    "onBlur='handleBlurInput(this)'",
+                                    "name='monto'",
+                                    "required",
+                                    "autocomplete='off'",
+                                    "value=''",
+                                    "onkeyup='this.value = eventMaskThousand(this.value)'",
+                                },
+                                new string[] {
+                                    "padding-top: 10px",
+                                    "padding-bottom: 10px",
+                                    "outline: none",
+                                    "border: none",
+                                    "width: 100%",
+                                    "text-transform: uppercase",
+                                    "font-weight: 100"
+                                },
+                                "on",
+                                new string[]
+                                {
+                                    "<label class='new-family-teamwork dspl-block pdt-27 pdb-11 cursor-pointer color-100x3' onclick='handleFocusInput(this)' style='font-weight: 100; position: absolute; width: 100%; font-size: 15px; text-transform: uppercase;' " +
+                                    "data-fontsizeafter='12px' data-fontsizebefore='15px' data-paddingbefore='27px, none, 11px, none' data-paddingafter='0px, none, none, none' data-ownerfocus='input-add-gratif' id='legends-add-gratif'>Indique Bono que va considerar</label>"
+                                }
+                            )
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 mt-10">
+                            <input type="text" name="wizardsActual" value="@ViewBag.WizardsActual" class="dspl-none" />
+                            <input type="text" value="" class="dspl-none" id="bonoCodigo" name="codigoBono" />
+                            <input type="text" value="@itemHeader.CodigoCargoMod" class="dspl-none" name="codigoCargoMod" />
+                            @Html.ButtonAdministracion(
+                                "submit",
+                                new string[] {
+                                    "class='dspl-inline-block btn btn-teamwork new-family-teamwork'"
+                                },
+                                new string[]
+                                {
+                                    "width: 40px",
+                                    "height: 40px",
+                                    "border: none",
+                                    "border-radius: 50%",
+                                    "text-align: center"
+                                },
+                                new string[]
+                                {
+                                    "<img src='../../../../Resources/mas.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                },
+                                true
+                            )
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+                            <textarea name="condiciones" placeholder="Indicar condiciones del bono" class="form-control new-family-teamwork" style="font-weight: 100;" required></textarea>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-8 mt-50">
+                @foreach (Teamwork.Model.Finanzas.EstructuraCargo itemHaberes in ViewBag.RenderizaHaberesEstructura)
+                {
+                    foreach (Teamwork.Model.Operaciones.BonosCargoMod itemBono in itemHaberes.Bonos)
+                    {
+                        <div class="row mt-20">
+                            <div class="col-1 col-sm-1 col-md-1 col-lg-2" style="line-height: 10px;">
+                                <p class="mt-5neg color-100x3">
+                                    . <br />
+                                    . <br />
+                                    . <br />
+                                    . . . . . <span class="dspl-inline-block mt-3">&#x25B8;</span>
+                                </p>
+                            </div>
+                             <div class="col-11 col-sm-11 col-md-11 col-lg-10">
+                                 <div class="new-family-teamwork">
+                                     <span style="display: inline-block; width: 25%; font-weight: 100;">@itemBono.Nombre</span>
+                                         @using (Ajax.BeginForm("ActualizarBono", "Operaciones", new AjaxOptions()
+                                         {
+                                             HttpMethod = "POST",
+                                             UpdateTargetId = "contentWizards",
+                                             InsertionMode = InsertionMode.Replace,
+                                             LoadingElementId = "loader",
+                                             OnSuccess = "formatInput"
+                                         }))
+                                         {
+                                             <input type="text" value="@itemBono.CodigoBono" name="codigoBono" class="dspl-none" />
+                                             <input type="text" value="@itemHeader.CodigoCargoMod" class="dspl-none" name="codigoCargoMod" />
+                                             <input type="text" name="wizardsActual" value="@ViewBag.WizardsActual" class="dspl-none" />
+                                             <div class="dspl-inline-block" style="width: 350px;">
+                                                 <div class="dspl-inline-block mt-10neg" style="width: 350px;">
+                                                     @Html.InputAdministrador(
+                                                         "text",
+                                                         new string[] {
+                                                             "class='family-teamwork bb-1-solid-200x3 dspl-block mt-20'",
+                                                             "id='input__add__" + itemBono.CodigoBono + "'",
+                                                             "data-ownerlegends='legends__add__" + itemBono.CodigoBono + "'",
+                                                             "data-fontsizebefore='14px'",
+                                                             "data-fontsizeafter='12px'",
+                                                             "data-paddingbefore='30px, none, 11px, 0px'",
+                                                             "data-paddingafter='10px, none, none, 0px'",
+                                                             "onBlur='handleBlurInput(this)'",
+                                                             "name='monto'",
+                                                             "required",
+                                                             "autocomplete='off'",
+                                                             "onkeyup='this.value = eventMaskThousand(this.value)'",
+                                                             "value='" + itemBono.Valor.Replace("$ ", "") + "'"
+                                                         },
+                                                         new string[] {
+                                                             "padding: 10px 0px",
+                                                             "outline: none",
+                                                             "width: 100%",
+                                                             "border-left: none",
+                                                             "border-right: none",
+                                                             "border-top: none"
+                                                         },
+                                                         "on",
+                                                         new string[]
+                                                         {
+                                                             "<label class='new-family-teamwork dspl-block pdt-30 pdl-0 pdb-11 cursor-pointer legends__native__bonos' onclick='handleFocusInput(this)' style='position: absolute; width: 100%; font-size: 14px; font-weight: 100;' " +
+                                                             "data-fontsizeafter='12px' data-fontsizebefore='14px' data-paddingafter='10px, none, none, 0px' data-paddingbefore='30px, none, 11px, 0px' data-paddingbefore='30px, none, 11px, 0px' data-paddingafter='10px, none, none, 0px'" +
+                                                             "data-ownerfocus='input__add__" + itemBono.CodigoBono + "' id='legends__add__" + itemBono.CodigoBono + "'>" +
+                                                             "Actualizar Monto (Ej. 181019)" +
+                                                             "</label>"
+                                                         }
+                                                      )
+                                                 </div>
+                                                 <div class="mt-20">
+                                                     <textarea name="condiciones" placeholder="Indicar condiciones del bono" class="form-control new-family-teamwork" style="font-weight: 100;" required>@itemBono.Condiciones</textarea>
+                                                 </div>
+                                             </div>
+                                             @Html.ButtonAdministracion(
+                                                 "submit",
+                                                 new string[] {
+                                                     "class='dspl-inline-block btn btn-warning'"
+                                                 },
+                                                 new string[]
+                                                 {
+                                                     "width: 40px",
+                                                     "height: 40px",
+                                                     "border: none",
+                                                     "border-radius: 50%",
+                                                     "text-align: center"
+                                                 },
+                                                 new string[]
+                                                 {
+                                                     "<img src='../../../../Resources/editar.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                                 },
+                                                 true
+                                             )
+                                         }
+                                     
+                                        @using (Ajax.BeginForm("EliminarBono", "Operaciones", new AjaxOptions()
+                                        {
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "contentWizards",
+                                            InsertionMode = InsertionMode.Replace,
+                                            LoadingElementId = "loader",
+                                            OnSuccess = "formatInput"
+                                        }))
+                                        {
+                                            <input type="text" value="@itemBono.CodigoBono" name="codigoBono" class="dspl-none" />
+                                            <input type="text" value="@itemHeader.CodigoCargoMod" class="dspl-none" name="codigoCargoMod" />
+                                            <input type="text" name="wizardsActual" value="@ViewBag.WizardsActual" class="dspl-none" />
+                                            @Html.ButtonAdministracion(
+                                                 "submit",
+                                                 new string[] {
+                                                     "class='dspl-inline-block btn btn-danger'"
+                                                 },
+                                                 new string[]
+                                                 {
+                                                     "width: 40px",
+                                                     "height: 40px",
+                                                     "border: none",
+                                                     "border-radius: 50%",
+                                                     "text-align: center"
+                                                 },
+                                                 new string[]
+                                                 {
+                                                     "<img src='../../../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: -8%;' />"
+                                                 },
+                                                 true
+                                             )
+                                        }
+                                 </div>
+                            </div>
+                        </div>
+                        
+                    }
+                }
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-50 mb-100 ta-right">
+                        @using (Ajax.BeginForm("SiguienteWizards", "Operaciones", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "contentWizards",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loader"
+                        }, new { @style = "display: block; width: 100%" }))
+                        {
+                            <input type="text" name="tipoEvento" value="@itemHeader.Origen" class="dspl-none" />
+                            <input type="text" name="codigoCargoMod" value="@itemHeader.CodigoCargoMod" class="dspl-none" />
+                            <input type="text" name="wizards" value="@ViewBag.WizardsNext" class="dspl-none" />
+                            <input type="text" name="wizardsActual" value="@ViewBag.WizardsActual" class="dspl-none" />
+                            @Html.ButtonAdministracion(
+                                "submit",
+                                new string[] {
+                                    "class='dspl-inline-block new-family-teamwork'",
+                                    (itemHeader.NombreCargo != "" && itemHeader.NombreCargoMod.Replace(itemHeader.Cliente + " ", "") != "") ? "" : "disabled='disabled'"
+                                },
+                                new string[]
+                                {
+                                    "min-width: 50px",
+                                    "border: none",
+                                    "text-align: center",
+                                    "font-weight: 100",
+                                    "border: 0",
+                                    "margin: none",
+                                    "background-color: transparent!important"
+                                },
+                                new string[]
+                                {
+                                    "<span class='dspl-inline-block'><span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;' " +
+                                    "class='btn " + ((itemHeader.NombreCargo != "" && itemHeader.NombreCargoMod.Replace(itemHeader.Cliente + " ", "") != "") ? "btn-teamwork" : "btn-disabled") +
+                                    " pdt-5 pdr-5 pdb-5 pdl-5'><img src='../../../../Resources/flecha-correcta.svg' width='30' height='30' style='position: relative; left: 10%;' /></span></span>" +
+                                    "<span class='new-family-teamwork' style='position: relative; float: left; margin-right: 10px; margin-top: 10px; font-size: 20px; font-wight: 100;'>Siguiente</span>"
+                                },
+                                true
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<script async>
+
+    convertTriangleTopBottom = (element) => {
+        return element.split(' ▾').join('').split(' ▴').join('')
+    }
+
+    window.onload = () => {
+        formatInput()
+    }
+
+    formatInput = () => {
+        handleFocusInput(document.getElementById("legends-add-gratif"))
+
+        for (let i = 0; i < [...document.getElementsByClassName('legends__native__bonos')].length; i++) {
+            handleFocusInput(document.getElementById([...document.getElementsByClassName('legends__native__bonos')][i].id))
+        }
+    }
+
+    handleFocusInput = (e) => {
+        const padding = e.dataset.paddingafter.split(',')
+
+        if (padding[0] !== 'none') {
+            e.style.paddingTop = padding[0]
+        }
+
+        if (padding[1] !== 'none') {
+            e.style.paddingRight = padding[1]
+        }
+
+        if (padding[2] !== 'none') {
+            e.style.paddingBottom = padding[2]
+        }
+
+        if (padding[3] !== 'none') {
+            e.style.paddingLeft = padding[3]
+        }
+
+        e.style.transition = "all 0.2s ease-in"
+        e.style.fontSize = document.getElementById(e.dataset.ownerfocus).dataset.fontsizeafter
+        document.getElementById(e.dataset.ownerfocus).focus()
+        document.getElementById(e.dataset.ownerfocus).style.borderBottom = "1px solid #428bca"
+        e.style.color = "#428bca"
+        document.getElementById(e.dataset.ownerfocus).style.color = "#428bca"
+    }
+
+    handleBlurInput = (e) => {
+        if (e.value === "") {
+            const padding = e.dataset.paddingbefore.split(',')
+
+            if (padding[0] !== 'none') {
+                document.getElementById(e.dataset.ownerlegends).style.paddingTop = padding[0]
+            }
+
+            if (padding[1] !== 'none') {
+                document.getElementById(e.dataset.ownerlegends).style.paddingRight = padding[1]
+            }
+
+            if (padding[2] !== 'none') {
+                document.getElementById(e.dataset.ownerlegends).style.paddingBottom = padding[2]
+            }
+
+            if (padding[3] !== 'none') {
+                document.getElementById(e.dataset.ownerlegends).style.paddingLeft = padding[3]
+            }
+
+            document.getElementById(e.dataset.ownerlegends).style.fontSize = document.getElementById(e.dataset.ownerlegends).dataset.fontsizebefore
+            document.getElementById(e.dataset.ownerlegends).style.transition = "all 0.2s ease-in"
+        }
+
+        document.getElementById(e.dataset.ownerlegends).style.color = "rgb(100, 100, 100)"
+        e.style.borderBottom = "1px solid rgb(200, 200, 200)"
+        e.style.color = "rgb(50, 50, 50)"
+    }
+
+
+    handleClickSelect = (e) => {
+        const classList = [...e.classList]
+        let active = false
+
+        classList.map(x => {
+            if (x === "active__parent__content__select") {
+                active = true
+            }
+        })
+
+        if (!active) {
+            e.style.borderBottom = "1px solid #428bca"
+            e.style.color = "#428bca"
+            e.classList.add("active__parent__content__select")
+            e.innerHTML = e.innerHTML.split('▾').join('▴')
+            document.getElementById(e.dataset.contentSelect).style.display = "block"
+        }
+        else {
+            e.classList.remove("active__parent__content__select")
+            e.style.borderBottom = "1px solid rgb(200, 200, 200)"
+            e.style.color = "rgb(100, 100, 100)"
+            e.innerHTML = e.innerHTML.split('▴').join('▾')
+            document.getElementById(e.dataset.contentSelect).style.display = "none"
+        }
+    }
+
+    handleClicOptionSelect = (e) => {
+        const elementDestino = document.getElementById(e.dataset.contentParent)
+        const inputDestino = document.getElementById(e.dataset.destinoConstante)
+
+        elementDestino.innerHTML = elementDestino.innerHTML.split(`${elementDestino.dataset.optionSelected} ▴`).join(`${e.innerHTML} ▾`)
+        elementDestino.setAttribute("data-option-selected", e.innerHTML)
+
+        inputDestino.value = e.dataset.optionConstante
+
+        //console.log(e.dataset.optionConstante, e.innerHTML)
+    }
+
+    document.querySelector("body").addEventListener("click", (e) => {
+        const classList = [...e.target.classList]
+        let action = true
+
+        if (classList !== null) {
+            classList.map(x => {
+                if (x === "parent__content__select__show") {
+                    action = false
+                }
+            })
+        }
+
+        if (action) {
+            const elementSelect = [...document.getElementsByClassName("select__content__hidden")]
+            let hidden = false
+            let contentId = ""
+
+            classList.map(x => {
+                if (x !== "select__content__hidden") {
+                    hidden = true
+                }
+            })
+
+            if (!hidden) {
+
+                if (e.target.offsetParent !== null) {
+                    const parentClassList = [...e.target.offsetParent.classList]
+
+                    parentClassList.map(y => {
+                        if (y === "select__content__hidden") {
+                            contentId = e.target.offsetParent.id
+                        }
+                    })
+                }
+
+            }
+
+            if (hidden) {
+                elementSelect.map(x => {
+                    document.getElementById(x.id).style.display = "none"
+                    document.getElementById(x.dataset.parentContent).style.borderBottom = "1px solid rgb(200, 200, 200)"
+                    document.getElementById(x.dataset.parentContent).style.color = "rgb(100, 100, 100)"
+                    document.getElementById(x.dataset.parentContent).innerHTML = document.getElementById(x.dataset.parentContent).innerHTML.split('▴').join('▾')
+                    document.getElementById(x.dataset.parentContent).classList.remove("active__parent__content__select")
+                })
+            }
+            else {
+                elementSelect.map(x => {
+                    if (x.id !== contentId) {
+                        document.getElementById(x.id).style.display = "none"
+                        document.getElementById(x.dataset.parentContent).style.borderBottom = "1px solid rgb(200, 200, 200)"
+                        document.getElementById(x.dataset.parentContent).style.color = "rgb(100, 100, 100)"
+                        document.getElementById(x.dataset.parentContent).innerHTML = document.getElementById(x.dataset.parentContent).innerHTML.split('▴').join('▾')
+                        document.getElementById(x.dataset.parentContent).classList.remove("active__parent__content__select")
+                    }
+                })
+            }
+        }
+    })
+
+    /** creacion de mascara para valores separados por miles Ej. => 1.000 */
+
+    eventMaskThousand = (e) => {
+        const expReg = /[0-9]/
+        if (e !== 'Backspace') {
+            if (e.match(expReg)) {
+                return maskThousand(e)
+            }
+            else {
+                return maskThousand(e.split(e).join(''))
+            }
+        }
+        else {
+            return maskThousand(e)
+        }
+    }
+
+    maskThousand = (monto) => {
+        let maskThousandFormat = ""
+        let separator = 0
+        let separation = ''
+
+        if (monto.length <= 3) {
+            return monto
+        }
+
+        const formatNumbers = monto.split('.').join('')
+
+        const numbers = formatNumbers.split('')
+
+        for (let i = numbers.length - 1; i >= 0; i--) {
+            if (separator === 3) {
+                separation = '.'
+                separator = 0
+            }
+
+            maskThousandFormat = `${numbers[i]}${separation}${maskThousandFormat}`
+
+            separator = separator + 1
+            separation = ''
+        }
+
+        return maskThousandFormat
+    }
+
+</script>
