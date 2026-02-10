@@ -75,6 +75,7 @@ El SP evalúa `@OPCION` y ejecuta lo siguiente:
 | `ActualizaDiasSemanales` | `__SPRM_CargoMod_ActualizaDiasSemanales` | Configura días de trabajo semanal. |
 | `HistorialCargoMod` | `__HistorialCargoMod` | Obtiene el historial de cambios. |
 
+
 ## Variables Internas y Manejo de Errores
 
 *   **Transacciones**: Todo el bloque está envuelto en `BEGIN TRANSACTION` y `COMMIT TRANSACTION`. Si ocurre un error, se ejecuta `ROLLBACK TRANSACTION` en el bloque `CATCH`.
