@@ -1,6 +1,0 @@
-﻿@foreach (Teamwork.Model.Operaciones.Clientes item in ViewBag.RenderizadoClientes)
-{
-    <label for="chk_@item.Codigo" class="dspl-block cursor-pointer pdt-5 pdb-10 pdr-10 pdl-10 mb-5neg" style="width: 100%;" data-element="@item.Codigo">
-        <input type="radio" id="chk_@item.Codigo" name="cliente" class="dspl-inline-block mb-4 option-cliente" value="@item.Codigo" data-html-value="@item.Value" onclick="handleClickOptionCLI(this)"  /> @item.Value
-    </label>
-} 

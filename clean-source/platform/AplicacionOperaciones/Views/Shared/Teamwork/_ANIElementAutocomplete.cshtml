@@ -1,7 +1,0 @@
-﻿@foreach (Teamwork.Model.Finanzas.ANI item in ViewBag.RenderizadoANI)
-{
-    <label for="chk_@item.Concepto" class="dspl-block cursor-pointer pdt-5 pdb-10 pdr-10 pdl-10 mb-5neg" style="width: 100%;" data-element="@item.Concepto">
-        <input type="radio" id="chk_@item.Concepto" name="ani" class="dspl-inline-block mb-4 option-ani" value="@item.Concepto" data-html-value="@item.Valor" onclick="handleClickOptionANI(this)" /> @item.Valor
-    </label>
-}
-
