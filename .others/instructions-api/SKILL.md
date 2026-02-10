@@ -15,7 +15,14 @@ description: Instrucciones que el agente debe serguir para analizar el proyecto 
 8. Generar un archivo markdown que tenga un nombre descriptivo y que incluya todo lo analizado
 9. Generar el archivo markdown en un directorio llamado docs en la raíz del proyecto, si no existe crearlo
 10. Si se encuentran conexiones a softland, mencionar donde
-11. Si se encuentran conexiones a softland, describir qué hacen
+11. Si se encuentran conexiones a softland, describir qué hacen con lujo de detalle
+12. Si se encuentran calculos, mencionar donde
+13. Si se encuentran calculos, describir qué hacen con lujo de detalle
+14. Si se encuentran consultas a base de datos, mencionar donde
+15. Si se encuentran consultas a base de datos, describir qué hacen con lujo de detalle
+16. Describir todo con el mayo detalle posible, no importa si es necesario que te extiendas demasiado o hacer varias iteraciones, la idea es lograr el mayor detalle y entendimiento posible
+17. IMPORTATE! Todo debe ser documentado en español
+18. Si es necesario crear varios archivos markdown de salida, hazlo
 
 ## Cuando usar
 - En todo momento que se solicite analizar el proyecto legalo de .NET
@@ -86,3 +93,4 @@ description: Instrucciones que el agente debe serguir para analizar el proyecto 
 - [ ] Archivo .gitignore, contiene configuración de git, no es relevante
 - [ ] Archivo README.md, contiene documentación general del proyecto, no es relevante
 - [ ] Omitir código comentado
+- [ ] Omitir todos los archivos markdown, a menos que se indique leerlos

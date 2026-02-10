@@ -22,4 +22,5 @@ description: Instrucciones básicas que debe serguir el agente de antigravity cu
 - [ ] Omite el código comentado, pero menciona que existe
 - [ ] Lo archivos md de salida deben ser generados en la raiz del proyecto, es decir, afuera del directorio analyzed
 
-## 
+## Omitir
+- Todo lo que hay en el directorio .others
