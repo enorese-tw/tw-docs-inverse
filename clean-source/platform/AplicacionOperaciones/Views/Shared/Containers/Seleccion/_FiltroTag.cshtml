@@ -1,0 +1,21 @@
+﻿
+<select id="filterTypeTag" class="form-control new-family-teamwork dspl-inline-block mr-10" style="font-weight: 100; width: 250px; display:none;">
+    <option value="Descripcion" selected>Descripción</option>
+</select>
+
+@*<label class="new-family-teamwork dspl-inline-block">Buscar: </label>*@
+<input type="text" id="filterTag" placeholder="Buscar por Descripción" onkeydown="handleKeydownSearch(this)" data-target="searchTag" class="form-control new-family-teamwork dspl-inline-block" style="font-weight: 100; width: 300px;"/>
+
+
+<button id="searchTag" class="btn new-family-teamwork fs-18 dspl-inline-block"
+        style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; margin: none; background-color: transparent!important; font-weight: 100"
+        onclick="handleSearchTag()">
+    <span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;'
+          class='btn btn-teamwork pdt-5 pdr-5 pdb-5 pdl-5'>
+        <img src='~/Resources/buscar.svg' width='30' height='30' style='position: relative; left: 10%;' />
+    </span>
+</button>
+
+
+
+

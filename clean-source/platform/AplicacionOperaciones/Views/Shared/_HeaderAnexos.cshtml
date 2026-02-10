@@ -1,0 +1,28 @@
+﻿<div class="row" style="width: 92%; margin: auto;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-9" style="margin-top: 10px;">
+        <label style="font-family: 'Open Sans Condensed', sans-serif; line-height: 5px; display: block;">Aplicar Filtrado de Anexos</label>
+        <input type="text" id="input_anexos" class="form-control dspl-inline-block family-teamwork" style="width: 300px;" pattern="^[0-9]$" />
+        <a href="#" class="btn btn-teamwork dspl-inline-block" id="btnEventSearchAnexos" style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-buscar" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -7px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Buscar</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Tipos Anexos</i>
+            </span>
+        </a>
+        <a href="#" class="btn btn-warning eventRestore"
+           style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -7px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Restablecer</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Tipos Anexos</i>
+            </span>
+        </a>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <label class="family-teamwork color-150x3" style="font-size: 14px;" id="renderizadoresult_@ViewData["HtmlSearchElement"]">@ViewData["ResultSearch"]</label>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+﻿<div class="row" style="width: 92%; margin: auto;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 style="font-family: 'Open Sans Condensed', sans-serif; font-size: 40px;">
+            <i class="glyphicon-tw-5 glyphicon-tw-proceso2"></i> Procesos @ViewData["PostTitulo"]
+        </h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-9" style="margin-top: 10px;">
+        <label style="font-family: 'Open Sans Condensed', sans-serif; line-height: 5px; display: block;">Aplicar Filtrado de Procesos</label>
+        <select class="form-control family-teamwork eventSearchProcess" id="search_@ViewData["HtmlSearchElement"]" data-eventClick="@ViewData["HtmlSearchElement"]" style="width: 200px; display: inline-block;">
+            <option value="TW9zdHJhciBUb2Rv" data-input="input">Seleccione Filtro</option>
+            <option value="RmljaGE=" data-input="input">Ficha</option>
+            @*<option value="Tm9tYnJlIFNvbGljaXR1ZA==" data-input="input">Nombre Solicitud</option>
+        <option value="RXN0YWRv" data-input="select">Estado/Prioridad</option>
+        <option value="RmVjaGEgZGUgQ2FyZ2E=" data-input="input">Fecha de Carga</option>
+        <option value="UnV0IFRyYWJhamFkb3I=" data-input="input">Rut Trabajador</option>
+        <option value="Tm9tYnJlIFByb2Nlc28=" data-input="input">Nombre Proceso</option>
+        <option value="Q2xpZW50ZQ==" data-input="input">Cliente (Area Negocio)</option>*@
+        </select>
+        <input type="text" id="input_@ViewData["HtmlSearchElement"]" class="form-control dspl-none family-teamwork" style="width: 300px;" />
+        @*<select class="form-control family-teamwork" style="width: 300px; display: none;">
+            <option>Prioridad Normal</option>
+            <option>Prioridad Urgente</option>
+            <option>Prioridad Critico</option>
+            <option>Prioridad Sin Prioridad</option>
+            <option>Prioridad Anulado</option>
+            <option>Prioridad Con Errores</option>
+        </select>*@
+        <a href="#" class="btn btn-teamwork dspl-none btnEventSearchProcess" id="btnEvent_@ViewData["HtmlSearchElement"]" data-tiposolicitud="@ViewData["TipoSolicitud"]" data-eventElementGet="search" 
+                    data-htmlrenderizadosearch="renderizadoresult_@ViewData["HtmlSearchElement"]" data-eventDataGet="@ViewData["HtmlSearchElement"]" data-htmlrenderizado="@ViewData["htmlRenderizado"]" data-htmlpagination="@ViewData["htmlPagination"]"
+           style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-buscar" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -7px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Buscar</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Procesos</i>
+            </span>
+        </a>
+        <a href="#" class="btn btn-warning eventRestore"
+           style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -7px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Restablecer</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Procesos</i>
+            </span>
+        </a>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <label class="family-teamwork color-150x3" style="font-size: 14px;" id="renderizadoresult_@ViewData["HtmlSearchElement"]">@ViewData["ResultSearch"]</label>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="btn btn-success dspl-inline-block mb-10"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-terminar" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-12neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">Proceso Terminado</i>
+            </span>
+        </div>
+        <div class="btn btn-success dspl-inline-block mb-10"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-12neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">Proceso Con Prioridad Normal</i>
+            </span>
+        </div>
+        <div class="btn btn-warning dspl-inline-block mb-10"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #000;">
+            <i class="glyphicon-tw-7 glyphicon-tw-urgente" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-12neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">Proceso Con Prioridad Urgente</i>
+            </span>
+        </div>
+        <div class="btn btn-danger dspl-inline-block mb-10"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-critico" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-12neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">Proceso Con Prioridad Critico (Atrasado)</i>
+            </span>
+        </div>
+        <div class="btn btn-teamwork dspl-inline-block mb-10"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-noprioridad" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-12neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">Proceso Sin Prioridad</i>
+            </span>
+        </div>
+        <div class="btn btn-anulado dspl-inline-block mb-10"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-12neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">Proceso Anulado</i>
+            </span>
+        </div>
+        <div class="btn btn-create dspl-inline-block mb-10"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-12neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">Proceso Con Errores</i>
+            </span>
+        </div>
+    </div>
+</div>

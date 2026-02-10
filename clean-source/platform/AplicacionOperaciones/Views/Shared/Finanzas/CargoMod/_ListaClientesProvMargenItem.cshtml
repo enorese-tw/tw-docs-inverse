@@ -1,0 +1,148 @@
+﻿@if (((List<Teamwork.Model.Operaciones.Clientes>)ViewBag.RenderizadoClientesProvMargen).Count > 0)
+{
+    foreach (Teamwork.Model.Operaciones.Clientes item in ViewBag.RenderizadoClientesProvMargen)
+    {
+        <div class="row">
+            <div class="col-lg-1 ta-right" style="line-height: 15px; padding-left: 0; padding-right: 0;">
+                <p class="dspl-inline-block ta-left mt-40 color-100x3" id="content__legend__subconjunto__@item.Codigo">
+
+                </p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-10">
+                <div class="dspl-block mb-20 cursor-pointer" data-btn-action="btn__action__@item.Codigo" data-legends-subconjunto="content__legend__subconjunto__@item.Codigo" data-collapse-content="content__collapse__@item.Codigo"
+                     data-loading-content="content__asignaciones__@item.Codigo" onclick="handleClickCollapseAsign(this)">
+                    <div class="dspl-inline-block" style="width: 120px; z-index: 99; position: relative;">
+                        <div style="width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; vertical-align: middle;" class="btn btn-teamwork">
+                            <p class="ta-center ml-auto mr-auto family-teamwork color-fx3 pdt-20" style="line-height: 25px;">
+                                <span class="dspl-block" style="width: 100%; font-size: 40px;">@item.Codigo</span>
+                                Codigo Cliente
+                            </p>
+                        </div>
+                    </div>
+                    <div style="width: 90%; height: 120px; margin-left: -7%; z-index: 9; position: relative; border-bottom-right-radius: 100px; border-top-right-radius: 100px;" class="dspl-inline-block warning">
+                        <p style="margin-left: 10%; font-size: 30px;" class="family-teamwork color-fx3 pdt-10">
+                            <span class="dspl-block" style="width: 100%; font-size: 15px;">Descripcion del Cliente</span>
+                            @item.Empresa - @item.Value
+                            <i class="dspl-block" style="width: 100%; font-size: 14px;" id="content__collapse__@item.Codigo">Has clic para ver el detalle y puedas editar las asignaciones de margenes y provisiones. &#x25BE;</i>
+                        </p>
+                    </div>
+                </div>
+                @using (Ajax.BeginForm("ProvMargenAsignaciones", "Finanzas", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "content__asignaciones__" + item.Codigo,
+                    InsertionMode = InsertionMode.Replace
+                }))
+                {
+                    <input type="text" class="dspl-none" value="@item.Codigo" name="cliente" />
+                    <input type="text" class="dspl-none" value="@item.Empresa" name="empresa" />
+                    <input type="submit" id="btn__action__@item.Codigo" class="dspl-none" />
+                }
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+        <div class="row mb-30">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="bl-5-solid-428BCA dspl-none" id="content__asignaciones__@item.Codigo" style="min-height: 200px; width: 100%;">
+
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="row ml-auto mr-auto" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <img src="~/Resources/svg/003-404 error.svg" width="100" height="100" class="ml-auto mr-auto dspl-block" />
+            <h1 class="family-teamwork ta-center">Ups! No encontramos el area de negocio que solicitaste buscar.</h1>
+            <h3 class="family-teamwork ta-center">Te invitamos a realizar otra búsqueda si es que gustas.</h3>
+        </div>
+    </div>
+    
+    using (Ajax.BeginForm("RenderizadoClientesProvMargen", "Finanzas", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "content__init__search__clients",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementId = "loader"
+    }, new { @style = "display: inline-block; width: 100%; text-align: center;" }))
+    {
+        <div class="row mt-30">
+            <div class="col-lg-2"></div>
+            <input type="text" class="dspl-none" value="init" name="evento" />
+            <input type="text" class="dspl-none" value="MS01" name="pagination" />
+            <input type="text" class="dspl-none" value="@ViewBag.Empresa" name="empresa" id="empresaMandanteInit" />
+            <select name="typeFilter" class="form-control dspl-none family-teamwork" style="width: 10%;">
+                <option value="Codigo">Codigo Area de Negocio</option>
+            </select>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-7">
+                @Html.InputAdministrador(
+                    "text",
+                    new string[] {
+                        "class='family-teamwork bb-1-solid-200x3 bt-1-solid-200x3 bl-1-solid-200x3 br-1-solid-200x3 dspl-block mt-20'",
+                        "id='input-add'",
+                        "data-ownerlegends='legends-add'",
+                        "data-fontsizebefore='20px'",
+                        "data-fontsizeafter='14px'",
+                        "data-paddingbefore='27px, none, 11px, 30px'",
+                        "data-paddingafter='0px, none, 38px, 20px'",
+                        "onBlur='handleBlurInput(this)'",
+                        "name='dataFilter'",
+                        "required",
+                        "autocomplete='off'",
+                        "maxlength='3'"
+                    },
+                    new string[] {
+                        "padding: 10px 20px",
+                        "outline: none",
+                        "width: 100%",
+                        "text-transform: uppercase",
+                        "text-align: center",
+                        "border-radius: 25px"
+                    },
+                    "on",
+                    new string[]
+                    {
+                        "<label class='family-teamwork dspl-block pdt-27 pdl-30 pdb-11 cursor-pointer color-100x3' onclick='handleFocusInput(this)' style='position: absolute; width: 100%; font-size: 20px; text-transform: uppercase;' " +
+                        "data-fontsizeafter='14px' data-fontsizebefore='20px' data-paddingbefore='27px, none, 11px, 30px' data-paddingafter='0px, none, 38px, 20px' data-ownerfocus='input-add' id='legends-add'>Indique area de negocio (Ejemplo XYZ)</label>"
+                    }
+                    )
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-1">
+                @Html.ButtonAdministracion(
+                    "submit",
+                    new string[] {
+                        "class='dspl-inline-block btn btn-teamwork mt-20'"
+                    },
+                    new string[]
+                    {
+                        "width: 45px",
+                        "height: 45px",
+                        "border: none",
+                        "border-radius: 50%",
+                        "text-align: center"
+                    },
+                    new string[]
+                    {
+                        "<img src='../../Resources/buscar.svg' width='20' height='20' style='position: relative;' />"
+                    },
+                    true
+                )
+            </div>
+
+            <div class="col-lg-2"></div>
+        </div>
+    }
+
+}
+
+<script async>
+
+    handleClickDestroyContentPagination = (e) => {
+        setTimeout(() => {
+            document.getElementById(e.dataset.contentHidden).remove()
+        }, 200)
+    }
+
+</script>

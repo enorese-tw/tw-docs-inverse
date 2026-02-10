@@ -1,0 +1,317 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Solicitudes";
+
+}
+
+@if (ViewBag.CodeCorrect)
+{
+    if (!ViewBag.RenderizaSolicitudData)
+    {
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-100 mb-20">
+            @foreach (AplicacionOperaciones.Models.HeaderSolicitud item in (List<AplicacionOperaciones.Models.HeaderSolicitud>)ViewBag.RenderizadoHeaderSolicitudContratos)
+            {
+                Html.RenderPartial("_HeaderSolicitudes", new ViewDataDictionary() {
+            { "PostTitulo", item.PostTitulo },
+            { "htmlRenderizado", item.HtmlRenderizado },
+            { "htmlPagination", item.HtmlPagination },
+            { "HtmlSearchElement", item.HtmlSearchElement },
+            { "TipoSolicitud", item.TipoSolicitud },
+            { "NombreProceso", item.NombreProceso },
+            { "Creado", item.Creado },
+            { "Estado", item.Estado },
+            { "Glyphicon", item.Glyphicon },
+            { "GlyphiconColor", item.GlyphiconColor },
+            { "EjecutivoKam", item.EjecutivoKam },
+            { "EjecutivoCreador", item.EjecutivoCreador },
+            { "Cliente", item.Cliente },
+            { "ResultSearch", item.ResultSearch },
+            { "RenderizaSolicitud", ViewBag.RenderizaSolicitud },
+            { "RenderizadoPrioridades", ViewBag.RenderizadoPrioridades }
+        });
+            }
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="solicitudContrato">
+            @foreach (AplicacionOperaciones.Models.Solicitud item in (List<AplicacionOperaciones.Models.Solicitud>)ViewBag.RenderizadoSolicitudContratos)
+            {
+                if (item.Code == "200")
+                {
+                    Html.RenderPartial("_Solicitudes", new ViewDataDictionary() {
+                { "Nombre", item.NombreSolicitud },
+                { "NombreProceso", item.NombreProceso },
+                { "TipoEvento", item.TipoEvento },
+                { "FechaCreacion", item.Creado },
+                { "CodificarCod", item.CodificarCod },
+                { "CodigoSolicitud", item.CodigoSolicitud },
+                { "FechasCompromiso", item.FechasCompromiso },
+                { "Comentarios", item.Comentarios },
+                { "Prioridad", item.Prioridad },
+                { "Glyphicon", item.Glyphicon },
+                { "GlyphiconColor", item.GlyphiconColor },
+                { "BorderColor", item.BorderColor },
+                { "ColorFont", item.ColorFont },
+                { "RenderizadoOpciones" , item.RenderizadoOpciones },
+                { "OptDescargarDatosCargados" , item.OptDescargarDatosCargados },
+                { "OptAsignarSolicitud" , item.OptAsignarSolicitud },
+                { "OptDescargarSolicitudContratoIndividual" , item.OptDescargarSolicitudContratoIndividual },
+                { "OptHistorialSolicitud" , item.OptHistorialSolicitud },
+                { "OptRevertirAnulacion" , item.OptRevertirAnulacion },
+                { "OptDescargarErrorDatosCargados" , item.OptDescargarErrorDatosCargados },
+                { "OptAnularSolicitud" , item.OptAnularSolicitud },
+                { "OptRevertirTermino" , item.OptRevertirTermino }
+            });
+                }
+                else
+                {
+                    Html.RenderPartial("_NoResultadosEncontrados", new ViewDataDictionary() {
+                { "Message", item.Message },
+                { "Clase", "" }
+            });
+                }
+            }
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-50 ta-center mb-50" id="solicitudContratoPagination">
+            @foreach (AplicacionOperaciones.Models.Pagination item in (List<AplicacionOperaciones.Models.Pagination>)ViewBag.RenderizadoPagSolicitudesContratos)
+            {
+                if (item.Code == "200")
+                {
+                    Html.RenderPartial("_Pagination", new ViewDataDictionary() {
+                { "FirstItem", item.FirstItem },
+                { "PreviousItem", item.PreviousItem },
+                { "Codificar", item.Codificar },
+                { "NumeroPagina", item.NumeroPagina },
+               { "NextItem", item.NextItem },
+                 { "LastItem", item.LastItem },
+                 { "TotalItems", item.TotalItems },
+                { "Active", item.Active },
+                { "TipoSolicitud", item.TipoSolicitud },
+                { "HtmlRenderizado", item.HtmlRenderizado },
+                { "HtmlPagination", item.HtmlPagination },
+                { "HtmlSearchElement", item.HtmlSearchElement },
+                { "HtmlEventAction", item.HtmlEventAction }
+            });
+                }
+            }
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-100 mb-20">
+            @foreach (AplicacionOperaciones.Models.HeaderSolicitud item in (List<AplicacionOperaciones.Models.HeaderSolicitud>)ViewBag.RenderizadoHeaderSolicitudRenovaciones)
+            {
+                Html.RenderPartial("_HeaderSolicitudes", new ViewDataDictionary() {
+            { "PostTitulo", item.PostTitulo },
+            { "htmlRenderizado", item.HtmlRenderizado },
+            { "htmlPagination", item.HtmlPagination },
+            { "HtmlSearchElement", item.HtmlSearchElement },
+            { "TipoSolicitud", item.TipoSolicitud },
+            { "NombreProceso", item.NombreProceso },
+            { "Creado", item.Creado },
+            { "Estado", item.Estado },
+            { "Glyphicon", item.Glyphicon },
+            { "GlyphiconColor", item.GlyphiconColor },
+            { "EjecutivoKam", item.EjecutivoKam },
+            { "EjecutivoCreador", item.EjecutivoCreador },
+            { "Cliente", item.Cliente },
+            { "ResultSearch", item.ResultSearch },
+            { "RenderizaSolicitud", ViewBag.RenderizaSolicitud },
+            { "RenderizadoPrioridades", ViewBag.RenderizadoPrioridades }
+        });
+            }
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-100" id="solicitudRenovacion">
+            @foreach (AplicacionOperaciones.Models.Solicitud item in (List<AplicacionOperaciones.Models.Solicitud>)ViewBag.RenderizadoSolicitudRenovaciones)
+            {
+                if (item.Code == "200")
+                {
+                    Html.RenderPartial("_Solicitudes", new ViewDataDictionary() {
+                { "Nombre", item.NombreSolicitud },
+                { "NombreProceso", item.NombreProceso },
+                { "TipoEvento", item.TipoEvento },
+                { "FechaCreacion", item.Creado },
+                { "CodificarCod", item.CodificarCod },
+                { "CodigoSolicitud", item.CodigoSolicitud },
+                { "FechasCompromiso", item.FechasCompromiso },
+                { "Comentarios", item.Comentarios },
+                { "Prioridad", item.Prioridad },
+                { "Glyphicon", item.Glyphicon },
+                { "GlyphiconColor", item.GlyphiconColor },
+                { "BorderColor", item.BorderColor },
+                { "ColorFont", item.ColorFont },
+                { "RenderizadoOpciones", item.RenderizadoOpciones },
+                { "OptDescargarDatosCargados" , item.OptDescargarDatosCargados },
+                { "OptAsignarSolicitud" , item.OptAsignarSolicitud },
+                { "OptDescargarSolicitudContratoIndividual" , item.OptDescargarSolicitudContratoIndividual },
+                { "OptHistorialSolicitud" , item.OptHistorialSolicitud },
+                { "OptRevertirAnulacion" , item.OptRevertirAnulacion },
+                { "OptDescargarErrorDatosCargados" , item.OptDescargarErrorDatosCargados },
+                { "OptAnularSolicitud" , item.OptAnularSolicitud },
+                { "OptRevertirTermino" , item.OptRevertirTermino }
+            });
+                }
+                else
+                {
+                    Html.RenderPartial("_NoResultadosEncontrados", new ViewDataDictionary() {
+                { "Message", item.Message },
+                { "Clase", "" }
+            });
+                }
+            }
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-50 ta-center mb-50" id="solicitudRenovacionPagination">
+            @foreach (AplicacionOperaciones.Models.Pagination item in (List<AplicacionOperaciones.Models.Pagination>)ViewBag.RenderizadoPagSolicitudesRenovaciones)
+            {
+                if (item.Code == "200")
+                {
+                    Html.RenderPartial("_Pagination", new ViewDataDictionary() {
+                { "FirstItem", item.FirstItem },
+                { "PreviousItem", item.PreviousItem },
+                { "Codificar", item.Codificar },
+                { "NumeroPagina", item.NumeroPagina },
+                { "NextItem", item.NextItem },
+                { "LastItem", item.LastItem },
+                { "TotalItems", item.TotalItems },
+                { "Active", item.Active },
+                { "TipoSolicitud", item.TipoSolicitud },
+                { "HtmlRenderizado", item.HtmlRenderizado },
+                { "HtmlPagination", item.HtmlPagination },
+                { "HtmlSearchElement", item.HtmlSearchElement },
+                { "HtmlEventAction", item.HtmlEventAction }
+            });
+                }
+            }
+        </div>
+    }
+    else
+    {
+        if (ViewBag.RenderizaDatosSolicitudType == "Contratos")
+        {
+            foreach (AplicacionOperaciones.Models.SolicitudContrato item in (List<AplicacionOperaciones.Models.SolicitudContrato>)ViewBag.RenderizadoSolicitudContrato)
+            {
+                Html.RenderPartial("_DatosSolicitudContrato", new ViewDataDictionary(){
+        { "NombreSolicitud" , item.NombreSolicitud },
+        { "Comentarios", item.Comentarios },
+        { "Glyphicon", item.Glyphicon },
+        { "GlyphiconColor", item.GlyphiconColor },
+        { "ColorFont", item.ColorFont },
+        { "NombreProceso" , item.NombreProceso },
+        { "Creado" , item.Creado },
+        { "EjecutivoCarga" , item.EjecutivoCarga },
+        { "BusinessCenter" , item.BusinessCenter },
+        { "AuthStatement" , item.AuthStatement },
+        { "FastTrack" , item.FastTrack },
+        { "Rut" , item.Rut },
+        { "Nombre" , item.Nombre },
+        { "NativeSurname" , item.NativeSurname },
+        { "Surname" , item.Surname },
+        {"Email" , item.Email },
+        {"Birthdate" , item.Birthdate },
+        {"CivilState" , item.CivilState },
+        {"Gender" , item.Gender },
+        {"Address" , item.Address },
+        {"Comuna" , item.Comuna },
+        {"Ciudad" , item.Ciudad },
+        {"Country" , item.Country },
+        {"Phone" , item.Phone },
+        {"Salud" , item.Salud },
+        {"MontoIsapre" , item.MontoIsapre },
+        {"Afp" , item.Afp },
+        {"PorcentajeAfp" , item.PorcentajeAfp },
+        {"PorcentajeSeguroMasComisionAfp" , item.PorcentajeSeguroMasComisionAfp },
+        {"Bank" , item.Bank },
+        {"BankAccount" , item.BankAccount },
+        {"AccountType" , item.AccountType },
+        {"Profesion" , item.Profesion },
+        {"StartDate" , item.StartDate },
+        {"CodCaja" , item.CodCaja },
+        {"CodEstudios" , item.CodEstudios },
+        {"CodCentroCosto" , item.CodCentroCosto },
+        {"CodCargo" , item.CodCargo },
+        {"NHijos" , item.NHijos },
+        {"UltimoEmpleador" , item.UltimoEmpleador },
+        {"TallaPantalon" , item.TallaPantalon },
+        {"TallaPolera" , item.TallaPolera },
+        {"TallaZapatos" , item.TallaZapatos },
+        {"Observaciones" , item.Observaciones },
+        {"Categoria" , item.Categoria },
+        {"TipoContrato" , item.TipoContrato },
+        {"TipoMov" , item.TipoMov },
+        {"Causal" , item.Causal },
+        {"ObsCausal" , item.ObsCausal },
+        {"FinalDate" , item.FinalDate },
+        {"DatePrimPlazoInicio" , item.DatePrimPlazoInicio },
+        {"DatePrimPlazoTermino" , item.DatePrimPlazoTermino },
+        {"DateSegPlazoInicio" , item.DateSegPlazoInicio },
+        {"DateSegPlazoTermino" , item.DateSegPlazoTermino },
+        {"ObsMantencion" , item.ObsMantencion },
+        {"EjecutivoName" , item.EjecutivoName },
+        {"IdCliente" , item.IdCliente },
+        {"HorasTrab" , item.HorasTrab },
+        {"HorariosTrab" , item.HorariosTrab },
+        {"Visa" , item.Visa },
+        {"VencVisa" , item.VencVisa },
+        {"Colacion" , item.Colacion },
+        {"CargoReal" , item.CargoReal },
+        {"Reemplazo" , item.Reemplazo },
+        {"DescripcionFunciones" , item.DescripcionFunciones },
+        {"RenovacionAutomatica" , item.RenovacionAutomatica },
+        {"Pasaporte" , item.Pasaporte },
+        {"Empresa" , item.Empresa }
+    });
+            }
+        }
+        else
+        {
+            foreach (AplicacionOperaciones.Models.SolicitudRenovacion item in (List<AplicacionOperaciones.Models.SolicitudRenovacion>)ViewBag.RenderizadoSolicitudRenovacion)
+            {
+                Html.RenderPartial("_DatosSolicitudRenovacion", new ViewDataDictionary(){
+        { "NombreSolicitud" , item.NombreSolicitud },
+        { "Comentarios", item.Comentarios },
+        { "Glyphicon", item.Glyphicon },
+        { "GlyphiconColor", item.GlyphiconColor },
+        { "ColorFont", item.ColorFont },
+        { "NombreProceso" , item.NombreProceso },
+        { "Creado" , item.Creado },
+        { "EjecutivoCarga" , item.EjecutivoCarga },
+        { "Ficha", item.Ficha },
+        { "Rut", item.Rut },
+        { "NombreCompleto", item.NombreCompleto },
+        { "CargoMod", item.CargoMod },
+        { "FechaInicio", item.FechaInicio },
+        { "FechaTermino", item.FechaTermino },
+        { "Causal", item.Causal },
+        { "FechaInicioRenov", item.FechaInicioRenov },
+        { "FechaTerminoRenov", item.FechaTerminoRenov },
+        { "Empresa",item.Empresa }
+    });
+            }
+        }
+
+    }
+
+    Html.RenderPartial("_ModalExpiracionSesion");
+    Html.RenderPartial("_ModalConfirmarEvento");
+    Html.RenderPartial("_ModalConfirmarEventoRevertirTerminadoInd");
+    Html.RenderPartial("_ModalErrorReversionTermino");
+
+    Html.RenderPartial("_ModalAnularSolicitud", new ViewDataDictionary() {
+{ "RenderizadoMotivosAnulacion", ViewBag.RenderizadoMotivosAnulacion }
+});
+
+<span id="loaderProceso"></span>
+<span id="loaderSearch"></span>
+}
+else
+{
+
+foreach (AplicacionOperaciones.Models.Error item in (List<AplicacionOperaciones.Models.Error>)ViewBag.Error)
+{
+    @Html.Partial("_ErrorSistema", new ViewDataDictionary {
+        { "Resultado", item.Message }
+    });
+}
+
+}
+
+@Scripts.Render("~/bundles/ajaxfunciones")
+@Scripts.Render("~/bundles/solicitudes")
+@Scripts.Render("~/bundles/utils")
+@Scripts.Render("~/bundles/solicitudesgeneric")

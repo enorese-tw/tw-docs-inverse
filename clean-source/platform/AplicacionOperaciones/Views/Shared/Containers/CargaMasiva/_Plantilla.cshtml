@@ -1,0 +1,28 @@
+﻿@using Teamwork.Model.Operaciones
+@model List<ProcesoCargaMasiva>
+
+
+@foreach (ProcesoCargaMasiva item in Model)
+{
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="new-family-teamwork" style="font-weight: 100; font-size: 40px;">
+            <i class="glyphicon-tw-21 @item.Glyphicon"></i>
+            <br />
+            @item.RenderizadoTituloOne @item.RenderizadoTituloTwo
+        </h1>
+        <h2 class="new-family-teamwork fs-20 mt-5neg" style="font-weight: 100;">@item.RenderizadoDescripcion</h2>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="new-family-teamwork m-auto ta-justify" style="font-weight: 100; color: #f00; width: 70%;" id="messagePlataforma"></div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        @Html.Partial("Components/CargaMasiva/_Upload")
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center mt-30">
+        <h1 class="new-family-teamwork" style="font-weight: 100; font-size: 30px;">@item.RenderizadoTituloDownload @item.RenderizadoTituloTwo</h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center mt-10">
+        @Html.Partial("Components/CargaMasiva/_Download")
+    </div>
+    <span id="loaderProceso"></span>
+}

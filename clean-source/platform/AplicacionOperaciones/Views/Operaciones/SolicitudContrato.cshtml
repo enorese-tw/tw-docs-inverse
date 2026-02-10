@@ -1,0 +1,30 @@
+﻿@using Teamwork.Model.Operaciones
+@model List<ProcesoCargaMasiva>
+
+@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Solicitud Contratos";
+}
+
+<div class="row mt-100 ta-center" id="content__cargamasiva">
+    @{ Html.RenderPartial("Containers/CargaMasiva/_Plantilla", Model); }
+</div>
+
+@if (Request.QueryString["mode"] == "bW9kb19hZG1pbmlzdHJhZG9yX3JlZW52aWFyc29saWNpdHVk")
+{
+    using (Ajax.BeginForm("PlantillaEmitirSolicitudContrato", "Operaciones", new AjaxOptions()
+    {
+        HttpMethod = "POST"
+    }))
+    {
+        <input type="text" name="plantillaMasiva" placeholder="Plantilla" value="MQ==" />
+        <input type="text" name="codigoTransaction" placeholder="Codigo Transaccion" />
+        <button type="submit">Enviar solicitud</button>
+    }
+}
+
+
+@Scripts.Render("~/bundles/ajaxFunciones")
+@Scripts.Render("~/bundles/utils")
+@Scripts.Render("~/bundles/solicitudcontrato")
+@Scripts.Render("~/bundles/cargamasiva")

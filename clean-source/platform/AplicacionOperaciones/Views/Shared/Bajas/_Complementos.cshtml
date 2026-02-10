@@ -1,0 +1,491 @@
+﻿<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="family-teamwork color-100x3" style="font-size: 40px;">
+            <b><i class="glyphicon-tw-5 glyphicon-tw-complemento mb-10neg"></i> Complementos de Finiquito </b>
+        </h1>
+    </div>
+</div>
+
+@switch ((string)ViewBag.HasSectionIndv)
+{
+    case "Finiquito":
+        <table style="width: 100%;">
+            <tbody>
+                @foreach (Teamwork.Model.Bajas.Complementos item in ViewBag.RenderizaComplementos)
+                {
+                    <tr class="@item.Border br-1-solid-200x3 bb-1-solid-200x3 bt-1-solid-200x3">
+                        <td style="width: 120px; border-left: none; border-right: none;" class="ta-center">
+                            <p class="@item.GlyphiconColor family-teamwork color-fx3 fw-bold m-auto" style="font-size: 16px; width: 60px; height: 60px; display: inline-block; border-radius: 50%; vertical-align: middle; display: flex; align-items: center; text-align: center;">
+                                <span style="width: 100%; text-align: center; display: block;">@item.Folio</span>
+                            </p>
+                        </td>
+                        <td style="border-left: none; border-right: none;">
+                            <a href="@item.DetalleComplemento" style="width: 100%; display: block;">
+                                <h1 class="family-teamwork color-100x3 fw-bold" style="font-size: 18px;">@Html.Raw(item.NombreSolicitudCorto)</h1>
+                                <p class="family-teamwork color-100x3 mt-5neg">Creado <b>@item.Creado</b> &bull; Creado por <i class="fw-bold fst-normal">@item.CreadoPor</i></p>
+                                @*<p class="family-teamwork color-100x3 mt-15neg">Solicitud: <b>Finiquito TWEST • GMP • CA01909001 • 007.687.639-8 RODRIGUEZ VIDELA PILAR DEL CARMEN</b></p>*@
+
+                                <p class="family-teamwork color-100x3 mt-15neg">Comentarios de Seguimiento: <i class="fw-bold fst-normal">@Html.Raw(item.Comentarios)</i></p>
+                            </a>
+                        </td>
+                        <td>
+                            @if (item.EnlaceVolverFiniquito == "S")
+                            {
+                                <a href="@item.EnlaceVolverFiniquito" class="btn btn-teamwork" target="_blank"
+                                   style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Finiquito</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Asociado</i>
+                                    </span>
+                                </a>
+                            }
+
+                            @if (item.OptViewDocumento == "S")
+                            {
+                                <a href="@item.EnlaceDocumento" class="btn btn-danger" target="_blank"
+                                   style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-pdf" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Visualizar</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Documento</i>
+                                    </span>
+                                </a>
+                            }
+
+
+                            @if (item.OptAnular == "S")
+                            {
+                                using (Ajax.BeginForm("ConfirmacionEvento", "Bajas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "contentPayment",
+                                    OnSuccess = "ModalPaymentShow",
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" class="dspl-none" name="option" value="AnularComplemento" />
+                                    <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                    <input type="text" class="dspl-none" name="codigoComplemento" value="@item.CodigoComplemento" />
+                                    <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                    <button type="submit" class="btn btn-anulado"
+                                            style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                        <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                        <span style="display: inline-block; margin-top: -7px;">
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Anular</i>
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Complemento</i>
+                                        </span>
+                                    </button>
+                                }
+                            }
+
+                            @if (item.OptEnviarProcesoPagoTEF == "S")
+                            {
+                                using (Ajax.BeginForm("DatosSolicitudTransferencia", "Bajas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "contentPayment",
+                                    OnSuccess = "ModalPaymentShow",
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" class="dspl-none" name="origen" value="CMP" />
+                                    <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                    <input type="text" class="dspl-none" name="codigoComplemento" value="@item.CodigoComplemento" />
+                                    <input type="text" class="dspl-none" name="enlaceViewCaratula" value="@item.EnlaceDocumento" />
+                                    <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                    <button type="submit" class="btn btn-warning"
+                                            style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                        <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                        <b>
+                                            <span style="display: inline-block; margin-top: -7px;">
+                                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Solicitar Pago</i>
+                                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Por TEF/Deposito</i>
+                                            </span>
+                                        </b>
+                                    </button>
+                                }
+                            }
+
+                            @if (item.OptRevEnvioProcesoPago == "S")
+                            {
+                                using (Ajax.BeginForm("RevertirSolicitudTransferencia", "Bajas", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "contentPayment",
+                                    OnSuccess = "ModalPaymentShow",
+                                    LoadingElementId = "loader"
+                                }))
+                                {
+                                    <input type="text" class="dspl-none" name="pago" value="@item.Pago" />
+                                    <input type="text" class="dspl-none" name="codigoPago" value="@item.CodigoPago" />
+                                    <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                    <input type="text" class="dspl-none" name="origen" value="CMP" />
+                                    <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                    <button type="submit" class="btn btn-anulado"
+                                            style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                        <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                                        <span style="display: inline-block; margin-top: -7px;">
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Revertir Solicitud</i>
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Transferencia/Deposito</i>
+                                        </span>
+                                    </button>
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        break;
+    case "Complemento":
+        foreach (Teamwork.Model.Bajas.Complementos item in ViewBag.RenderizaComplementos)
+        {
+            <h3 class="@item.GlyphiconColor pdt-5 pdr-10 pdb-5 pdl-10 family-teamwork color-fx3 dspl-inline-block" style="vertical-align: top;">@item.Folio</h3>
+            <h3 class="@item.GlyphiconColor pdt-7 pdr-10 pdb-8 pdl-10 family-teamwork color-fx3 dspl-inline-block" style="font-size: 20px; vertical-align: top;">
+                <i class="" style="width: 25px; height: 25px; margin-bottom: -5px; display: inline-block;"></i>
+            </h3>
+            <h1 class="family-teamwork color-100x3"><b>@Html.Raw(item.NombreSolicitud)</b></h1>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                    <p class="@item.GlyphiconColor pdt-5 pdr-10 pdb-5 pdl-10 family-teamwork color-fx3 dspl-inline-block">Creado Por <b>@item.CreadoPor</b></p>
+                    <p class="@item.GlyphiconColor pdt-5 pdr-10 pdb-5 pdl-10 family-teamwork color-fx3 dspl-inline-block">Creado <b>@item.Creado</b></p>
+                    <p class="pdt-5 pdr-10 pdb-5 pdl-10 family-teamwork color-100x3 dspl-inline-block">Asociado a Solicitud <b>@Html.Raw(item.Solicitud)</b></p>
+                    <div>
+                        @if (item.EnlaceVolverFiniquito == "S")
+                        {
+                            <a href="@item.EnlaceVolverFiniquito" class="btn btn-teamwork" target="_blank"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Finiquito</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Asociado</i>
+                                </span>
+                            </a>
+                        }
+
+                        @if (item.OptViewDocumento == "S")
+                        {
+                            <a href="@item.EnlaceDocumento" class="btn btn-danger" target="_blank"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-pdf" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Visualizar</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Documento</i>
+                                </span>
+                            </a>
+                        }
+
+
+                        @if (item.OptAnular == "S")
+                        {
+                            using (Ajax.BeginForm("ConfirmacionEvento", "Bajas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "contentPayment",
+                                OnSuccess = "ModalPaymentShow",
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" name="option" value="AnularComplemento" />
+                                <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                <input type="text" class="dspl-none" name="codigoComplemento" value="@item.CodigoComplemento" />
+                                <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                <button type="submit" class="btn btn-anulado"
+                                        style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Anular</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Complemento</i>
+                                    </span>
+                                </button>
+                            }
+                        }
+
+                        @if (item.OptEnviarProcesoPagoTEF == "S")
+                        {
+                            using (Ajax.BeginForm("DatosSolicitudTransferencia", "Bajas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "contentPayment",
+                                OnSuccess = "ModalPaymentShow",
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" name="origen" value="CMP" />
+                                <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                <input type="text" class="dspl-none" name="codigoComplemento" value="@item.CodigoComplemento" />
+                                <input type="text" class="dspl-none" name="enlaceViewCaratula" value="@item.EnlaceDocumento" />
+                                <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                <button type="submit" class="btn btn-warning"
+                                        style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                    <b>
+                                        <span style="display: inline-block; margin-top: -7px;">
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Solicitar Pago</i>
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Por TEF/Deposito</i>
+                                        </span>
+                                    </b>
+                                </button>
+                            }
+                        }
+
+                        @if (item.OptRevEnvioProcesoPago == "S")
+                        {
+                            using (Ajax.BeginForm("RevertirSolicitudTransferencia", "Bajas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "contentPayment",
+                                OnSuccess = "ModalPaymentShow",
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" name="pago" value="@item.Pago" />
+                                <input type="text" class="dspl-none" name="codigoPago" value="@item.CodigoPago" />
+                                <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                <input type="text" class="dspl-none" name="origen" value="CMP" />
+                                <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                <button type="submit" class="btn btn-anulado"
+                                        style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Revertir Solicitud</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Transferencia/Deposito</i>
+                                    </span>
+                                </button>
+                            }
+                        }
+
+                    </div>
+
+                    <p class="family-teamwork ta-center color-100x3" style="font-size: 18px;">Monto Total Complemento</p>
+                    <p class="family-teamwork ta-center mt-20neg color-100x3" style="font-size: 40px;"><b>$ @item.TotalComplemento</b></p>
+
+                    <p class="family-teamwork @item.Border pdl-5 pdt-5 pdb-5 color-100x3" style="font-size: 18px;">Comentarios: @item.Comentarios</p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 ta-center">
+                    <embed src="@item.EnlaceDocumento" style="width: 100%; height: 700px;" />
+                    <div style="margin-top: -600px; width: 100%; height: 600px; text-align: center;">
+                        <img src="~/Resources/pdfcolorreal-x2.png" style="width: 50px; display: block; margin: auto;" />
+                        <h1 class="family-teamwork color-100x3">Cargando PDF<br />Espere un momento...</h1>
+                    </div>
+                </div>
+            </div>
+
+        }
+        break;
+    case "All":
+
+        if (((List<Teamwork.Model.Bajas.Complementos>)ViewBag.RenderizaComplementos).Count > 0)
+        {
+            <table style="width: 100%;">
+                <tbody>
+                    @foreach (Teamwork.Model.Bajas.Complementos item in ViewBag.RenderizaComplementos)
+                    {
+                        <tr class="@item.Border br-1-solid-200x3 bb-1-solid-200x3 bt-1-solid-200x3">
+                            <td style="width: 120px; border-left: none; border-right: none;" class="ta-center">
+                                <p class="@item.GlyphiconColor family-teamwork color-fx3 fw-bold m-auto" style="font-size: 20px; width: 80px; height: 80px; display: inline-block; border-radius: 50%; vertical-align: middle; display: flex; align-items: center; text-align: center;">
+                                    <span style="width: 100%; text-align: center; display: block;">@item.Folio</span>
+                                </p>
+                            </td>
+                            <td style="border-left: none; border-right: none;">
+                                <a href="@item.DetalleComplemento" style="width: 100%; display: block;">
+                                    <h1 class="family-teamwork color-100x3 fw-bold" style="font-size: 18px;">@Html.Raw(item.NombreSolicitud)</h1>
+                                    <p class="family-teamwork color-100x3 mt-5neg">Creado @item.Creado</p>
+                                    <p class="family-teamwork color-100x3 mt-15neg">Creado por <i class="fw-bold fst-normal">@item.CreadoPor</i></p>
+                                    <p class="family-teamwork color-100x3 mt-15neg">Solicitud: <b>@Html.Raw(item.Solicitud)</b></p>
+                                    <p class="family-teamwork color-100x3 mt-15neg">Monto Liquido a Percibir <i class="fw-bold fst-normal">$ @item.TotalComplemento</i></p>
+                                    <p class="family-teamwork color-100x3 mt-15neg">Comentarios de Seguimiento: <i class="fw-bold fst-normal">@Html.Raw(item.Comentarios)</i></p>
+                                </a>
+                            </td>
+                            <td>
+                                @if (item.EnlaceVolverFiniquito == "S")
+                                {
+                                    <a href="@item.EnlaceVolverFiniquito" class="btn btn-teamwork" target="_blank"
+                                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                        <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                                        <span style="display: inline-block; margin-top: -7px;">
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Finiquito</i>
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Asociado</i>
+                                        </span>
+                                    </a>
+                                }
+
+                                @if (item.OptViewDocumento == "S")
+                                {
+                                    <a href="@item.EnlaceDocumento" class="btn btn-danger" target="_blank"
+                                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                        <i class="glyphicon-tw-7 glyphicon-tw-pdf" style="display: inline-block;"></i>
+                                        <span style="display: inline-block; margin-top: -7px;">
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Visualizar</i>
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Documento</i>
+                                        </span>
+                                    </a>
+                                }
+
+
+                                @if (item.OptAnular == "S")
+                                {
+                                    using (Ajax.BeginForm("ConfirmacionEvento", "Bajas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "contentPayment",
+                                        OnSuccess = "ModalPaymentShow",
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" class="dspl-none" name="option" value="AnularComplemento" />
+                                        <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                        <input type="text" class="dspl-none" name="codigoComplemento" value="@item.CodigoComplemento" />
+                                        <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                        <button type="submit" class="btn btn-anulado"
+                                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                            <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                            <span style="display: inline-block; margin-top: -7px;">
+                                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Anular</i>
+                                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Complemento</i>
+                                            </span>
+                                        </button>
+                                    }
+                                }
+
+                                @if (item.OptEnviarProcesoPagoTEF == "S")
+                                {
+                                    using (Ajax.BeginForm("DatosSolicitudTransferencia", "Bajas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "contentPayment",
+                                        OnSuccess = "ModalPaymentShow",
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" class="dspl-none" name="origen" value="CMP" />
+                                        <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                        <input type="text" class="dspl-none" name="codigoComplemento" value="@item.CodigoComplemento" />
+                                        <input type="text" class="dspl-none" name="enlaceViewCaratula" value="@item.EnlaceDocumento" />
+                                        <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                        <button type="submit" class="btn btn-warning"
+                                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                            <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                            <b>
+                                                <span style="display: inline-block; margin-top: -7px;">
+                                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Solicitar Pago</i>
+                                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Por TEF/Deposito</i>
+                                                </span>
+                                            </b>
+                                        </button>
+                                    }
+                                }
+
+                                @if (item.OptRevEnvioProcesoPago == "S")
+                                {
+                                    using (Ajax.BeginForm("RevertirSolicitudTransferencia", "Bajas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "contentPayment",
+                                        OnSuccess = "ModalPaymentShow",
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" class="dspl-none" name="pago" value="@item.Pago" />
+                                        <input type="text" class="dspl-none" name="codigoPago" value="@item.CodigoPago" />
+                                        <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                        <input type="text" class="dspl-none" name="origen" value="CMP" />
+                                        <input type="text" class="dspl-none" name="onlyFiniquito" value="@ViewBag.OnlyFiniquito" />
+                                        <button type="submit" class="btn btn-anulado"
+                                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                            <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                                            <span style="display: inline-block; margin-top: -7px;">
+                                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Revertir Solicitud</i>
+                                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size:
+                                                                14px; font-style: normal; display: block;">Transferencia/Deposito</i>
+                                            </span>
+                                        </button>
+                                    }
+                                }
+
+                                @if ((string)item.ConfirmarPago == "S")
+                                {
+                                    using (Ajax.BeginForm("ConsultarTipoConfirmacion", "Bajas", new AjaxOptions()
+                                    {
+                                        HttpMethod = "POST",
+                                        InsertionMode = InsertionMode.Replace,
+                                        UpdateTargetId = "contentPayment",
+                                        OnSuccess = "ModalPaymentShow",
+                                        LoadingElementId = "loader"
+                                    }))
+                                    {
+                                        <input type="text" class="dspl-none" name="enlaceViewCaratula" value="@item.EnlaceDocumento" />
+                                        <input type="text" class="dspl-none" name="paginationIndex" value="@ViewBag.ReferenciaPaginationIndex" />
+                                        <input type="text" class="dspl-none" name="codigoComplemento" value="@item.CodigoComplemento" />
+                                        <input type="text" class="dspl-none" name="origen" value="CMP" />
+                                        <button type="submit" class="btn btn-teamwork"
+                                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                            <i class="glyphicon-tw-7 glyphicon-tw-asignado" style="display: inline-block;"></i>
+                                            <span style="display: inline-block; margin-top: -7px;">
+                                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Confirmar el</i>
+                                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block;">Pago de Complemento</i>
+                                            </span>
+                                        </button>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="mt-40 mb-100 ta-center">
+                @Html.Partial("Teamwork/_PaginationsComplementos")
+            </div>
+        }
+        else
+        {
+            <img src="~/Resources/sinresultados.png" style="width: 100px;" class="dspl-block m-auto" />
+            <h1 class="family-teamwork ta-center color-70x3 mt-10ne">Ups, Lo sentimos! No se ha encontrado lo que esta buscando!</h1>
+            <h1 class="family-teamwork ta-center color-70x3 mt-10neg" style="font-size: 50px;">Sistema de Complementos</h1>
+        }
+
+        break;
+}

@@ -1,0 +1,79 @@
+﻿<table class="family-teamwork">
+    <tbody>
+        @foreach (Teamwork.Model.Operaciones.BonosCargoMod item in ViewBag.RenderizadoBonosCargoMod)
+        {
+            <tr class="@item.Border br-1-solid-200x3 bt-1-solid-200x3 bb-1-solid-200x3">
+                <td style="width: 50px;" class="ta-center">
+                    @switch (item.Glyphicon)
+                    {
+                        case "success":
+                            <img src="~/Resources/check.png" style="width: 30px; border-radius: 50%;" class="@item.GlyphiconColor dspl-inline-block" />
+                            break;
+                        case "warning":
+                            <img src="~/Resources/advertencia.png" style="width: 30px; border-radius: 50%;" class="@item.GlyphiconColor dspl-inline-block " />
+                            break;
+                    }
+
+                </td>
+                <td>
+                    <p style="font-size: 19px;">@item.Nombre</p>
+                    <p class="mt-10neg">Creado @item.Creado &bull; Ultima Actualización @item.UltimaActualizacion</p>
+                    <p class="mt-15neg">Creado Por: @item.CreadoPor</p>
+                    <p class="mt-15neg">Comentarios: @item.Comentarios</p>
+                </td>
+                <td class="ta-center pdl-30 pdr-30">
+                    <p class="mt-10neg">Monto del Bono<i class="fst-normal mt-10neg dspl-block" style="font-size: 30px;">@item.Valor</i></p>
+                </td>
+                <td>
+                    @using (Ajax.BeginForm("ConfirmarEvento", "Operaciones", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "contentOperaciones",
+                        InsertionMode = InsertionMode.Replace,
+                        OnSuccess = "ShowModalConfirmacion",
+                        LoadingElementId = "loader"
+                    }))
+                    {
+                        <input type="text" class="dspl-none" name="option" value="ActualizarBono" />
+                        <button type="submit" class="btn btn-warning"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #000;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-edit" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Editar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block;">Bono</i>
+                            </span>
+                        </button>
+                    }
+
+                    @using (Ajax.BeginForm("ConfirmarEvento", "Operaciones", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "contentOperaciones",
+                        InsertionMode = InsertionMode.Replace,
+                        OnSuccess = "ShowModalConfirmacion",
+                        LoadingElementId = "loader"
+                    }))
+                    {
+                        <input type="text" class="dspl-none" name="option" value="EliminarBono" />
+                        <input type="text" class="dspl-none" name="bono" value="@item.Nombre" />
+                        <input type="text" class="dspl-none" name="codigoBono" value="@item.CodigoBono" />
+                        <input type="text" class="dspl-none" name="codigoCargoMod" value="@item.CodigoCargoMod" />
+                        <button type="submit" class="btn btn-danger"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-trash" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Eliminar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block;">Bono</i>
+                            </span>
+                        </button>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

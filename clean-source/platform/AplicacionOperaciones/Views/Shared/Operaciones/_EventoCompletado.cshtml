@@ -1,0 +1,33 @@
+﻿@switch ((string)ViewBag.OptionEventoCompletado)
+{
+    case "EliminarBono":
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+                <img src="~/Resources/check.png" style="width: 60px; border-radius: 50%;" class="success dspl-inline-block mb-3" />
+                <h2 class="family-teamwork">@ViewBag.MessageEventoCompletado</h2>
+                @using (Ajax.BeginForm("TerminarEventoCompletado", "Operaciones", new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "contentBonos",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loader",
+                    OnComplete = "HideModalConfirmacion"
+                }, new { @style = "display: block;" }))
+                {
+                    <input type="text" class="dspl-none" name="codigoCargoMod" value="@ViewBag.CodigoCargoMod" />
+                    <input type="text" class="dspl-none" name="option" value="@ViewBag.OptionEventoCompletado" />
+                    <button type="submit" class="btn btn-success"
+                            style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Excelente! Terminar y</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Actualizar Bonos</i>
+                        </span>
+                    </button>
+                }
+            </div>
+        </div>
+        break;
+}

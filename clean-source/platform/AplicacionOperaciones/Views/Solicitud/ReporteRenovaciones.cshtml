@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Reporte Renovaciones";
+}
+
+<div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="new-family-teamwork ta-center" style="font-weight: 100;">Creación de Reporte Renovaciones</h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3 mt-50">
+        <input type="text" data-datepicker="datepicker-desde" class="datepickerteamwork new-family-teamwork datepicker__input" id="datepicker-desde-input"
+               onclick="handleClickDatePicker(this)" onfocus="handleClickDatePicker(this)" onblur="handleBlurDatepicker(this)" data-legend="datepicker-desde-legend"
+               onkeyup="handleKeyDownDatepicker(this)" data-day="" data-month="" data-year="" data-targeterror="error__primarydate" />
+        <label for="datepicker-desde-input" id="datepicker-desde-legend" class="datepicker__legend new-family-teamwork"
+               onclick="handleClickDatepickerLegend(this)">Fecha Inicio (Ej. DD-MM-AAAA)</label>
+        <span id="error__primarydate" class="new-family-teamwork span__target__error"></span>
+        <div class="datepicker-teamwork datepickerteamwork" id="datepicker-desde">
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3 mt-50">
+        <input type="text" data-datepicker="datepicker-hasta" class="datepickerteamwork new-family-teamwork datepicker__input" id="datepicker-hasta-input"
+               onclick="handleClickDatePicker(this)" onfocus="handleClickDatePicker(this)" onblur="handleBlurDatepicker(this)" data-legend="datepicker-hasta-legend"
+               onkeyup="handleKeyDownDatepicker(this)" data-day="" data-month="" data-year="" data-targeterror="error__lastdate" />
+        <label for="datepicker-hasta-input" id="datepicker-hasta-legend" class="datepicker__legend new-family-teamwork" onclick="handleClickDatepickerLegend(this)">Fecha Termino (Ej. DD-MM-AAAA)</label>
+        <span id="error__lastdate" class="new-family-teamwork span__target__error"></span>
+        <div class="datepicker-teamwork datepickerteamwork" id="datepicker-hasta">
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3 mt-50">
+        <div class="select__teamwork new-family-teamwork selectteamwork" id="select__cliente" data-target="legend__cliente" data-value="" onclick="handleClickSelectHtml(this)">
+        </div>
+        <label for="select__cliente" id="legend__cliente" class="select__legend__teamwork new-family-teamwork selectteamwork" onclick="handleClickSelect(this)">Seleccione Area de Negocio</label>
+        <span class="content__select selectteamwork" id="content__select__cliente" data-target="legend__cliente"></span>
+        <div class="mt-10">
+            <input type="checkbox" id="check__masive__clientes" /> <label class="new-family-teamwork" style="font-weight: 100;" for="check__masive__clientes">Selección Multiple</label>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-3 mt-50">
+        <div class="select__teamwork new-family-teamwork selectteamwork" id="select__empresa" data-target="legend__empresa" data-value="" onclick="handleClickSelectHtml(this)">
+        </div>
+        <label for="select__empresa" id="legend__empresa" class="select__legend__teamwork new-family-teamwork selectteamwork" onclick="handleClickSelect(this)">Seleccione Empresa</label>
+        <span class="content__select selectteamwork" id="content__select__empresa" data-target="legend__empresa"></span>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-50">
+        <div class="mt-5" id="content__masive__clientes">
+
+        </div>
+    </div>
+</div>
+<div class="row ml-auto mr-auto mt-100" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+        <button type="button" id="buttonEmitirReporte" class="btn btn-success new-family-teamwork pdt-10 pdb-10 pdl-50 pdr-50" style="font-weight: 100; border-radius: 60px; font-size: 20px;">
+            Emitir Reporte
+        </button>
+    </div>
+</div>
+
+
+<script async>
+
+    document.querySelector("#buttonEmitirReporte").addEventListener("click", () => {
+        const masiveClientes = document.querySelector('#check__masive__clientes');
+        let clientesSelected = "";
+
+        if (masiveClientes.checked) {
+            let multiCliente = JSON.parse(localStorage.getItem('applicacion__masive__clientes'));
+            let position = 0;
+
+            multiCliente.forEach(cliente => {
+                clientesSelected += `${position > 0 ? `+` : ``}${cliente}`;
+                position = position + 1;
+            });
+        }
+        else {
+            clientesSelected = document.getElementById("select__cliente").dataset.value;
+        }
+
+        const cliente = clientesSelected;
+        const fechaTermino = document.getElementById('datepicker-hasta-input').value;
+        const fechaInicio = document.getElementById('datepicker-desde-input').value;
+        const empresa = document.getElementById("select__empresa").dataset.value;
+        let prefix = "";
+
+        if (window.location.href.includes("localhost")) {
+            let { origin } = window.location;
+            prefix = origin;
+        }
+
+        window.location.href = `${prefix}/Solicitud/GenerateExcel?excel=ReporteRenovaciones&fechainicio=${fechaInicio}&fechatermino=${fechaTermino}&cliente=${cliente}&empresa=${empresa}`;
+
+    });
+
+</script>
+
+<script async src="~/Scripts/teamwork/datepicker.js"></script>
+<script async src="~/Scripts/teamwork/select.js"></script>
+<script async src="~/Scripts/teamwork/input.js"></script>

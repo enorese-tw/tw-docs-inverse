@@ -1,0 +1,95 @@
+﻿@using Teamwork.Model.Operaciones
+@model List<ProcesoCargaMasiva>
+
+@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Solicitud Asistencia";
+}
+
+<div style="width: 100%; height: 60px;"></div>
+<div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 10px;" id="content__cargamasiva">
+    <div class="row ml-auto mr-auto" style="width:92%">
+        @Html.ButtonAdministracion(
+                       "button",
+                       new string[] {
+                           "class='dspl-inline-block new-family-teamwork'",
+                           "onclick='handleReturnMenuCargaMasiva()'"
+                       },
+                       new string[]
+                       {
+                           "min-width: 50px",
+                           "border: none",
+                           "text-align: center",
+                           "font-weight: 100",
+                           "border: 0",
+                           "margin: none",
+                           "background-color: transparent!important"
+                       },
+                       new string[]
+                       {
+                           "<span class='dspl-inline-block'><span style='width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; text-align: center;' class='btn btn-teamwork pdt-5 pdr-5 pdb-5 pdl-5'><img src='../Resources/flecha-izquierda.svg' width='30' height='30' style='position: relative; left: 10%;' /></span></span>" +
+                           "<span class='new-family-teamwork' style='position: relative; float: right; margin-left: 10px; margin-top: 10px; font-size: 20px; font-wight: 100;'>Volver a Menu Cargas Masivas</span>"
+                       },
+                       true
+                   )
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 10px;">
+        <div class="row ml-auto mr-auto" style="width:92%; text-align:center;">
+            @*<div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center" style="margin-bottom: 10px; display: none;">
+            <h1 class="new-family-teamwor" style="font-weight:100;">
+                Carga Masiva
+            </h1>
+        </div>*@
+
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 ta-left" style="margin-top:80px;">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-left">
+                            <div class="row">
+                                <select id="select__empresaCarga" onchange="handleChangeEmpresaCarga()" class="form-control new-family-teamwork" style="width: 260px; margin-right: 10px; display: inline-block;">
+                                    <option value="0" data-input="input">Seleccione Empresa</option>
+                                    <option value="TWEST" data-input="input">EST</option>
+                                    <option value="TWRRHH" data-input="input">OUT</option>
+                                    <option value="TWC" data-input="input">TWC</option>
+                                </select>
+
+                                <input type="month" id="input__periodoCarga" onchange="handleChangeFilterCarga()" class="form-control new-family-teamwork" style="width: 260px; font-weight:100; display: inline-block;" />
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-left" style="margin-top: 10px;">
+                            <div class="row">
+                                <input id="input__areaNegocio" list="select__areaNegocioCarga" class="form-control new-family-teamwork" style="width: 470px; display: inline-block;" placeholder="Area de Negocio">
+                                <datalist id="select__areaNegocioCarga" class="form-control new-family-teamwork" style="width: 470px; display: none;"></datalist>
+
+                                <button class="btn new-family-teamwork fs-18 dspl-inline-block"
+                                        style="min-width: 50px; border: none; text-align: center; font-weight: 100; border: 0; background-color: transparent!important; font-weight: 100; margin-top: -10px;"
+                                        onclick="handleAddAreaNegocioCarga()">
+                                    <span style='width: 40px; height: 40px; border-radius: 25px; display: flex; align-items: center; text-align: center;'
+                                          class='btn btn-teamwork pdt-5 pdr-5 pdb-5 pdl-5'>
+                                        <img src='~/Resources/add.png' width='18' height='18' style='position: relative; left: 20%;' />
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="div__errorReporte" class="col-12 col-sm-12 col-md-12 col-lg-12 ta-left" style="margin-top:10px;"></div>
+
+                        <div id="div__areasNegocios" class="col-12 col-sm-12 col-md-12 col-lg-12 ta-left" style="margin-top:10px;"></div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 ta-center">
+                    @{ Html.RenderPartial("Containers/CargaMasiva/_PlantillaAsistencia", Model); }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/ajaxFunciones")
+@Scripts.Render("~/bundles/utils")
+@Scripts.Render("~/bundles/solicitudcontrato")
+@Scripts.Render("~/bundles/cargamasiva")
+@Scripts.Render("~/bundles/asistencia")

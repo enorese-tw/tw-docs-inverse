@@ -1,0 +1,73 @@
+﻿<div class="row">
+    @if (ViewBag.ReferenciaHasHabilitadoMM == "S")
+    {
+        using (Ajax.BeginForm("AgregarMontosManualesCartaBaja", "Bajas", new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "contentCartaBaja",
+            InsertionMode = InsertionMode.Replace,
+            LoadingElementId = "loader"
+        }))
+        {
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h1 class="family-teamwork ta-center" style="font-size: 20px;">Bienvenido a la emisión de Carta de Baja, se requiere indicar como primera instancia los siguiente datos:</h1>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h1 class="family-teamwork ta-center" style="font-size: 20px;">Causal Desvinculacion para emitir Carta</h1>
+                <h1 class="family-teamwork ta-center" style="font-size: 20px;">@ViewBag.ReferenciaDescripcionCausal</h1>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h1 class="family-teamwork ta-center" style="font-size: 20px;">La carta de baja se va a emitir con <u>Indemnización sustitutiva 30 días aviso previo</u></h1>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+                <label class="switch" style="display: inline-block; ">
+                    <input type="checkbox" name="mesaviso" value="S">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+                <p class="family-teamwork ta-center">La indemnización sustitutiva 30 días aviso previo</p>
+            </div>
+            if (ViewBag.ReferenciaYearIAS != "")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1 class="family-teamwork ta-center" style="font-size: 20px;">La vinculación del trabajador y la empresa es de @ViewBag.ReferenciaYearIAS año (s), por lo cual debe indicar el Monto de descuento AFC</h1>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+                    <div class="row">
+                        <div class="col-1 col-sm-1 col-md-2 col-lg-3"></div>
+                        <div class="col-10 col-sm-10 col-md-8 col-lg-6">
+                            <input type="text" class="form-control ta-center family-teamwork" name="afc" placeholder="Indicar Monto de Descuento AFC" />
+                            <p class="family-teamwork ta-center">El monto que especifique en este apartado, al momento de realizar el cálculo del finiquito será autocompletado por el sistema de manera automática.</p>
+                        </div>
+                        <div class="col-1 col-sm-1 col-md-2 col-lg-3"></div>
+                    </div>
+                </div>
+            }
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center mt-20 mb-50">
+                <input type="text" name="codigoSolicitud" value="@ViewBag.ReferenciaCodigoSolicitud" class="dspl-none" />
+                <input type="text" name="enlaceCartaBaja" value="@ViewBag.ReferenciaViewCartaBaja" class="dspl-none" />
+                <button type="submit" class="btn btn-success ta-left" style="border-radius: 25px; height: 40px; margin-top: 12px; color: #fff;">
+                    <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Visualizar Doc. PDF</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block;">Carta Baja</i>
+                    </span>
+                </button>
+                <a href="#" data-dismiss="modal" type="submit" class="btn btn-danger ta-left" style="border-radius: 25px; height: 40px; margin-top: 12px; color: #fff;">
+                    <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Cancelar y</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block;">Volver</i>
+                    </span>
+                </a>
+            </div>
+        }
+    }
+
+</div>

@@ -1,0 +1,284 @@
+﻿@{ 
+    List<AplicacionOperaciones.Models.Accesos> renderizadoPermisos = new List<AplicacionOperaciones.Models.Accesos>();
+    
+    string urlServer = "";
+    int menudesplegable = 1;
+    List<AplicacionOperaciones.Models.Accesos> multiAccesos = new List<AplicacionOperaciones.Models.Accesos>();
+
+    if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+    {
+        urlServer = "http://181.190.6.196/AplicacionOperaciones";
+    }
+    else
+    {
+        urlServer = "http://localhost:46903";
+    }
+
+    if (Session["ApplicationActive"] != null)
+    {
+        if (Session["ApplicationActive"].ToString() == "S")
+        {
+            string preController = Session["PreController"].ToString();
+
+            ViewBag.prefix = urlServer;
+
+            ViewBag.Username = Session["NombreUsuario"].ToString();
+            ViewBag.Cargo = Session["Cargo"].ToString();
+            ViewBag.Area = Session["Area"].ToString();
+            ViewBag.UrlSignOut = ViewBag.prefix + "/Auth/SignOut";
+            ViewBag.UrlIndex = ViewBag.prefix + "/" + preController;
+            renderizadoPermisos = (List<AplicacionOperaciones.Models.Accesos>)Session["RenderizadoPermisos"];
+            
+        }
+    }
+}
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Last-Modified" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, mustrevalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title &bull; Plataforma TeamWork Chile</title>
+    <!-- RENDERIZADO DE ESTILOS -->
+
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/w3.css")
+
+    @Styles.Render("~/Content/teamwork/glyphicon-tw.css")
+    @Styles.Render("~/Content/teamwork/form-tw.css")
+    @Styles.Render("~/Content/teamwork/btn.css")
+    @Styles.Render("~/Content/teamwork/background-color.css")
+    @Styles.Render("~/Content/teamwork/background-size.css")
+    @Styles.Render("~/Content/teamwork/generic-tw.css")
+    @Styles.Render("~/Content/teamwork/color.css")
+    @Styles.Render("~/Content/teamwork/display.css")
+    @Styles.Render("~/Content/teamwork/height.css")
+    @Styles.Render("~/Content/teamwork/margin.css")
+    @Styles.Render("~/Content/teamwork/padding.css")
+    @Styles.Render("~/Content/teamwork/width.css")
+    @Styles.Render("~/Content/teamwork/cursor.css")
+    @Styles.Render("~/Content/teamwork/text-decoration.css")
+    @Styles.Render("~/Content/teamwork/loader.css")
+    @Styles.Render("~/Content/teamwork/menu.css")
+    @Styles.Render("~/Content/teamwork/loaderv2.css")
+    @Styles.Render("~/Content/owlCarousel/owl.carousel.min.css")
+    @Styles.Render("~/Content/teamwork/teamwork-files.css")
+    @Styles.Render("~/Content/Chartjs/Chart.min.css")
+    @Styles.Render("~/Content/teamwork/Datepicker.css")
+    @Styles.Render("~/Content/jquery-ui.css")
+    @Styles.Render("~/Content/teamwork/paginator.css")
+    @Styles.Render("~/Content/sweetAlert2/sweetAlert.min.css")
+    @Styles.Render("~/Content/Switch.css")
+    @Styles.Render("~/Content/teamwork/datepicker.css")
+    @Styles.Render("~/Content/teamwork/select.css")
+    @Styles.Render("~/Content/teamwork/input.css")
+    @Styles.Render("~/Content/css/select.css")
+    @Styles.Render("~/Content/teamwork/Asistencia.css")
+
+    @if (Request.Url.AbsoluteUri.Split('/')[Request.Url.AbsoluteUri.Split('/').Length - 1] == "Informa" &&
+         Request.Url.AbsoluteUri.Split('/')[Request.Url.AbsoluteUri.Split('/').Length - 2] == "Teamwork")
+    {
+        @Styles.Render("~/Content/Editor/samples.css")
+        @Styles.Render("~/Scripts/toolbarconfigurator/lib/codemirror/neo.css")
+    }
+
+
+    <!-- RENDERIZADO DE SCRIPTS -->
+    @Scripts.Render("~/Scripts/jquery-3.3.1.js")
+    @Scripts.Render("~/Scripts/jquery-ui.js")
+    @Scripts.Render("~/Scripts/bootstrap.js")
+    @Scripts.Render("~/Scripts/Datepicker.js")
+    @Scripts.Render("~/Scripts/angular.min.js")
+    @Scripts.Render("~/Scripts/xlsx.full.min.js")
+    @Scripts.Render("~/Scripts/owlCarousel/owl.carousel.min.js")
+    @Scripts.Render("~/Scripts/Chartjs/Chart.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Scripts/sweetAlert2/sweetAlert.min.js")
+
+</head>
+<body ng-controller="MyController">
+    <div class="container-fluid" style="padding-left: 0px; padding-right: 0px;">
+        <div class="row" style="position: fixed; position: fixed; width: 100%; z-index: 999; height: 5px; top: 0; left: 15px;">
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 success height-5"></div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 warning height-5"></div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 teamwork height-5"></div>
+        </div>
+        <div class="row" style="background-color: rgb(220, 220, 220);
+                                height: 50px;
+                                border-bottom: 0.5px solid rgb(200, 200, 200); position: fixed; width: 100%;
+                                z-index: 999; top: 5px; left: 15px;">
+            <div class="col-8 col-sm-6 col-md-5 col-lg-7">
+                <a href="#collapseMenuOptions" id="eventMenu" class="btn btn-anulado mt-5"
+                   style="border-radius: 25px; height: 40px; text-align: left; color: #fff;"
+                   data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseMenuOptions">
+                    <i class="glyphicon-tw-7 glyphicon-tw-menu" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Menú de la</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Plataforma</i>
+                    </span>
+                </a>
+                <div class="dspl-inline-block" style="display: inline-block;">
+                    <a href="@ViewBag.UrlIndex">
+                        <img src="~/Resources/logo-teamwork-chile.png" class="width-100 mt-6" />
+                    </a>
+                </div>
+                <div style="display: inline-block;" class="mt-6">
+                    @foreach (AplicacionOperaciones.Models.Accesos items in renderizadoPermisos)
+                    {
+                        if (menudesplegable <= 3)
+                        {
+                            <a href="@ViewBag.prefix/@items.PreController/@items.Controller" class="menuOption" style="cursor: pointer; margin-left: 10px; text-decoration: none; color: none;">
+                                <label class="family-teamwork" style="
+                                                    display: block;
+                                line-height: 14px;
+                                font-size: 14px;
+                                margin-top: 10px;
+                                cursor: pointer;"><i class="glyphicon-tw-13 @items.Glyphicon"></i> @items.Titulo</label>
+                            </a>
+                        }
+
+                        if (menudesplegable == 4)
+                        {
+                            <a href="#collapseMenuOptionsNResponsive" class="menuOption" style="margin-top: -9px; margin-bottom: 2px; cursor: pointer; margin-left: 10px; text-decoration: none; color: none;"
+                                 data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseMenuOptionsNResponsive">
+                                <label class="family-teamwork" style="display: block;
+                                line-height: 14px;
+                                font-size: 14px;
+                                margin-top: 20px;
+                                cursor: pointer;"><i class="glyphicon-tw-13 glyphicon-tw-optsmenu"></i> Otras Herramientas &#x25BC;</label>
+                            </a>
+                        }
+
+                        if (menudesplegable > 3)
+                        {
+                            multiAccesos.Add(items);
+                        }
+
+                        menudesplegable = menudesplegable + 1;
+                    }
+                </div>
+                <div class="mt-8 collapse" id="collapseMenuOptionsNResponsive" style="width: 300px; position: absolute; left: 34%; background-color: rgb(220, 220, 220);
+                                border: 0.5px solid rgb(200, 200, 200); position: fixed;">
+                    @foreach (AplicacionOperaciones.Models.Accesos item in multiAccesos)
+                    {
+                        <a href="@ViewBag.prefix/@item.PreController/@item.Controller" class="menuOption dspl-block ta-center"
+                            style="width: 90%; cursor: pointer; margin-left: 10px; text-decoration: none; color: none;">
+                            <label class="family-teamwork" style="
+                                                display: block;
+                            line-height: 14px;
+                            font-size: 14px;
+                            margin-top: 10px;
+                            cursor: pointer;"><i class="glyphicon-tw-13 @item.Glyphicon"></i> @item.Titulo</label>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-4 col-sm-6 col-md-7 col-lg-5" style="text-align: right;">
+                <div class="btn success mt-5 dspl-inline-block renderUsername"
+                   style="border-radius: 25px; height: 40px; text-align: left; color: #fff; position: relative; z-index: 999;">
+                    <span style="display: inline-block; margin-top: -4px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Bienvenido a Plataforma</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Colaborador de Teamwork</i>
+                    </span>
+                </div>
+                <div class="btn warning mt-5 dspl-inline-block pdl-45 ml-40neg renderUsername"
+                   style="border-radius: 25px; height: 40px; text-align: left; color: #fff; position: relative; z-index: 99;">
+                    <span style="display: inline-block; margin-top: -4px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">@ViewBag.Username</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">@ViewBag.Cargo</i>
+                    </span>
+                </div>
+                <a href="@ViewBag.UrlSignOut" id="renderUsuarioSignOut" class="btn btn-danger mt-5"
+                   style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                    <i class="glyphicon-tw-7 glyphicon-tw-salir" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Salir de la</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Plataforma</i>
+                    </span>
+                </a>
+                <a href="@ViewBag.UrlSignOut" id="renderUsuarioSignOutResponsive" class="btn btn-danger mt-4"
+                   style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                    <i class="glyphicon-tw-7 glyphicon-tw-salir" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Salir de la</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                        font-size: 14px; font-style: normal; display: block;">Plataforma</i>
+                    </span>
+                </a>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 collapse" id="collapseMenuOptions" style="position: absolute; top: 50px; width: 100%; min-height: 100vh; z-index: 999; overflow-y: scroll; background-color: rgba(100, 100, 100, 0.9);">
+                <div class="row ta-center">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10">
+                        <div>
+                            <h1 style="font-size: 15px; width: 40%; border-radius: 50px; z-index: 9999; position: relative;" class="family-teamwork warning color-fx3 pdb-10 pdt-10 pdl-20 pdr-20 dspl-inline-block">
+                                <span style="font-size: 19px;">Bienvenido a Nuestra</span><br />Plataforma de Operaciones
+                            </h1>
+                            <h2 style="font-size: 15px; width: 60%; border-radius: 50px; z-index: 999; position: relative;" class="ta-left family-teamwork teamwork color-fx3 pdb-10 pdt-10 pdl-60 pdr-20 dspl-inline-block ml-50neg">
+                                <span style="font-size: 19px;">Colaborador de TeamWork</span><br />@ViewBag.Username
+                            </h2>
+                            <h2 style="font-size: 15px; border-radius: 50px; z-index: 99; position: relative;" class="family-teamwork success color-fx3 pdb-10 pdt-10 pdl-60 pdr-20 dspl-inline-block ml-50neg">
+                                <span style="font-size: 19px;">@ViewBag.Area</span><br />Cargo @ViewBag.Cargo
+                            </h2>
+                            @*<h2 style="font-size: 17px; width: 89.8%; border-top-left-radius: 0px; border-bottom-left-radius: 50px; border-top-right-radius: 0px; border-bottom-right-radius: 50px; 
+                                        z-index: 99; position: relative;" class="ta-center family-teamwork success color-fx3 mt-40neg pdb-10 pdt-40 pdl-20 pdr-20 dspl-inline-block">
+                                @ViewBag.Area &bull; Cargo @ViewBag.Cargo
+                            </h2>*@
+                        </div>
+                    </div>
+                    @foreach (AplicacionOperaciones.Models.Accesos items in renderizadoPermisos)
+                    {
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5">
+                            <a href="@ViewBag.prefix/@items.PreController/@items.Controller" class="dspl-blc color-fx3"
+                               style="margin-top: -2px; cursor: pointer; margin-left: 10px; text-decoration: none; color: none;">
+                            <label style="font-family: 'Open Sans Condensed', sans-serif;
+                                            display: block;
+                                line-height: 14px;
+                                font-size: 22px;
+                                margin-top: 20px;
+                                cursor: pointer;"><i class="glyphicon-tw-17 @items.Glyphicon"></i> @items.Titulo</label>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+            
+
+        @RenderBody()
+
+
+        @Scripts.Render("~/MaterialDesign/js/popper.min.js")
+        @Scripts.Render("~/Scripts/bootstrap.js")
+        
+        @Scripts.Render("~/Scripts/Editor/ckeditor.js")
+        @Scripts.Render("~/Scripts/Editor/sample.js")
+
+
+
+        @Scripts.Render("~/Scripts/src/select.js")
+
+        <script>
+            initSample();
+
+            /** INICIALIZACION DE EDITORES PARA ADMINISTRADOR DE NOTICIAS */
+            initSampleEditorIlustracion();
+            initSampleEditorSubTitulo();
+            initSampleEditorCuerpo();
+
+        </script>
+    </div>
+</body>
+</html>

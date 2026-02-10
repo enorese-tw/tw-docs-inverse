@@ -1,0 +1,245 @@
+﻿@{
+    string prefixApp = "";
+    string urlServer = "";
+    string controller = "";
+
+    if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+    {
+        urlServer = Request.Url.AbsoluteUri.Split('/')[2];
+        prefixApp = "/" + Request.Url.AbsoluteUri.Split('/')[3];
+        controller = Request.Url.AbsoluteUri.Split('/')[4];
+    }
+    else if (Request.Url.AbsoluteUri.Split('/')[2].Contains("181.190.6.196"))
+    {
+        urlServer = "181.190.6.196";
+    }
+    else
+    {
+        urlServer = Request.Url.AbsoluteUri.Split('/')[2];
+        controller = Request.Url.AbsoluteUri.Split('/')[3];
+    }
+
+    ViewBag.PathCodified = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/" + controller + "/Solicitudes/" + ViewData["CodificarCod"];
+    ViewBag.PathCodifiedHistorial = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/" + controller + "/Historial";
+    ViewBag.PathCodifiedIntegrateSettlement = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp +
+        "/Auth/TokenAuth?events=integratesettlement&authorizate=" + ViewData["CodigoSolicitud"] + "&ref=" + ViewData["IntegrateSettlement"];
+}
+
+<div class="row width-90per m-auto @ViewData["BorderColor"] bt-1-solid-200x3 br-1-solid-200x3 bb-1-solid-200x3 mheight-180 mt-2">
+    <div class="col-12 col-sm-12 col-md-2 col-lg-2 ta-center">
+        <div class="btn @ViewData["GlyphiconColor"] dspl-inline-block mt-80"
+             style="margin-top: -4px; border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 @ViewData["Glyphicon"]" style="display: inline-block;"></i>
+            <span class="dspl-inline-block mt-15neg">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                 font-size: 16px; font-style: normal; display: block; margin-bottom: -8px;">@ViewData["Prioridad"]</i>
+            </span>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-5">
+        <div class="row">
+            <a href="@ViewBag.PathCodified" class="dspl-block txd-none cursor-pointer width-100per">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 dspl-block">
+                    <label class="cursor-pointer family-teamwork dspl-block lh-10 fs-14 mt-10 color-100x3">Nombre Solicitud</label>
+                    <label class="cursor-pointer family-teamwork dspl-block lh-20 fs-20 color-100x3"><b>@ViewData["Nombre"]</b></label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10">
+                    <label class="cursor-pointer family-teamwork lh-10 fs-14 dspl-block color-100x3">Creado <b>@ViewData["FechaCreacion"]</b></label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-5">
+                    <label class="cursor-pointer family-teamwork lh-10 fs-14 dspl-block color-100x3">Nombre Proceso: <b>@ViewData["NombreProceso"]</b></label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <label class="cursor-pointer family-teamwork fs-14 color-100x3">Fechas de compromiso: <b>@ViewData["FechasCompromiso"]</b>, Con Prioridad <b>@ViewData["Prioridad"]</b></label>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <label class="cursor-pointer family-teamwork lh-16 fs-14 @ViewData["ColorFont"]">Comentarios de la solicitud: <b>@Html.Raw(ViewData["Comentarios"])</b></label>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-5" style="text-align: right;">  
+        <div class="row" style="min-height: 180px; align-items: center; vertical-align: middle;">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                @switch (ViewData["RenderizadoOpciones"].ToString())
+                {
+                    case "ContratoRenovacion":
+                        if (ViewData["OptDescargarDatosCargados"].ToString() == "S")
+                        {
+                            <a href="@ViewBag.PathCodifiedDownloadData&excel=RGF0b3NDb21wbGV0b3NTb2xpY2l0dWRDb250cmF0bw==" class="btn btn-success" data-tipoanulacion="Proceso"
+                               data-solicitud="@ViewData["Nombre"]" data-cifrado="@ViewData["CodigoTransaccion"]"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-excel" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Descargar Datos</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">Cargados</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptAsignarSolicitud"].ToString() == "S")
+                        {
+                            <a href="#" class="btn btn-teamwork eventAsinarProceso" data-tipoanulacion="Proceso"
+                               data-solicitud="@ViewData["Nombre"]" data-cifrado="@ViewData["CodigoTransaccion"]"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-asignado" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Asignar</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptDescargarSolicitudContratoIndividual"].ToString() == "S")
+                        {
+                            <a href="@ViewBag.PathCodifiedDownloadData&excel=RGF0b3NTb2xpY2l0dWRDb250cmF0b3M=" class="btn btn-success" data-tipoanulacion="Proceso"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-excel" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                              font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Descargar Datos</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                              font-size: 14px; font-style: normal; display: block;">Solicitud Contrato Indv.</i>
+                                </span>
+                            </a>
+                        }
+                        if (ViewData["OptHistorialSolicitud"].ToString() == "S")
+                        {
+                            <a href="@ViewBag.PathCodifiedHistorial/S!!@ViewData["TipoEvento"]/@ViewData["CodigoSolicitud"]" target="_blank" class="btn btn-teamwork" data-tipoanulacion="Proceso"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-atrasado" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Historial</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptRevertirAnulacion"].ToString() == "S")
+                        {
+                            <a href="#" class="btn btn-warning eventRevertirAnulacion" data-tipoanulacion="Proceso"
+                               data-solicitud="@ViewData["Nombre"]" data-cifrado="@ViewData["CodigoTransaccion"]"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #000;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Revertir</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">Anulación</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptDescargarErrorDatosCargados"].ToString() == "S")
+                        {
+                            <a href="@ViewBag.PathCodifiedDownloadData&excel=RGF0b3NFcnJvcmVzU29saWNpdHVkQ29udHJhdG8=" class="btn btn-create" data-tipoanulacion="Proceso"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-excel" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                              font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Descargar Errores</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                              font-size: 14px; font-style: normal; display: block;">Datos Cargados</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptAnularSolicitud"].ToString() == "S")
+                        {
+                            <a href="#" class="btn btn-danger eventAnularSolicitudInd" data-tipoanulacion="Solicitud"
+                               data-solicitud="@ViewData["Nombre"]" data-cifrado="@ViewData["CodigoSolicitud"]" data-tipoevento="@ViewData["TipoEvento"]"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Anular</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptRevertirTermino"].ToString() == "S")
+                        {
+                            <a href="#" class="btn btn-warning eventRevertirTerminoSolicitudInd" data-tipoanulacion="Solicitud"
+                               data-solicitud="@ViewData["Nombre"]" data-cifrado="@ViewData["CodigoSolicitud"]" data-tipoevento="@ViewData["TipoEvento"]"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Revertir Termino</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">de Solicitud</i>
+                                </span>
+                            </a>
+                        }
+                        break;
+                    case "Bajas":
+                        if (ViewData["OptHistorial"].ToString() == "S")
+                        {
+                            <a href="@ViewBag.PathCodifiedHistorial/S!!@ViewData["TipoEvento"]/@ViewData["CodigoSolicitud"]" class="btn btn-teamwork" target="_blank"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-atrasado" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Historial</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptCalcular"].ToString() == "S")
+                        {
+                            <a href="@ViewBag.PathCodifiedIntegrateSettlement" class="btn btn-primary"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-calculado" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Emitir</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">Cálculo</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptEmitirCaratulaFiniquito"].ToString() == "S")
+                        {
+                            <a href="@ViewBag.PathCodifiedIntegrateSettlement" class="btn btn-danger" target="_blank"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-pdf" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Emitir Caratula</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">del Finiquito</i>
+                                </span>
+                            </a>
+                        }
+
+                        if (ViewData["OptEmitirDocumentoFiniquito"].ToString() == "S")
+                        {
+                            <a href="@ViewBag.PathCodifiedIntegrateSettlement" class="btn btn-danger" target="_blank"
+                               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-pdf" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Emitir Documento</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                          font-size: 14px; font-style: normal; display: block;">de Finiquito</i>
+                                </span>
+                            </a>
+                        }
+                        break;
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

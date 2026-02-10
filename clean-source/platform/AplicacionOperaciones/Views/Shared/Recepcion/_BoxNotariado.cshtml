@@ -1,0 +1,31 @@
+﻿<div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+    @if (ViewBag.ReferenciaMessageNotariar != "")
+    {
+        <h1 class="family-teamwork" style="font-size: 20px;"><img src="~/Resources/corregir.png" class="ml-auto mr-auto dspl-inline-block" style="width: 30px;" /> @ViewBag.ReferenciaMessageNotariar</h1>
+    }
+    <img src="~/Resources/ilustracionmatchchequedocumento.jpg" class="ml-auto mr-auto dspl-inline-block" style="width: 200px;">
+    <h1 class="family-teamwork ta-center">¿Va a realizar el notariado de otro finiquito?</h1>
+</div>
+<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+    <h2 class="family-teamwork ta-center">Para notariar debe leer el codigo de barra de este documento</h2>
+</div>
+<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <img src="~/Resources/ilustracionlecturadocumentos.jpg" class="dspl-block m-auto" style="width: 200px;" />
+            <h4 class="family-teamwork ta-center">Finiquito o Caratula Finiquito</h4>
+        </div>
+    </div>
+</div>
+
+@using (Ajax.BeginForm("NotariarFiniquito", "Recepcion", new AjaxOptions()
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "contentRecepcion",
+    LoadingElementId = "loader"
+}, new { @style = "position: absolute; top: 0; display: block; height: 100%; width: 100%; left: 0;" }))
+{
+    <input type="text" name="codigoFiniquito" id="codigoFiniquito" style="width: 100%; position: absolute; top: 0; left: 0; height: 100%; background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0);" autocomplete="off" />
+    <input type="submit" value="ENVIAR" class="mt-100 dspl-block" style="z-index: 999999999999999; position: absolute;" />
+}

@@ -1,0 +1,35 @@
+﻿<div class="col-12 col-lg-12 col-sm-12 col-lg-12 mt-140 ta-center">
+    <h1 class="family-teamwork">Seleccione el Administrador de Datos</h1>
+</div>
+<div class="col-lg-3"></div>
+<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-100">
+    <Button type="button" class="dspl-block btn-warning" style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;" data-reference="Provisiones" onclick="handleClickRedirectAction(this)">
+        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Variables de Provisiones</h2>
+        <img src="~/Resources/datoindiv.svg" width="50" height="50" />
+    </Button>
+</div>
+<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-100">
+    <Button type="button" class="dspl-block btn-danger" style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;" data-reference="Margenes" onclick="handleClickRedirectAction(this)">
+        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Variables de Margenes</h2>
+        <img src="~/Resources/datoindiv.svg" width="50" height="50" />
+    </Button>
+</div>
+<div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-100">
+    <Button type="button" class="dspl-block btn-create" style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;" data-reference="AsignProvMargen" onclick="handleClickRedirectAction(this)">
+        <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+        <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Asignaciones</h2>
+        <img src="~/Resources/lista.svg" width="50" height="50" />
+    </Button>
+</div>
+<div class="col-lg-3"></div>
+
+<script async>
+
+    handleClickRedirectAction = (e) => {
+        console.log(window.location)
+        window.location.href = `${window.location.href}/${e.dataset.reference}` 
+    }
+
+</script>

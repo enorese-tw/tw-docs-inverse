@@ -1,0 +1,46 @@
+﻿<div class="modal fade" id="modalAnularSolicitud" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title family-teamwork">Etapa de Anulación de <i class="tipoAnulacion" style="font-style: normal;"></i></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <p class="family-teamwork">
+                            Nombre de <i class="tipoAnulacion" style="font-style: normal;"></i>
+                            <br />
+                            <i id="tituloAnulacion" class="fs-20 color-2178379 fw-bold mt-10neg dspl-inline-block" style="font-style: normal;"></i>
+                        </p>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 errorModal">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <select class="family-teamwork form-control" id="selectMotivo">
+                            <option value="0">Indicar el Motivo de la anulación</option>
+                            @foreach (AplicacionOperaciones.Models.MotivosAnulacion item in (List<AplicacionOperaciones.Models.MotivosAnulacion>)ViewData["RenderizadoMotivosAnulacion"])
+                            {
+                                <option value="@item.Descripcion">@item.Descripcion</option>
+                            }
+                            <option value="otro">Otro Motivo : </option>
+                        </select>
+                        <textarea class="family-teamwork form-control mt-20" style="display: none; max-height: 200px;" 
+                                  id="OtroMotivoAnulacion" placeholder="Indique el motivo de anulación"></textarea>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center mt-20">
+                        <a href="#" class="eventDeclararAnulacion btn btn-anulado ta-left color-fx3 br-25 height-50" data-tipoanulacion="" data-codificar="">
+                            <i class="glyphicon-tw-6 glyphicon-tw-cancel dspl-inlblc mb-15neg"></i>
+                            <span class="dspl-inlblc">
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Declrar Anulado</i>
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal tipoAnulacion"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

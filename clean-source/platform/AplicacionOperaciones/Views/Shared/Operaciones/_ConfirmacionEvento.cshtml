@@ -1,0 +1,163 @@
+﻿@switch ((string)ViewBag.OptionConfirmacionEvento)
+{
+    case "AgregarNuevoBono":
+        <div class="row">
+            @using (Ajax.BeginForm("ConfirmarEvento", "Operaciones", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "contentOperaciones",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loader"
+            }, new { @style = "display: block;" }))
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1 class="family-teamwork ta-center">Creación y asignación de bono no considerado</h1>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="family-teamwork ta-center">Nombre del nuevo Bono</p>
+                    <input name="bono" class="family-teamwork br-1-solid-200x3 bl-1-solid-200x3 bt-1-solid-200x3 bb-1-solid-200x3 input-nofocus dspl-block m-auto ta-center pdt-10 pdb-10" placeholder="Nombre del nuevo Bono" style="width: 60%;" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10">
+                    <p class="color-9218492 family-teamwork ta-center">
+                        <img src="~/Resources/check.png" style="width: 20px; border-radius: 50%;" class="success dspl-inline-block mb-3" />
+                        <b>Bono esta disponible para su creación.</b>
+                    <p class="color-2178379 family-teamwork ta-center">
+                        <img src="~/Resources/cancel.png" style="width: 20px; border-radius: 50%;" class="danger dspl-inline-block mb-3" />
+                        <b>Bono esta disponible para su creación.</b>
+                    </p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <p class="family-teamwork ta-center">Nombre del nuevo Bono</p>
+                    <input type="number" name="monto" class="family-teamwork br-1-solid-200x3 bl-1-solid-200x3 bt-1-solid-200x3 bb-1-solid-200x3 input-nofocus dspl-block m-auto ta-center pdt-10 pdb-10" placeholder="Nombre del nuevo Bono" style="width: 60%;" />
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+                    <input type="text" class="dspl-none" name="option" value="ConfirmarAgregarNuevoBono" />
+                    <input type="text" class="dspl-none" name="codigoCargoMod" value="@ViewBag.CodigoCargoMod" />
+                    <button type="submit" class="btn btn-success"
+                            style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Agregar Bono</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">No Considerado</i>
+                        </span>
+                    </button>
+                    <a href="#" data-dismiss="modal" type="submit" class="btn btn-danger"
+                       style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Cancelar y</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block;">Cerrar</i>
+                        </span>
+                    </a>
+                </div>
+            }
+
+        </div>
+        break;
+    case "ConfirmarAgregarNuevoBono":
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h1 class="family-teamwork ta-center">¿Esta seguro de crear el nuevo bono no considerado?</h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="family-teamwork ta-center">
+                Si acepta la creación del bono con nombre "<b>@ViewBag.Bono</b>", va quedar pendiente de aprobación de finanzas, donde el
+                área correspondiente, podría o no deshechar el bono que usted esta indicando, de cualquier manera, los procesos posteriores todos
+                serán informados a las áreas correspondientes, sabiendo esto desea proceder con la creación y asignación del bono y su monto asociado.
+            </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+            @using (Ajax.BeginForm("AgregarNuevoBono", "Operaciones", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "contentOperaciones",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loader"
+            }))
+            {
+                <input type="text" class="dspl-none" name="glosaNewBono" value="@ViewBag.Bono" />
+                <input type="text" class="dspl-none" name="monto" value="@ViewBag.Monto" />
+                <input type="text" class="dspl-none" name="codigoCargoMod" value="@ViewBag.CodigoCargoMod" />
+                <button type="submit" class="btn btn-success"
+                        style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                    <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Aceptar y</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Crear Bono</i>
+                    </span>
+                </button>
+            }
+            <a href="#" data-dismiss="modal" type="submit" class="btn btn-danger"
+               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                <span style="display: inline-block; margin-top: -7px;">
+                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Cancelar y</i>
+                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Cerrar</i>
+                </span>
+            </a>
+        </div>
+        break;
+    case "ActualizarBono":
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h1 class="family-teamwork ta-center">¿Esta seguro de crear el nuevo bono no considerado?</h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="family-teamwork ta-center">
+                Si acepta la creación del bono con nombre "<b>@ViewBag.Bono</b>", va quedar pendiente de aprobación de finanzas, donde el
+                área correspondiente, podría o no deshechar el bono que usted esta indicando, de cualquier manera, los procesos posteriores todos
+                serán informados a las áreas correspondientes, sabiendo esto desea proceder con la creación y asignación del bono y su monto asociado.
+            </p>
+        </div>
+        break;
+    case "EliminarBono":
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h1 class="family-teamwork ta-center">¿Esta seguro de eliminar el bono?</h1>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="family-teamwork ta-center">
+                Si acepta la eliminación del bono con nombre "<b>@ViewBag.Bono</b>", va eliminarse permanentemente, por ende si necesito volver a crarlo,
+                tendrá que realizar el proceso de creación nuevamente, sabiendo esto desea proceder con la eliminación del bono.
+            </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+            @using (Ajax.BeginForm("EliminarBono", "Operaciones", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "contentOperaciones",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loader"
+            }))
+            {
+                <input type="text" class="dspl-none" name="codigoBono" value="@ViewBag.CodigoBono" />
+                <input type="text" class="dspl-none" name="codigoCargoMod" value="@ViewBag.CodigoCargoMod" />
+                <button type="submit" class="btn btn-success"
+                        style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                    <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                    <span style="display: inline-block; margin-top: -7px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Aceptar y</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Eliminar Bono</i>
+                    </span>
+                </button>
+            }
+            <a href="#" data-dismiss="modal" type="submit" class="btn btn-danger"
+               style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                <i class="glyphicon-tw-7 glyphicon-tw-cancel" style="display: inline-block;"></i>
+                <span style="display: inline-block; margin-top: -7px;">
+                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Cancelar y</i>
+                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Cerrar</i>
+                </span>
+            </a>
+        </div>
+        break;
+}

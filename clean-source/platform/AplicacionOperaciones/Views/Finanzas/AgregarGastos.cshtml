@@ -1,0 +1,166 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Agregar Gastos";
+}
+
+<div class="row mt-100 ml-auto mr-auto mb-20" style="width: 92%;>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 style="font-family: 'Open Sans Condensed', sans-serif; font-size: 40px;">
+            <i class="glyphicon-tw-5 glyphicon-tw-anexos2"></i> Agregar Rendicion
+        </h1>
+        <h2 class="family-teamwork fs-20">
+            Portal de ingreso de finanzas, para mayor informacion visitar el Manual de Ingreso de Gastos AQUI. Para cualquier consulta o duda favor enviar un correo a la Mesa de Ayuda TW.
+        </h2>
+    </div>
+</div>
+
+
+<div class="d-flex justify-content-center">
+    <form id="formulario">
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                <P>Tipo Documento</P>
+            </div>
+            <div class="col">
+                <select class="form-control" id="idTipoDocumento" required="required">
+                    @foreach (AplicacionOperaciones.Models.TipoDocumento item in (List<AplicacionOperaciones.Models.TipoDocumento>)ViewBag.RenderizadoTipoDocumento)
+                    {
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                <p>Numero Documento</p>
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Nº Documento" id="numeroDocumento" pattern="[0-9]+" required="required">
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                Rut Proveedor
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Rut Proveedor" id="rutProveedor" pattern="[0-9]+" monto>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                Monto Gasto
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Monto" id="montoNeto" pattern="[0-9]+" monto>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                <P>Concepto de Gasto</P>
+            </div>
+            <div class="col">
+                <select class="form-control" id="idConcepto" required="required">
+                    @foreach (AplicacionOperaciones.Models.ConceptoGasto item in (List<AplicacionOperaciones.Models.ConceptoGasto>)ViewBag.RenderizadoConceptoGasto)
+                    {
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                Fecha gasto
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="DD-MM-AAAA" id="fechaRendicion" required="required">
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                <P>Banco</P>
+            </div>
+            <div class="col">
+                <select class="form-control" id="idTipoBanco" required="required">
+                    @foreach (AplicacionOperaciones.Models.Banco item in (List<AplicacionOperaciones.Models.Banco>)ViewBag.RenderizadoBanco)
+                    {
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                <P>Tipo de Cuenta</P>
+            </div>
+            <div class="col">
+                <select class="form-control" id="idTipoCuenta" required="required">
+                    @foreach (AplicacionOperaciones.Models.TipoCuenta item in (List<AplicacionOperaciones.Models.TipoCuenta>)ViewBag.RenderizadoReembolso)
+                    {
+                        <option value="@item.Id">@item.Nombre</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="row ml-37 mr-37 mt-20">
+            <div class="col">
+                Numero de Cuenta
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Nº Cuenta" id="numeroCuenta" required="required" pattern="[0-9]+">
+            </div>
+        </div>
+
+        <div class="form-group mt-50">
+            <label for="Comentario">Comentarios</label>
+            <textarea class="form-control" rows="3" id="comentario" required="required"></textarea>
+        </div>
+
+        <div class="custom-file">
+            <label for="DocumentoExcel">Seleccione Documento Excel</label>
+            <input type="file" class="custom-file-input" id="DocumentoExcel" disabled>
+            <label class="custom-file-label" for="validatedCustomFile">Escoger Respaldo Excel</label>
+            <div class="invalid-feedback mb-20">Example invalid custom file feedback</div>
+        </div>
+        <div class="custom-file mt-10 ">
+            <input type="file" class="custom-file-input" id="validatedCustomFile" disabled>
+            <label class="custom-file-label" for="validatedCustomFile">Escoger Respaldo Fotografico</label>
+            <div class="invalid-feedback mb-20">Example invalid custom file feedback</div>
+        </div>
+
+        <a href="#" id="btnCrearGasto" class="btn btn-success"
+           style="border-radius: 50px; height: 80px; min-width: 100px; margin-top: 12px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-15 glyphicon-tw-dinero" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -68px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 25px; font-style: normal; display: block; margin-bottom: -10px;">Crear</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                  font-size: 25px; font-style: normal; display: block;">Gasto</i>
+            </span>
+        </a>
+    </form>
+
+
+    <div id="exito" style="display:none">
+        Sus datos han sido recibidos con éxito.
+    </div>
+
+    <div id="fracaso" style="display:none">
+        Se ha producido un error durante el envío de datos.
+    </div>
+</div>
+
+@*@Scripts.Render("~/bundles/cargamasiva")*@
+
+@Scripts.Render("~/bundles/ajaxFuncionesfz")
+@Scripts.Render("~/bundles/utils")
+@Scripts.Render("~/bundles/agregargastos")
+

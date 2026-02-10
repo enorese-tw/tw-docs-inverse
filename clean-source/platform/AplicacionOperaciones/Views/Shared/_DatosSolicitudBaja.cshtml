@@ -1,0 +1,410 @@
+﻿@{ 
+    string prefixApp = "";
+    string urlServer = "";
+
+    if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+    {
+        prefixApp = "/" + Request.Url.AbsoluteUri.Split('/')[3];
+    }
+
+    if (Request.Url.AbsoluteUri.Split('/')[2].Contains("181.190.6.196"))
+    {
+        urlServer = "181.190.6.196";
+    }
+    else
+    {
+        urlServer = Request.Url.AbsoluteUri.Split('/')[2];
+    }
+
+    ViewBag.PathDownloadPdfDocFiniquito = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/Bajas/GeneratePdf?pdf=RG9jRmluaXF1aXRv&data=" + ViewData["Codificado"];
+    ViewBag.PathViewPdfDocFiniquito = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/Bajas/ViewPdf?pdf=RG9jRmluaXF1aXRv&data=" + ViewData["Codificado"];
+    ViewBag.PathViewPdfCaratulaFiniquito = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/Bajas/ViewPdf?pdf=Q2FyYXR1bGFGaW5pcXVpdG8=&data=" + ViewData["Codificado"];
+
+}
+<div class="row mt-100" style="width: 92%; margin: auto;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-3">
+        <h1 class="family-teamwork" style="font-size: 40px;">
+            <i class="glyphicon-tw-5 glyphicon-tw-documento dspl-inline-block mb-3"></i>
+            <i class="fst-normal dspl-inline-block mt-20neg">
+                <span class="dspl-block color-100x3" style="font-size: 22px;">Solicitud de Baja Confirmada</span>
+                <span class="dspl-block mt-8neg">Administración del detalle de la solicitud de Baja.</span>
+            </i>
+        </h1>
+    </div>
+</div>
+
+<div class="row mt-20 mb-100" style="width: 92%; margin: auto;">
+    <div class="col-lg-1"></div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-10">
+        <span class="teamwork" style="width: 60px; height: 60px; position: absolute; margin-top: -20px; vertical-align: middle; align-items: center; display: flex; border-radius: 50%;">
+        <i class="fst-normal color-fx3 dspl-block ta-center family-teamwork fw-bold" style="width: 100%; margin: auto; font-size: 20px;">EST</i>
+        </span>
+        <div class="row" style="border: 1px solid rgb(150, 150, 150); min-height: 150px;">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 ta-center" style="min-height: 150px;">
+                <h3 class="family-teamwork fw-bold color-100x3 mt-20" style="font-size: 18px;">SOLICITUD DE BAJA</h3>
+                <span class="danger" style="height: 2px; width: 30px; display: inline-block; margin-right: 10px; margin-top: -15px;"></span>
+                <h1 class="family-teamwork fw-bold color-428BCA mt-5neg dspl-inline-block" style="font-size: 40px;">@ViewData["Ficha"]</h1>
+                <span class="danger" style="height: 2px; width: 30px; display: inline-block; margin-left: 10px; margin-top: -15px;"></span>
+                <h1 class="family-teamwork fw-bold color-100x3 mt-5neg" style="font-size: 20px;">@ViewData["NombreTrabajador"]</h1>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6" style="min-height: 150px;"></div>
+        </div>
+        <div class="row" style="min-height: 150px; margin-top: -170px;">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6" style="min-height: 150px;"></div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6" style="min-height: 150px;">
+                <div style="border: 1px solid rgb(100, 100, 100); width: 90%; margin: auto; min-height: 190px; background-color: rgb(100, 100, 100); text-align: center; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);">
+                    <h3 class="family-teamwork fw-bold color-fx3 mt-50" style="font-size: 18px;">SIGUIENTE ETAPA DE LA BAJA</h3>
+                    <div class="row mt-20">
+                        <div class="col-md-3 col-lg-3"></div>
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            @switch (ViewData["OptSgteEtapa"].ToString())
+                            {
+                                case "OptCalcular":
+                                    Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                                        { "Redirection", "#" },
+                                        { "GlyphiconColor", "btn-info" },
+                                        { "AddClass", "" },
+                                        { "Identificador", "" },
+                                        { "Glyphicon", "glyphicon-tw-calculado" },
+                                        { "Glosa", "CALCULAR LA SOLICITUD DE BAJA" },
+                                        { "DataValor", "" }
+                                    });
+                                    break;
+                                case "OptDescargarCaratula":
+                                    Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                                        { "Redirection", ViewBag.PathDownloadPdfDocFiniquito },
+                                        { "GlyphiconColor", "btn-danger" },
+                                        { "AddClass", "" },
+                                        { "Identificador", "" },
+                                        { "Glyphicon", "glyphicon-tw-pdf" },
+                                        { "Glosa", "DESCARGAR DOC. DE FINIQUITO" },
+                                        { "DataValor", "" }
+                                    });
+                                    break;
+                            }
+                        </div>
+                        <div class="col-md-3 col-lg-3"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+
+<div class="row mt-50neg mb-100" style="width: 92%; margin: auto;">
+    <div class="col-lg-1"></div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-10" style="border: 1px solid rgb(150, 150, 150);">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h4 class="family-teamwork color-100x3 pdt-5 pdl-5 pdr-5">Información de seguimiento, cálculo y monto asociado al finiquito.</h4>
+                <hr />
+            </div>
+        </div>
+        <div class="row mb-20">
+            @if (ViewData["BarcodeImageHasExists"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 ta-center">
+
+                    <h3 class="family-teamwork fw-bold mt-10neg color-100x3">Monto Finiquito</h3>
+                    <h1 class="family-teamwork color-428BCA fw-bold mt-5neg">$ 983.000</h1>
+                    <p class="family-teamwork fw-bold">
+                        Puedes revisar el línea la caratula del finiquito y el documento de finiquito.
+                    </p>
+                    <div class="row">
+                        @if (ViewData["OptViewDocFiniquito"].ToString() == "S")
+                        {
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-10">
+                                @{
+                                    Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                                                                        { "Redirection", "#" },
+                                                                        { "GlyphiconColor", "btn-danger" },
+                                                                        { "AddClass", "eventViewPdf" },
+                                                                        { "Identificador", "" },
+                                                                        { "Glyphicon", "glyphicon-tw-pdf" },
+                                                                        { "Glosa", "Visualizar documento de finiquito" },
+                                                                        { "DataValor", ViewBag.PathViewPdfDocFiniquito }
+                                                                    });
+                                }
+                            </div>
+                        }
+
+                        @if (ViewData["OptViewCaratula"].ToString() == "S")
+                        {
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-10">
+                                @{
+                                    Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                                                                        { "Redirection", "#" },
+                                                                        { "GlyphiconColor", "btn-danger" },
+                                                                        { "AddClass", "eventViewPdf" },
+                                                                        { "Identificador", "" },
+                                                                        { "Glyphicon", "glyphicon-tw-pdf" },
+                                                                        { "Glosa", "Visualizar caratula del finiquito" },
+                                                                        { "DataValor", ViewBag.PathViewPdfCaratulaFiniquito }
+                                                                    });
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 ta-center">
+                    <img src="@ViewData["BarcodeImage"]" style="width: 300px; height: 60px;" />
+                    <h4 class="family-teamwork fw-bold ta-center">@ViewData["Barcode"]</h4>
+                    <p class="family-teamwork fw-bold ta-left">
+                        Importante: Este código de barra es generado por el sistema, contiene el folio de cálculo para realizar el respectivo seguimiento.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center">
+                    <h1 class="family-teamwork color-100x3">El finiquito aun no ha sido cálculado por bajas/finiquitos.</h1>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+
+<div class="row mt-50neg mb-100" style="width: 92%; margin: auto;">
+    <div class="col-lg-1"></div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-10" style="border: 1px solid rgb(150, 150, 150);">
+        <div class="row mb-30">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 ta-center">
+                @{ 
+                    Html.RenderPartial("_TagInformation", new ViewDataDictionary()
+                    {
+                        { "TitleOne", "SOLICITUD EN ESTADO" },
+                        { "TitleTwo", ViewData["Estado"] },
+                        { "Glyphicon", ViewData["Glyphicon"] },
+                        { "GlyphiconColor", ViewData["GlyphiconColor"] }
+                    });
+                }
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 ta-center">
+                @{ 
+                    Html.RenderPartial("_TagInformation", new ViewDataDictionary()
+                    {
+                        { "TitleOne", "ULTIMA ACTUALIZACION" },
+                        { "TitleTwo", ViewData["FechaUltimaActualizacion"] },
+                        { "Glyphicon", "glyphicon-tw-calendario" },
+                        { "GlyphiconColor", ViewData["GlyphiconColor"] }
+                    });
+                }
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 ta-center">
+                @{ 
+                    Html.RenderPartial("_TagInformation", new ViewDataDictionary()
+                    {
+                        { "TitleOne", "SOLICITUD CREADA" },
+                        { "TitleTwo", ViewData["Fecha"] },
+                        { "Glyphicon", "glyphicon-tw-calendario" },
+                        { "GlyphiconColor", ViewData["GlyphiconColor"] }
+                    });
+                }
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 ta-center">
+                @{ 
+                    Html.RenderPartial("_TagInformation", new ViewDataDictionary()
+                    {
+                        { "TitleOne", "CREADO POR" },
+                        { "TitleTwo", ViewData["CreadoPor"] },
+                        { "Glyphicon", "glyphicon-tw-usuarios" },
+                        { "GlyphiconColor", ViewData["GlyphiconColor"] }
+                    });
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1"></div>
+</div>
+<div class="row mt-120neg mb-100" style="width: 92%; margin: auto;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="row">
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2"></div>
+            <div class="col-8 col-sm-8 col-md-8 col-lg-8 @ViewData["GlyphiconColor"]" style="border-radius: 2px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);">
+                <p class="family-teamwork color-fx3 ta-center pdt-15">COMENTARIOS DE LA SOLICITUD</p>
+                <p class="family-teamwork color-fx3 ta-center" style="font-size: 17px;">@ViewData["ComentariosSolicitud"]</p>
+            </div>
+            <div class="col-2 col-sm-2 col-md-2 col-lg-2"></div>
+        </div>
+    </div>
+</div>
+
+
+@*<div class="row mt-30neg mb-100" style="width: 92%; margin: auto;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h2 class="family-teamwork color-428BCA fw-bold">@ViewData["Ficha"]</h2>
+                <h1 class="family-teamwork color-100x3 fw-bold mt-10neg">@ViewData["NombreTrabajador"]</h1>
+                <h3 class="family-teamwork color-100x3 fw-bold mt-10neg">Rut @ViewData["Rut"]</h3>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h2 class="family-teamwork color-428BCA fw-bold" style="font-size: 25px;">@ViewData["CodigoCliente"] &bull; @ViewData["Cliente"]</h2>
+                <h2 class="family-teamwork color-100x3 fw-bold mt-10neg" style="font-size: 20px;">@ViewData["CargoMod"]</h2>
+                <h2 class="family-teamwork color-100x3 fw-bold mt-10neg" style="font-size: 20px;">@ViewData["CargoReal"]</h2>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <h2 class="family-teamwork color-428BCA fw-bold" style="font-size: 25px;">@ViewData["Articulo"]</h2>
+                <h2 class="family-teamwork color-100x3 fw-bold mt-10neg" style="font-size: 20px;">@ViewData["Causal"]</h2>
+
+                <h2 class="family-teamwork color-100x3 fw-bold mt-10neg" style="font-size: 18px;">Observaciones: @ViewData["ObservacionesCausal"]</h2>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                        <h2 class="family-teamwork color-428BCA fw-bold" style="font-size: 25px;">Fecha Inicio</h2>
+                        <h2 class="family-teamwork color-100x3 fw-bold mt-10neg" style="font-size: 20px;">@ViewData["FechaInicio"]</h2>
+
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                        <h2 class="family-teamwork color-428BCA fw-bold" style="font-size: 25px;">Fecha de Baja/Fecha Término</h2>
+                        <h2 class="family-teamwork color-100x3 fw-bold mt-10neg" style="font-size: 20px;">@ViewData["FechaTermino"]</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+        <div class="row">
+            @if (ViewData["OptHistorial"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+                    @{
+                        Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                            { "Redirection", "#" },
+                            { "GlyphiconColor", "btn-teamwork" },
+                            { "AddClass", "" },
+                            { "Identificador", "" },
+                            { "Glyphicon", "glyphicon-tw-atrasado" },
+                            { "Glosa", "Historial de la solicitud de baja" },
+                            { "DataValor", "" }
+                        });
+                    } 
+                </div>
+            }
+
+            @if (ViewData["OptCalcular"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+                    @{
+                        Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                            { "Redirection", "#" },
+                            { "GlyphiconColor", "btn-info" },
+                            { "AddClass", "" },
+                            { "Identificador", "" },
+                            { "Glyphicon", "glyphicon-tw-calculado" },
+                            { "Glosa", "Calcular la solicitud de baja" },
+                            { "DataValor", "" }
+                        });
+                    } 
+                </div>
+            }
+
+            @if (ViewData["OptViewDocFiniquito"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+                    @{
+                        Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                            { "Redirection", ViewBag.PathViewPdfDocFiniquito },
+                            { "GlyphiconColor", "btn-danger" },
+                            { "AddClass", "" },
+                            { "Identificador", "" },
+                            { "Glyphicon", "glyphicon-tw-pdf" },
+                            { "Glosa", "Visualizar documento de finiquito" },
+                            { "DataValor", "" }
+                        });
+                    } 
+                </div>
+            }
+
+            @if (ViewData["OptDescargarDocFiniquito"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+                    @{
+                        Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                            { "Redirection", ViewBag.PathDownloadPdfDocFiniquito },
+                            { "GlyphiconColor", "btn-danger" },
+                            { "AddClass", "" },
+                            { "Identificador", "" },
+                            { "Glyphicon", "glyphicon-tw-pdf" },
+                            { "Glosa", "Descargar documento de finiquito" },
+                            { "DataValor", "" }
+                        });
+                    } 
+                </div>
+            }
+
+            @if (ViewData["OptViewCaratula"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+                    @{
+                        Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                            { "Redirection", "#" },
+                            { "GlyphiconColor", "btn-danger" },
+                            { "AddClass", "" },
+                            { "Identificador", "" },
+                            { "Glyphicon", "glyphicon-tw-pdf" },
+                            { "Glosa", "Visualizar caratula del finiquito" },
+                            { "DataValor", "" }
+                        });
+                    } 
+                </div>
+            }
+
+            @if (ViewData["OptDescargarCaratula"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+                    @{
+                        Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                            { "Redirection", "#" },
+                            { "GlyphiconColor", "btn-danger" },
+                            { "AddClass", "" },
+                            { "Identificador", "" },
+                            { "Glyphicon", "glyphicon-tw-pdf" },
+                            { "Glosa", "Descargar caratula del finiquito" },
+                            { "DataValor", "" }
+                        });
+                    } 
+                </div>
+            }
+
+            @if (ViewData["OptRechazar"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+                    @{
+                        Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                            { "Redirection", "#" },
+                            { "GlyphiconColor", "btn-danger" },
+                            { "AddClass", "" },
+                            { "Identificador", "" },
+                            { "Glyphicon", "glyphicon-tw-cancel" },
+                            { "Glosa", "Rechazar solicitud de baja" },
+                            { "DataValor", "" }
+                        });
+                    } 
+                </div>
+            }
+
+            @if (ViewData["OptMoverAFiniquito"].ToString() == "S")
+            {
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-10">
+                    @{
+                        Html.RenderPartial("_TagButtonExtended", new ViewDataDictionary() {
+                            { "Redirection", "#" },
+                            { "GlyphiconColor", "btn-warning" },
+                            { "AddClass", "" },
+                            { "Identificador", "" },
+                            { "Glyphicon", "glyphicon-tw-atrasado" },
+                            { "Glosa", "Mover Solicitud de Baja a Finiquitos" },
+                            { "DataValor", "" }
+                        });
+                    } 
+                </div>
+            }
+
+        </div>
+    </div>
+</div>*@

@@ -1,0 +1,331 @@
+﻿<div id="contentEdit">
+    @switch ((string)ViewBag.OptionCargoModEdit)
+    {
+        case "200":
+            foreach (Teamwork.Model.Operaciones.SolicitudCargo item in ViewBag.RenderizadoSolicitudCargoMod)
+            {
+                <div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+                    <div class="col-12 col-sm-12 col-lg-12 col-md-12" id="encabezadoSolicitudCargo">
+                        @Html.Partial("Operaciones/_EncabezadoSolicitudCargoMod")
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-12 col-md-12">
+                        <button type="submit" class="btn btn-teamwork"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Volver a</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Solicitudes</i>
+                            </span>
+                        </button>
+                        <button type="submit" class="btn btn-create"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-reasignar" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Volver Detalle</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                            </span>
+                        </button>
+                        <button type="submit" class="btn btn-danger"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-trash" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Deshechar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                            </span>
+                        </button>
+                        <button type="submit" class="btn btn-warning"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-actualizar" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Actualizar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                            </span>
+                        </button>
+                        <button type="submit" class="btn btn-danger"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-pdf" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Visualizar Estructura</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">De Renta PDF</i>
+                            </span>
+                        </button>
+                        <button type="submit" class="btn btn-warning"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #000;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-edit" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Editar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Solicitud</i>
+                            </span>
+                        </button>
+                        <a href="@item.EnlaceSolicitar" type="submit" class="btn btn-success"
+                                style="border-radius: 25px; height: 40px; margin-top: 12px; text-align: left; color: #fff;">
+                            <i class="glyphicon-tw-7 glyphicon-tw-asignado" style="display: inline-block;"></i>
+                            <span style="display: inline-block; margin-top: -7px;">
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Solicitar</i>
+                                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block;">Cargo Mod</i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-20">
+                        @using (Ajax.BeginForm("ActualizaNombreCargo", "Operaciones", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "encabezadoSolicitudCargo",
+                            InsertionMode = InsertionMode.Replace
+                        }, new { @style = "display: block;" }))
+                        {
+                            <input type="text" class="dspl-none" name="codigoSolicitud" value="@item.CodigoSolicitud" />
+                            <input type="text" value="@item.NombreCargo" id="nombreCargo" name="nombreCargo" class="input-nofocus dspl-inline-block pdl-5 pdr-5 pdt-10 pdb-10 family-teamwork mt-10neg br-1-solid-200x3 bt-1-solid-200x3
+                                                          bl-1-solid-200x3 bb-1-solid-200x3" style="width: 80%; font-size: 17px;" placeholder="Nombre del cargo / función (Ej. PROMOTOR FULL TIME" />
+                            <span class="family-teamwork dspl-block">
+                                Nota: la aplicación funciona asincronamente, todo lo que registre quedará guardada on-demand, esto quiere decir que no será necesario actualizar la
+                                página para ver los cambios surgan efecto.
+                            </span>
+                            <input type="submit" id="btnCambioNombre" class="dspl-none" />
+                        }
+
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h2 class="family-teamwork">Información de Haberes del cargo mod</h2>
+                        <p class="family-teamwork mt-10neg">Nota: aqui se debe indicar todo concepto que sea considerado como haber para la estructura de renta del cargo mod, la cual a posterior será validada por el área de finanzas.</p>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="family-teamwork dspl-block">SUELDO BASE</h4>
+                        @using (Ajax.BeginForm("ActualizaSueldoBase", "Operaciones", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "encabezadoSolicitudCargo",
+                            InsertionMode = InsertionMode.Replace
+                        }, new { @style = "display: block;" }))
+                        {
+                            <input type="text" class="dspl-none" name="codigoSolicitud" value="@item.CodigoSolicitud" />
+                            <input type="number" value="" id="sueldoBase" name="sueldoBase" class="input-nofocus dspl-inline-block pdl-5 pdr-5 pdt-10 pdb-10 family-teamwork mt-10neg br-1-solid-200x3 bt-1-solid-200x3
+                                                          bl-1-solid-200x3 bb-1-solid-200x3" style="width: 80%; font-size: 17px;" placeholder="SUELDO BASE (Ej. 320125)" />
+                            <input type="submit" id="btnCambiarSueldoBase" class="dspl-none" />
+                        }
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-10">
+                        <h4 class="family-teamwork dspl-block">GRATIFICACIÓN</h4>
+                        <span>
+                            @using (Ajax.BeginForm("ActualizaGratificacion", "Operaciones", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "encabezadoSolicitudCargo",
+                                InsertionMode = InsertionMode.Replace
+                            }, new { @style = "display: block;" }))
+                            {
+                                <input type="text" class="dspl-none" name="codigoSolicitud" value="@item.CodigoSolicitud" />
+                                <input type="text" class="dspl-none" name="typeGratif" value="CC" />
+                                <input type="text" class="dspl-none" name="observGratiConv" value="" />
+                                <input type="text" class="dspl-none" name="gratificacion" value="0" />
+                                <label class="switch-md" style="display: inline-block;">
+                                    <input type="radio" class="gratif" name="gratif" id="typeIntermGratifLegal" data-trigger-action="typeIntermGratifLegal" />
+                                    <span class="slider teamwork"></span>
+                                </label>
+                                <i class="fst-normal family-teamwork dspl-inline-block mr-10">Con Gratificación</i>
+                                <label class="switch-md" style="display: inline-block;">
+                                    <input type="radio" class="gratif" name="gratif" id="typeGratifCostoCero" data-trigger-action="btnTypeGratifCostoCero" />
+                                    <span class="slider teamwork"></span>
+                                </label>
+                                <i class="fst-normal family-teamwork dspl-inline-block">Sin Gratificación</i>
+                                <input type="submit" class="dspl-none" id="btnTypeGratifCostoCero" />
+                            }
+                        </span>
+                        <span class="dspl-none contentGratificacionMonto">
+                            <span class="dspl-inline-block ml-30 mb-10">
+                                @using (Ajax.BeginForm("ActualizaGratificacion", "Operaciones", new AjaxOptions()
+                                {
+                                    HttpMethod = "POST",
+                                    UpdateTargetId = "encabezadoSolicitudCargo",
+                                    InsertionMode = InsertionMode.Replace
+                                }, new { @style = "display: block;" }))
+                                {
+                                    <input type="text" class="dspl-none" name="codigoSolicitud" value="@item.CodigoSolicitud" />
+                                    <input type="text" class="dspl-none" name="typeGratif" value="L" />
+                                    <input type="text" class="dspl-none" name="observGratiConv" value="" />
+                                    <input type="text" class="dspl-none" name="gratificacion" value="0" />
+                                    <label class="switch-md" style="display: inline-block;">
+                                        <input type="radio" class="gratif" name="gratif" id="typeGratifLegal" data-trigger-action="btnTypeGratifLegal" />
+                                        <span class="slider teamwork"></span>
+                                    </label>
+                                    <i class="fst-normal family-teamwork dspl-inline-block">Gratificación Legal 25%</i>
+                                    <label class="switch-md" style="display: inline-block;">
+                                        <input type="radio" class="gratif" name="gratif" id="typeGratifPactada" data-trigger-action="btnTypeGratifPactada" />
+                                        <span class="slider teamwork"></span>
+                                    </label>
+                                    <i class="fst-normal family-teamwork dspl-inline-block">Gratificación Convencional Pactada con Cliente</i>
+                                    <input type="submit" class="dspl-none" id="btnTypeGratifLegal" />
+                                }
+                            </span>
+                        </span>
+                        <p class="ml-30 family-teamwork dspl-none glosaGratifCostoCero alert alert-info">
+                            Nota: Se esta considerando un monto $ 0 para la gratificación, la cual se indicara y se replicara a todos los sistemas en monto $ 0.
+                        </p>
+                        <p class="ml-30 family-teamwork dspl-none glosaGratifLegal alert alert-info">
+                            Nota: Se esta considerando gratificación legal del 25% con tope en 126.864, la cual será calculada de manerá automática por el sistema.
+                        </p>
+                        <div class="contentGratificacionPactada dspl-none">
+                            @using (Ajax.BeginForm("ActualizaGratificacion", "Operaciones", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "encabezadoSolicitudCargo",
+                                InsertionMode = InsertionMode.Replace
+                            }, new { @style = "display: block;" }))
+                            {
+                                <input type="text" class="dspl-none" name="codigoSolicitud" value="@item.CodigoSolicitud" />
+                                <input type="text" class="dspl-none" name="typeGratif" value="PCC" />
+                                <input type="text" name="gratificacion" id="gratificacion" class="input-nofocus dspl-inline-block pdl-5 pdr-5 pdt-10 pdb-10 ta-center ml-30 family-teamwork mt-10neg br-1-solid-200x3 bt-1-solid-200x3
+                                       bl-1-solid-200x3 bb-1-solid-200x3" style="width: 30%; font-size: 17px;" placeholder="Indique Monto (Ej. 126.485 o 126485)" />
+                              
+                                <p class="ml-30 family-teamwork">
+                                    Observación de la gratificación convensional pactada con el cliente
+                                </p>
+                                <textarea name="observGratiConv" id="observGratiConv" class="input-nofocus dspl-block pdl-5 pdr-5 pdt-10 pdb-10 ml-30 family-teamwork mt-10neg br-1-solid-200x3 bt-1-solid-200x3
+                                       bl-1-solid-200x3 bb-1-solid-200x3" style="width: 70%; max-height: 100px; min-height: 50px"></textarea>
+                                <input type="submit" class="dspl-none" id="btnTypeGratifPactada" />
+                            }
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h4 class="family-teamwork dspl-block">ASIGNACIONES NO IMPONIBLES</h4>
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <label class="switch-md" style="display: inline-block;">
+                                            <input type="radio" class="gratif" name="gratif" id="typeGratifPactada" data-trigger-action="btnTypeGratifPactada" />
+                                            <span class="slider teamwork"></span>
+                                        </label>
+                                        <i class="fst-normal family-teamwork dspl-inline-block">Con monto de asignación de Colación</i>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <p class="ml-30 family-teamwork alert alert-warning">
+                                            Nota: Se registrará con monto $ 0 la asignación de colación.
+                                        </p>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <label class="switch-md" style="display: inline-block;">
+                                            <input type="radio" class="gratif" name="gratif" id="typeGratifPactada" data-trigger-action="btnTypeGratifPactada" />
+                                            <span class="slider teamwork"></span>
+                                        </label>
+                                        <i class="fst-normal family-teamwork dspl-inline-block">Con monto de asignación de Movilización</i>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                        <p class="ml-30 family-teamwork alert alert-warning">
+                                            Nota: Se registrará con movilización $ 0 la asignación de colación.
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-100" id="contentFullBonos">
+                        <h4 class="family-teamwork dspl-block">ASIGNACIONES DE BONOS</h4>
+                        @Html.Partial("Operaciones/_ContentBonos")
+                    </div>
+                </div>
+            }
+            break;
+        case "404":
+            <div style="background-color: rgb(107, 142, 164); background-image: url(../../Resources/bnn_clientes.PNG);
+                                        background-size: 40%; background-position: center; background-repeat: no-repeat; width: 100%; height: 400px; margin-top: 55px;"></div>
+            <div style="width: 100%; height: 400px; margin-top: -400px; background-color: rgba(0, 0, 0, 0.5);"></div>
+            <div class="row mt-350neg ml-auto mr-auto" style="width: 92%;" id="contentCreate">
+                @Html.Partial("Operaciones/_SeleccionaCliente")
+            </div>
+            break;
+    }
+</div>
+
+<script>
+
+    function HideModalConfirmacion() {
+        $("#modalConfirmacionEvento").modal("hide");
+    }
+
+    function onBegin() { }
+
+    function ShowModalConfirmacion() {
+        $("#modalConfirmacionEvento").modal("show");
+    }
+
+    $(document).on("blur", "#nombreCargo", function () {
+        $("#btnCambioNombre").trigger("click");
+    });
+
+    $(document).on("blur", "#sueldoBase", function () {
+        $("#btnCambiarSueldoBase").trigger("click");
+    });
+
+    $(document).on("blur", "#gratificacion", function () {
+        $("#btnTypeGratifPactada").trigger("click");
+    });
+
+    $(document).on("blur", "#observGratiConv", function () {
+        $("#btnTypeGratifPactada").trigger("click");
+    });
+
+    $(document).on("click", ".gratif", function () {
+        
+        switch ($(this).attr("data-trigger-action")) {
+            case "typeIntermGratifLegal":
+                
+                $(".glosaGratifCostoCero").addClass("dspl-none").removeClass("dspl-block");
+                $(".contentGratificacionMonto").removeClass("dspl-none").addClass("dspl-block");
+
+                $(".contentGratificacionPactada").addClass("dspl-none").removeClass("dspl-block");
+
+                break;
+            case "btnTypeGratifLegal":
+
+                $("#" + $(this).attr("data-trigger-action")).trigger("click");
+
+                $(".glosaGratifCostoCero").addClass("dspl-none").removeClass("dspl-block");
+                $(".glosaGratifLegal").removeClass("dspl-none").addClass("dspl-block");
+
+                $(".contentGratificacionPactada").addClass("dspl-none").removeClass("dspl-block");
+
+                break;
+            case "btnTypeGratifCostoCero":
+
+                $("#" + $(this).attr("data-trigger-action")).trigger("click");
+
+                $(".glosaGratifCostoCero").removeClass("dspl-none").addClass("dspl-block");
+                $(".glosaGratifLegal").addClass("dspl-none").removeClass("dspl-block");
+
+                $(".contentGratificacionPactada").addClass("dspl-none").removeClass("dspl-block");
+                $(".contentGratificacionMonto").addClass("dspl-none").removeClass("dspl-block");
+
+                break;
+            case "btnTypeGratifPactada":
+                
+                $(".glosaGratifCostoCero").addClass("dspl-none").removeClass("dspl-block");
+                $(".glosaGratifLegal").addClass("dspl-none").removeClass("dspl-block");
+
+                $(".contentGratificacionPactada").removeClass("dspl-none").addClass("dspl-block");
+
+                break;
+
+        }
+    });
+
+
+</script>

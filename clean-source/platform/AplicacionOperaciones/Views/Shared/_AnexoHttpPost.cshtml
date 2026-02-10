@@ -1,0 +1,40 @@
+﻿@{ 
+    string prefixApp = "";
+    string urlServer = "";
+
+    if (!Request.Url.AbsoluteUri.Split('/')[2].Contains("localhost"))
+    {
+        prefixApp = "/" + Request.Url.AbsoluteUri.Split('/')[3];
+    }
+
+    if (Request.Url.AbsoluteUri.Split('/')[2].Contains("181.190.6.196"))
+    {
+        urlServer = "181.190.6.196";
+    }
+    else
+    {
+        urlServer = Request.Url.AbsoluteUri.Split('/')[2];
+    }
+
+    ViewBag.PathAccess = Request.Url.AbsoluteUri.Split('/')[0] + "//" + urlServer + prefixApp + "/Operaciones/Anexos/" + ViewBag.Path;
+}
+<div class="col-12 col-sm-12 col-md-6 col-lg-3">
+    <div class="ml-auto mr-5neg mt-10 mb-10 br-1-solid-200x3 @ViewBag.BorderColor bb-1-solid-200x3 bt-1-solid-200x3" style="height: 300px; right: 10px;">
+    </div>
+    <div class="ml-auto mr-auto mt-305neg mb-10 br-1-solid-200x3 @ViewBag.BorderColor bb-1-solid-200x3 bt-1-solid-200x3" style="height: 300px; background-color: #fff; z-index: 999;">
+        <div class="@ViewBag.GlyphiconColor ml-20 mt-20neg dspl-inline-block @ViewBag.Glyphicon" style="border-radius: 50%; width: 60px; height: 60px;"></div>
+        <h1 class="family-teamwork dspl-inline-block mt-20" style="font-size: 15px;">@ViewBag.RenderizadoTituloOne<br />@ViewBag.RenderizadoTituloTwo</h1>
+        <p class="family-teamwork ml-auto mr-auto mt-20" style="width: 90%;">
+            @ViewBag.RenderizadoDescripcion
+        </p>
+        <div class="ta-center mt-50">
+            <a href="@ViewBag.PathAccess" class="btn @ViewBag.ButtonClass ta-left @ViewBag.ColorFont br-25 height-50">
+                <i class="glyphicon-tw-6 @ViewBag.Glyphicon dspl-inlblc mb-15neg"></i>
+                <span class="dspl-inlblc">
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">@ViewBag.RenderizadoButtonOne</i>
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal">@ViewBag.RenderizadoButtonTwo</i>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

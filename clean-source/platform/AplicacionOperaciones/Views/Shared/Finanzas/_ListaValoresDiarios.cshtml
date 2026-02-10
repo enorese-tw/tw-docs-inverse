@@ -1,0 +1,59 @@
+﻿
+<div class="ta-left mb-30">
+    @using (Ajax.BeginForm("ListarValoresDiarios", "Finanzas", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "contentValorDiario",
+        LoadingElementId = "loader"
+    }))
+    {
+        <label style="font-family: 'Open Sans Condensed', sans-serif; line-height: 5px; display: block;">Aplicar Filtrado de Valores Diarios</label>
+        <select class="form-control family-teamwork" style="width: 200px; display: inline-block;" id="typeFilter" name="typeFilter">
+            <option value="">Seleccione Filtro</option>
+            <option value="Empresa">Empresa</option>
+            <option value="Cliente">Cliente</option>
+            <option value="CargoMod">Cargo Mod</option>
+        </select>
+        <input type="text" class="form-control family-teamwork dspl-none" style="width: 300px;" id="textNormal" />
+        <select class="form-control family-teamwork dspl-none" style="width: 300px;" id="textEmpresa">
+            <option value="">Seleccione Empresa</option>
+            <option value="TWEST">TWEST &bull; Empresa Servicios Transitorios</option>
+            <option value="TWRRHH">TWRRHH &bull; Recursos Humanos</option>
+            <option value="TWC">TWC &bull; Consultora</option>
+        </select>
+        <button type="submit" class="btn btn-teamwork dspl-none" id="btnBuscarSolicitud"
+                style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-buscar" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -7px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Buscar</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                font-size: 14px; font-style: normal; display: block;">Valores Diarios</i>
+            </span>
+        </button>
+    }
+    @using (Ajax.BeginForm("ListarValoresDiarios", "Finanzas", new AjaxOptions()
+    {
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "contentValorDiario",
+        LoadingElementId = "loader"
+    }))
+    {
+        <button type="submit" class="btn btn-warning dspl-inline-block" style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+            <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+            <span style="display: inline-block; margin-top: -7px;">
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Restablecer</i>
+                <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                font-size: 14px; font-style: normal; display: block;">Valores Diarios</i>
+            </span>
+        </button>
+    }
+</div>
+
+<div id="contentValorDiario" style="width: 100%;">
+    @Html.Partial("Finanzas/_ItemValoresDiarios")
+</div>
+

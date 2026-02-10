@@ -1,0 +1,862 @@
+﻿@if (ViewBag.HttpRedirectChangeCodigoCargoMod != null)
+{
+    <div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @if (ViewBag.HtmlMessageResult != null)
+            {
+                @: <span class="alert alert-success dspl-block m-auto new-family-teamwork" style="width: 100%; font-weight: 100;"><img src="../../../Resources/check.svg" width="30" height="30" /> @Html.Raw(ViewBag.HtmlMessageResult)</span>
+            }
+            <h2 class="new-family-teamwork ta-center color-100x3" style="font-weight: 100;">El codigo cargo mod ha cambiado, los estamos redirecionando...</h2>
+            <h5 class="new-family-teamwork ta-center" style="font-weight: 100;">Espere un momento, no tardamos.</h5>
+        </div>
+    </div>
+    <script async>
+
+        setTimeout(() => {
+            window.location.href = "@ViewBag.HttpRedirectChangeCodigoCargoMod"
+        }, 1000)
+
+    </script>
+}
+else
+{
+    foreach (Teamwork.Model.Operaciones.SolicitudCargo itemSolic in ViewBag.RenderizadoSolicitudesCargoMod)
+    {
+        foreach (Teamwork.Model.Finanzas.EstructuraCargo item in ViewBag.RenderizaHeaderEstructura)
+        {
+
+            <div class="row mt-80 ml-auto mr-auto" style="width: 92%;">
+                @if (ViewBag.HtmlMessageResult != null)
+                {
+                    @: <span class="alert alert-success dspl-block m-auto new-family-teamwork" style="width: 100%; font-weight: 100;"><img src="../../../Resources/check.svg" width="30" height="30" /> @Html.Raw(ViewBag.HtmlMessageResult)</span>
+                }
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1 class="new-family-teamwork mb-10neg" style="font-weight: 100; font-size: 30px; ">
+                        <img src="~/Resources/svg/050-form.svg" width="50" height="50" class="dspl-inline-block mb-5" />
+                        @switch (item.Origen)
+                        {
+                            case "Simulación":
+                                @: Cotización
+                                break;
+                            default:
+                                @item.Origen
+                                break;
+                        }
+                        : @item.NombreCargoMod
+                    </h1>
+                    <h4 class="new-family-teamwork" style="font-weight: 100;">Comentarios Solicitud : @itemSolic.Comentarios</h4>
+                </div>
+            </div>
+            <div class="row ml-auto mr-auto" style="width: 92%;">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="mb-20">
+                        @Html.ButtonAdministracion(
+                            "submit",
+                            new string[] {
+                                "class='dspl-inline-block btn btn-teamwork color-fx3 new-family-teamwork mr-2'",
+                                "onclick='handleClickRedirectAction(this)'",
+                                "data-reference='" + itemSolic.EnlaceVolver + "'"
+                            },
+                            new string[]
+                            {
+                                "min-width: 50px",
+                                "height: 50px",
+                                "border: none",
+                                "font-size: 15px",
+                                "border-radius: 25px",
+                                "text-align: center",
+                                "font-weight: 100"
+                            },
+                            new string[]
+                            {
+                                "<img src='../../../Resources/atras.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                "<span style='position: relative; float: right;'>Volver</span>"
+                            },
+                            true
+                        )
+
+                        @using (Ajax.BeginForm("ModalHistorialCargoMod", "Finanzas", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "contentPayment",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loader",
+                            OnSuccess = "ModalPaymentShow"
+                        }))
+                        {
+                            <input type="text" name="codigoCargoMod" value="@itemSolic.CodigoSolicitud" class="dspl-none" />
+                            @Html.ButtonAdministracion(
+                                "submit",
+                                new string[] {
+                                    "class='dspl-inline-block btn btn-create new-family-teamwork mr-5'"
+                                },
+                                new string[]
+                                {
+                                    "min-width: 50px",
+                                    "height: 50px",
+                                    "border: none",
+                                    "font-size: 15px",
+                                    "border-radius: 25px",
+                                    "text-align: center",
+                                    "font-weight: 100"
+                                },
+                                new string[]
+                                {
+                                    "<img src='../../../Resources/svgnuevos/reloj.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                    "<span style='position: relative; float: right;'>Historial Cargo Mod</span>"
+                                },
+                                (itemSolic.OptHistorial == "S") ? true : false
+                            )
+                        }
+
+                        @using (Ajax.BeginForm("ModalConfirmacionRechazoCargoMod", "Finanzas", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "contentPayment",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loader",
+                            OnSuccess = "ModalPaymentShow"
+                        }))
+                        {
+                            <input type="text" name="origen" value="Solicitud" class="dspl-none" />
+                            <input type="text" name="codigoCargoMod" value="@itemSolic.CodigoSolicitud" class="dspl-none" />
+                            <input type="text" name="estado" value="RZR" class="dspl-none" />
+                            @Html.ButtonAdministracion(
+                                "submit",
+                                new string[] {
+                                    "class='dspl-inline-block btn btn-danger new-family-teamwork'"
+                                },
+                                new string[]
+                                {
+                                    "min-width: 50px",
+                                    "height: 50px",
+                                    "border: none",
+                                    "border-radius: 25px",
+                                    "text-align: center",
+                                    "font-weight: 100"
+                                },
+                                new string[]
+                                {
+                                    "<img src='../../../Resources/rechazo.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                    "<span style='position: relative; float: right;'>Rechazar</span>"
+                                },
+                                (itemSolic.OptRechazarRem == "S") ? true : false
+                            )
+                        }
+
+                        @using (Ajax.BeginForm("ModalConfirmacionRechazoCargoMod", "Finanzas", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "contentPayment",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loader",
+                            OnSuccess = "ModalPaymentShow"
+                        }))
+                        {
+                            <input type="text" name="origen" value="Solicitud" class="dspl-none" />
+                            <input type="text" name="codigoCargoMod" value="@itemSolic.CodigoSolicitud" class="dspl-none" />
+                            <input type="text" name="estado" value="RZ" class="dspl-none" />
+                            @Html.ButtonAdministracion(
+                                "submit",
+                                new string[] {
+                                    "class='dspl-inline-block btn btn-danger new-family-teamwork'"
+                                },
+                                new string[]
+                                {
+                                    "min-width: 50px",
+                                    "height: 50px",
+                                    "border: none",
+                                    "border-radius: 25px",
+                                    "text-align: center",
+                                    "font-weight: 100"
+                                },
+                                new string[]
+                                {
+                                    "<img src='../Resources/rechazo.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                    "<span style='position: relative; float: right;'>Rechazar</span>"
+                                },
+                                (itemSolic.OptRechazar == "S") ? true : false
+                            )
+                        }
+
+                        @Html.ButtonAdministracion(
+                            "submit",
+                            new string[] {
+                                "class='dspl-inline-block btn btn-warning color-fx3 new-family-teamwork mr-5'",
+                                "onclick='handleClickRedirectAction(this)'",
+                                "data-reference='" + itemSolic.EnlaceEditar + "'"
+                            },
+                            new string[]
+                            {
+                                "min-width: 50px",
+                                "height: 50px",
+                                "border: none",
+                                "font-size: 15px",
+                                "border-radius: 25px",
+                                "text-align: center",
+                                "font-weight: 100"
+                            },
+                            new string[]
+                            {
+                                "<img src='../../../Resources/editar.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                "<span style='position: relative; float: right;'>Editar</span>"
+                            },
+                            (itemSolic.OptEditar == "S") ? true : false
+                        )
+
+                        @Html.ButtonAdministracion(
+                            "submit",
+                            new string[] {
+                                "class='dspl-inline-block btn btn-danger new-family-teamwork mr-5'",
+                                "onclick='handleClickRedirectAction(this, `_blank`)'",
+                                "data-reference='" + itemSolic.EnlaceEstructura + "'"
+                            },
+                            new string[]
+                            {
+                                "min-width: 50px",
+                                "height: 50px",
+                                "border: none",
+                                "font-size: 15px",
+                                "border-radius: 25px",
+                                "text-align: center",
+                                "font-weight: 100"
+                            },
+                            new string[]
+                            {
+                                "<img src='../../../Resources/pdf.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                "<span style='position: relative; float: right;'>Estructura</span>"
+                            },
+                            (itemSolic.OptPdf == "S") ? true : false
+                        )
+
+                        @using (Ajax.BeginForm("DeshacerSolicitud", "Finanzas", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "contentDetail",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loader"
+                        }))
+                        {
+                            <input type="text" name="origen" value="Detail" class="dspl-none" />
+                            <input type="text" class="dspl-none" name="codigoSolicitud" value="@itemSolic.CodigoSolicitud" />
+                            @Html.ButtonAdministracion(
+                                "submit",
+                                new string[] {
+                                    "class='dspl-inline-block btn btn-danger new-family-teamwork mr-5'"
+                                },
+                                new string[]
+                                {
+                                    "min-width: 50px",
+                                    "height: 50px",
+                                    "border: none",
+                                    "font-size: 15px",
+                                    "border-radius: 25px",
+                                    "text-align: center",
+                                    "font-weight: 100"
+                                },
+                                new string[]
+                                {
+                                    "<img src='../../../Resources/eliminar.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                "<span style='position: relative; float: right;'>Eliminar</span>"
+                                },
+                                (itemSolic.OptDesechar == "S") ? true : false
+                            )
+                        }
+
+                        @using (Ajax.BeginForm("CambioEstadoSolicitud", "Finanzas", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "contentDetail",
+                            InsertionMode = InsertionMode.Replace,
+                            LoadingElementId = "loader",
+                            OnSuccess = "handleScrollTop"
+                        }))
+                        {
+                            <input type="text" name="origen" value="Detail" class="dspl-none" />
+                            <input type="text" name="codigoCargoMod" value="@itemSolic.CodigoSolicitud" class="dspl-none" />
+                            <input type="text" name="estado" value="FD" class="dspl-none" />
+                            @Html.ButtonAdministracion(
+                                "submit",
+                                new string[] {
+                                    "class='dspl-inline-block btn btn-success new-family-teamwork mr-5'"
+                                },
+                                new string[]
+                                {
+                                    "min-width: 50px",
+                                    "height: 50px",
+                                    "border: none",
+                                    "font-size: 15px",
+                                    "border-radius: 25px",
+                                    "text-align: center",
+                                    "font-weight: 100"
+                                },
+                                new string[]
+                                {
+                                    "<img src='../../../Resources/solicitar.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                    "<span style='position: relative; float: right;'>Publicar y Enviar Firma Digital</span>"
+                                },
+                                (itemSolic.OptPublicar == "S") ? true : false
+                            )
+                        }
+
+                        @Html.ButtonAdministracion(
+                            "button",
+                            new string[] {
+                                "class='dspl-inline-block btn btn-success new-family-teamwork mr-5'",
+                                "onclick='handleClickRedirectAction(this)'",
+                                "data-reference='" + itemSolic.EnlaceDescargaReporteFirmaDigital + "'"
+                            },
+                            new string[]
+                            {
+                                "min-width: 50px",
+                                "height: 50px",
+                                "border: none",
+                                "font-size: 15px",
+                                "border-radius: 25px",
+                                "text-align: center",
+                                "font-weight: 100"
+                            },
+                            new string[]
+                            {
+                                "<img src='../../../Resources/solicitar.svg' width='20' height='20' style='position: relative; left: 1%; margin-top: -5%; margin-right: 3px;' />" +
+                                "<span style='position: relative; float: right;'>Descargar Reporte</span>"
+                            },
+                            (itemSolic.OptDescargarReporteFirmaDigital == "S") ? true : false
+                        )
+                    </div>
+                    <p class="new-family-teamwork mb-10neg" style="font-weight: 100;">
+                        Cliente
+                    </p>
+                    <h3 class="new new-family-teamwork @itemSolic.Border pdl-10 pdt-10 pdr-10 pdb-10" style="font-weight: 100;">
+                        @item.RazonSocial
+                    </h3>
+                    <p class="new-family-teamwork mb-10neg" style="font-weight: 100;">
+                        Nombre cargo y/o función
+                    </p>
+                    <h3 class="new new-family-teamwork @itemSolic.Border pdl-10 pdt-10 pdr-10 pdb-10" style="font-weight: 100;">
+                        @item.NombreCargo
+                    </h3>
+                    <p class="new-family-teamwork mb-10neg" style="font-weight: 100;">
+                        Tipo de Jornada
+                    </p>
+                    <h3 class="new new-family-teamwork @itemSolic.Border pdl-10 pdt-10 pdr-10 pdb-10" style="font-weight: 100;">
+                        @if (item.TypeJornada == "F")
+                        {
+                            @: FULL TIME
+                        }
+
+                        @if (item.TypeJornada == "P")
+                        {
+                            @: PART TIME
+                            @: <span class="dspl-block" style="font-size: 18px;">
+                                @: Se esta calculando en base a Part Time por
+                                if (item.TypeCalculoPT == "PTD")
+                                {
+                                    @: Día
+                                }
+                                else
+                                {
+                                    @: Hora
+                                }
+                                @: y el valor
+                                if (item.TypeCalculoPT == "PTD")
+                                {
+                                    @: Día
+                                }
+                                else
+                                {
+                                    @: Hora
+                                }
+                                @: es de $ @item.ValorSueldoPT, donde cuyas horas semanales corresponden a @item.NumeroHorasSemanalesPT
+                            @: </span>
+                        }
+                    </h3>
+                    <p class="new-family-teamwork mb-10neg" style="font-weight: 100;">
+                        Tipo de Sueldo
+                    </p>
+                    <h3 class="new new-family-teamwork @itemSolic.Border pdl-10 pdt-10 pdr-10 pdb-10" style="font-weight: 100;">
+                        @if (item.TypeCalculoSueldo == "M" || item.TypeCalculoSueldo == "PTM")
+                        {
+                            @: MENSUAL
+                        }
+
+                        @if (item.TypeCalculoSueldo == "D" || item.TypeCalculoSueldo == "PTD")
+                        {
+                            @: DIARIO
+                        }
+                    </h3>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+
+                    <p class="new-family-teamwork mb-10neg" style="font-weight: 100;">
+                        Codigo Solicitud
+                    </p>
+                    <h3 class="new-family-teamwork @itemSolic.Border pdl-10 pdt-10 pdr-10 pdb-10" style="font-weight: 100;">
+                        @itemSolic.CodigoCargoMod @itemSolic.GlosaCodigo
+                        <span style="font-size: 13px;" class="dspl-block">Codigo Referencial: @itemSolic.CodigoSolicitud</span>
+                    </h3>
+                    <h3 class="new-family-teamwork" style="font-weight: 100;">
+                        Horarios y Jornada de Cargo Mod
+                    </h3>
+                    
+                    @if (item.Horarios != "" || item.NumeroHorasSemanales != "")
+                    {
+                        @: <p class="new-family-teamwork @itemSolic.Border pdl-10 pdt-20 pdr-10 pdb-20" style="font-weight: 100;">
+                        if (item.TypeCalculoSueldo == "D" || item.TypeCalculoSueldo == "PTD" || item.TypeCalculoSueldo == "PTM")
+                        {
+                            @item.NumeroDias @: Dias Semanales <br/>
+                        }
+                        if (item.NumeroHorasSemanalesPT == "")
+                        {
+                            switch(item.NumeroHorasSemanales){
+                                case "45":
+                                    @: 45 Horas semanales
+                                    break;
+                                case "JE":
+                                    @: Jornada Excepcional
+                                    break;
+                                case "ART22":
+                                    @: Articulo 22
+                                    break;
+                                default:
+                                    @item.NumeroHorasSemanales @: Horas Semanales
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            @item.NumeroHorasSemanalesPT @: Horas Semanales
+                        }
+                        @: <br/>
+                        @: @item.Horarios
+                        @: </p>
+                    }
+                    else
+                    {
+                        @: <p class="new-family-teamwork @itemSolic.Border pdl-10 pdt-20 pdr-10 pdb-20 color-100x3" style="font-weight: 100;">Sin Jornada ni horarios de Cargo Mod que destacar</p>
+                    }
+
+                    <h3 class="new new-family-teamwork" style="font-weight: 100;">
+                        Observaciones, anotaciones y notas de Cargo Mod
+                    </h3>
+                    @if (item.Observaciones != "" || item.Observaciones2 != "")
+                    {
+                        @: <p class="new-family-teamwork @itemSolic.Border pdl-10 pdt-20 pdr-10 pdb-20" style="font-weight: 100;">@Html.Raw(item.Observaciones + "<br/>" + item.Observaciones2)</p>
+                    }
+                    else
+                    {
+                        @: <p class="new-family-teamwork @itemSolic.Border pdl-10 pdt-20 pdr-10 pdb-20 color-100x3" style="font-weight: 100;">Sin Observaciones, anotaciones y notas Cargo Mod que destacar</p>
+                    }
+                </div>
+            </div>
+        }
+        <div id="module_tables_estructura_renta" class="row mt-20 ml-auto mr-auto" style="width: 92%;">
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-20">
+                @if (itemSolic.SectHaber == "S")
+                {
+                    <table border="1" style="width: 100%; min-height: 500px; font-size: 18px; font-weight: 100;" class="new-family-teamwork br-1-solid-200x3 bl-1-solid-200x3 bt-1-solid-200x3 bb-1-solid-200x3">
+                        <tbody>
+                            @foreach (Teamwork.Model.Finanzas.EstructuraCargo item in ViewBag.RenderizaHeaderEstructura)
+                            {
+                                <tr>
+                                    <td class="pdl-10 pdr-10" colspan="3" style="color: #f00;">CARGO MOD: <b id="nombreCargoMod">@item.NombreCargoMod</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="pdl-10 pdr-10" colspan="3" style="color: #f00;"><b>@item.Cliente</b></td>
+                                </tr>
+                                <tr>
+                                    <td class="pdl-10 pdr-10" style="width: 50%;"><b>Tipo de Contrato</b></td>
+                                    <td class="pdl-10 pdr-10 ta-center" colspan="2"><b>@item.TípoContrato</b></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td class="ta-center">
+                                        <b>
+                                            Tope Imp. @item.TopeUFImponibleAFC UF <br />
+                                            @item.TopeCLPImponibleAFC
+                                        </b>
+                                    </td>
+                                    <td class="ta-center">
+                                        <b>
+                                            Tope Imp. @item.TopeUFImponible UF <br />
+                                            @item.TopeCLPImponible
+                                        </b>
+                                    </td>
+                                </tr>
+                            }
+
+
+                            <tr>
+                                <td colspan="3" class="pdl-10 pdr-10"><b>HABERES</b></td>
+                            </tr>
+                            <tr>
+                                <td style="border: none;"><br /></td>
+                                <td style="border: none;" colspan="2" class="ta-right"></td>
+                            </tr>
+                            @foreach (Teamwork.Model.Finanzas.EstructuraCargo item in ViewBag.RenderizaHaberesEstructura)
+                            {
+                                <tr>
+                                    <td style="border: none;" class="pdl-10 pdr-10">
+                                        Sueldo Base
+                                        @if (item.MessageSueldoBase != "")
+                                        {
+                                            @: <span class="alert alert-danger dspl-block pdl-3 pdr-2 pdt-2 pdb-2">
+                                                @item.MessageSueldoBase
+                                            @: </span>
+                                        }
+                                    </td>
+                                    <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10" id="contentSueldoBase">
+                                        @item.SueldoBase
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;" class="pdl-10 pdr-10">
+                                        Gratificación
+                                        @if (item.MessageGratif != "")
+                                        {
+                                            @: <span class="alert alert-info dspl-block pdl-2 pdr-2 pdt-2 pdb-2">
+                                                @item.MessageGratif
+                                            @: </span>
+                                        }
+                                    </td>
+                                    <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10"><b>@item.Gratificacion</b></td>
+                                </tr>
+                                foreach (Teamwork.Model.Operaciones.BonosCargoMod itemBono in item.Bonos)
+                                {
+                                    <tr>
+                                        <td style="border: none;" class="pdl-10 pdr-10">
+                                            @itemBono.Nombre
+                                            @if (itemBono.MessageAsignado != "")
+                                            {
+                                                @: <p class="alert alert-warning new-family-teamwork pdl-4 pdr-4 pdt-4 pdb-4" style="font-weight: 100; font-size: 12px;">@itemBono.MessageAsignado</p>
+                                            }
+                                        </td>
+                                        <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10">@itemBono.Valor</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: none;" colspan="3" class="pdl-10 pdr-10">
+                                            @if (itemBono.Condiciones != "")
+                                            {
+                                                @: <p class="alert alert-warning new-family-teamwork pdl-4 pdr-4 pdt-4 pdb-4" style="font-weight: 100; font-size: 12px;">
+                                                    @: Condiciones:  @itemBono.Condiciones
+                                                @: </p>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+
+                                <tr>
+                                    <td colspan="3" style="border: none;"><br /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;" class="pdl-10 pdr-10"><b>BASE IMPONIBLE</b></td>
+                                    <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10"><b>@item.BaseImponible</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;" class="pdl-10 pdr-10"><b>BASE IMPONIBLE AFC</b></td>
+                                    <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10"><b>@item.BaseImponibleAFC</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;" class="pdl-10 pdr-10"><b>TOTAL IMPONIBLE</b></td>
+                                    <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10"><b>@item.TotalImponible</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;" class="pdl-10 pdr-10"><b>TOTAL TRIBUTABLE</b></td>
+                                    <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10"><b>@item.TotalTributable</b></td>
+                                </tr>
+
+                                foreach (Teamwork.Model.Operaciones.ANIsCargoMod itemANI in item.AsignacionesNOImponibles)
+                                {
+                                    <tr>
+                                        <td style="border: none;" class="pdl-10 pdr-10">@itemANI.Nombre</td>
+                                        <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10">@itemANI.Valor</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: none;" colspan="3" class="pdl-10 pdr-10">
+                                            @switch (itemANI.Deft)
+                                            {
+                                                case "S":
+                                                    @: <p class="alert alert-info new-family-teamwork pdl-4 pdr-4 pdt-4 pdb-4" style="font-weight: 100; font-size: 12px;">
+                                                        @:  Por dia efectivamente trabajado.
+                                                    @: </p>
+                                                    break;
+                                                case "N":
+                                                    @: <p class="alert alert-info new-family-teamwork pdl-4 pdr-4 pdt-4 pdb-4" style="font-weight: 100; font-size: 12px;">
+                                                        @:  Proporcional a los dias trabajados.
+                                                    @: </p>
+                                                    break;
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: none;" colspan="3" class="pdl-10 pdr-10">
+                                            @if (itemANI.MessageANI != "")
+                                            {
+                                                @: <p class="alert alert-warning new-family-teamwork pdl-4 pdr-4 pdt-4 pdb-4" style="font-weight: 100; font-size: 12px;">
+                                                    @:  @itemANI.MessageANI
+                                                @: </p>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="border: none;" colspan="3" class="pdl-10 pdr-10">
+                                            @if (itemANI.Observaciones != "")
+                                            {
+                                                @: <p class="alert alert-warning new-family-teamwork pdl-4 pdr-4 pdt-4 pdb-4" style="font-weight: 100; font-size: 12px;">
+                                                    @: Observaciones: @itemANI.Observaciones
+                                                @: </p>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+
+                                <tr>
+                                    <td style="border: none;"><br /></td>
+                                    <td style="border: none;" colspan="2" class="ta-right"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;" class="pdl-10 pdr-10"><b>TOTAL HABERES</b></td>
+                                    <td style="border: none;" colspan="2" class="ta-right pdl-10 pdr-10"><b>@item.TotalHaberes</b></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="3" style="border: none;"><br /><br /></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                }
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-20" style="min-height: 400px;">
+                @if (itemSolic.SectDesc == "S")
+                {
+                    <table border="1" style="width: 100%; font-size: 18px; font-weight: 100;" class="new-family-teamwork br-1-solid-200x3 bl-1-solid-200x3 bt-1-solid-200x3 bb-1-solid-200x3">
+                        <tbody>
+                            <tr>
+                                <td colspan="5" style="border: none;"><br /></td>
+                            </tr>
+                            @foreach (Teamwork.Model.Finanzas.EstructuraCargo item in ViewBag.RenderizaDescuentosEstructura)
+                            {
+                                <tr>
+                                    <td style="width: 20%; border: none;"></td>
+                                    <td style="border: none; width: 10%;"><b>0.00</b></td>
+                                    <td style="border: none;">Horas Trabajadas</td>
+                                    <td class="ta-center">A.F.P.</td>
+                                    <td class="ta-center">@item.AFP</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>0.00</b></td>
+                                    <td style="border: none;">Horas Extras</td>
+                                    <td colspan="2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>0</b></td>
+                                    <td style="border: none;">Días Licencia</td>
+                                    <td colspan="2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>30</b></td>
+                                    <td style="border: none;">Días del Mes</td>
+                                    <td colspan="2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>30</b></td>
+                                    <td style="border: none;">Días Trabajados</td>
+                                    <td colspan="2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>21</b></td>
+                                    <td style="border: none;">Días Efectivos</td>
+                                    <td colspan="2" style="border: none;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"></td>
+                                    <td colspan="3"><b>DESCUENTOS</b></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="border: none;"><br /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>@item.PorcAFP</b></td>
+                                    <td style="border: none;">AFP</td>
+                                    <td colspan="2" style="border: none; color: #f00;" class="ta-right"><b>@item.CLPAFP</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>@item.PorcFondoPensiones</b></td>
+                                    <td style="border: none;">Fondo de Pensiones</td>
+                                    <td colspan="2" style="border: none; color: #f00;" class="ta-right"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>@item.PorcSegInvalidez</b></td>
+                                    <td style="border: none;">Seg. Invalidez</td>
+                                    <td colspan="2" style="border: none; color: #f00;" class="ta-right"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="border: none;"><br /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>@item.PorcSalud</b></td>
+                                    <td style="border: none;"><b>FONASA/ISAPRE</b></td>
+                                    <td colspan="2" style="border: none; color: #f00;" class="ta-right">@item.CLPSalud</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="border: none;"><br /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;">IMPUESTO UNICO</td>
+                                    <td colspan="2" style="border: none; color: #f00;" class="ta-right">@item.CLPImpuestoUnico</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>@item.PorcSeguroDesempleo</b></td>
+                                    <td style="border: none;">SEGURO CESANTIA</td>
+                                    <td colspan="2" style="border: none; color: #f00;" class="ta-right">@item.CLPSeguroDesempleo</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="border: none;"><br /></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>TOTAL DESCUENTOS</b></td>
+                                    <td colspan="2" style="border: none;" class="ta-right"><b>@item.TotalDescuentos</b></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="5" style="border: none;"><br /></td>
+                            </tr>
+                            @foreach (Teamwork.Model.Finanzas.EstructuraCargo item in ViewBag.RenderizaHaberesEstructura)
+                            {
+                                <tr>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"></td>
+                                    <td style="border: none;"><b>LIQUIDO A PAGO</b></td>
+                                    <td colspan="2" style="border: none; background-color: #ffd800;" class="ta-right" id="contentSueldoLiquido"><b>@item.SueldoLiquido</b></td>
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="5" style="border: none;"><br /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-100" style="min-height: 400px;">
+                @if (itemSolic.SectPorvMargen == "S")
+                {
+                    <table border="1" cellpadding="5" style="width: 100%; font-size: 18px; font-weight: 100;" class="new-family-teamwork br-1-solid-200x3 bl-1-solid-200x3 bt-1-solid-200x3 bb-1-solid-200x3">
+                        <tbody>
+                            @foreach (Teamwork.Model.Finanzas.Provision item in ViewBag.RenderizaDescuentosProvision)
+                            {
+                                <tr>
+                                    <td style="width: 50%;">@Html.Raw(item.Concepto)</td>
+                                    <td class="ta-center">@item.Percentage</td>
+                                    <td class="ta-center">@item.MontoCLP</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+            <div class="col-md-6 col-lg-6"></div>
+        </div>
+        if (itemSolic.OptSolicitar == "S")
+        {
+            <span class="btn btn-success cursor-pointer new-family-teamwork" id="contentActionGuardar" onclick="handleClickSolicCreacion()" style="font-weight: 100; text-transform: uppercase; position: fixed; bottom: 0; height: 60px; z-index: 99999; display: flex; width: 100%; border-radius: 0px; visibility: hidden;">
+                @foreach (Teamwork.Model.Finanzas.EstructuraCargo item in ViewBag.RenderizaHeaderEstructura)
+                {
+                    using (Ajax.BeginForm("CambioEstadoSolicitud", "Finanzas", new AjaxOptions()
+                    {
+                        HttpMethod = "POST",
+                        UpdateTargetId = "contentDetail",
+                        InsertionMode = InsertionMode.Replace,
+                        LoadingElementId = "loader",
+                        OnSuccess = "handleScrollTop"
+                    }, new { @style = "display: inline-block; width: 100%;" }))
+                    {
+                        switch (item.Origen)
+                        {
+                            case "Simulación":
+                                @:  Solicitar Cotización
+                                break;
+                            default:
+                                @:  Solicitar Creacion de Cargo Mod
+                                break;
+                        }
+                        <input type="text" name="origen" value="Detail" class="dspl-none" />
+                        <input type="text" name="codigoCargoMod" value="@item.CodigoCargoMod" class="dspl-none" />
+                        if (itemSolic.Profile == "KAM")
+                        {
+                            <input type="text" name="estado" value="PDAPROB" class="dspl-none" />
+                        }
+                        else
+                        {
+                            <input type="text" name="estado" value="APROB" class="dspl-none" />
+                        }
+                        <input type="submit" id="btnSolicitarCargo" class="dspl-none" />
+                    }
+                }
+            </span>
+        }
+
+
+        if (itemSolic.OptSolicitar == "S")
+        {
+            <script async>
+
+                handleScrollTop = () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                }
+
+                handleClickSolicCreacion = () => {
+                    document.getElementById("btnSolicitarCargo").click()
+                }
+
+                window.addEventListener("scroll", () => {
+                    const tables = document.getElementById("module_tables_estructura_renta");
+                    const sueldoBase = document.getElementById("contentSueldoBase")
+                    const sueldoLiquido = document.getElementById("contentSueldoLiquido")
+                    const nombreCargoMod = document.getElementById("nombreCargoMod")
+                    
+                    if (window.scrollY + window.innerHeight > tables.scrollHeight) {
+                        if (sueldoBase.innerHTML !== "" &&
+                            sueldoLiquido.innerHTML !== "" &&
+                            nombreCargoMod.innerHTML !== "") {
+                            document.getElementById("contentActionGuardar").style.visibility = "visible"
+                        }
+                    }
+                    else {
+                        document.getElementById("contentActionGuardar").style.visibility = "hidden"
+                    }
+                })
+            </script>
+        }
+
+    }
+}
+
+@Html.Partial("Bajas/_ModalPaymentMethods")
+
+<script>
+    function HideModalPayment() {
+        $("#modalPaymentMethods").modal("hide");
+    }
+
+    function onBegin() { }
+
+    function ModalPaymentShow() {
+        $("#modalPaymentMethods").modal("show");
+    }
+</script>

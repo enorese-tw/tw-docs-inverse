@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Administrador de Noticias";
+}
+<span id="loader" class="dspl-none">
+    @Html.Partial("_LoaderTransaccion")
+</span>
+<div class="row mt-100" id="contentNoticias">
+    @switch ((string)ViewBag.EventNoticias)
+    {
+        case "New":
+            Html.RenderPartial("Teamwork/Noticias/_New");
+            break;
+    }
+</div>
+

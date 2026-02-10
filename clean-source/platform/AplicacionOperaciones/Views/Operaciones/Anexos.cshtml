@@ -1,0 +1,87 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Solicitud de Anexos";
+}
+
+@if (ViewBag.RenderizaIndexCargas)
+{
+    <div class="row mt-100 ml-auto mr-auto mb-20" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <h1 style="font-family: 'Open Sans Condensed', sans-serif; font-size: 40px;">
+                <i class="glyphicon-tw-5 glyphicon-tw-anexos2"></i> Solicitud de Anexos Varios
+            </h1>
+            <h2 class="family-teamwork fs-20">
+                Sección dedicada para la solicitud de anexos varios como son Anexo Actualización IMM, Anexo de Entrega de Celular, Anexo Variables, Anexo de Cambio de Cargo,
+                Anexo Cambio de Horario, Anexo Cambio de Funciones, Anexo Cambio de Dirección Personal, Anexo de Entrega de Uniforme, Anexo de Entrega de EPP,
+                Anexo de Pacto de Horas Extraordinarias, Anexo de Cambio Dirección Laboral, Anexo de Entrega de Computador, Anexo de Entrega de BAM, Entre otros.
+            </h2>
+        </div>
+    </div>
+ 
+    <div class="row ml-auto mr-auto mb-100" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row" id="contentAnexos">
+                @foreach (AplicacionOperaciones.Models.Anexos item in (List<AplicacionOperaciones.Models.Anexos>)ViewBag.RenderizaIndexDocumentosAnexos)
+                {
+                    Html.RenderPartial("_Anexo", new ViewDataDictionary() {
+                        { "RenderizadoTituloOne", item.RenderizadoTituloOne },
+                        { "RenderizadoTituloTwo", item.RenderizadoTituloTwo },
+                        { "RenderizadoDescripcion", item.RenderizadoDescripcion },
+                        { "Glyphicon", item.Glyphicon },
+                        { "GlyphiconColor", item.GlyphiconColor },
+                        { "BorderColor", item.BorderColor },
+                        { "ColorFont", item.ColorFont },
+                        { "ButtonClass", item.ButtonClass },
+                        { "RenderizadoButtonOne", item.RenderizadoButtonOne },
+                        { "RenderizadoButtonTwo", item.RenderizadoButtonTwo },
+                        { "Path", ViewBag.Path + item.Path },
+                    });
+                }
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row mt-100 ml-auto mr-auto ta-center" style="width: 92%;">
+        @{
+            foreach (AplicacionOperaciones.Models.CargaMasiva item in (List<AplicacionOperaciones.Models.CargaMasiva>)ViewBag.RenderizadoCargaMasiva)
+            {
+                Html.RenderPartial("_CargaMasiva", new ViewDataDictionary()
+                {
+                    { "Glyphicon", item.Glyphicon },
+                    { "GlyphiconColor", item.GlyphiconColor },
+                    { "RenderizadoTituloOne", item.RenderizadoTituloOne },
+                    { "RenderizadoTituloTwo", item.RenderizadoTituloTwo },
+                    { "RenderizadoDescripcion", item.RenderizadoDescripcion },
+                    { "UploadRenderizadoColor", item.UploadRenderizadoColor },
+                    { "UploadNombrePlantilla", item.UploadNombrePlantilla },
+                    { "UploadNombreHojaCargaMasiva", item.UploadNombreHojaCargaMasiva },
+                    { "UploadCifrado", item.UploadCifrado },
+                    { "UploadColumnas", item.UploadColumnas },
+                    { "UploadNodoPadre", item.UploadNodoPadre },
+                    { "UploadNodoHijo", item.UploadNodoHijo },
+                    { "UploadRenderizadoGlyphicon", item.UploadRenderizadoGlyphicon },
+                    { "UploadRenderizadoOneTexto", item.UploadRenderizadoOneTexto },
+                    { "UploadRenderizadoSecTexto", item.UploadRenderizadoSecTexto },
+                    { "UploadRenderizadoMensajeImpt", item.UploadRenderizadoMensajeImpt },
+                    { "RenderizadoTituloDownload", item.RenderizadoTituloDownload },
+                    { "DownloadCifrado", item.DownloadCifrado },
+                    { "DownloadRenderizadoColor", item.DownloadRenderizadoColor },
+                    { "DownloadRenderizadoGlyphicon", item.DownloadRenderizadoGlyphicon },
+                    { "DownloadRenderizadoOneTexto", item.DownloadRenderizadoOneTexto },
+                    { "DownloadRenderizadoSecTexto", item.DownloadRenderizadoSecTexto },
+                    { "DownloadRenderizadoMensajeImpt", item.DownloadRenderizadoMensajeImpt }
+                });
+            }
+        }
+        
+    </div>
+}
+
+@Scripts.Render("~/bundles/ajaxfunciones")
+@Scripts.Render("~/bundles/utils")
+@Scripts.Render("~/bundles/anexos")
+@Scripts.Render("~/bundles/cargamasiva")

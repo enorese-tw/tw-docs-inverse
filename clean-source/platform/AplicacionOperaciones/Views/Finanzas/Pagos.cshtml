@@ -1,0 +1,29 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Pagos";
+}
+<span id="loader" class="dspl-none">
+    @Html.Partial("_LoaderTransaccion")
+</span>
+<div class="row ml-auto mr-auto mt-100" style="width: 92%;" id="procesoPago">
+    @Html.Partial("Finanzas/_ProcesoPago")
+</div>
+
+@Html.Partial("Finanzas/_ModalConfirmacionEvento")
+
+<script>
+    function HideModalConfirmacionEvent() {
+        $("#modalConfirmacionEvent").modal("hide");
+    }
+
+    function onBegin() { }
+
+    function onSuccess() {
+        $("#loader").addClass('dspl-none').removeClass('dspl-block');
+    }
+
+    function ModalConfirmacionEvent() {
+        $("#modalConfirmacionEvent").modal("show");
+    }
+</script>

@@ -1,0 +1,62 @@
+﻿<div id="content__body__clientes__provmargen">
+    @Html.Partial("Finanzas/CargoMod/_ListaClientesProvMargenItem")
+</div>
+
+
+<script async>
+
+    handleClickCollapseAsign = (e) => {
+
+        const classList = [...e.classList]
+        let enabled = false
+
+        classList.map(x => {
+            if (x === "show__collapse") {
+                enabled = true
+            }
+        })
+
+        const subConjunto =
+            `
+            . . . . .
+            . <br />
+            . <br />
+            . <br />
+            . <br />
+            . <br />
+            . <br />
+            <span style="margin-left: -5%;" class="dspl-inline-block">&#x25BE;</span>
+           `
+
+        if (!enabled) {
+            document.getElementById(e.dataset.legendsSubconjunto).innerHTML = subConjunto
+            document.getElementById(e.dataset.collapseContent).innerHTML = `Has clic para ocultar el detalle de asignaciones de provisiones y margenes &#x25B4;`
+
+            document.getElementById(e.dataset.loadingContent).classList.remove("dspl-none")
+            document.getElementById(e.dataset.loadingContent).classList.add("dspl-block")
+            document.getElementById(e.dataset.loadingContent).innerHTML =
+                `
+                 <p class="family-teamwork ta-center pdt-30">
+                    <span style="font-size: 20px;" class="dspl-block ta-center">Espere un momento... </span>
+                    Estamos cargando la información de provisiones y margenes.
+                 </p>
+                `
+
+            e.classList.add("show__collapse")
+
+            setTimeout(() => {
+                document.getElementById(e.dataset.btnAction).click()
+            }, 200)
+        }
+        else {
+            document.getElementById(e.dataset.legendsSubconjunto).innerHTML = ""
+            document.getElementById(e.dataset.loadingContent).innerHTML = ""
+            document.getElementById(e.dataset.loadingContent).classList.add("dspl-none")
+            document.getElementById(e.dataset.collapseContent).innerHTML = `Has clic para ver el detalle y puedas editar las asignaciones de margenes y provisiones &#x25BE;`
+
+            e.classList.remove("show__collapse")
+        }
+
+    }
+
+</script>

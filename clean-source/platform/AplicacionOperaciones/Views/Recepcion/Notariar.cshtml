@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Notariar";
+}
+<span id="loader" class="dspl-none">
+    @Html.Partial("_LoaderTransaccion")
+</span>
+<div class="row mt-100" id="contentRecepcion">
+    @Html.Partial("Recepcion/_BoxNotariar")
+</div>
+<script>
+    function emptyBarcode(){
+        $("#codigoDespacho").val('');
+    }
+</script>
+

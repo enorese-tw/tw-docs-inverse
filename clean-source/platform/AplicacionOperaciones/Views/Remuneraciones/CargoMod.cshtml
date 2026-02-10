@@ -1,0 +1,108 @@
+﻿@using AplicacionOperaciones.HelpersHTML
+@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Cargo Mod";
+    
+}
+
+<span id="loader" class="dspl-none">
+    @Html.Partial("_LoaderTransaccion")
+</span>
+
+@switch ((string)ViewBag.OptionCargoMod)
+{
+    case "CargoMod":
+
+
+        <div id="contentSolicitudes">
+            @Html.Partial("Finanzas/CargoMod/_ItemSolicitudes")
+        </div>
+
+        break;
+    case "Create":
+        <div id="contentCreate">
+            <div style="background-color: rgb(107, 142, 164); width: 100%; height: 200px; margin-top: 55px;"></div>
+            <div style="width: 100%; height: 400px; margin-top: -400px; background-color: rgba(0, 0, 0, 0.5);"></div>
+            <div class="row mt-150neg ml-auto mr-auto" style="width: 92%;">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1 class="family-teamwork ta-center color-fx3" style="font-size: 50px;"><b>¿Seleccione la Empresa Teamwork Mandante?</b></h1>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-150">
+                    <div class="row">
+                        <div class="col-lg-3"></div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                            @using (Ajax.BeginForm("CrearSolicitud", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentCreate",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }, new { @style = "display: block;" }))
+                            {
+                                <input type="text" name="evento" class="dspl-none" value="@ViewBag.EventoCreacion" />
+                                <input type="text" name="empresa" class="dspl-none" value="TWEST" />
+                                <Button type="submit" class="dspl-block btn-success" style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;">
+                                    <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">TWEST</h1>
+                                    <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Servicios Transitorios</h2>
+                                    <img src="~/Resources/empresaunica.svg" width="50" height="50" />
+                                </Button>
+                            }
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                            @using (Ajax.BeginForm("CrearSolicitud", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentCreate",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }, new { @style = "display: block;" }))
+                            {
+                                <input type="text" name="evento" class="dspl-none" value="@ViewBag.EventoCreacion" />
+                                <input type="text" name="empresa" class="dspl-none" value="TWRRHH" />
+                                <Button type="submit" class="dspl-block btn-warning" style="width: 220px; height: 220px; border-radius: 50%;  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;">
+                                    <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">TWRRHH</h1>
+                                    <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Recursos Humanos</h2>
+                                    <img src="~/Resources/empresaunica.svg" width="50" height="50" />
+                                </Button>
+                            }
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-2">
+                            @using (Ajax.BeginForm("CrearSolicitud", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentCreate",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }, new { @style = "display: block;" }))
+                            {
+                                <input type="text" name="evento" class="dspl-none" value="@ViewBag.EventoCreacion" />
+                                <input type="text" name="empresa" class="dspl-none" value="TWC" />
+                                <Button type="submit" class="dspl-block btn-teamwork" style="width: 220px; height: 220px; border-radius: 50%;  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;">
+                                    <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">TWC</h1>
+                                    <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Consultora</h2>
+                                    <img src="~/Resources/empresaunica.svg" width="50" height="50" />
+                                </Button>
+                            }
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        break;
+    case "Detail":
+        <div id="contentDetail">
+            @Html.Partial("Finanzas/CargoMod/_Detail")
+        </div>
+        break;
+}
+
+<script async>
+
+    handleClickRedirectAction = (e, target = undefined) => {
+        (target === undefined)
+            ? window.location.href = `${e.dataset.reference}`
+            : window.open(`${e.dataset.reference}`, '_blank')
+    }
+
+</script>

@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_MenuEmpty.cshtml";
+    ViewBag.Title = "Visualizador Pdf";
+}
+
+@switch ((string)ViewBag.Pdf)
+{
+    case "RG9jRmluaXF1aXRv":
+        @Html.Raw(ViewBag.RenderizaHtmlPdf)
+        break;
+    case "Q2FyYXR1bGFGaW5pcXVpdG8=":
+        @Html.Raw(ViewBag.RenderizaHtmlPdf)
+        break;
+    case "Q2FydGFCYWph":
+        @Html.Raw(ViewBag.RenderizaHtmlPdf)
+        break;
+}

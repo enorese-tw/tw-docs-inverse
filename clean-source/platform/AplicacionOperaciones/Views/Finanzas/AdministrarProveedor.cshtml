@@ -1,0 +1,184 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Administrar Proveedores";
+    
+}
+
+<div class="container-fluid" style="width: 92%;">
+    <span id="loader" class="dspl-none">
+        @Html.Partial("_LoaderTransaccion")
+    </span>
+    <div class="row mt-100">
+        <div class="row col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="col-7 col-sm-7 col-md-7 col-lg-7">
+                <h1 style="font-family: 'Open Sans Condensed', sans-serif; font-size: 40px;">
+                    <i class="glyphicon-tw-5 glyphicon-tw-anexos"></i> Mantenedor Proveedores
+                </h1>
+                <h2 class="family-teamwork fs-20">
+                    Portal de Ingreso para gestionar integramente los proveedores.
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-20 ml-auto mr-auto" style="width: 92%;">
+                @using (Ajax.BeginForm("Proveedores", "Finanzas", FormMethod.Post, new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "tablaProveedores",
+                    OnBegin = "onBegin",
+                    OnSuccess = "onSuccess",
+                    LoadingElementId = "loader"
+                }))
+                {
+                    <input type="text" name="hasBaja" value="@ViewBag.RenderizadoHasBaja" class="dspl-none" />
+                    <input type="text" name="pagination" value="MS01" class="dspl-none" />
+                    <label style="font-family: 'Open Sans Condensed', sans-serif; line-height: 5px; display: block;">Aplicar Filtrado de Proveedores</label>
+                    <select class="form-control family-teamwork" style="width: 200px; display: inline-block;" id="typeFilter" name="typeFilter">
+                        <option value="bm9uZQ==">Seleccione Filtro</option>
+                        <option value="Rut">Rut</option>
+                        <option value="Nombre">Nombre</option>
+                    </select>
+                    <input type="text" class="form-control family-teamwork dspl-inline-block" style="width: 300px;" id="filterDatos" name="filterDatos" />
+                    <button type="submit" class="btn btn-teamwork dspl-inline-block" id="btnBuscarSolicitud"
+                            style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-buscar" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Buscar</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Proveedores</i>
+                        </span>
+                    </button>
+                    <a href="#" class="btn btn-warning eventRestore dspl-inline-block" style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Restablecer</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Proveedores</i>
+                        </span>
+                    </a>
+                    <a href="#" class="eventAgregarProvee btn btn-success mt-4"
+                       style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                        <i class="glyphicon-tw-7 glyphicon-tw-check" style="display: inline-block;"></i>
+                        <span style="display: inline-block; margin-top: -7px;">
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                     font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Agregar</i>
+                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                            font-size: 14px; font-style: normal; display: block;">Proveedor</i>
+                        </span>
+                    </a>
+                }
+            </div>
+        </div>
+        @*<div class="row col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="row mt-50">
+                @using (Ajax.BeginForm("MantenedorProveedores", "Finanzas", FormMethod.Post, new AjaxOptions()
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "alertsucces",
+                    OnSuccess = "onSuccess",
+                    OnComplete = "okInsert"
+                }))
+                {
+                    <div>
+
+                    </div>
+
+                    <div class="col-12 align-center">
+                        <div class="ml-150 mr-150">
+                            <div class="alert-success row ml-37 mr-37 mt-20 justify-content-center dspl-none" id="alertsucces">
+
+                            </div>
+
+                            <div class="row ml-37 mr-37 mt-20">
+                                <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                                    <label for="empresa" class="mt-2">Rut</label>
+                                </div>
+
+                                <div class="col-6">
+
+
+                                    <input name="rut" maxlength="10" type="text" class="form-control" id="formGroupExampleInput"
+                                            placeholder="Ingrese rut">
+
+
+                                </div>
+                                <div>
+                                    <button id="btnbuscar" type="submit" class="btn btn-warning"
+                                            style="border-radius: 25px; height: 40px; color: #fff; float:right">
+                                        <span style="display: inline-block; margin-top: -11px;">
+                                            <i style="font-family: 'Open Sans Condensed', sans-serif;
+                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">
+                                                Buscar
+                                                Proveedor
+                                            </i>
+                                        </span>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 align-center">
+                        <div class="ml-150 mr-150">
+                            <div class="row ml-37 mr-37 mt-20">
+                                <div class="col-3" style="align-items: center; display: flex; vertical-align: middle;">
+                                    <label maxlength="10" required for="empresa" class="mt-2">Nombre</label>
+                                </div>
+                                <div class="col-6">
+                                    <input name="nombre" required type="text" class="form-control"
+                                            placeholder="Ingrese nombre proveedor" id="idnameprovee">
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>*@
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-20">
+        <div class="row ml-auto mr-auto mt-auto" id="tablaProveedores">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                @Html.Partial("Proveedor/_ListadoProveedores")
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    function onBegin() {
+
+    }
+
+    function onSuccess() {
+        $("#loader").addClass('dspl-none').removeClass('dspl-block');
+        $("#formGroupExampleInput").val('');
+        $("#idnameprovee").val('');
+    }
+
+    function okInsert() {
+        $("#alertsucces").show();
+        setTimeout(function () {
+            $("#alertsucces").hide();
+        }, 1000);
+    }
+
+    $(".eventRestore").on("click", function (e) {
+        e.preventDefault();
+        window.location.reload();
+
+    });
+
+
+</script>
+
+@Html.Partial("_ModalAgregarProveedores")
+
+
+

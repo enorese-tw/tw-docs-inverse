@@ -1,0 +1,20 @@
+﻿<div class="col-12 col-sm-12 col-md-6 col-lg-3">
+    <div class="ml-auto mr-5neg mt-10 mb-10 br-1-solid-200x3 @ViewData["BorderColor"] bb-1-solid-200x3 bt-1-solid-200x3" style="height: 300px; right: 10px;">
+    </div>
+    <div class="ml-auto mr-auto mt-305neg mb-10 br-1-solid-200x3 @ViewData["BorderColor"] bb-1-solid-200x3 bt-1-solid-200x3" style="height: 300px; background-color: #fff; z-index: 999;">
+        <div class="@ViewData["GlyphiconColor"] ml-20 mt-20neg dspl-inline-block @ViewData["Glyphicon"]" style="border-radius: 50%; width: 60px; height: 60px;"></div>
+        <h1 class="family-teamwork dspl-inline-block mt-20" style="font-size: 15px;">@ViewData["RenderizadoTituloOne"]<br />@ViewData["RenderizadoTituloTwo"]</h1>
+        <p class="family-teamwork ml-auto mr-auto mt-20" style="width: 90%;">
+            @ViewData["RenderizadoDescripcion"]
+        </p>
+        <div class="ta-center mt-50">
+            <a href="@ViewData["Path"]" class="btn @ViewData["ButtonClass"] ta-left color-fx3 br-25 height-50">
+                <i class="glyphicon-tw-6 @ViewData["Glyphicon"] dspl-inlblc mb-15neg"></i>
+                <span class="dspl-inlblc">
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">@ViewData["RenderizadoButtonOne"]</i>
+                    <i class="family-teamwork dspl-blc fs-14 fst-normal">@ViewData["RenderizadoButtonTwo"]</i>
+                </span>
+            </a>
+        </div>
+    </div>
+</div>

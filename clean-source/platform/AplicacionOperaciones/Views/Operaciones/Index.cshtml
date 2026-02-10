@@ -1,0 +1,576 @@
+﻿@{
+        Layout = "~/Views/Shared/_Menu.cshtml";
+        ViewBag.Title = "Operaciones";
+}
+
+@if (ViewBag.CodeCorrect)
+{
+    switch ((string)ViewBag.ProfileActivo)
+    {
+        case "Coordinador Procesos":
+            <span id="loader" class="dspl-none">
+                @Html.Partial("_LoaderTransaccion")
+            </span>
+            <div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <h1 class="family-teamwork" style="font-size: 40px;">
+                        <i class="glyphicon-tw-5 glyphicon-tw-grafico"></i> Dashboard Asociado a <b>Finiquitos</b> TWEST, TWRRHH, TWC
+                    </h1>
+                </div>
+            </div>
+            <div class="row mt-20 ml-auto mr-auto" style="width: 92%;">
+                @Html.Partial("Operaciones/_DashboardFiniquitos")
+            </div>
+            <div class="row mt-10 ml-auto mr-auto" style="width: 92%;">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-20 ml-auto mr-auto">
+                        @using (Ajax.BeginForm("Finiquitos", "Bajas", FormMethod.Post, new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            InsertionMode = InsertionMode.Replace,
+                            UpdateTargetId = "finiquitos",
+                            OnBegin = "onBegin",
+                            OnSuccess = "onSuccess",
+                            LoadingElementId = "loader"
+                        }))
+                        {
+                            <input type="text" name="hasBaja" value="@ViewBag.RenderizadoHasBaja" class="dspl-none" />
+                            <input type="text" name="pagination" value="MS01" class="dspl-none" />
+                            <label style="font-family: 'Open Sans Condensed', sans-serif; line-height: 5px; display: block;">Aplicar Filtrado de Solicitudes</label>
+                            <select class="form-control family-teamwork" style="width: 200px; display: inline-block;" id="typeFilter" name="typeFilter">
+                                <option value="Rm9saW8=">Seleccione Filtro</option>
+                                <option value="bm9uZQ==">Folio</option>
+                                <option value="UnV0VHJhYmFqYWRvcg==">Rut Trabajador</option>
+                                <option value="RW1wcmVzYQ==">Empresa</option>
+                                <option value="QXJlYSBOZWdvY2lv">Area Negocio</option>
+                                <option value="Tm9tYnJlIFRyYWJhamFkb3I=">Nombre Trabajador</option>
+                                <option value="Q2F1c2FsIERlc3ZpbmN1bGFjacOzbg==">Causal Desvinculación</option>
+                                <option value="RmVjaGFz">Fechas de Baja</option>
+                                <option value="RXN0YWRv">Estado</option>
+                            </select>
+                            <input type="text" class="form-control family-teamwork dspl-none" style="width: 300px;" id="filterDatos" name="filterDatos" />
+                            <input type="date" class="form-control family-teamwork dspl-none ta-center" style="width: 150px;" id="filterDatoFechaIni" name="filterDatoFechaIni" placeholder="DD-MM-AAAA" />
+                            <input type="date" class="form-control family-teamwork dspl-none ta-center" style="width: 150px;" id="filterDatoFechaEnd" name="filterDatoFechaEnd" placeholder="DD-MM-AAAA" />
+                            <select class="form-control family-teamwork dspl-none" style="width: 200px;" id="filterEmpresa" name="filterEmpresa">
+                                <option value="">Seleccione Empresa</option>
+                                <option value="TWEST">TWEST (EST)</option>
+                                <option value="TWRRHH">TWRRHH (OUT)</option>
+                                <option value="TWC">TWC (CONSULTORA)</option>
+                            </select>
+                            <select class="form-control family-teamwork dspl-none" style="width: 400px;" id="filterCausal" name="filterCausal">
+                                <option value="">Seleccione Causal</option>
+                                <option value="Art.159N4">Art.159N4 Vencimiento del plazo convenido en el contrato</option>
+                                <option value="Art.159N1">Art.159N1 Mutuo acuerdo de las partes</option>
+                                <option value="Art.159N2">Art.159N2 Renuncia del trabajador</option>
+                            </select>
+                            <select class="form-control family-teamwork dspl-none" style="width: 200px;" id="filterEstado" name="filterEstado">
+                                <option value="">Seleccione Estado</option>
+                                <option value="PLZ">Solicitado</option>
+                                <option value="EPC">Pendiente de Calculo</option>
+                            </select>
+                            <button type="submit" class="btn btn-teamwork dspl-none" id="btnBuscarSolicitud"
+                                    style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-buscar" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Buscar</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block;">Solicitudes</i>
+                                </span>
+                            </button>
+                            <a href="#" class="btn btn-warning eventRestore dspl-inline-block" style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-deshacer" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Restablecer</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block;">Solciitudes</i>
+                                </span>
+                            </a>
+                        }
+
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-30" id="finiquitos">
+                    <h1 class="family-teamwork ta-center color-150x3" style="font-size: 30px;">
+                        Querido Colaborador
+                    </h1>
+                    <h1 class="family-teamwork fw-bold mt-8neg ta-center color-100x3" style="font-size: 40px;">@Session["NombreUsuario"].ToString()</h1>
+                    <h2 class="family-teamwork color-100x3 ta-center" style="font-size: 25px;">
+                        ¡Estoy a la espera a que interactues con el dashboard para desplegar los procesos correspondientes que tú me indiques!
+                    </h2>
+                    <img src="~/Resources/dashboard-blind.jpg" style="width: 100%;" />
+                </div>
+            </div>
+            break;
+        case "Auditor":
+            <div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+                <div class="col-lg-1"></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-10 mt-30" id="finiquitos">
+                    <h1 class="family-teamwork ta-center color-150x3" style="font-size: 30px;">
+                        Querido Colaborador
+                    </h1>
+                    <h1 class="family-teamwork fw-bold mt-8neg ta-center color-100x3" style="font-size: 40px;">@Session["NombreUsuario"].ToString()</h1>
+                    <img src="~/Resources/dashboard-blind.jpg" style="width: 100%;" />
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+
+            break;
+        case "Analista Finiquitos":
+            <div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+                <div class="col-lg-1"></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-10 mt-30" id="finiquitos">
+                    <h1 class="family-teamwork ta-center color-150x3" style="font-size: 30px;">
+                        Querido Colaborador
+                    </h1>
+                    <h1 class="family-teamwork fw-bold mt-8neg ta-center color-100x3" style="font-size: 40px;">@Session["NombreUsuario"].ToString()</h1>
+                    <img src="~/Resources/dashboard-blind.jpg" style="width: 100%;" />
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            break;
+        case "Administrador Mural":
+            <div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+                <div class="col-lg-1"></div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-10 mt-30" id="finiquitos">
+                    <h1 class="family-teamwork ta-center color-150x3" style="font-size: 30px;">
+                        Querido Colaborador
+                    </h1>
+                    <h1 class="family-teamwork fw-bold mt-8neg ta-center color-100x3" style="font-size: 40px;">@Session["NombreUsuario"].ToString()</h1>
+                    <img src="~/Resources/dashboard-blind.jpg" style="width: 100%;" />
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            break;
+        default:
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-100 mb-20 ml-auto mr-auto" style="width: 92%;">
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <h1 class="family-teamwork" style="font-size: 40px;">
+                            <i class="glyphicon-tw-5 glyphicon-tw-grafico"></i> Dashboard Solicitudes <b>Pendientes</b> Sistema Operaciones
+                        </h1>
+                    </div>
+                    <span id="loader" class="dspl-none">
+                        @Html.Partial("_LoaderTransaccion")
+                    </span>
+                </div>
+                <div class="row mt-20">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        @if (ViewBag.RenderizaOptionFiltrosDashboard == "200")
+                        {
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-right mb-20">
+                                    <a href="@ViewBag.CreadorReportes" class="btn btn-teamwork new-family-teamwork pdt-10 pdb-10 pdl-50 pdr-50 color-fx3" style="font-weight: 100; border-radius: 60px; font-size: 20px;">
+                                        Reporte Finiquitos
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <a href="#" class="btn btn-teamwork dashboardEvent" id="dashboardCompleto" data-typedashboard="Completo" data-attrpadre="#dashboardCompleto"
+                               data-day="@DateTime.Now.Day" data-month="@DateTime.Now.Month" data-year="@DateTime.Now.Year"
+                               style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-calendario" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Mostrar Dashboard</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                    font-size: 14px; font-style: normal; display: block;">Total Solicitudes</i>
+                                </span>
+                            </a>
+                            
+                            <a href="#" class="btn btn-teamwork dashboardEvent" id="dashboardDiario" data-typedashboard="Diario" data-attrpadre="#dashboardCompleto"
+                               data-day="@DateTime.Now.Day" data-month="@DateTime.Now.Month" data-year="@DateTime.Now.Year"
+                               style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                <i class="glyphicon-tw-7 glyphicon-tw-calendario" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                            font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Mostrar Dashboard</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                    font-size: 14px; font-style: normal; display: block;">Hoy (Pendientes)</i>
+                                </span>
+                            </a>
+                        }
+                        else
+                        {
+
+                            using (Ajax.BeginForm("ViewPartialDashboardTotal", "Operaciones", FormMethod.Post, new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "contentDashboardTotales",
+                                LoadingElementId = "loader"
+                            }))
+                            {
+
+                                <button type="submit" class="btn btn-teamwork dashboardBtnKAM" id="dashboardPendiente" data-typedashboard="Pendiente"
+                                        data-day="@DateTime.Now.Day" data-month="@DateTime.Now.Month" data-year="@DateTime.Now.Year"
+                                        data-attrpadre="#dashboardTotal"
+                                        style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-calendario" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Mostrar Dashboard</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                                font-size: 14px; font-style: normal; display: block;">Total Pendiente</i>
+                                    </span>
+                                </button>
+                                <input type="text" name="tipoDashboard" style="display:none;" value="Pendiente" />
+                            }
+                            
+                            using (Ajax.BeginForm("ViewPartialDashboardTotal", "Operaciones", FormMethod.Post, new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "contentDashboardTotales",
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <button type="submit" class="btn btn-teamwork dashboardBtnKAM" id="dashboardDiario" data-attrpadre="#dashboardTotal"
+                                        data-typedashboard="Diario" data-day="@DateTime.Now.Day" data-month="@DateTime.Now.Month" data-year="@DateTime.Now.Year"
+                                        style="border-radius: 25px; height: 40px; text-align: left; color: #fff;">
+                                    <i class="glyphicon-tw-7 glyphicon-tw-calendario" style="display: inline-block;"></i>
+                                    <span style="display: inline-block; margin-top: -7px;">
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                    font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Mostrar Dashboard</i>
+                                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                            font-size: 14px; font-style: normal; display: block;">Hoy (Pendientes)</i>
+                                    </span>
+                                </button>
+                                <input type="text" name="tipoDashboard" style="display:none;" value="Diario" />
+                                <input type="text" name="day" style="display:none;" value="@DateTime.Now.Day" />
+                                <input type="text" name="month" style="display:none;" value="@DateTime.Now.Month" />
+                                <input type="text" name="year" style="display:none;" value="@DateTime.Now.Year" />
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="row mt-20" id="contentDashboardTotales">
+                    @switch ((string)ViewBag.RenderizaTipoDashboard)
+                    {
+                        case "Contratos":
+                            foreach (AplicacionOperaciones.Models.EstadisticaTotal item in (List<AplicacionOperaciones.Models.EstadisticaTotal>)ViewBag.RenderizadoIndiceEstadisticoTotal)
+                            {
+                                Html.RenderPartial("_DashboardSolicitudes", new ViewDataDictionary() {
+                                { "Concepto", item.Concepto },
+                                { "TipoProceso", item.TipoProceso },
+                                { "Total", item.Total },
+                                { "Twest", item.Twest },
+                                { "Twrrhh", item.Twrrhh },
+                                { "Twc", item.Twc },
+                                { "UsuarioContratos", item.Analista }
+                            });
+
+                            }
+                            break;
+                        case "Kam":
+                            Html.RenderPartial("_DashboardKam");
+                            break;
+                    }
+
+                </div>
+                <div class="row mt-20 ta-center" id="contentDashboardXContratoDespliegue">
+                    @if (ViewBag.RenderizaOptionEstadisticaXContrato == "200")
+                    {
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <a href="#contentDashboardXContrato" class="btn btn-teamwork" style="border-radius: 25px; height: 40px; text-align: left; color: #fff;"
+                               data-toggle="collapse" role="button" aria-expanded="false" aria-controls="contentDashboardXContrato">
+                                <i class="glyphicon-tw-7 glyphicon-tw-grafico" style="display: inline-block;"></i>
+                                <span style="display: inline-block; margin-top: -7px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                        font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">Mostrar Detalle Carga</i>
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                                font-size: 14px; font-style: normal; display: block;">Laboral Analista Contratos</i>
+                                </span>
+                            </a>
+                        </div>
+                    }
+                </div>
+                <div class="row mt-20 collapse" id="contentDashboardXContrato">
+                    @foreach (AplicacionOperaciones.Models.EstadisticaXContratos item in (List<AplicacionOperaciones.Models.EstadisticaXContratos>)ViewBag.RenderizadoIndiceEstadisticoXContrato)
+                    {
+                        Html.RenderPartial("_DashboardAnalistaContratos", new ViewDataDictionary() {
+                            { "Analista", item.Analista },
+                            { "ConceptoC", item.ConceptoC },
+                            { "CSolicitado", item.CSolicitado },
+                            { "CTerminado", item.CTerminado },
+                            { "CTotal", item.CTotal },
+                            { "CTwest", item.CTwest },
+                            { "CTwrrhh", item.CTwrrhh },
+                            { "CTwc", item.CTwc },
+                            { "ConceptoR", item.ConceptoR },
+                            { "RSolicitado", item.RSolicitado },
+                            { "RTerminado", item.RTerminado },
+                            { "RTotal", item.RTotal },
+                            { "RTwest", item.RTwest },
+                            { "RTwrrhh", item.RTwrrhh },
+                            { "RTwc", item.RTwc }
+                        });
+                    }
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-20 mt-40" id="interactionplataforma">
+                <h1 class="family-teamwork ta-center color-150x3" style="font-size: 30px;">
+                    Querido Colaborador
+                </h1>
+                <h1 class="family-teamwork fw-bold mt-8neg ta-center color-100x3" style="font-size: 40px;">@Session["NombreUsuario"].ToString()</h1>
+                <h2 class="family-teamwork color-100x3 ta-center" style="font-size: 25px;">
+                    ¡Estoy a la espera a que interactues con el dashboard para desplegar los procesos correspondientes que tú me indiques!
+                </h2>
+                <img src="~/Resources/dashboard-blind.jpg" class="dspl-block ml-auto mr-auto" style="width: 70%;" />
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-20" id="renderizadoheader_contratos">
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="procesosContratos">
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-50 ta-center" id="procesosContratosPagination">
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-80 mb-20" id="renderizadoheader_renovaciones">
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-100" id="procesosRenovacion">
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-50 ta-center mb-50" id="procesosRenovacionPagination">
+            </div>
+
+            Html.RenderPartial("_ModalExpiracionSesion");
+            Html.RenderPartial("_ModalConfirmarEvento");
+            Html.RenderPartial("_ModalConfirmarEventoTerminado");
+
+
+            Html.RenderPartial("_ModalAnularSolicitud", new ViewDataDictionary() {
+    { "RenderizadoMotivosAnulacion", ViewBag.RenderizadoMotivosAnulacion }
+});
+
+<span id="loaderProceso"></span>
+<span id="loaderSearch"></span>
+break;
+}
+
+@Html.Partial("Bajas/_ModalPaymentMethods")
+
+}
+else
+{
+foreach (AplicacionOperaciones.Models.Error item in (List<AplicacionOperaciones.Models.Error>)ViewBag.Error)
+{
+    @Html.Partial("_ErrorSistema", new ViewDataDictionary {
+        { "Message", item.Message }
+    });
+}
+}
+
+<script>
+
+    function moveTopFiniquitos() {
+        $('html, body').animate({
+            scrollTop: $("#finiquitos").offset().top - 70
+        }, 1000);
+    }
+
+    $(document).on("click", ".typePayments", function () {
+        switch ($(this).val()) {
+            case "Cheque":
+                $("#btnConfirmarCheque").show();
+                $("#btnConfirmarTEF").hide();
+                break;
+            case "TEF":
+                $("#btnConfirmarTEF").show();
+                $("#btnConfirmarCheque").hide();
+                break;
+        }
+    });
+
+    function ModalPaymentBarcodeShow() {
+        $("#modalPaymentMethods").modal("show");
+        setTimeout(function () {
+            $("#readerBarcode").focus();
+        }, 500);
+    }
+
+    function HideModalPayment() {
+        $("#modalPaymentMethods").modal("hide");
+    }
+
+    function onBegin() { }
+
+    function ModalPaymentShow() {
+        $("#modalPaymentMethods").modal("show");
+    }
+
+    function onModalCodigoBarraOpen() {
+        $("#loader").addClass('dspl-none').removeClass('dspl-block');
+        $("#modalCodigoBarra").modal("show");
+    }
+
+    function onSuccess() {
+        $("#loader").addClass('dspl-none').removeClass('dspl-block');
+    }
+
+    function onSuccessModalValidacion() {
+        $("#modalValidacionBaja").modal("show");
+    }
+
+    $(document).on("click", ".eventRestore", function (e) {
+        e.preventDefault();
+        window.location.reload();
+    });
+
+    $("#typeFilter").on("change", function () {
+        switch ($(this).val()) {
+            case "bm9uZQ==":
+                $("#filterDatos").addClass("dspl-inline-block").removeClass("dspl-none").attr("placeholder", "Indique el folio");
+                $("#btnBuscarSolicitud").addClass("dspl-inline-block").removeClass("dspl-none");
+
+                /** remueve elementos */
+                RemoverElementosHtmlfiltrado("", "S", "", "", "", "");
+                break;
+            case "UnV0VHJhYmFqYWRvcg==":
+                $("#filterDatos").addClass("dspl-inline-block").removeClass("dspl-none").attr("placeholder", "Indique el Rut del trabajador");
+                $("#btnBuscarSolicitud").addClass("dspl-inline-block").removeClass("dspl-none");
+
+                /** remueve elementos */
+                RemoverElementosHtmlfiltrado("", "S", "", "", "", "");
+                break;
+            case "RW1wcmVzYQ==":
+                $("#filterEmpresa").addClass("dspl-inline-block").removeClass("dspl-none");
+                $("#btnBuscarSolicitud").addClass("dspl-inline-block").removeClass("dspl-none");
+
+                /** remueve elementos */
+                RemoverElementosHtmlfiltrado("", "", "S", "", "", "");
+                break;
+            case "QXJlYSBOZWdvY2lv":
+                $("#filterDatos").addClass("dspl-inline-block").removeClass("dspl-none").attr("placeholder", "Indique el área de negocio");
+                $("#btnBuscarSolicitud").addClass("dspl-inline-block").removeClass("dspl-none");
+
+                /** remueve elementos */
+                RemoverElementosHtmlfiltrado("", "S", "", "", "", "");
+                break;
+            case "Tm9tYnJlIFRyYWJhamFkb3I=":
+                $("#filterDatos").addClass("dspl-inline-block").removeClass("dspl-none").attr("placeholder", "Indique el nombre del trabajador");
+                $("#btnBuscarSolicitud").addClass("dspl-inline-block").removeClass("dspl-none");
+                /** remueve elementos */
+                RemoverElementosHtmlfiltrado("", "S", "", "", "", "");
+                break;
+            case "Q2F1c2FsIERlc3ZpbmN1bGFjacOzbg==":
+                $("#filterCausal").addClass("dspl-inline-block").removeClass("dspl-none");
+                $("#btnBuscarSolicitud").addClass("dspl-inline-block").removeClass("dspl-none");
+
+                /** remueve elementos */
+                RemoverElementosHtmlfiltrado("", "", "", "S", "", "");
+                break;
+            case "RmVjaGFz":
+                $("#filterDatoFechaIni").addClass("dspl-inline-block").removeClass("dspl-none");
+                $("#filterDatoFechaEnd").addClass("dspl-inline-block").removeClass("dspl-none");
+                $("#btnBuscarSolicitud").addClass("dspl-inline-block").removeClass("dspl-none");
+
+                /** remueve elementos */
+                RemoverElementosHtmlfiltrado("", "", "", "", "", "N");
+                break;
+            case "RXN0YWRv":
+                $("#filterEstado").addClass("dspl-inline-block").removeClass("dspl-none");
+                $("#btnBuscarSolicitud").addClass("dspl-inline-block").removeClass("dspl-none");
+
+                /** remueve elementos */
+                RemoverElementosHtmlfiltrado("", "", "", "", "S", "");
+                break;
+            default:
+                RemoverElementosHtmlfiltrado("S", "", "", "", "", "");
+                break;
+        }
+    });
+
+    function RemoverElementosHtmlfiltrado(emptyFiltro = "", filtreDatos = "", filterEmpresa = "", filterCausal = "", filterEstado = "", filterFechas = "") {
+
+        if (emptyFiltro !== "") {
+            $("#filterDatos").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterDatoFechaIni").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+            $("#filterDatoFechaEnd").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterEmpresa").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEmpresa option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#filterCausal").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterCausal option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#filterEstado").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEstado option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#btnBuscarSolicitud").removeClass("dspl-inline-block").addClass("dspl-none");
+        }
+
+        if (filtreDatos !== "") {
+            $("#filterDatoFechaIni").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+            $("#filterDatoFechaEnd").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterEmpresa").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEmpresa option[value='']").attr("selected", "selected").removeAttr("selected");
+
+
+            $("#filterCausal").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterCausal option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#filterEstado").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEstado option[value='']").attr("selected", "selected").removeAttr("selected");
+        }
+
+        if (filterEmpresa !== "") {
+            $("#filterDatos").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterDatoFechaIni").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+            $("#filterDatoFechaEnd").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterCausal").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterCausal option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#filterEstado").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEstado option[value='']").attr("selected", "selected").removeAttr("selected");
+        }
+
+        if (filterCausal !== "") {
+            $("#filterDatos").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterDatoFechaIni").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+            $("#filterDatoFechaEnd").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterEmpresa").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEmpresa option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#filterEstado").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEstado option[value='']").attr("selected", "selected").removeAttr("selected");
+        }
+
+        if (filterEstado !== "") {
+            $("#filterDatos").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterDatoFechaIni").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+            $("#filterDatoFechaEnd").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterEmpresa").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEmpresa option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#filterCausal").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterCausal option[value='']").attr("selected", "selected").removeAttr("selected");
+        }
+
+        if (filterFechas !== "") {
+            $("#filterDatos").removeClass("dspl-inline-block").addClass("dspl-none").removeAttr("placeholder").val("");
+
+            $("#filterEmpresa").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEmpresa option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#filterCausal").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterCausal option[value='']").attr("selected", "selected").removeAttr("selected");
+
+            $("#filterEstado").removeClass("dspl-inline-block").addClass("dspl-none");
+            $("#filterEstado option[value='']").attr("selected", "selected").removeAttr("selected");
+        }
+
+    }
+
+</script>
+
+@Scripts.Render("~/bundles/ajaxfunciones")
+@Scripts.Render("~/bundles/utils")
+@Scripts.Render("~/bundles/index")
+@Scripts.Render("~/bundles/procesosgeneric")

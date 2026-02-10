@@ -1,0 +1,514 @@
+﻿<div class="mt-100 " style="width: 92%; margin: auto; border-bottom: 1px solid #D5D5D5; display: flex; vertical-align: middle; align-items: center;">
+    <div class="new-family-teamwork" 
+         @if (ViewBag.TagSelected == "CargoMod") {
+             @: style="border-left: 1px solid #D5D5D5; border-right: 1px solid #D5D5D5; border-top: 1px solid #D5D5D5; border-bottom: 1px solid #fff; margin-bottom: -1px; padding-left: 30px; padding-right: 30px; padding-top: 20px; padding-bottom: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px;"
+         }
+         else {
+             @: style="padding-left: 30px; padding-right: 30px;"
+         }
+  >
+ @using (Ajax.BeginForm("TagsActionSolicitudes", "Finanzas", new AjaxOptions()
+ {
+     HttpMethod = "POST",
+     UpdateTargetId = "contentSolicitudes",
+     InsertionMode = InsertionMode.Replace,
+     LoadingElementId = "loader"
+ }))
+        {
+            <input type="text" class="dspl-none" value="CargoMod" name="tagsSelected" />
+            <button type="submit" style="background-color: transparent; border: none;">
+                Cargos Mod
+            </button>
+        }
+    </div>
+    @if (Session["Profile"].ToString() == "Finanzas" || Session["Profile"].ToString() == "KAM" || Session["Profile"].ToString() == "ADMINISTRADOR")
+    {
+    <div class="new-family-teamwork" @if (ViewBag.TagSelected == "Cotizacion") { @: style="border-left: 1px solid #D5D5D5; border-right: 1px solid #D5D5D5; border-top: 1px solid #D5D5D5; border-bottom: 1px solid #fff; margin-bottom: -1px; padding-left: 30px; padding-right: 30px; padding-top: 20px; padding-bottom: 20px; border-top-left-radius: 20px; border-top-right-radius: 20px" ;
+         } else { @: style="padding-left: 30px; padding-right: 30px;"
+         }>
+        @using (Ajax.BeginForm("TagsActionSolicitudes", "Finanzas", new AjaxOptions()
+        {
+            HttpMethod = "POST",
+            UpdateTargetId = "contentSolicitudes",
+            InsertionMode = InsertionMode.Replace,
+            LoadingElementId = "loader"
+        }))
+        {
+            <input type="text" class="dspl-none" value="Cotizacion" name="tagsSelected" />
+            <button type="submit" style="background-color: transparent; border: none;">
+                Cotizaciones
+            </button>
+        }
+    </div>
+    }
+    
+</div>
+
+
+@*<div class="row ml-auto mr-auto" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h3 class="new-family-teamwork color-100x3" style="font-weight: 100;"><img src="~/Resources/svg/012-pie.svg" width="50" height="50" class="dspl-inline-block mb-5" /> Dashboard Gestión de Cargo Mod</h3>
+    </div>
+</div>*@
+
+@if (((List<Teamwork.Model.Operaciones.Dashboard>)ViewBag.RenderizadoDashboard).Count == 0)
+{
+    <div class="row ml-auto mr-auto" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <img src="~/Resources/svg/012-pie.svg" width="100" height="100" class="dspl-block ml-auto mr-auto" />
+            <h3 class="new-family-teamwork ta-center" style="font-weight: 100;">No tenemos nada que mostrar en el dashboard.</h3>
+            <h4 class="new-family-teamwork ta-center" style="font-weight: 100;">Una vez que se comiencen a crear solicitudes el dashboard se hara presente.</h4>
+        </div>
+    </div>
+}
+
+@foreach (Teamwork.Model.Operaciones.Dashboard item in ViewBag.RenderizadoDashboard)
+{
+    <div class="row ml-auto mt-30 mr-auto" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center" style="padding-left: 0; padding-right: 0;">
+            <div style="display: flex; vertical-align: middle; align-items: center; width: 100%; flex-direction: column;">
+                @if (ViewBag.TagSelected == "Cotizacion")
+                {
+                    <div>
+                        @if (item.Simulaciones != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Cotizaciones Creadas" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="SOLICS" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-create m-auto mb-10"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "SOLICS")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork" style="font-size: 25px; font-weight: 200;">@item.Simulaciones</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 300;">Cotizaciones <br/> Creadas</h2>
+                                    <img src="~/Resources/cotizar.svg" width="40" height="40" />
+                                </button>
+                            }
+                        }
+
+
+                        @if (item.CotizacionesRechazadas != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Cotizaciones Creadas" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="RZ-C" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-danger m-auto mb-10"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "RZ-C")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork color-fx3" style="font-size: 25px; font-weight: 200;">@item.CotizacionesRechazadas</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 300;">Cotizaciones <br /> Rechazadas</h2>
+                                    <img src="~/Resources/rechazo.svg" width="30" height="30" />
+                                </button>
+                            }
+                        }
+
+                        @if (item.ValidacionCotizaciones != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Cotizaciones Creadas" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="PDAPROB-C" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-warning m-auto mb-10"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "PDAPROB-C")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork color-fx3" style="font-size: 25px; font-weight: 200;">@item.ValidacionCotizaciones</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 300;">Cotizaciones en <br/> Validación</h2>
+                                    <img src="~/Resources/validando.svg" width="40" height="40" />
+                                </button>
+                            }
+                        }
+
+                        @if (item.CotizacionesAprobadas != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Cotizaciones Creadas" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="APROB-C" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-success m-auto mb-10"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "APROB-C")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork" style="font-size: 25px; font-weight: 200;">@item.CotizacionesAprobadas</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 300;">Cotizaciones <br /> Aprobadas</h2>
+                                    <img src="~/Resources/check.svg" width="40" height="40" />
+                                </button>
+                            }
+                        }
+
+                    </div>
+                }
+                @if (ViewBag.TagSelected == "CargoMod")
+                {
+                    <div>
+                        @if (item.Creaciones != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Creaciones de Solicitudes" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="CREATEE" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-create m-auto"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "CREATEE")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork" style="font-size: 30px; font-weight: 100;">@item.Creaciones</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 100;">Solicitudes creadas <br />Cargos Mod</h2>
+                                    <img src="~/Resources/original.svg" width="40" height="40" />
+                                </button>
+                            }
+                        }
+
+
+                        @if (item.RechazadosKam != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Solicitudes Rechazadas" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="RZ" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-danger m-auto"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "RZ")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork" style="font-size: 30px; font-weight: 100;">@item.RechazadosKam</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 100;">Solicitudes rechazados <br /> Por Finanzas</h2>
+                                    <img src="~/Resources/rechazo.svg" width="30" height="30" />
+                                </button>
+                            }
+                        }
+
+                        @if (item.RechazadosRem != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Solicitudes Rechazadas" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="RZR" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-danger m-auto"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "RZR")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork" style="font-size: 30px; font-weight: 100;">@item.RechazadosRem</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 100;">Solicitudes rechazados <br /> Por Remuneraciones</h2>
+                                    <img src="~/Resources/rechazo.svg" width="30" height="30" />
+                                </button>
+                            }
+                        }
+
+                        @if (item.PendienteFinanzas != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Solicitudes En Validación" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="PDAPROB" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-warning m-auto"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "PDAPROB")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork color-fx3" style="font-size: 30px; font-weight: 100;">@item.PendienteFinanzas</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 100;">Solicitudes <br /> En Validación</h2>
+                                    <img src="~/Resources/validando.svg" width="40" height="40" />
+                                </button>
+                            }
+                        }
+
+                        @if (item.PendienteRemuneraciones != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Solicitudes Pendientes de Remuneraciones" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="APROB" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-teamwork m-auto"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "APROB")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork color-fx3" style="font-size: 30px; font-weight: 100;">@item.PendienteRemuneraciones</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 14px; font-weight: 100;">Solicitudes <br/> Pend. Remuneración</h2>
+                                    <img src="~/Resources/duplicar.svg" width="40" height="40" />
+                                </button>
+                            }
+                        }
+
+
+                        @if (item.PendientesFirmaDigital != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Solicitudes Pendientes Firma Digital" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="FD" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-success m-auto"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "FD")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork" style="font-size: 30px; font-weight: 100;">@item.PendientesFirmaDigital</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 100;">Solicitudes <br />Pend. Firma Digital</h2>
+                                    <img src="~/Resources/firmadigital.svg" width="40" height="40" />
+                                </button>
+                            }
+                        }
+
+                        @if (item.Terminados != "NA")
+                        {
+                            using (Ajax.BeginForm("SolicitudesCargoMod", "Finanzas", new AjaxOptions()
+                            {
+                                HttpMethod = "POST",
+                                UpdateTargetId = "contentSolicitudes",
+                                InsertionMode = InsertionMode.Replace,
+                                LoadingElementId = "loader"
+                            }))
+                            {
+                                <input type="text" class="dspl-none" value="@ViewBag.TagSelected" name="tagsSelected" />
+                                <input type="text" class="dspl-none" value="Solicitudes Terminadas" name="glosaOrigenDashboard" />
+                                <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                                <input type="text" class="dspl-none" value="Estado" name="typeFilter" />
+                                <input type="text" class="dspl-none" value="TER" name="dataFilter" />
+                                <button type="submit" class="dspl-block btn-success m-auto"
+                                        style="@if (ViewBag.EstadoSelectedDashboard == "TER")
+                               {
+                                    @: width: 200px; height: 200px;
+                               } else {
+                                    @: width: 180px; height: 180px;
+                               }
+                               box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); border: none; border-radius: 50%;">
+                                    <h1 class="new-family-teamwork" style="font-size: 30px; font-weight: 100;">@item.Terminados</h1>
+                                    <h2 class="new-family-teamwork ta-center mt-10neg color-fx3" style="font-size: 13px; font-weight: 100;">Solicitudes <br />Terminados</h2>
+                                    <img src="~/Resources/firmadigital.svg" width="40" height="40" />
+                                </button>
+                            }
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+}
+
+@if (((List<Teamwork.Model.Operaciones.SolicitudCargo>)ViewBag.RenderizadoSolicitudesCargoMod).Count > 0)
+{
+<div class="row mt-20 ml-auto mr-auto" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h3 class="new-family-teamwork color-100x3" style="font-weight: 100;"><img src="~/Resources/svg/011-table.svg" width="50" height="50" class="dspl-inline-block mb-5" /> @ViewBag.GlosaOrigenDashboard de Cargo Mod</h3>
+    </div>
+</div>
+}
+
+@if (ViewBag.HtmlMessageResult != null)
+{
+    @: <span class="alert alert-success dspl-block m-auto new-family-teamwork" style="width: 92%; font-weight: 100;"><img src="../Resources/check.svg" width="30" height="30" /> @Html.Raw(ViewBag.HtmlMessageResult)</span>
+}
+@if (((List<Teamwork.Model.Operaciones.SolicitudCargo>)ViewBag.RenderizadoSolicitudesCargoMod).Count == 0)
+{
+    <div class="row ml-auto mr-auto mt-60" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <img src="~/Resources/svg/011-table.svg" width="100" height="100" class="dspl-block ml-auto mr-auto" />
+            <h3 class="new-family-teamwork ta-center" style="font-weight: 100;">No tenemos solicitudes para mostrarte en este momento.</h3>
+            <h4 class="new-family-teamwork ta-center" style="font-weight: 100;">Una vez que se comiencen a crear solicitudes serán visibles para ti, por eso te invitamos a crear tu primera solicitud.</h4>
+        </div>
+    </div>
+}
+@if (((List<Teamwork.Model.Operaciones.SolicitudCargo>)ViewBag.RenderizadoSolicitudesCargoMod).Count > 0)
+{
+    <div class="row ml-auto mr-auto" style="width: 92%;">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @using (Ajax.BeginForm("SolicitudesCargoModFiltro", "Finanzas", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "content__solicitudes__cargomod",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loader"
+            }))
+            {
+                <input type="text" name="pagination" class="dspl-none" value="MS01" />
+                <select class="form-control new-family-teamwork" name="typeFilter" style="width: 200px; font-weight: 100; display: inline-block;">
+                    <option value="">Seleccione Filtro</option>
+                    <option value="NombreCargoMod">Nombre Cargo Mod</option>
+                    <option value="NombreCargo">Nombre Cargo</option>
+                    <option value="CodigoCargoMod">Codigo Cargo</option>
+                </select>
+                <input type="text" class="form-control new-family-teamwork" name="dataFilter" placeholder="Indique filtro" autocomplete="off" style="font-weight: 100; width: 300px; display: inline-block;" />
+                <button type="submit" class="dspl-inline-block btn btn-teamwork new-family-teamwork color-fx3 button__buscar__finiquitos" style="min-width: 50px; height: 50px; border: none; border-radius: 25px; text-align: center; font-weight: 100; ">
+                    <img src="~/Resources/svgnuevos/lupa.svg" width="20" height="20" style="position: relative; left: 1%; margin-top: -5%; margin-right: 5px;">
+                    <span style="position: relative; float: right;">Buscar</span>
+                </button>
+            }
+            @using (Ajax.BeginForm("SolicitudesCargoModFiltro", "Finanzas", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "content__solicitudes__cargomod",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loader"
+            }))
+            {
+                <input type="text" name="pagination" class="dspl-none" value="MS01" />
+                <input type="text" name="typeFilter" class="dspl-none" value="" />
+                <input type="text" name="dataFilter" class="dspl-none" value="" />
+                <button type="submit" class="dspl-inline-block btn btn-warning new-family-teamwork color-fx3 button__refresh__finiquitos" style="min-width: 50px; height: 50px; border: none; border-radius: 25px; text-align: center; font-weight: 100; ">
+                    <img src="~/Resources/svgnuevos/refresh.svg" width="20" height="20" style="position: relative; left: 1%; margin-top: -5%; margin-right: 5px;">
+                    <span style="position: relative; float: right;">Restablecer</span>
+                </button>
+            }
+        </div>
+    </div>
+}
+
+<div class="row mt-20 ml-auto mr-auto mb-100" style="width: 92%;" id="content__solicitudes__cargomod">
+    @Html.Partial("Finanzas/CargoMod/_CargoModSolicitud")
+</div>
+
+<label></label>
+
+@if (Session["Profile"].ToString() == "Finanzas" || Session["Profile"].ToString() == "KAM" || Session["Profile"].ToString() == "ADMINISTRADOR")
+{
+<span style="position: fixed; bottom: 10px; right: 10px;">
+    @if (ViewBag.TagSelected == "CargoMod")
+    {
+        <a href="@ViewBag.EnlaceCreacionSolicitudCargoMod" title="Nuevo Cargo Mod" class="btn btn-success dspl-inline-block mb-5" style="display: flex; vertical-align: middle; align-items: center;
+                            border-radius: 50%; width: 70px; height: 70px; text-align: center; color: #fff; font-size: 10px;">
+            <img src="~/Resources/original.svg" width="30" height="30" style="position: relative; left: 20%;" />
+        </a>
+    }
+
+
+    @if (ViewBag.TagSelected == "Cotizacion")
+    {
+        <a href="@ViewBag.EnlaceCreacionSimulacionCargoMod" title="Nueva Cotización" class="btn btn-create dspl-inline-block mb-5" style="display: flex; vertical-align: middle; align-items: center;
+                                border-radius: 50%; width: 70px; height: 70px; text-align: center; color: #fff; font-size: 10px;">
+            <img src="~/Resources/cotizar.svg" width="40" height="40" style="position: relative; left: 8%;" />
+        </a>
+    }
+
+</span>
+}

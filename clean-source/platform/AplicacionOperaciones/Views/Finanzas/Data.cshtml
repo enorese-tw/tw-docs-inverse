@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Data";
+    
+}
+
+<span id="loader" class="dspl-none">
+    @Html.Partial("_LoaderTransaccion")
+</span>
+
+<div class="row ml-auto mr-auto" style="width: 92%;">
+    @switch ((string)ViewBag.OptionEnabledData)
+    {
+        case "Provisiones":
+            Html.RenderPartial("Finanzas/CargoMod/_ItemProvisiones");
+            break;
+        case "Margenes":
+            Html.RenderPartial("Finanzas/CargoMod/_ItemMargenes");
+            break;
+        case "AsignProvMargen":
+            Html.RenderPartial("Finanzas/CargoMod/_ItemAsignProvMargen");
+            break;
+        default:
+            Html.RenderPartial("Finanzas/CargoMod/_ItemForDefault");
+            break;
+    }
+
+</div>
+
+
+<script async>
+
+    handleClickDestroyCollapse = () => {
+        const attr = [ ...document.getElementsByClassName("collapse__anonymus") ]
+
+        attr.map(x => {
+            const className = [ ...x.classList ]
+            className.map(y => {
+                if (y === "show") {
+                    document.getElementById(x.id).classList.remove("show")
+                }
+            })
+        })
+    }
+    
+    handleChangeEmpresaMandante = (e) => {
+        document.getElementById("empresaMandante").value = e.defaultValue
+        document.getElementById("empresaMandanteInit").value = e.defaultValue
+        document.getElementById("btnEmpresaMandante").click()
+    }
+
+</script>

@@ -1,0 +1,102 @@
+﻿@{
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Libro Asistencia";
+}
+<div class="row ml-auto mr-auto mt-100" style="width: 92%; text-align:center">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-50">
+        <h1 class="new-family-teamwork dspl-block" style="font-weight: 100;">Menu Libro de Asistencia</h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-20 mt-50">
+        <button type="button" class="dspl-inline-block btn-info mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="Calendario" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Inasistencia Por Ficha</h2>
+            <img src="~/Resources/datoindiv.svg" width="50" height="50" />
+        </button>
+
+        <Button type="button" class="dspl-inline-block btn-warning mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="Asistencia" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Inasistencia Multiple</h2>
+            <img src="~/Resources/lista.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block mb-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: rgb(229, 229, 229); background: #fff;"
+                data-reference="CargasMasivas" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center" style="font-size: 22px;">Carga Masiva</h1>
+            <h2 class="family-teamwork ta-center mt-10neg" style="font-size: 19px;">Inasistencia</h2>
+            <img src="~/Resources/svg/attend.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-success mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="Reporte" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Reporte</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Asistencia</h2>
+            <img src="~/Resources/excel.png" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-teamwork mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="Periodo" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Periodos</h2>
+            <img src="~/Resources/svg/lockcalendar.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-dark mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="ArchivoAsistencia" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Archivos Inasistencia</h2>
+            <img src="~/Resources/svg/document.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-primary mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="JornadaLaboral" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Jornadas Laborales</h2>
+            <img src="~/Resources/svg/working-time.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-anulado mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="HorasExtras" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Horas Extras</h2>
+            <img src="~/Resources/svg/overtime.svg" width="50" height="50" />
+        </Button>
+
+
+        <Button type="button" class="dspl-inline-block btn-anulado mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="Bonos" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Tipo Bonos</h2>
+            <img src="~/Resources/svg/overtime.svg" width="50" height="50" />
+        </Button>
+
+        <Button type="button" class="dspl-inline-block btn-anulado mr-10"
+                style="width: 220px; height: 220px; border-radius: 50%; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); border: none;"
+                data-reference="AdministracionBonos" onclick="handleClickRedirectAction(this)">
+            <h1 class="family-teamwork fw-bold ta-center color-fx3" style="font-size: 22px;">Administrador</h1>
+            <h2 class="family-teamwork ta-center mt-10neg color-fx3" style="font-size: 19px;">Bonos</h2>
+            <img src="~/Resources/svg/overtime.svg" width="50" height="50" />
+        </Button>
+    </div>
+</div>
+
+<script async>
+    //const __APP = "/AplicacionOperaciones";
+    const __APP = "";
+    const __SERVERHOST = `${window.location.origin}${__APP}`;
+
+    handleClickRedirectAction = (e) => {
+        window.location.href = `${__SERVERHOST}/Asistencia/${e.dataset.reference}`
+    }
+
+</script>

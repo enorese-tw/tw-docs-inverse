@@ -1,0 +1,273 @@
+﻿@using AplicacionOperaciones.HelpersHTML
+
+<div class="row mt-100 ml-auto mr-auto" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="new-family-teamwork ta-center" style="font-weight: 100;">Administración de Datos Provisiones y Margenes</h1>
+    </div>
+</div>
+<div class="row mt-30 ml-auto mr-auto" style="width: 92%;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12" id="content__init__search__clients">
+        @if (ViewBag.RenderizadoProvisionesAsignadas != null &&
+             ViewBag.RenderizadoMargenesAsignadas != null)
+        {
+            @Html.Partial("Finanzas/CargoMod/_ListaClientesProvMargen")
+        }
+        else
+        {
+            using (Ajax.BeginForm("RenderizadoClientesProvMargen", "Finanzas", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "content__init__search__clients",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loader"
+            }, new { @style = "display: inline-block; width: 100%; text-align: center;" }))
+            {
+                <div class="mt-100 new-family-teamwork" style="font-weight: 100;">
+                    <input type="text" class="dspl-none" value="init" name="evento" />
+                    <input type="text" class="dspl-none" value="MS01" name="pagination" />
+                    <input type="text" class="dspl-none" value="Codigo" name="typeFilter" />
+                    <div class="container__ficha" style="width: calc(100% / 3 - 5px); display: inline-block;">
+                        <label class="label-teamwork-report" for="data_filter">¿Qué cliente esta Buscando?</label>
+                        <input type="text" value="" name="dataFilter" required placeholder="Ejemplo area de negocio: ABC" autocomplete="off" class="pdt-20 pdb-20 ta-center" style="display: block; width: 95%; border-left: none; border-top: none; border-right: none; outline: none; border-bottom: 1px solid rgb(150, 150, 150);" />
+                    </div>
+                    <div class="container__ficha" style="width: calc(100% / 3 - 5px); display: inline-block;">
+                        <label class="label-teamwork-report" for="data_filter">¿Qué empresa mandante?</label>
+                        <select class="pdt-20 pdb-20" name="empresa" required style="display: block; width: 95%; border-left: none; border-top: none; border-right: none; outline: none; border-bottom: 1px solid rgb(150, 150, 150);">
+                            <option></option>
+                            <option>TWEST</option>
+                            <option>TWRRHH</option>
+                            <option>TWC</option>
+                        </select>
+                    </div>
+                    <div style="width: calc(100% / 3 - 5px); display: inline-block;">
+                        <button type="submit" class="btn btn-teamwork pdt-25 pdb-25 color-fx3" style="border-radius: 100px; width: 100%;">
+                            <img src="~/Resources/buscar.svg" width="20" height="20">
+                            <span>Consultar Asignaciones</span>
+                        </button>
+                    </div>
+                    @*<input type="text" class="dspl-none" value="@ViewBag.Empresa" name="empresa" id="empresaMandanteInit" />
+                    <select name="typeFilter" class="form-control dspl-none family-teamwork" style="width: 10%;">
+                        <option value="Codigo">Codigo Area de Negocio</option>
+                    </select>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-7">
+                        @Html.InputAdministrador(
+                            "text",
+                            new string[] {
+                                "class='family-teamwork bb-1-solid-200x3 bt-1-solid-200x3 bl-1-solid-200x3 br-1-solid-200x3 dspl-block mt-20'",
+                                "id='input-add'",
+                                "data-ownerlegends='legends-add'",
+                                "data-fontsizebefore='20px'",
+                                "data-fontsizeafter='14px'",
+                                "data-paddingbefore='27px, none, 11px, 30px'",
+                                "data-paddingafter='0px, none, none, 20px'",
+                                "onBlur='handleBlurInputFZ(this)'",
+                                "name='dataFilter'",
+                                "required",
+                                "autocomplete='off'",
+                                "maxlength='3'"
+                            },
+                            new string[] {
+                                "padding: 10px 20px",
+                                "outline: none",
+                                "width: 100%",
+                                "text-transform: uppercase",
+                                "text-align: center",
+                                "border-radius: 25px"
+                            },
+                            "on",
+                            new string[]
+                            {
+                                "<label class='family-teamwork dspl-block pdt-27 pdl-30 pdb-11 cursor-pointer color-100x3' onclick='handleFocusInputFZ(this)' style='position: absolute; width: 100%; font-size: 20px; text-transform: uppercase;' " +
+                                "data-fontsizeafter='14px' data-fontsizebefore='20px' data-paddingbefore='27px, none, 11px, 30px' data-paddingafter='0px, none, none, 20px' data-ownerfocus='input-add' id='legends-add'>Indique area de negocio (Ejemplo XYZ)</label>"
+                            }
+                         )
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-1">
+                        @Html.ButtonAdministracion(
+                            "submit",
+                            new string[] {
+                                "class='dspl-inline-block btn btn-teamwork mt-20'"
+                            },
+                            new string[]
+                            {
+                                "width: 45px",
+                                "height: 45px",
+                                "border: none",
+                                "border-radius: 50%",
+                                "text-align: center"
+                            },
+                            new string[]
+                            {
+                                "<img src='../../Resources/buscar.svg' width='20' height='20' style='position: relative; margin-left: 1%;' />"
+                            },
+                            true
+                        )
+                    </div>*@
+                    
+                </div>
+                
+                
+            }
+        }
+    </div>
+</div>
+
+<script async>
+    
+    handleFocusInputFZ = (e) => {
+        const padding = e.dataset.paddingafter.split(',')
+
+        if(padding[0] !== 'none'){
+            e.style.paddingTop = padding[0]
+        }
+
+        if (padding[1] !== 'none') {
+            e.style.paddingRight = padding[1]
+        }
+
+        if (padding[2] !== 'none') {
+            e.style.paddingBottom = padding[2]
+        }
+
+        if (padding[3] !== 'none') {
+            e.style.paddingLeft = padding[3]
+        }
+        
+        e.style.transition = "all 0.2s ease-in"
+        e.style.fontSize = document.getElementById(e.dataset.ownerfocus).dataset.fontsizeafter
+        document.getElementById(e.dataset.ownerfocus).focus()
+        document.getElementById(e.dataset.ownerfocus).style.borderBottom = "1px solid #428bca"
+        e.style.color = "#428bca"
+        document.getElementById(e.dataset.ownerfocus).style.color = "#428bca"
+    }
+
+    handleBlurInputFZ = (e) => {
+        if (e.value === "") {
+            const padding = e.dataset.paddingbefore.split(',')
+
+            if (padding[0] !== 'none') {
+                document.getElementById(e.dataset.ownerlegends).style.paddingTop = padding[0]
+            }
+
+            if (padding[1] !== 'none') {
+                document.getElementById(e.dataset.ownerlegends).style.paddingRight = padding[1]
+            }
+
+            if (padding[2] !== 'none') {
+                document.getElementById(e.dataset.ownerlegends).style.paddingBottom = padding[2]
+            }
+
+            if (padding[3] !== 'none') {
+                document.getElementById(e.dataset.ownerlegends).style.paddingLeft = padding[3]
+            }
+            
+            document.getElementById(e.dataset.ownerlegends).style.fontSize = document.getElementById(e.dataset.ownerlegends).dataset.fontsizebefore
+            document.getElementById(e.dataset.ownerlegends).style.transition = "all 0.2s ease-in"
+        }
+
+        document.getElementById(e.dataset.ownerlegends).style.color = "rgb(100, 100, 100)"
+        e.style.borderBottom = "1px solid rgb(200, 200, 200)"
+        e.style.color = "rgb(50, 50, 50)"
+    }
+
+
+    handleClickSelectFZ = (e) => {
+        const classList = [...e.classList]
+        let active = false
+        
+        classList.map(x => {
+            if (x === "active__parent__content__select") {
+                active = true
+            }
+        })
+            
+        if (!active) {
+            e.style.borderBottom = "1px solid #428bca"
+            e.style.color = "#428bca"
+            e.classList.add("active__parent__content__select")
+            e.innerHTML = e.innerHTML.split('▾').join('▴')
+            document.getElementById(e.dataset.contentSelect).style.display = "block"
+        }
+        else
+        {
+            e.classList.remove("active__parent__content__select")
+            e.style.borderBottom = "1px solid rgb(200, 200, 200)"
+            e.style.color = "rgb(100, 100, 100)"
+            e.innerHTML = e.innerHTML.split('▴').join('▾')
+            document.getElementById(e.dataset.contentSelect).style.display = "none"
+        }
+    }
+
+    handleClicOptionSelectFZ = (e) => {
+        const elementDestino = document.getElementById(e.dataset.contentParent)
+        const inputDestino = document.getElementById(e.dataset.destinoConstante)
+
+        elementDestino.innerHTML = elementDestino.innerHTML.split(`${elementDestino.dataset.optionSelected} ▴`).join(`${e.innerHTML} ▾`)
+        elementDestino.setAttribute("data-option-selected", e.innerHTML)
+
+        inputDestino.value = e.dataset.optionConstante
+
+        //console.log(e.dataset.optionConstante, e.innerHTML)
+    }
+
+    document.querySelector("body").addEventListener("click", (e) => {
+        const classList = [...e.target.classList]
+        let action = true
+
+        if (classList !== null) {
+            classList.map(x => {
+                if (x === "parent__content__select__show") {
+                    action = false
+                }
+            })
+        }
+            
+        if (action) {
+            const elementSelect = [...document.getElementsByClassName("select__content__hidden")]
+            let hidden = false
+            let contentId = ""
+
+            classList.map(x => {
+                if (x !== "select__content__hidden") {
+                    hidden = true
+                }
+            })
+
+            if (!hidden) {
+
+                if (e.target.offsetParent !== null) {
+                    const parentClassList = [...e.target.offsetParent.classList]
+
+                    parentClassList.map(y => {
+                        if (y === "select__content__hidden") {
+                            contentId = e.target.offsetParent.id
+                        }
+                    })
+                }
+                
+            }
+
+            if (hidden) {
+                elementSelect.map(x => {
+                    document.getElementById(x.id).style.display = "none"
+                    document.getElementById(x.dataset.parentContent).style.borderBottom = "1px solid rgb(200, 200, 200)"
+                    document.getElementById(x.dataset.parentContent).style.color = "rgb(100, 100, 100)"
+                    document.getElementById(x.dataset.parentContent).innerHTML = document.getElementById(x.dataset.parentContent).innerHTML.split('▴').join('▾')
+                    document.getElementById(x.dataset.parentContent).classList.remove("active__parent__content__select")
+                })
+            }
+            else {
+                elementSelect.map(x => {
+                    if (x.id !== contentId) {
+                        document.getElementById(x.id).style.display = "none"
+                        document.getElementById(x.dataset.parentContent).style.borderBottom = "1px solid rgb(200, 200, 200)"
+                        document.getElementById(x.dataset.parentContent).style.color = "rgb(100, 100, 100)"
+                        document.getElementById(x.dataset.parentContent).innerHTML = document.getElementById(x.dataset.parentContent).innerHTML.split('▴').join('▾')
+                        document.getElementById(x.dataset.parentContent).classList.remove("active__parent__content__select")
+                    }
+                })
+            }
+        }
+    })
+
+</script>

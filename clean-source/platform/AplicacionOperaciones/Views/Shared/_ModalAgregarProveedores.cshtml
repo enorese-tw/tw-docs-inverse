@@ -1,0 +1,62 @@
+﻿<div class="modal fade" id="modalAgregarProveedor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title family-teamwork">Agregar un nuevo Proveedor</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    @using (Ajax.BeginForm("MantenedorProveedores", "Finanzas", FormMethod.Post, new AjaxOptions() {
+                                HttpMethod = "POST",
+                                InsertionMode = InsertionMode.Replace,
+                                UpdateTargetId = "codigosid",
+                                OnSuccess = "limpiarModalProveedores"
+                            }))
+                    {
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 errorModal" id="message">
+                            <span id="codigosid"></span>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-12">
+                            <input name="rut" required type="text" maxlength="10" placeholder="Rut del proveedor" class="form-control" autocomplete="off" id="inputrut"/>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-12 col-lg-12">
+                            <input name="nombre" required type="text" placeholder="Nombre del proveedor"
+                                   class="form-control"  id="inputnombre"/>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <br />
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                            <button type="submit" class="btn btn-success"
+                                    style="border-radius: 25px; height: 40px; color: #fff; float:right">
+                                <span style="display: inline-block; margin-top: -11px;">
+                                    <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                font-size: 14px; font-style: normal; display: block; margin-bottom: -8px;">
+                                        Agregar
+                                        Proveedor
+                                    </i>
+                                </span>
+                            </button>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function limpiarModalProveedores() {
+    $("#inputrut").val('');
+    $("#inputnombre").val('');
+    setTimeout(function () {
+        $("#modalAgregarProveedor").modal("hide");
+        $("#message").html('');
+    }, 2000);
+}
+</script>

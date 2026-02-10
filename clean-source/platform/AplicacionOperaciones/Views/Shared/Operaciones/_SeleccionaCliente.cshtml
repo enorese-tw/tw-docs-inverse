@@ -1,0 +1,102 @@
+﻿@if(ViewBag.Redireccionamiento != "")
+{
+}
+else
+{
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+        <h1 class="family-teamwork ta-center">¿Seleccione el cliente asociado al cargo mod?</h1>
+    </div>
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+    
+    @foreach (Teamwork.Model.Operaciones.SolicitudCargo item in ViewBag.RenderizadoSolicitudCargoMod)
+    {
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-8 mt-30">
+                <div style="position: absolute; z-index: 999; top: 0; width: 100%; border: 1px solid rgb(200, 200, 200); padding-top: 2.5%; padding-bottom: 2.5%;
+                        background-color: rgb(240, 240, 240); box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);" class="autocomplete">
+                    <div>
+                        <span disabled="disabled" class="enabled-cliente dspl-block m-auto pdl-5 pdr-5 pdt-5 pdb-5 family-teamwork ta-center cursor-pointer
+                            br-1-solid-200x3 bb-1-solid-200x3 bt-1-solid-200x3 bl-1-solid-200x3" style="width: 95%; font-size: 20px;">SELECCIONE CLIENTE &#x25BE;</span>
+                    </div>
+                    <div class="content-busqueda-autocomplete dspl-none">
+                        @using (Ajax.BeginForm("AutocompleteClientes", "Operaciones", new AjaxOptions()
+                        {
+                            HttpMethod = "POST",
+                            UpdateTargetId = "contentElementAutocomplete",
+                            InsertionMode = InsertionMode.Replace
+                        }, new { @style = "display: block;" }))
+                        {
+                            <input type="text" name="empresa" value="@item.Empresa" class="dspl-none" />
+                            <input type="text" name="dataFilter" class="dspl-block m-auto pdl-30 pdr-5 pdt-5 pdb-5 family-teamwork busqueda-automplete" style="width: 95%;" placeholder="Buscar cliente" />
+                            <i class="glyphicon-tw-buscarselect" style="margin-left: 28px; margin-top: -30px; width: 20px; height: 20px; position: absolute;"></i>
+                            <input type="submit" id="btnAutocomplete" class="dspl-none" />
+                        }
+
+                    </div>
+                    <div class="content-element-autocomplete m-auto family-teamwork dspl-none" style="height: 300px; background-color: #fff; width: 95%; overflow-y: scroll; ">
+                        <div id="contentElementAutocomplete">
+                            @Html.Partial("Teamwork/_ClientesElementAutocomplete")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @using (Ajax.BeginForm("ActualizarCliente", "Operaciones", new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "contentCreate",
+                InsertionMode = InsertionMode.Replace,
+                LoadingElementId = "loader"
+            }, new { @style = "display: block; width: 100%;" }))
+            {
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4"></div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 mt-200">
+                <input type="text" value="" class="dspl-none" name="cliente" id="clienteCodigo" />
+                <input type="text" name="codigoSolicitud" value="@item.CodigoSolicitud" class="dspl-none" />
+                <button type="submit" class="btn btn-success" id="btnConfirmarTEF"
+                        style="border-radius: 0; height: 60px; margin-top: 12px; text-align: left; color: #fff;">
+                    <i class="glyphicon-tw-check" style="display: inline-block; width: 40px; height: 40px; margin-top: 2px;"></i>
+                    <span style="display: inline-block; margin-top: -35px;">
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 20px; font-style: normal; display: block; margin-bottom: -8px;">Actualizar y Seleccionar Cliente</i>
+                        <i style="font-family: 'Open Sans Condensed', sans-serif;
+                                                font-size: 16px; font-style: normal; display: block;">Asociado al Cargo Mod</i>
+                    </span>
+                </button>
+            </div>
+            <div class="col-lg-4"></div>
+            }
+        </div>
+    }
+    </div>
+
+    <script>
+        $(document).on("click", ".option-cliente", function () {
+            $("#clienteCodigo").val($(this).val());
+            $(".enabled-cliente").html($(this).attr("data-html-value") + " &#x25BE;");
+
+            //$(".autocomplete").css("border", "none").css("background-color", "transparent").css("box-shadow", "none");
+            //$(".enabled-cliente").css("background-color", "rgb(200, 200, 200)");
+            $(".content-busqueda-autocomplete").hide();
+            $(".content-element-autocomplete").hide();
+        });
+
+        $(document).on("click", ".enabled-cliente", function () {
+            if (!$(".content-busqueda-autocomplete").is(":visible")) {
+                $(".content-busqueda-autocomplete").show();
+                $(".content-element-autocomplete").show();
+            }
+            else {
+                $(".content-busqueda-autocomplete").hide();
+                $(".content-element-autocomplete").hide();
+            }
+
+        });
+
+        $(document).on("keyup", ".busqueda-automplete", function () {
+            $("#btnAutocomplete").trigger("click");
+        })
+    </script>
+
+}

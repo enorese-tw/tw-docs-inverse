@@ -1,0 +1,12 @@
+﻿@{
+
+    Layout = "~/Views/Shared/_Menu.cshtml";
+    ViewBag.Title = "Despachos";
+    
+}
+<span id="loader" class="dspl-none">
+    @Html.Partial("_LoaderTransaccion")
+</span>
+<div class="row mt-100 ml-auto mr-auto" style="width: 92%;" id="contentDespacho">
+     @Html.Partial("Finanzas/_CrearBoxDespacho")
+</div>

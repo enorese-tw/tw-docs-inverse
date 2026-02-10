@@ -1,0 +1,145 @@
+﻿@model AplicacionOperaciones.Models.Modal
+
+
+@switch ((string)ViewBag.ConfirmacionPeriodoAbierto)
+{
+    case "N":
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <p class="family-teamwork" style="font-size: 18px;">
+                Empresa:
+                <b><span class="mt-2neg dspl-inline-block">@ViewBag.NombreEmpresa</span></b>
+            </p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @if ((string)ViewBag.ErrorCodigo300 != "")
+            {
+                @Html.Partial("_ErrorGeneric")
+            }
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @using (Ajax.BeginForm("AbrirPeriodo", "Finanzas", FormMethod.Post, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = Model.UpdateTargetId,
+                OnSuccess = Model.OnSuccess,
+                OnBegin = "onBegin",
+                OnComplete = "OnComplete"
+
+            }))
+            {
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <label class="family-teamwork fw-bold">Periodo:</label>
+                        <input type="text" class="family-teamwork datepicker" required name="periodoparam" autocomplete="off" />
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center mt-20 mb-20">
+                        <input type="text" class="dspl-none" name="nombreEmpresa" value="@ViewBag.NombreEmpresaCodificado" />
+                        <button id="btnAbrirN" type="submit" class="cursor-pointer btn btn-success dspl-inline-block ta-left color-fx3 br-25 height-50">
+                            <i class="glyphicon-tw-6 glyphicon-tw-check dspl-inlblc mb-15neg"></i>
+                            <span class="dspl-inlblc">
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Abrir</i>
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal">Periodo</i>
+                            </span>
+                        </button>
+                        <a href="#" data-dismiss="modal" class="dspl-inline-block btn btn-danger ta-left color-fx3 br-25 height-50">
+                            <i class="glyphicon-tw-6 glyphicon-tw-cancel dspl-inlblc mb-15neg"></i>
+                            <span class="dspl-inlblc">
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">    </i>
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal">Descartar</i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+            }
+        </div>
+        break;
+
+    case "S":
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <p class="family-teamwork" style="font-size: 18px;">
+                    ¿Desea abrir el  periodo <b><span class="mt-2neg dspl-inline-block">@ViewBag.PeriodoConfirmadoAbrir</span></b> para la empresa seleccionada?
+                </p>
+            </div>
+
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            @using (Ajax.BeginForm("AbrirPeriodo", "Finanzas", FormMethod.Post, new AjaxOptions()
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = Model.UpdateTargetId,
+                OnSuccess = Model.OnSuccess,
+                OnBegin = "onBegin",
+                OnComplete = "OnComplete"
+
+
+            }))
+            {
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 errorModal">
+                        @if (ViewBag.ViewMessageApplication != "")
+                        {
+                            @Html.Partial((string)ViewBag.ViewMessageApplication)
+                        }
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12 ta-center mt-20 mb-20">
+                        <input type="text" class="dspl-none" name="periodoparam" value="@ViewBag.PeriodoConfirmadoAbrir" />
+                        <input type="text" class="dspl-none" name="confirmacion" value="@ViewBag.ConfirmacionPeriodoAbierto" />
+                        <input type="text" class="dspl-none" name="nombreEmpresa" value="@ViewBag.NombreEmpresaCodificado" />
+                        <button id="btnAbrirS" type="submit" class="cursor-pointer btn btn-success dspl-inline-block ta-left color-fx3 br-25 height-50">
+                            <i class="glyphicon-tw-6 glyphicon-tw-check dspl-inlblc mb-15neg"></i>
+                            <span class="dspl-inlblc">
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Confirmar</i>
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal">Nuevo Periodo</i>
+                            </span>
+                        </button>
+                        <a href="#" data-dismiss="modal" class="dspl-inline-block btn btn-danger ta-left color-fx3 br-25 height-50">
+                            <i class="glyphicon-tw-6 glyphicon-tw-cancel dspl-inlblc mb-15neg"></i>
+                            <span class="dspl-inlblc">
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal mb-8neg">Descartar</i>
+                                <i class="family-teamwork dspl-blc fs-14 fst-normal">Periodo</i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+            }
+        </div>
+        break;
+}
+
+<script>
+    $(function () {
+        $(".datepicker").datepicker();
+        $(".datepicker").datepicker("option", "dateFormat", 'mm-yy');
+
+
+    });
+
+    $(".eventDescartarPeriodo").on("click", function (e) {
+        $("#modalCerrarP").modal("hide");
+
+        function onBegin() {
+
+            $('#btnAbrirS').attr("disabled", true);
+            $('#btnAbrirN').attr("disabled", true);
+        }
+
+
+        function OnComplete() {
+            $('#btnAbrirS').attr("disabled", false);
+            ('#btnAbrirN').attr("disabled", false);
+
+        }
+
+        function modalCerrarVentanaAbrir() {
+            $("#modalAgregarPerido").modal("hide");
+        }
+
+
+    });
+</script>
+
