@@ -90,14 +90,14 @@ El proyecto utiliza JWT para la seguridad de la API. Las claves se encuentran en
 | :--- | :--- | :--- |
 | `HostDatabase` | `localhost` | `bG9jYWxob3N0` |
 | `UsernameDatabase` | `sa` | `c2E=` |
-| `PasswordDatabase` | `TuPassword123!` | `VHVQYXNzd29yZDEyMyE=` |
+| `PasswordDatabase` | `P@ssw0rd!` | `UEBzc3cwcmQh` |
 | `Database` | `TW_GENERAL_TEAMWORK` | `VFdfR0VORVJBTF9URUFNV09SSw==` |
 | `DatabaseOperaciones` | `TW_OPERACIONES` | `VFdfT1BFUkFDSU9ORVM=` |
 | `DatabaseSeleccion` | `TW_SELECCION` | `VFdfU0VMRUNDSU9O` |
 | `DBCoins` | `Coins` | `Q29pbnM=` |
 | `HostDatabaseSoftland` | `localhost` | `bG9jYWxob3N0` |
 | `UsernameDatabaseSoftland` | `sa` | `c2E=` |
-| `PasswordDatabaseSoftand` | `TuPassword123!` | `VHVQYXNzd29yZDEyMyE=` |
+| `PasswordDatabaseSoftand` | `P@ssw0rd!` | `UEBzc3cwcmQh` |
 | `DatabaseTWEST` | `TWEST` | `VFdFU1Q=` |
 | `DatabaseTWRRHH` | `TEAMRRHH` | `VEVBTVJSSEg=` |
 | `DatabaseTWC` | `TEAMWORK` | `VEVBTVdPUks=` |
