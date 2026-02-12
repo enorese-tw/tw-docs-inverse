@@ -1402,7 +1402,6 @@ namespace FiniquitosV2
 
                 if (TextBox2.Text.Contains("PT"))
                 {
-                    //Response.Write("<script>alert('Trabajador Part Time')</script>");
                     Label71.Visible = true;
                     Label71.Text = "TRABAJADOR PART TIME";
                 }
